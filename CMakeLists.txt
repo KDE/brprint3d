@@ -15,13 +15,17 @@ find_package(Qt5 REQUIRED COMPONENTS
 
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
-set(brprint3d_SRCS
+set(qtModels_SRCS
+    qt-models/bedmodel.cpp
+    qt-models/bedobject.cpp
+    )
 
+set(brprint3d_SRCS
     brprint3d.cpp
     main.cpp
-)
+    )
 
-add_executable(brprint3d ${brprint3d_SRCS})
+add_executable(brprint3d ${brprint3d_SRCS} ${qtModels_SRCS})
 target_link_libraries(brprint3d Qt5::Core Qt5::Widgets)
 
 #install(TARGETS brprint3d RUNTIME DESTINATION bin)
