@@ -2,7 +2,8 @@
 
 bedModel::bedModel()
 {
-
+    timer.start(1000);
+    connect(&timer, &QTimer::timeout, this, &bedModel::updateBedTemperature);
 }
 
 int bedModel::rowCount(const QModelIndex &parent) const
@@ -46,4 +47,13 @@ Qt::ItemFlags bedModel::flags(const QModelIndex &index) const
         return QAbstractListModel::flags(index);
     else
         return QAbstractListModel::flags(index) | Qt::ItemIsEditable;
+}
+
+void bedModel::updateBedTemperature()
+{   /* Use rand to sort random temps to test, but when the project is more advanced substitute this
+      for the info get from the printer
+    */
+    std::srand (time(NULL));
+    const QVariant v(std::rand()%100);
+    setData(index(0,0),v,Qt::EditRole);
 }

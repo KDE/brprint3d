@@ -2,6 +2,7 @@
 #define BEDMODEL_H
 
 #include <QAbstractListModel>
+#include <QTimer>
 
 class bedObject{
     double currTemp;
@@ -23,6 +24,8 @@ private:
     virtual bool setData(const QModelIndex &index, const QVariant &value, int role);
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
     bedObject bed;
+    void updateBedTemperature();
+    QTimer timer;
 };
 
 #endif // BEDMODEL_H
