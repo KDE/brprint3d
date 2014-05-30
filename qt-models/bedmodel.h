@@ -3,6 +3,14 @@
 
 #include <QAbstractListModel>
 
+class bedObject{
+    double currTemp;
+    double desireTemp;
+    int areaX;
+    int areaY;
+    int areaZ;
+};
+
 class bedModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -14,6 +22,7 @@ private:
     virtual QVariant data(const QModelIndex &index, int role) const;
     virtual bool setData(const QModelIndex &index, const QVariant &value, int role);
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
+    bedObject bed;
 };
 
 #endif // BEDMODEL_H
