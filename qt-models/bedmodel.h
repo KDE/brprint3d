@@ -1,16 +1,12 @@
 #ifndef BEDMODEL_H
 #define BEDMODEL_H
 
+//QtIncludes
 #include <QAbstractListModel>
 #include <QTimer>
 
-class bedObject{
-    double currTemp;
-    double desireTemp;
-    int areaX;
-    int areaY;
-    int areaZ;
-};
+//Local Includes
+#include "bedobject.h"
 
 class bedModel : public QAbstractListModel
 {

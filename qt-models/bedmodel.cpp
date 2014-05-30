@@ -18,27 +18,29 @@ QVariant bedModel::data(const QModelIndex &index, int role) const
             return QVariant();
         else{
             switch (index.row()){
-            case 0: return bed.currTemp;
-            case 1: return bed.desireTemp;
-            case 2: return bed.areaX;
-            case 3: return bed.areaY;
-            case 4: return bed.areaZ;
+            case 0: return bed.getCurrTemp();
+            case 1: return bed.getDesireTemp();
+            case 2: return bed.getX();
+            case 3: return bed.getY();
+            case 4: return bed.getZ();
             }
         }
 }
-
+/*
+    Remove the set's of the area of the printer, because this model only will be constructed
+    when the printer is connect, and because of that, the value of the print area cant be
+    changed.
+*/
 bool bedModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (role == Qt::EditRole) {
             switch(index.row()) {
-                case 0:  bed.currTemp = value.toDouble(); emit dataChanged(index,index);break;
-                case 1:  bed.desireTemp = value.toDouble(); emit dataChanged(index,index);break;
-                case 2:  bed.areaX = value.toInt(); emit dataChanged(index,index);break;
-                case 3:  bed.areaY = value.toInt(); emit dataChanged(index,index);break;
-                case 4:  bed.areaZ = value.toInt(); emit dataChanged(index,index);break;
+                case 0:  bed.setCurrTemp(value.toDouble()); emit dataChanged(index,index);break;
+                case 1:  bed.setDesireTemp(value.toDouble()); emit dataChanged(index,index);break;
             }
+            return true;
         }
-        return true;
+     return false;
 }
 
 Qt::ItemFlags bedModel::flags(const QModelIndex &index) const
