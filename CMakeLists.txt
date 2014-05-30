@@ -1,13 +1,27 @@
-cmake_minimum_required(VERSION 2.6)
 project(brprint3d)
-find_package(Qt4 REQUIRED)
+cmake_minimum_required(VERSION 2.8)
+
+set(CMAKE_AUTOMOC ON)
+
+if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUXX)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
+endif()
+
+find_package(Qt5 REQUIRED COMPONENTS
+                Core
+                Widgets
+                Test
+            )
 
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
-set(brprint3d_SRCS brprint3d.cpp main.cpp)
+set(brprint3d_SRCS
 
-qt4_automoc(${brprint3d_SRCS})
+    brprint3d.cpp
+    main.cpp
+)
+
 add_executable(brprint3d ${brprint3d_SRCS})
-target_link_libraries(brprint3d ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
+target_link_libraries(brprint3d Qt5::Core Qt5::Widgets)
 
-install(TARGETS brprint3d RUNTIME DESTINATION bin)
+#install(TARGETS brprint3d RUNTIME DESTINATION bin)
