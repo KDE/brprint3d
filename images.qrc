@@ -1,0 +1,38 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file>Icons/bt-warningmax</file>
+        <file>Icons/bt-warningskull</file>
+        <file>Icons/bt-slider</file>
+        <file>Icons/bt-temper_bar</file>
+        <file>Icons/bt-hotend</file>
+        <file>Icons/bt-mesa_aquecida</file>
+        <file>Icons/bt-cooler_fan</file>
+        <file>Icons/bt-vazao_filamento</file>
+        <file>Icons/bt-velocidade_impressao</file>
+        <file>Icons/bt-arrowleft</file>
+        <file>Icons/bt-arrowdown</file>
+        <file>Icons/bt-arrowright</file>
+        <file>Icons/bt-arrowup</file>
+        <file>Icons/bt-eixoxyz</file>
+        <file>Icons/bt-eixoz</file>
+        <file>Icons/bt-eixox</file>
+        <file>Icons/bt-eixoy</file>
+        <file>Icons/bt-extruder</file>
+        <file>Icons/bt-z</file>
+        <file>Icons/bt-xy</file>
+        <file>Icons/logo</file>
+        <file>Icons/bt-play-onclick</file>
+        <file>Icons/bt-pause-onclick</file>
+        <file>Icons/bt-stop-onclick</file>
+        <file>Icons/bt-connect-onclick</file>
+        <file>Icons/bt-play</file>
+        <file>Icons/bt-stop</file>
+        <file>Icons/bt-connect</file>
+        <file>Icons/bt-file</file>
+        <file>Icons/bt-import</file>
+        <file>Icons/bt-emergency.png</file>
+        <file>Icons/bt-pause</file>
+        <file>Icons/270.png</file>
+        <file>Icons/brlogo.png</file>
+    </qresource>
+</RCC>
