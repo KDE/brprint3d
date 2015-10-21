@@ -19,7 +19,72 @@ QSettings settings(QDir::currentPath()+"/br.ini",QSettings::IniFormat); //Arquiv
 
 
 /*******************************************************************************************************************/
-/*Organização do Código
+/* Code Organization - English
+ * Function Init
+ *
+ * --Actions MenuBar--
+ * Exit
+ * Change Language
+ * About -> BrPrint, Documentation, Help, Legal Warning
+ *
+ * Function Hide/Show Configuration
+ * Function's of Search
+ *  Locate Slier
+ *  Locar Cura
+ *  Locate Arduino -> Not used
+ * Actions about Slicer
+ *  Start Slicing
+ *  Stop Slicing
+ * Actions MenuBar
+ *  Import Gcode ready to print
+ *  Open Gcode or STL
+ *  Connect/Disconnect 3DPrinter
+ * Actions Save Configs
+ * Action Statics of Print Job
+ * Action Load Cofigs
+ *
+ * --Actions RTO--
+ * MenuBar
+ *  Start Print Job(Play)
+ *  Pause Print Job
+ *  Stop Print Job
+ *  Stop Print job on Emergency
+ * Manual Control:
+ *  Move X to 0
+ *  Move Y to 0
+ *  Move Z to 0
+ *  Move XYZ to 0
+ *  Move X to Left - width
+ *  Move X to Right - width
+ *  Move Y to Back -heigh
+ *  Move Y to Front -heigh
+ *  Move Z to Up -Vertical
+ *  Move Z to Down -Vertical
+ *  Retract Fill
+ *  Expulse Fill 1x
+ *  Expulse Fill 2x
+ *  Set Speed of feed fill
+ *  Set flow rate of fill
+ *  Set cooler fan
+ *  ON/OFF bed heating
+ *  ON/OFF Extruders heating
+ *
+ * --3D Actions--
+ * Render model from GCODE
+ * Render model fom STL
+ * Rotate model
+ * Zoom in/out
+ * Prism Print Area
+ * Render model during the print job
+ * --Convenience Functions--
+ * Thread monitoring of temperature
+ * Thread monitoring of extruder position
+ * Thread monitoring connection of arduino -> not used
+ * Block/Unblock button position of extruder to safety
+ * Close Event
+ * */
+//Below comments its only for me-> Lays
+/*Organização do Código - Portuguese
  * Função de Inicialização da Pandora
  *
  * --Ações MenuBar--
@@ -138,7 +203,7 @@ void BrPrint3D::init()
         ui->tb_extruder_vol_max->setText(this->extruderMAXVol);
     }
 
-    ui->GCodePreview->setPlainText(tr("Nenhum arquivo carregado."));
+    ui->GCodePreview->setPlainText(tr("No Open File."));
 
     //Set Values on labels of Manual Control
     ui->lb_value_cooler->setText(QVariant (ui->sl_coolerFan->value()).toString());
@@ -146,8 +211,6 @@ void BrPrint3D::init()
     ui->lb_value_speedfil->setText(QVariant (ui->sl_speedFeedFilament->value()).toString());
     ui->lb_value_vazaofil->setText(QVariant (ui->sl_filamentFlow->value()).toString());
     ui->lb_extruderTemp0->setText(QVariant (ui->sl_extruder->value()).toString());
-
-    //ui->bt_hide->setText(tr("Configurações - Mostrar"));
 
     //Hide Config Menu
     ui->Menu_Control_Left->hide();
@@ -240,15 +303,15 @@ void BrPrint3D::on_actionSobre_o_BrPrint3D_triggered()
 //This action Hide/Show The Configuration of Printer
 void BrPrint3D::on_bt_hide_clicked()
 {
-    if(ui->bt_hide->text()==tr("Configurações - Mostrar"))
+    if(ui->bt_hide->text()==tr("Configuration - Show"))
     {
-        ui->bt_hide->setText(tr("Configurações - Esconder"));
+        ui->bt_hide->setText(tr("Configuration - Hide"));
         ui->Menu_Control_Left->show();
         ui->openGLWidget->setGeometry(460,160,480,510);
     }
     else
     {
-        ui->bt_hide->setText(tr("Configurações - Mostrar"));
+        ui->bt_hide->setText(tr("Configuration - Show"));
         ui->Menu_Control_Left->hide();
         ui->openGLWidget->setGeometry(20,160,900,510);
     }
@@ -262,7 +325,7 @@ void BrPrint3D::locate_Slicer()
     if(!slicer)
     {
 
-        msg.setText("Arquivo Slic3er não pode ser aberto!");
+        msg.setText("Bin Slic3r could not be open!");
         msg.exec();
     }
     else
@@ -270,8 +333,9 @@ void BrPrint3D::locate_Slicer()
         {   slicer.getline(path,sizeof(path));//Lê a linha do arquivo
             if(path[7]=='\0')
             {
-               msg.setText("Slic3r nao encontrado, para encontrar manualmente vá na aba Slicer e clique em procurar.");
-               ui->cb_Slicer->addItem("Slic3er (Não encontrado)");
+               msg.setText("Slic3r not found! To search click on add Slicer on tab Slicer!");
+               ui->cb_Slicer->addItem("Slic3er (Not Found)");
+               //msg.exec();
             }
             else
             {   for(int i=8;path[i]!=' ';i++)
@@ -293,7 +357,7 @@ void BrPrint3D::locate_Cura()
     char path[201];
     if(!cura)
     {
-        msg.setText("Arquivo Slic3er não pode ser aberto!");
+        msg.setText("Bin Cura could not be open!");
     }
     else
     {
@@ -302,7 +366,7 @@ void BrPrint3D::locate_Cura()
             cura.getline(path,sizeof(path));//Lê a linha do arquivo
             if(path[5]=='\0')
             {
-                ui->cb_Slicer->addItem("Cura Engine (Não instalado)");
+                ui->cb_Slicer->addItem("Cura Engine (Not Found)");
             }
             else
             {
@@ -362,7 +426,7 @@ void BrPrint3D::locate_Arduino(bool b,QString word)
 //This action search for Slic3er manually, if the slic3er isnt installed, the user could user the bin
 void BrPrint3D::on_bt_addSlicer_clicked()
 {
-    QString filename=QFileDialog::getOpenFileName(this, "Abrir Arquivo","/home/~","slic3r");
+    QString filename=QFileDialog::getOpenFileName(this, "Open File","/home/~","slic3r");
     ui->cb_Slicer->setItemText(0,"Slic3r");
     settings.setValue("slic3r",filename);
     settings.sync();
@@ -388,7 +452,7 @@ void BrPrint3D::on_bt_killSlicer_clicked()
 //This action import a GCODE file to print
 void BrPrint3D::on_bt_import_clicked()
 {
-    pathGcode=QFileDialog::getOpenFileName(this, "Abrir Arquivo","/home/~","*.gcode");
+    pathGcode=QFileDialog::getOpenFileName(this, "Open File","/home/~","*.gcode");
 
     if(!pathGcode.isEmpty() && QFileInfo(pathGcode).completeSuffix()=="gcode")
     {   QFile gcode(pathGcode);
@@ -408,7 +472,7 @@ void BrPrint3D::on_bt_import_clicked()
 //This action open a GCODE or STL file
 void BrPrint3D::on_bt_open_clicked()
 {
-    pathGcode=QFileDialog::getOpenFileName(this, "Abrir Arquivo","/home","*.gcode");
+    pathGcode=QFileDialog::getOpenFileName(this, "Open File","/home","*.gcode");
 
     if(!pathGcode.isEmpty() && QFileInfo(pathGcode).completeSuffix()=="gcode")
     {   QFile gcode(pathGcode);
@@ -490,7 +554,7 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
             ui->Manual_Control->setEnabled(true);
         }
         else
-        {    msg.setText(tr("Verifique se você fez todas as configurações necessárias da impressora 3D!"));
+        {    msg.setText(tr("Make sure you have all the necessary settings for connection!"));
              msg.setIcon(QMessageBox::Warning);
              msg.exec();
              ui->bt_connect->setChecked(false);
@@ -547,7 +611,7 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
            }
            ui->cb_Extruder_qnt->addItems(l);
 
-           msg.setText(tr("Conexão efetuada com sucesso!"));
+           msg.setText(tr("Successful Connection"));
            msg.setIcon(QMessageBox::Information);
            msg.exec();
         }
@@ -589,7 +653,7 @@ void BrPrint3D::on_bt_connect_clicked(bool checked)
 //This action save the configs insert by the user on Printer Configs in Ini File
 void BrPrint3D::on_bt_saveConfig_clicked() //Salva as configurações de impressoras
 {   bool ok;
-    QString name = QInputDialog::getText(this, tr("Insira nome da configuração: "),tr("Nome:"),QLineEdit::Normal,"ex.: Graber1",&ok);
+    QString name = QInputDialog::getText(this, tr("Insert the name of config: "),tr("Nome:"),QLineEdit::Normal,"ex.: Graber1",&ok);
     settings.beginGroup("Printer_Configs");
     if(ok && !name.isEmpty())
     {
@@ -695,7 +759,7 @@ void BrPrint3D::on_bt_play_clicked()
          ui->bt_pause->setEnabled(true);
          ui->bt_stop->setEnabled(true);
          this->printer_object->startPrintJob(true);
-         msg.setText(tr("Trabalho de impressão Iniciado!"));
+         msg.setText(tr("Print Job Started"));
          msg.exec();
          //Create a new thread and connect some signals
         temp = new ThreadRoutine(this->printer_object,&extrudersInUse);
@@ -747,11 +811,11 @@ void BrPrint3D::on_bt_emergency_clicked()
        this->temp->quit();
        this->temp->~ThreadRoutine();
 
-       msg.setText("Parada de Emergência Selecionada, clique em OK e aguarde.");
+       msg.setText("Emergency Stop Clicked, click on 'Ok' and wait!");
        msg.setIcon(QMessageBox::Critical);
        msg.exec();
        this->printer_object->scramPrinter();
-       msg.setText("Parada de Emergência efetuada com sucesso!");
+       msg.setText("Emergency Stop Succeful!");
        msg.setIcon(QMessageBox::Critical);
        msg.exec();
        this->printer_object->~Repetier();
@@ -917,11 +981,11 @@ void BrPrint3D::updateTemp(double *temp_Extruders, double tempBed)
       }
 
     //Change extruders temp
-        for(int i=0;i<extrudersInUse;i++)
+        for(int i=1;i<=extrudersInUse;i++)
             {
                switch (i)
                {
-                case 0:
+                case 1:
                 {  if(ui->bt_extruder1->isChecked())//Slider belongs to extruder 1
                    {
                         ui->sl_extruder->setValue(temp_Extruders[i]); //Set Slider value
@@ -941,7 +1005,7 @@ void BrPrint3D::updateTemp(double *temp_Extruders, double tempBed)
 
                     }
                 }break;
-                case 1:
+                case 2:
                 {   if(ui->bt_extruder2->isChecked())//Slider belongs to extruder two
                     {   ui->sl_extruder->setValue(temp_Extruders[i]);
                         ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[i]).toString());//Set Label of slider
@@ -954,7 +1018,7 @@ void BrPrint3D::updateTemp(double *temp_Extruders, double tempBed)
 
                     ui->lb_extruderTemp_2->setText(QVariant(temp_Extruders[i]).toString());
                 }break;
-                case 2:
+                case 3:
                 {  if(ui->bt_extruder3->isChecked())//Slider belongs to extruder two
                    {   ui->sl_extruder->setValue(temp_Extruders[i]);
                        ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[i]).toString());//Set Label of slider
@@ -968,7 +1032,7 @@ void BrPrint3D::updateTemp(double *temp_Extruders, double tempBed)
 
                     ui->lb_extruderTemp_3->setText(QVariant(temp_Extruders[i]).toString());
                 }break;
-                case 3:
+                case 4:
                 {  if(ui->bt_extruder4->isChecked())//Slider belongs to extruder two
                    {   ui->sl_extruder->setValue(temp_Extruders[i]);
                        ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[i]).toString());//Set Label of slider
@@ -1006,7 +1070,7 @@ void BrPrint3D::isPrintJobRunning(bool b)
     QMessageBox msg;
     if(b==true)
     {   disconnect(temp,SIGNAL(finishedJob(bool)),this,SLOT(isPrintJobRunning(bool)));
-        msg.setText("Trabalho de impressao finalizado/pausado!");
+        msg.setText("Print job finish or paused!");
         msg.setIcon(QMessageBox::Information);
         msg.exec();
         if(ui->bt_pause->isChecked()==false)
@@ -1020,7 +1084,7 @@ void BrPrint3D::closeEvent(QCloseEvent *event)
 {
     QMessageBox msg;
         if(this->printer_object->isPrintJobRunning()==true)
-        {   msg.setText("A impressora está em uso, tem certeza que deseja fechar o programa?");
+        {   msg.setText("The print job is running, Are you sure you want to continue?");
             msg.setIcon(QMessageBox::Warning);
             msg.setStandardButtons(QMessageBox::Cancel | QMessageBox::Ok);
             msg.setDefaultButton(QMessageBox::Cancel);
@@ -1206,7 +1270,7 @@ void BrPrint3D::on_bt_right_X_clicked()
 //This Action set the X axis to new position on left
 void BrPrint3D::on_bt_left_X_clicked()
 {   QMessageBox msg;
-    msg.setText("Posição inválida!");
+    msg.setText("Invalid Position!");
     msg.setIcon(QMessageBox::Warning);
     double pos = this->printer_object->getCurrentXPos();
     pos-=ui->cb_valuePosXY->currentText().toFloat();
@@ -1225,7 +1289,7 @@ void BrPrint3D::on_bt_up_Y_clicked()
 //This Action set the Y axis to new position on down
 void BrPrint3D::on_bt_down_Y_clicked()
 {   QMessageBox msg;
-    msg.setText("Posição inválida!");
+    msg.setText("Invalid Position!");
     msg.setIcon(QMessageBox::Warning);
     double pos = this->printer_object->getCurrentYPos();
     pos-=ui->cb_valuePosXY->currentText().toFloat();
@@ -1246,7 +1310,7 @@ void BrPrint3D::on_bt_up_Z_clicked()
 //This Action set the Z axis to new position on down
 void BrPrint3D::on_bt_down_Z_clicked()
 {   QMessageBox msg;
-    msg.setText("Posição inválida!");
+    msg.setText("Invalid Position!");
     msg.setIcon(QMessageBox::Warning);
     double pos = this->printer_object->getCurrentZPos();
     pos-=ui->cb_valuePosXY->currentText().toFloat();

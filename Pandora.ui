@@ -110,7 +110,7 @@
          </rect>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="Connection_Config">
          <attribute name="title">
@@ -1153,7 +1153,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="GCode_Slicer_Control">
      <attribute name="title">
@@ -2874,26 +2874,6 @@ QSlider::handle:horizontal {
      </attribute>
     </widget>
    </widget>
-   <zorder>bt_hide</zorder>
-   <zorder>Menu_Control_Left</zorder>
-   <zorder>lb_import</zorder>
-   <zorder>lb_open</zorder>
-   <zorder>bt_emergency</zorder>
-   <zorder>lb_connect</zorder>
-   <zorder>lb_play</zorder>
-   <zorder>lb_pause</zorder>
-   <zorder>lb_stop</zorder>
-   <zorder>line_5</zorder>
-   <zorder>lb_emergency</zorder>
-   <zorder>layoutWidget</zorder>
-   <zorder>layoutWidget</zorder>
-   <zorder>openGLWidget</zorder>
-   <zorder>label_7</zorder>
-   <zorder>label_15</zorder>
-   <zorder>bt_play</zorder>
-   <zorder>bt_pause</zorder>
-   <zorder>bt_stop</zorder>
-   <zorder>Configuracoes</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
