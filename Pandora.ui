@@ -59,7 +59,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Configurações - Mostrar</string>
+     <string>Config - Show</string>
     </property>
    </widget>
    <widget class="QWidget" name="Menu_Control_Left" native="true">
@@ -67,15 +67,15 @@
      <rect>
       <x>10</x>
       <y>140</y>
-      <width>441</width>
-      <height>511</height>
+      <width>406</width>
+      <height>531</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="Menu_Config_Left">
      <item>
       <widget class="QGroupBox" name="Menu_Control_LeftBlock">
        <property name="title">
-        <string>Configuração da Impressora</string>
+        <string>Printer  Configs</string>
        </property>
        <widget class="QLabel" name="lb_printer">
         <property name="geometry">
@@ -87,7 +87,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Impressora:</string>
+         <string>Printer:</string>
         </property>
        </widget>
        <widget class="QComboBox" name="cb_printer">
@@ -105,34 +105,34 @@
          <rect>
           <x>0</x>
           <y>70</y>
-          <width>421</width>
-          <height>421</height>
+          <width>386</width>
+          <height>441</height>
          </rect>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="Connection_Config">
          <attribute name="title">
-          <string>Conexão</string>
+          <string>Connection</string>
          </attribute>
          <widget class="QLabel" name="lb_Connection">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>10</y>
-            <width>66</width>
+            <width>96</width>
             <height>17</height>
            </rect>
           </property>
           <property name="text">
-           <string>Conexão:</string>
+           <string>Connection:</string>
           </property>
          </widget>
          <widget class="QComboBox" name="cb_Connection_Type">
           <property name="geometry">
            <rect>
-            <x>225</x>
+            <x>165</x>
             <y>10</y>
             <width>151</width>
             <height>21</height>
@@ -157,12 +157,12 @@
            <rect>
             <x>0</x>
             <y>40</y>
-            <width>131</width>
+            <width>146</width>
             <height>17</height>
            </rect>
           </property>
           <property name="text">
-           <string>Porta de Conexão: </string>
+           <string>Port of Connection:</string>
           </property>
          </widget>
          <widget class="QLabel" name="lb_Transmission">
@@ -175,7 +175,7 @@
            </rect>
           </property>
           <property name="text">
-           <string>Taxa de Transmissão:</string>
+           <string>Transmission Rate:</string>
           </property>
          </widget>
          <widget class="QLabel" name="lb_Protocol">
@@ -201,13 +201,13 @@
            </rect>
           </property>
           <property name="text">
-           <string>Tamanho de Cache:</string>
+           <string>Cache size:</string>
           </property>
          </widget>
          <widget class="QComboBox" name="cb_Connection_Port">
           <property name="geometry">
            <rect>
-            <x>225</x>
+            <x>165</x>
             <y>40</y>
             <width>151</width>
             <height>21</height>
@@ -227,7 +227,7 @@
          <widget class="QComboBox" name="cb_Transmition_Rate">
           <property name="geometry">
            <rect>
-            <x>225</x>
+            <x>165</x>
             <y>70</y>
             <width>151</width>
             <height>21</height>
@@ -267,7 +267,7 @@
          <widget class="QComboBox" name="cb_Firmware">
           <property name="geometry">
            <rect>
-            <x>225</x>
+            <x>165</x>
             <y>100</y>
             <width>151</width>
             <height>21</height>
@@ -287,7 +287,7 @@
          <widget class="QComboBox" name="cb_Cache_Size">
           <property name="geometry">
            <rect>
-            <x>225</x>
+            <x>165</x>
             <y>130</y>
             <width>151</width>
             <height>21</height>
@@ -309,13 +309,13 @@
            </rect>
           </property>
           <property name="text">
-           <string>Gerar log de impressão:</string>
+           <string>Printer Log:</string>
           </property>
          </widget>
          <widget class="QCheckBox" name="ck_logImpressao">
           <property name="geometry">
            <rect>
-            <x>270</x>
+            <x>195</x>
             <y>210</y>
             <width>21</width>
             <height>22</height>
@@ -335,13 +335,13 @@
            </rect>
           </property>
           <property name="text">
-           <string>Resetar ao Conectar:</string>
+           <string>Reset on Connect:</string>
           </property>
          </widget>
          <widget class="QCheckBox" name="ck_resetonConnect">
           <property name="geometry">
            <rect>
-            <x>270</x>
+            <x>195</x>
             <y>160</y>
             <width>21</width>
             <height>22</height>
@@ -361,13 +361,13 @@
            </rect>
           </property>
           <property name="text">
-           <string>Resetar em Caso de Emergência:</string>
+           <string>Reset on Emergency:</string>
           </property>
          </widget>
          <widget class="QCheckBox" name="ck_resetonEmergency">
           <property name="geometry">
            <rect>
-            <x>270</x>
+            <x>195</x>
             <y>185</y>
             <width>21</width>
             <height>22</height>
@@ -380,7 +380,7 @@
         </widget>
         <widget class="QWidget" name="Print_Config">
          <attribute name="title">
-          <string>Impressora</string>
+          <string>Printer Specs</string>
          </attribute>
          <widget class="QLabel" name="lb_RateMoviment">
           <property name="geometry">
@@ -392,7 +392,7 @@
            </rect>
           </property>
           <property name="text">
-           <string>Taxa de Movimento(mm/min):</string>
+           <string>Moviment Rate(mm/min):</string>
           </property>
          </widget>
          <widget class="QLabel" name="lb_Feed_Z">
@@ -405,7 +405,7 @@
            </rect>
           </property>
           <property name="text">
-           <string>Alimentação Eixo Z(mm/min):</string>
+           <string>Feed Z Axis(mm/min):</string>
           </property>
          </widget>
          <widget class="QLabel" name="lb_ExtruderV">
@@ -418,7 +418,7 @@
            </rect>
           </property>
           <property name="text">
-           <string>Velocidade do Extrusor(mm/s):</string>
+           <string>Extruder Speed(mm/s):</string>
           </property>
          </widget>
          <widget class="QLabel" name="lg_Velocity_R">
@@ -431,7 +431,7 @@
            </rect>
           </property>
           <property name="text">
-           <string>Velocidade de Retração(mm/s):</string>
+           <string>Retraction Speed(mm/s):</string>
           </property>
          </widget>
          <widget class="QLabel" name="lb_Extruder_Temper">
@@ -439,12 +439,12 @@
            <rect>
             <x>0</x>
             <y>130</y>
-            <width>181</width>
+            <width>206</width>
             <height>17</height>
            </rect>
           </property>
           <property name="text">
-           <string>Temperatura Extrusor(ºC):</string>
+           <string>Extruder Temperature(ºC):</string>
           </property>
          </widget>
          <widget class="QLabel" name="lb_TableTemperature">
@@ -457,7 +457,7 @@
            </rect>
           </property>
           <property name="text">
-           <string>Temperatura da Mesa(ºC):</string>
+           <string>Bed Temperature(ºC):</string>
           </property>
          </widget>
          <widget class="QLineEdit" name="tb_RateMoviment">
@@ -534,46 +534,46 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>215</y>
+            <y>220</y>
             <width>291</width>
             <height>17</height>
            </rect>
           </property>
           <property name="text">
-           <string>Área de Impressão - Profundidade(mm)(Y):</string>
+           <string>Print Area - Height(mm)(Y):</string>
           </property>
          </widget>
          <widget class="QLabel" name="lb_areax">
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>185</y>
+            <y>190</y>
             <width>251</width>
             <height>17</height>
            </rect>
           </property>
           <property name="text">
-           <string>Área de Impressão - Largura(mm)(X):</string>
+           <string>Print Area - Width(mm)(X):</string>
           </property>
          </widget>
          <widget class="QLabel" name="lb_areaz">
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>245</y>
+            <y>250</y>
             <width>301</width>
             <height>17</height>
            </rect>
           </property>
           <property name="text">
-           <string>Área de Impressão - Altura(mm)(Z):</string>
+           <string>Print Area - Vertical(mm)(Z):</string>
           </property>
          </widget>
          <widget class="QLineEdit" name="tb_AreaPrint_X">
           <property name="geometry">
            <rect>
-            <x>300</x>
-            <y>185</y>
+            <x>220</x>
+            <y>190</y>
             <width>111</width>
             <height>21</height>
            </rect>
@@ -582,8 +582,8 @@
          <widget class="QLineEdit" name="tb_AreaPrint_Z">
           <property name="geometry">
            <rect>
-            <x>300</x>
-            <y>245</y>
+            <x>220</x>
+            <y>250</y>
             <width>111</width>
             <height>21</height>
            </rect>
@@ -592,8 +592,8 @@
          <widget class="QLineEdit" name="tb_AreaPrint_Y">
           <property name="geometry">
            <rect>
-            <x>300</x>
-            <y>215</y>
+            <x>220</x>
+            <y>220</y>
             <width>111</width>
             <height>21</height>
            </rect>
@@ -602,7 +602,7 @@
         </widget>
         <widget class="QWidget" name="Extrusor_Config">
          <attribute name="title">
-          <string>Extrusor</string>
+          <string>Extruder</string>
          </attribute>
          <widget class="QLabel" name="ln_extruder_number">
           <property name="geometry">
@@ -614,7 +614,7 @@
            </rect>
           </property>
           <property name="text">
-           <string>Número de Extrusores:</string>
+           <string>Number of Extruders:</string>
           </property>
          </widget>
          <widget class="QLabel" name="lb_extrudertmp">
@@ -627,7 +627,7 @@
            </rect>
           </property>
           <property name="text">
-           <string>Temperatura Máxima do Extrusor(ºC):</string>
+           <string>Extruder Max Temperature(ºC):</string>
           </property>
          </widget>
          <widget class="QLabel" name="lb_tabletmp">
@@ -640,7 +640,7 @@
            </rect>
           </property>
           <property name="text">
-           <string>Temperatura Máxima da Mesa(ºC):</string>
+           <string>Bed Max Temperature(ºC):</string>
           </property>
          </widget>
          <widget class="QLabel" name="lb_vol_sec">
@@ -648,18 +648,18 @@
            <rect>
             <x>0</x>
             <y>100</y>
-            <width>261</width>
+            <width>251</width>
             <height>17</height>
            </rect>
           </property>
           <property name="text">
-           <string>Volume Máximo por segundo(mm³/s):</string>
+           <string>Volume Max per Second(mm³/s):</string>
           </property>
          </widget>
          <widget class="QComboBox" name="cb_Extruder_qnt">
           <property name="geometry">
            <rect>
-            <x>260</x>
+            <x>255</x>
             <y>10</y>
             <width>71</width>
             <height>21</height>
@@ -669,7 +669,7 @@
          <widget class="QLineEdit" name="tb_extruderMaxTemp">
           <property name="geometry">
            <rect>
-            <x>260</x>
+            <x>255</x>
             <y>40</y>
             <width>111</width>
             <height>21</height>
@@ -679,7 +679,7 @@
          <widget class="QLineEdit" name="tb_bedMaxTemp">
           <property name="geometry">
            <rect>
-            <x>260</x>
+            <x>255</x>
             <y>70</y>
             <width>111</width>
             <height>21</height>
@@ -689,7 +689,7 @@
          <widget class="QLineEdit" name="tb_extruder_vol_max">
           <property name="geometry">
            <rect>
-            <x>260</x>
+            <x>255</x>
             <y>100</y>
             <width>111</width>
             <height>21</height>
@@ -699,9 +699,9 @@
          <widget class="QLabel" name="lb_obs">
           <property name="geometry">
            <rect>
-            <x>110</x>
-            <y>160</y>
-            <width>311</width>
+            <x>15</x>
+            <y>255</y>
+            <width>356</width>
             <height>111</height>
            </rect>
           </property>
@@ -714,19 +714,14 @@
            <string notr="true">text-align: center;</string>
           </property>
           <property name="text">
-           <string>Consulte o fabricante ou as especificações da 
- sua impressora para definir as temperaturas  
- máximas da mesa e do(s) extrusor(es). 
-Pois por segurança, se ocorrer algum erro 
-sistêmico ou na impressora, essas variáveis  
-servirão para desligamento de emergência. </string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Check with the manufacturer or the specifications of your&lt;br/&gt;printer to set Max temperatures on bed and (s) extruder(s). &lt;br/&gt;As for security, if any error occurs systemic or printer,&lt;br/&gt;these variables serve for emergency shutdown.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
          <widget class="QLabel" name="label_5">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>170</y>
+            <x>145</x>
+            <y>180</y>
             <width>91</width>
             <height>71</height>
            </rect>
@@ -743,14 +738,14 @@ servirão para desligamento de emergência. </string>
        <widget class="QPushButton" name="bt_default">
         <property name="geometry">
          <rect>
-          <x>240</x>
+          <x>270</x>
           <y>40</y>
-          <width>151</width>
+          <width>91</width>
           <height>27</height>
          </rect>
         </property>
         <property name="text">
-         <string>Resetar p/ Default</string>
+         <string>Reset</string>
         </property>
        </widget>
        <widget class="QPushButton" name="bt_saveConfig">
@@ -763,1739 +758,8 @@ servirão para desligamento de emergência. </string>
          </rect>
         </property>
         <property name="text">
-         <string>Salvar</string>
+         <string>Save</string>
         </property>
-       </widget>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QGroupBox" name="Menu_Right">
-    <property name="geometry">
-     <rect>
-      <x>940</x>
-      <y>100</y>
-      <width>421</width>
-      <height>581</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Configurações</string>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QTabWidget" name="Configuracoes">
-       <property name="minimumSize">
-        <size>
-         <width>380</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="currentIndex">
-        <number>1</number>
-       </property>
-       <widget class="QWidget" name="GCode_Slicer_Control">
-        <attribute name="title">
-         <string>GCode/Slicer</string>
-        </attribute>
-        <widget class="QTabWidget" name="Gcode_Slicer">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>386</width>
-           <height>481</height>
-          </rect>
-         </property>
-         <property name="currentIndex">
-          <number>0</number>
-         </property>
-         <widget class="QWidget" name="Gcode">
-          <attribute name="title">
-           <string>Gcode</string>
-          </attribute>
-          <widget class="QPlainTextEdit" name="GCodePreview">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>10</y>
-             <width>361</width>
-             <height>431</height>
-            </rect>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: white;</string>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </widget>
-         <widget class="QWidget" name="Slicer">
-          <attribute name="title">
-           <string>Slicer</string>
-          </attribute>
-          <widget class="QPushButton" name="bt_startSlicer">
-           <property name="geometry">
-            <rect>
-             <x>10</x>
-             <y>55</y>
-             <width>221</width>
-             <height>41</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Iniciar 
- Fatiamento</string>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="bt_killSlicer">
-           <property name="geometry">
-            <rect>
-             <x>250</x>
-             <y>55</y>
-             <width>111</width>
-             <height>41</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Cancelar 
- Fatiamento</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="lb_slicer">
-           <property name="geometry">
-            <rect>
-             <x>10</x>
-             <y>15</y>
-             <width>51</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Slicer:</string>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="bt_addSlicer">
-           <property name="geometry">
-            <rect>
-             <x>290</x>
-             <y>0</y>
-             <width>71</width>
-             <height>46</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Adicionar 
- Slicer</string>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="cb_Slicer">
-           <property name="geometry">
-            <rect>
-             <x>55</x>
-             <y>10</y>
-             <width>226</width>
-             <height>27</height>
-            </rect>
-           </property>
-          </widget>
-         </widget>
-         <widget class="QWidget" name="Preview">
-          <attribute name="title">
-           <string>Pré-Visualização</string>
-          </attribute>
-          <widget class="QLabel" name="label_6">
-           <property name="geometry">
-            <rect>
-             <x>15</x>
-             <y>10</y>
-             <width>181</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Estatísticas de Impressão:</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="label_8">
-           <property name="geometry">
-            <rect>
-             <x>15</x>
-             <y>60</y>
-             <width>181</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Quantidade de Camadas:</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="label_9">
-           <property name="geometry">
-            <rect>
-             <x>15</x>
-             <y>80</y>
-             <width>116</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Total de Linhas:</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="label_10">
-           <property name="geometry">
-            <rect>
-             <x>15</x>
-             <y>100</y>
-             <width>191</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Quantidade de Filamento:</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="label_11">
-           <property name="geometry">
-            <rect>
-             <x>15</x>
-             <y>40</y>
-             <width>121</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Tempo Estimado:</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="lb_estimatedTime">
-           <property name="geometry">
-            <rect>
-             <x>220</x>
-             <y>40</y>
-             <width>67</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>0:00:00</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="lb_layerCounter">
-           <property name="geometry">
-            <rect>
-             <x>220</x>
-             <y>60</y>
-             <width>67</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="lb_lineCounter">
-           <property name="geometry">
-            <rect>
-             <x>220</x>
-             <y>80</y>
-             <width>67</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="lb_filamentQnt">
-           <property name="geometry">
-            <rect>
-             <x>220</x>
-             <y>100</y>
-             <width>67</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="label_12">
-           <property name="geometry">
-            <rect>
-             <x>15</x>
-             <y>135</y>
-             <width>91</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Visualização:</string>
-           </property>
-          </widget>
-          <widget class="Line" name="line_6">
-           <property name="geometry">
-            <rect>
-             <x>15</x>
-             <y>120</y>
-             <width>326</width>
-             <height>16</height>
-            </rect>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-          <widget class="QCheckBox" name="checkBox">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>160</y>
-             <width>226</width>
-             <height>22</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Mostrar Caminhos do Carro.</string>
-           </property>
-          </widget>
-          <widget class="QRadioButton" name="radioButton">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>190</y>
-             <width>221</width>
-             <height>22</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Mostrar GCode Completo.</string>
-           </property>
-          </widget>
-          <widget class="QSlider" name="sl_layers_first">
-           <property name="geometry">
-            <rect>
-             <x>150</x>
-             <y>235</y>
-             <width>196</width>
-             <height>29</height>
-            </rect>
-           </property>
-           <property name="maximum">
-            <number>100</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-          <widget class="QLabel" name="label_13">
-           <property name="geometry">
-            <rect>
-             <x>5</x>
-             <y>240</y>
-             <width>131</width>
-             <height>20</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Primeira Camada:</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="lb_sliderLayer_first">
-           <property name="geometry">
-            <rect>
-             <x>350</x>
-             <y>240</y>
-             <width>16</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="label_14">
-           <property name="geometry">
-            <rect>
-             <x>10</x>
-             <y>275</y>
-             <width>116</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Última Camada:</string>
-           </property>
-          </widget>
-          <widget class="QSlider" name="sl_layers_last">
-           <property name="geometry">
-            <rect>
-             <x>150</x>
-             <y>270</y>
-             <width>196</width>
-             <height>29</height>
-            </rect>
-           </property>
-           <property name="maximum">
-            <number>100</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-          <widget class="QLabel" name="lb_sliderLayer_last">
-           <property name="geometry">
-            <rect>
-             <x>350</x>
-             <y>275</y>
-             <width>16</width>
-             <height>17</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-          </widget>
-         </widget>
-        </widget>
-       </widget>
-       <widget class="QWidget" name="Manual_Control">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <attribute name="title">
-         <string>Controle Manual</string>
-        </attribute>
-        <widget class="QLabel" name="label">
-         <property name="geometry">
-          <rect>
-           <x>185</x>
-           <y>5</y>
-           <width>21</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>X:</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_2">
-         <property name="geometry">
-          <rect>
-           <x>255</x>
-           <y>5</y>
-           <width>21</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Y:</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_3">
-         <property name="geometry">
-          <rect>
-           <x>325</x>
-           <y>5</y>
-           <width>21</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Z:</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="tb_posicaoeixoX">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>200</x>
-           <y>5</y>
-           <width>51</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-          </font>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="tb_posicaoeixoY">
-         <property name="geometry">
-          <rect>
-           <x>270</x>
-           <y>6</y>
-           <width>51</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-          </font>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="tb_posicaoeixoZ">
-         <property name="geometry">
-          <rect>
-           <x>340</x>
-           <y>6</y>
-           <width>51</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-          </font>
-         </property>
-        </widget>
-        <widget class="Line" name="line">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>20</y>
-           <width>391</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_up_Y">
-         <property name="geometry">
-          <rect>
-           <x>60</x>
-           <y>40</y>
-           <width>30</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Up Y</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="images.qrc">
-           <normaloff>:/Icons/Icons/bt-arrowup</normaloff>:/Icons/Icons/bt-arrowup</iconset>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_down_Y">
-         <property name="geometry">
-          <rect>
-           <x>60</x>
-           <y>130</y>
-           <width>30</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Down Y</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="images.qrc">
-           <normaloff>:/Icons/Icons/bt-arrowdown</normaloff>:/Icons/Icons/bt-arrowdown</iconset>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_right_X">
-         <property name="geometry">
-          <rect>
-           <x>110</x>
-           <y>80</y>
-           <width>30</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Right X</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="images.qrc">
-           <normaloff>:/Icons/Icons/bt-arrowright</normaloff>:/Icons/Icons/bt-arrowright</iconset>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_left_X">
-         <property name="geometry">
-          <rect>
-           <x>5</x>
-           <y>80</y>
-           <width>30</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Left X</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="images.qrc">
-           <normaloff>:/Icons/Icons/bt-arrowleft</normaloff>:/Icons/Icons/bt-arrowleft</iconset>
-         </property>
-        </widget>
-        <widget class="Line" name="line_2">
-         <property name="geometry">
-          <rect>
-           <x>140</x>
-           <y>35</y>
-           <width>20</width>
-           <height>131</height>
-          </rect>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-        <widget class="Line" name="line_3">
-         <property name="geometry">
-          <rect>
-           <x>230</x>
-           <y>35</y>
-           <width>20</width>
-           <height>131</height>
-          </rect>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_filamentoRetract">
-         <property name="geometry">
-          <rect>
-           <x>290</x>
-           <y>40</y>
-           <width>30</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="images.qrc">
-           <normaloff>:/Icons/Icons/bt-arrowup</normaloff>:/Icons/Icons/bt-arrowup</iconset>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_filamentoOneSpeed">
-         <property name="geometry">
-          <rect>
-           <x>260</x>
-           <y>130</y>
-           <width>30</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="images.qrc">
-           <normaloff>:/Icons/Icons/bt-arrowleft</normaloff>:/Icons/Icons/bt-arrowleft</iconset>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_filamentoTwoSpeed">
-         <property name="geometry">
-          <rect>
-           <x>325</x>
-           <y>130</y>
-           <width>30</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="images.qrc">
-           <normaloff>:/Icons/Icons/bt-arrowright</normaloff>:/Icons/Icons/bt-arrowright</iconset>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lb_eixoXY">
-         <property name="geometry">
-          <rect>
-           <x>50</x>
-           <y>70</y>
-           <width>60</width>
-           <height>60</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="pixmap">
-          <pixmap resource="images.qrc">:/Icons/Icons/bt-xy</pixmap>
-         </property>
-        </widget>
-        <widget class="QLabel" name="tb_eixoZ">
-         <property name="geometry">
-          <rect>
-           <x>170</x>
-           <y>70</y>
-           <width>60</width>
-           <height>60</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="pixmap">
-          <pixmap resource="images.qrc">:/Icons/Icons/bt-z</pixmap>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lb_Extruder">
-         <property name="geometry">
-          <rect>
-           <x>280</x>
-           <y>70</y>
-           <width>60</width>
-           <height>60</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="pixmap">
-          <pixmap resource="images.qrc">:/Icons/Icons/bt-extruder</pixmap>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_home_X">
-         <property name="geometry">
-          <rect>
-           <x>5</x>
-           <y>30</y>
-           <width>40</width>
-           <height>40</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Home X</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="images.qrc">
-           <normaloff>:/Icons/Icons/bt-eixox</normaloff>:/Icons/Icons/bt-eixox</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>35</width>
-           <height>35</height>
-          </size>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_home_Y">
-         <property name="geometry">
-          <rect>
-           <x>5</x>
-           <y>120</y>
-           <width>40</width>
-           <height>40</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Home Y</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="images.qrc">
-           <normaloff>:/Icons/Icons/bt-eixoy</normaloff>:/Icons/Icons/bt-eixoy</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>35</width>
-           <height>35</height>
-          </size>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_home_Z">
-         <property name="geometry">
-          <rect>
-           <x>100</x>
-           <y>30</y>
-           <width>40</width>
-           <height>40</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Home Z</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="images.qrc">
-           <normaloff>:/Icons/Icons/bt-eixoz</normaloff>:/Icons/Icons/bt-eixoz</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>35</width>
-           <height>35</height>
-          </size>
-         </property>
-        </widget>
-        <widget class="Line" name="line_4">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>160</y>
-           <width>371</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_home_XYZ">
-         <property name="geometry">
-          <rect>
-           <x>100</x>
-           <y>120</y>
-           <width>40</width>
-           <height>40</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Home XYZ</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="images.qrc">
-           <normaloff>:/Icons/Icons/bt-eixoxyz</normaloff>:/Icons/Icons/bt-eixoxyz</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>35</width>
-           <height>35</height>
-          </size>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_extruderTemp">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>360</y>
-           <width>40</width>
-           <height>40</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Esquentar Extrusor</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="images.qrc">
-           <normaloff>:/Icons/Icons/bt-hotend</normaloff>:/Icons/Icons/bt-hotend</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>25</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_Bed">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>310</y>
-           <width>40</width>
-           <height>40</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Esquentar Mesa</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="images.qrc">
-           <normaloff>:/Icons/Icons/bt-mesa_aquecida</normaloff>:/Icons/Icons/bt-mesa_aquecida</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>35</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-        <widget class="QSlider" name="sl_extruder">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>45</x>
-           <y>370</y>
-           <width>290</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>290</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>290</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">
-QSlider::groove:horizontal {
-    border: 1px solid #999999;
-    height: 10px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
-    background-image: url(:/Icons/Icons/bt-temper_bar);
-	border-radius: 5px;
-
-}
-
-QSlider::handle:horizontal {
-   background: black;
-    border: 1px solid black;
-    width: 2px;
-    margin: -2px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
-    border-radius: 3px;
-}</string>
-         </property>
-         <property name="maximum">
-          <number>260</number>
-         </property>
-         <property name="singleStep">
-          <number>1</number>
-         </property>
-         <property name="value">
-          <number>0</number>
-         </property>
-         <property name="sliderPosition">
-          <number>0</number>
-         </property>
-         <property name="tracking">
-          <bool>false</bool>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="tickPosition">
-          <enum>QSlider::NoTicks</enum>
-         </property>
-        </widget>
-        <widget class="QSlider" name="sl_bed">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>45</x>
-           <y>320</y>
-           <width>290</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>290</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>290</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="palette">
-          <palette>
-           <active/>
-           <inactive/>
-           <disabled/>
-          </palette>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">
-QSlider::groove:horizontal {
-    border: 1px solid #999999;
-    height: 10px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
-    background-image: url(:/Icons/Icons/bt-temper_bar);
-	border-radius: 5px;
-
-}
-
-QSlider::handle:horizontal {
-   background: black;
-    border: 1px solid black;
-    width: 2px;
-    margin: -2px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
-    border-radius: 3px;
-}</string>
-         </property>
-         <property name="maximum">
-          <number>115</number>
-         </property>
-         <property name="singleStep">
-          <number>1</number>
-         </property>
-         <property name="value">
-          <number>0</number>
-         </property>
-         <property name="sliderPosition">
-          <number>0</number>
-         </property>
-         <property name="tracking">
-          <bool>false</bool>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="invertedAppearance">
-          <bool>false</bool>
-         </property>
-         <property name="invertedControls">
-          <bool>false</bool>
-         </property>
-         <property name="tickPosition">
-          <enum>QSlider::NoTicks</enum>
-         </property>
-        </widget>
-        <widget class="QSlider" name="sl_coolerFan">
-         <property name="geometry">
-          <rect>
-           <x>45</x>
-           <y>280</y>
-           <width>290</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QSlider::groove:horizontal {
-    border: 1px solid #999999;
-    height: 10px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
-    background-image: url(:/Icons/Icons/bt-slider);
-    border-radius:5px;
-
-}
-
-QSlider::handle:horizontal {
-   background: black;
-    border: 1px solid black;
-    width: 2px;
-    margin: -2px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
-    border-radius: 3px;
-}</string>
-         </property>
-         <property name="maximum">
-          <number>100</number>
-         </property>
-         <property name="pageStep">
-          <number>1</number>
-         </property>
-         <property name="value">
-          <number>50</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-        <widget class="QSlider" name="sl_filamentFlow">
-         <property name="geometry">
-          <rect>
-           <x>45</x>
-           <y>240</y>
-           <width>290</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QSlider::groove:horizontal {
-    border: 1px solid #999999;
-    height: 10px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
-    background-image: url(:/Icons/Icons/bt-slider);
-    border-radius:5px;
-
-}
-
-QSlider::handle:horizontal {
-   background: black;
-    border: 1px solid black;
-    width: 2px;
-    margin: -2px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
-    border-radius: 3px;
-}</string>
-         </property>
-         <property name="maximum">
-          <number>120</number>
-         </property>
-         <property name="pageStep">
-          <number>1</number>
-         </property>
-         <property name="value">
-          <number>50</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-        <widget class="QSlider" name="sl_speedFeedFilament">
-         <property name="geometry">
-          <rect>
-           <x>45</x>
-           <y>195</y>
-           <width>290</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QSlider::groove:horizontal {
-    border: 1px solid #999999;
-    height: 10px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
-    background-image: url(:/Icons/Icons/bt-slider);
-    border-radius:5px;
-
-}
-
-QSlider::handle:horizontal {
-   background: black;
-    border: 1px solid black;
-    width: 2px;
-    margin: -2px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
-    border-radius: 3px;
-}</string>
-         </property>
-         <property name="maximum">
-          <number>250</number>
-         </property>
-         <property name="pageStep">
-          <number>1</number>
-         </property>
-         <property name="value">
-          <number>50</number>
-         </property>
-         <property name="tracking">
-          <bool>true</bool>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lb_bedTemp">
-         <property name="geometry">
-          <rect>
-           <x>260</x>
-           <y>335</y>
-           <width>45</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lb_value_cooler">
-         <property name="geometry">
-          <rect>
-           <x>270</x>
-           <y>295</y>
-           <width>50</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lb_value_vazaofil">
-         <property name="geometry">
-          <rect>
-           <x>285</x>
-           <y>255</y>
-           <width>50</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lb_value_speedfil">
-         <property name="geometry">
-          <rect>
-           <x>285</x>
-           <y>210</y>
-           <width>50</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_extruder1">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>415</y>
-           <width>30</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>1</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_extruder2">
-         <property name="geometry">
-          <rect>
-           <x>100</x>
-           <y>415</y>
-           <width>30</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>2</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="tb_speedFeedFilament">
-         <property name="geometry">
-          <rect>
-           <x>335</x>
-           <y>195</y>
-           <width>41</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-          </font>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="tb_filamentFlow">
-         <property name="geometry">
-          <rect>
-           <x>335</x>
-           <y>240</y>
-           <width>41</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-          </font>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="tb_coolerfan">
-         <property name="geometry">
-          <rect>
-           <x>335</x>
-           <y>280</y>
-           <width>41</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-          </font>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="tb_BedTempMC">
-         <property name="geometry">
-          <rect>
-           <x>335</x>
-           <y>320</y>
-           <width>41</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-          </font>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="tb_ExtruderTempMC">
-         <property name="geometry">
-          <rect>
-           <x>340</x>
-           <y>370</y>
-           <width>41</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-          </font>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_16">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>185</y>
-           <width>40</width>
-           <height>40</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="pixmap">
-          <pixmap resource="images.qrc">:/Icons/Icons/bt-velocidade_impressao</pixmap>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_17">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>230</y>
-           <width>40</width>
-           <height>40</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="pixmap">
-          <pixmap resource="images.qrc">:/Icons/Icons/bt-vazao_filamento</pixmap>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_18">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>270</y>
-           <width>40</width>
-           <height>40</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="pixmap">
-          <pixmap resource="images.qrc">:/Icons/Icons/bt-cooler_fan</pixmap>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_19">
-         <property name="geometry">
-          <rect>
-           <x>310</x>
-           <y>210</y>
-           <width>16</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>%</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_20">
-         <property name="geometry">
-          <rect>
-           <x>310</x>
-           <y>255</y>
-           <width>16</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>%</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_21">
-         <property name="geometry">
-          <rect>
-           <x>310</x>
-           <y>295</y>
-           <width>16</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>%</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_22">
-         <property name="geometry">
-          <rect>
-           <x>310</x>
-           <y>335</y>
-           <width>16</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>ºC</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_23">
-         <property name="geometry">
-          <rect>
-           <x>315</x>
-           <y>385</y>
-           <width>16</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>ºC</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_extruder3">
-         <property name="geometry">
-          <rect>
-           <x>200</x>
-           <y>415</y>
-           <width>30</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>3</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_extruder4">
-         <property name="geometry">
-          <rect>
-           <x>300</x>
-           <y>415</y>
-           <width>30</width>
-           <height>30</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>4</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lb_extruderTemp_4">
-         <property name="geometry">
-          <rect>
-           <x>330</x>
-           <y>420</y>
-           <width>45</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lbC4">
-         <property name="geometry">
-          <rect>
-           <x>375</x>
-           <y>420</y>
-           <width>16</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>ºC</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lb_extruderTemp_3">
-         <property name="geometry">
-          <rect>
-           <x>230</x>
-           <y>420</y>
-           <width>45</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lbC3">
-         <property name="geometry">
-          <rect>
-           <x>280</x>
-           <y>420</y>
-           <width>16</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>ºC</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lbC2">
-         <property name="geometry">
-          <rect>
-           <x>180</x>
-           <y>420</y>
-           <width>16</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>ºC</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lb_extruderTemp_2">
-         <property name="geometry">
-          <rect>
-           <x>130</x>
-           <y>420</y>
-           <width>45</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lb_extruderTemp_1">
-         <property name="geometry">
-          <rect>
-           <x>30</x>
-           <y>420</y>
-           <width>45</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lbC1">
-         <property name="geometry">
-          <rect>
-           <x>80</x>
-           <y>420</y>
-           <width>16</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>ºC</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="lb_extruderTemp0">
-         <property name="geometry">
-          <rect>
-           <x>265</x>
-           <y>385</y>
-           <width>45</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_up_Z">
-         <property name="geometry">
-          <rect>
-           <x>180</x>
-           <y>40</y>
-           <width>31</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="images.qrc">
-           <normaloff>:/Icons/Icons/bt-arrowup</normaloff>:/Icons/Icons/bt-arrowup</iconset>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_down_Z">
-         <property name="geometry">
-          <rect>
-           <x>180</x>
-           <y>130</y>
-           <width>31</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="images.qrc">
-           <normaloff>:/Icons/Icons/bt-arrowdown</normaloff>:/Icons/Icons/bt-arrowdown</iconset>
-         </property>
-        </widget>
-        <widget class="QComboBox" name="cb_valuePosXY">
-         <property name="geometry">
-          <rect>
-           <x>115</x>
-           <y>5</y>
-           <width>60</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Descolamento referente aos eixos X e Y&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <item>
-          <property name="text">
-           <string>0.1</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>1</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>10</string>
-          </property>
-         </item>
-        </widget>
-        <widget class="QLabel" name="label_26">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>5</y>
-           <width>111</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Deslocamento:</string>
-         </property>
-        </widget>
-        <zorder>label</zorder>
-        <zorder>label_2</zorder>
-        <zorder>label_3</zorder>
-        <zorder>tb_posicaoeixoX</zorder>
-        <zorder>tb_posicaoeixoY</zorder>
-        <zorder>tb_posicaoeixoZ</zorder>
-        <zorder>line</zorder>
-        <zorder>bt_up_Y</zorder>
-        <zorder>bt_down_Y</zorder>
-        <zorder>bt_right_X</zorder>
-        <zorder>bt_left_X</zorder>
-        <zorder>line_2</zorder>
-        <zorder>line_3</zorder>
-        <zorder>bt_filamentoOneSpeed</zorder>
-        <zorder>bt_filamentoTwoSpeed</zorder>
-        <zorder>lb_eixoXY</zorder>
-        <zorder>tb_eixoZ</zorder>
-        <zorder>lb_Extruder</zorder>
-        <zorder>bt_home_X</zorder>
-        <zorder>bt_home_Y</zorder>
-        <zorder>bt_home_Z</zorder>
-        <zorder>line_4</zorder>
-        <zorder>bt_home_XYZ</zorder>
-        <zorder>bt_extruderTemp</zorder>
-        <zorder>bt_Bed</zorder>
-        <zorder>sl_extruder</zorder>
-        <zorder>sl_bed</zorder>
-        <zorder>sl_coolerFan</zorder>
-        <zorder>sl_filamentFlow</zorder>
-        <zorder>sl_speedFeedFilament</zorder>
-        <zorder>lb_bedTemp</zorder>
-        <zorder>lb_value_cooler</zorder>
-        <zorder>lb_value_vazaofil</zorder>
-        <zorder>lb_value_speedfil</zorder>
-        <zorder>bt_extruder1</zorder>
-        <zorder>bt_extruder2</zorder>
-        <zorder>tb_speedFeedFilament</zorder>
-        <zorder>tb_filamentFlow</zorder>
-        <zorder>tb_coolerfan</zorder>
-        <zorder>tb_BedTempMC</zorder>
-        <zorder>tb_ExtruderTempMC</zorder>
-        <zorder>label_16</zorder>
-        <zorder>label_17</zorder>
-        <zorder>label_18</zorder>
-        <zorder>label_19</zorder>
-        <zorder>label_20</zorder>
-        <zorder>label_21</zorder>
-        <zorder>label_22</zorder>
-        <zorder>label_23</zorder>
-        <zorder>bt_extruder3</zorder>
-        <zorder>bt_extruder4</zorder>
-        <zorder>lb_extruderTemp_4</zorder>
-        <zorder>lbC4</zorder>
-        <zorder>lb_extruderTemp_3</zorder>
-        <zorder>lbC3</zorder>
-        <zorder>lbC2</zorder>
-        <zorder>lb_extruderTemp_2</zorder>
-        <zorder>lb_extruderTemp_1</zorder>
-        <zorder>lbC1</zorder>
-        <zorder>lb_extruderTemp0</zorder>
-        <zorder>bt_up_Z</zorder>
-        <zorder>bt_down_Z</zorder>
-        <zorder>cb_valuePosXY</zorder>
-        <zorder>label_26</zorder>
-        <zorder>bt_filamentoRetract</zorder>
-       </widget>
-       <widget class="QWidget" name="Tool_Box">
-        <attribute name="title">
-         <string>Caixa de Ferramentas</string>
-        </attribute>
        </widget>
       </widget>
      </item>
@@ -2504,14 +768,14 @@ QSlider::handle:horizontal {
    <widget class="QLabel" name="lb_import">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>35</x>
       <y>80</y>
-      <width>61</width>
+      <width>51</width>
       <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>Importar</string>
+     <string>Import</string>
     </property>
    </widget>
    <widget class="QLabel" name="lb_open">
@@ -2524,7 +788,7 @@ QSlider::handle:horizontal {
      </rect>
     </property>
     <property name="text">
-     <string>Abrir</string>
+     <string>Open</string>
     </property>
    </widget>
    <widget class="QPushButton" name="bt_emergency">
@@ -2566,20 +830,20 @@ QSlider::handle:horizontal {
      </rect>
     </property>
     <property name="text">
-     <string>Conectar</string>
+     <string>Connect</string>
     </property>
    </widget>
    <widget class="QLabel" name="lb_play">
     <property name="geometry">
      <rect>
-      <x>905</x>
+      <x>925</x>
       <y>80</y>
-      <width>71</width>
+      <width>31</width>
       <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>Executar</string>
+     <string>Play</string>
     </property>
    </widget>
    <widget class="QLabel" name="lb_pause">
@@ -2592,20 +856,20 @@ QSlider::handle:horizontal {
      </rect>
     </property>
     <property name="text">
-     <string>Pausar</string>
+     <string>Pause</string>
     </property>
    </widget>
    <widget class="QLabel" name="lb_stop">
     <property name="geometry">
      <rect>
-      <x>1120</x>
+      <x>1110</x>
       <y>80</y>
-      <width>67</width>
+      <width>41</width>
       <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>Parar</string>
+     <string>Stop</string>
     </property>
    </widget>
    <widget class="Line" name="line_5">
@@ -2624,14 +888,14 @@ QSlider::handle:horizontal {
    <widget class="QLabel" name="lb_emergency">
     <property name="geometry">
      <rect>
-      <x>1190</x>
+      <x>1205</x>
       <y>80</y>
-      <width>171</width>
+      <width>126</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>Parada de Emergência</string>
+     <string>Emergency Stop</string>
     </property>
    </widget>
    <widget class="QWidget" name="layoutWidget">
@@ -2738,8 +1002,8 @@ QSlider::handle:horizontal {
      </rect>
     </property>
     <layout class="QGridLayout" name="buttonsright">
-     <item row="0" column="0">
-      <widget class="QPushButton" name="bt_play">
+     <item row="0" column="2">
+      <widget class="QPushButton" name="bt_stop">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -2754,8 +1018,7 @@ QSlider::handle:horizontal {
        </property>
        <property name="icon">
         <iconset resource="images.qrc">
-         <normaloff>:/Icons/Icons/bt-play</normaloff>
-         <disabledon>:/Icons/Icons/bt-play-onclick</disabledon>:/Icons/Icons/bt-play</iconset>
+         <normaloff>:/Icons/Icons/bt-stop</normaloff>:/Icons/Icons/bt-stop</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -2798,8 +1061,8 @@ QSlider::handle:horizontal {
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="bt_stop">
+     <item row="0" column="0">
+      <widget class="QPushButton" name="bt_play">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -2814,7 +1077,8 @@ QSlider::handle:horizontal {
        </property>
        <property name="icon">
         <iconset resource="images.qrc">
-         <normaloff>:/Icons/Icons/bt-stop</normaloff>:/Icons/Icons/bt-stop</iconset>
+         <normaloff>:/Icons/Icons/bt-play</normaloff>
+         <disabledon>:/Icons/Icons/bt-play-onclick</disabledon>:/Icons/Icons/bt-play</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -2832,17 +1096,11 @@ QSlider::handle:horizontal {
    <widget class="GLWidget" name="openGLWidget">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>160</y>
-      <width>480</width>
-      <height>510</height>
+      <x>420</x>
+      <y>140</y>
+      <width>531</width>
+      <height>521</height>
      </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>480</width>
-      <height>510</height>
-     </size>
     </property>
    </widget>
    <widget class="QLabel" name="label_7">
@@ -2879,6 +1137,1763 @@ QSlider::handle:horizontal {
      <string>Versão de Testes</string>
     </property>
    </widget>
+   <widget class="QTabWidget" name="Configuracoes">
+    <property name="geometry">
+     <rect>
+      <x>960</x>
+      <y>115</y>
+      <width>395</width>
+      <height>551</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>380</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="currentIndex">
+     <number>2</number>
+    </property>
+    <widget class="QWidget" name="GCode_Slicer_Control">
+     <attribute name="title">
+      <string>GCode/Slicer</string>
+     </attribute>
+     <widget class="QTabWidget" name="Gcode_Slicer">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>386</width>
+        <height>506</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="Gcode">
+       <attribute name="title">
+        <string>Gcode</string>
+       </attribute>
+       <widget class="QPlainTextEdit" name="GCodePreview">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>361</width>
+          <height>431</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: white;</string>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="Slicer">
+       <attribute name="title">
+        <string>Slicer</string>
+       </attribute>
+       <widget class="QPushButton" name="bt_startSlicer">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>55</y>
+          <width>221</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Start 
+ Slicer</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="bt_killSlicer">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>55</y>
+          <width>111</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Stop 
+ Slicer</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lb_slicer">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>15</y>
+          <width>51</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Slicer:</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="bt_addSlicer">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>0</y>
+          <width>71</width>
+          <height>46</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Add 
+ Slicer</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cb_Slicer">
+        <property name="geometry">
+         <rect>
+          <x>55</x>
+          <y>10</y>
+          <width>226</width>
+          <height>27</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="Preview">
+       <attribute name="title">
+        <string>Statics of Print</string>
+       </attribute>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>10</y>
+          <width>181</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Statics of Print:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_8">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>60</y>
+          <width>181</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Layers Count</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_9">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>80</y>
+          <width>116</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Total Lines:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_10">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>100</y>
+          <width>191</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Filament Count:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_11">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>40</y>
+          <width>121</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Time Estimated</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lb_estimatedTime">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>40</y>
+          <width>67</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0:00:00</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lb_layerCounter">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>60</y>
+          <width>67</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lb_lineCounter">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>80</y>
+          <width>67</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lb_filamentQnt">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>100</y>
+          <width>67</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_12">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>135</y>
+          <width>91</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>View:</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_6">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>120</y>
+          <width>326</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="checkBox">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>160</y>
+          <width>226</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Show car travels</string>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="radioButton">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>190</y>
+          <width>221</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Show Gcode complete</string>
+        </property>
+       </widget>
+       <widget class="QSlider" name="sl_layers_first">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>235</y>
+          <width>196</width>
+          <height>29</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_13">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>240</y>
+          <width>131</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>First Layer</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lb_sliderLayer_first">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>240</y>
+          <width>16</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_14">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>275</y>
+          <width>116</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Last Layer</string>
+        </property>
+       </widget>
+       <widget class="QSlider" name="sl_layers_last">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>270</y>
+          <width>196</width>
+          <height>29</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lb_sliderLayer_last">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>275</y>
+          <width>16</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="Manual_Control">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <attribute name="title">
+      <string>Manual Control</string>
+     </attribute>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>185</x>
+        <y>5</y>
+        <width>21</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>X:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>255</x>
+        <y>5</y>
+        <width>21</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Y:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>325</x>
+        <y>5</y>
+        <width>21</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Z:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="tb_posicaoeixoX">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>5</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="tb_posicaoeixoY">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>6</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="tb_posicaoeixoZ">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>6</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>20</y>
+        <width>391</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_up_Y">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>40</y>
+        <width>30</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Up Y</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/Icons/Icons/bt-arrowup</normaloff>:/Icons/Icons/bt-arrowup</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_down_Y">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>130</y>
+        <width>30</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Down Y</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/Icons/Icons/bt-arrowdown</normaloff>:/Icons/Icons/bt-arrowdown</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_right_X">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>80</y>
+        <width>30</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Right X</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/Icons/Icons/bt-arrowright</normaloff>:/Icons/Icons/bt-arrowright</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_left_X">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>80</y>
+        <width>30</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Left X</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/Icons/Icons/bt-arrowleft</normaloff>:/Icons/Icons/bt-arrowleft</iconset>
+      </property>
+     </widget>
+     <widget class="Line" name="line_2">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>35</y>
+        <width>20</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="Line" name="line_3">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>35</y>
+        <width>20</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_filamentoRetract">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>40</y>
+        <width>30</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/Icons/Icons/bt-arrowup</normaloff>:/Icons/Icons/bt-arrowup</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_filamentoOneSpeed">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>130</y>
+        <width>30</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/Icons/Icons/bt-arrowleft</normaloff>:/Icons/Icons/bt-arrowleft</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_filamentoTwoSpeed">
+      <property name="geometry">
+       <rect>
+        <x>325</x>
+        <y>130</y>
+        <width>30</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/Icons/Icons/bt-arrowright</normaloff>:/Icons/Icons/bt-arrowright</iconset>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_eixoXY">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>70</y>
+        <width>60</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="images.qrc">:/Icons/Icons/bt-xy</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="tb_eixoZ">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>70</y>
+        <width>60</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="images.qrc">:/Icons/Icons/bt-z</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_Extruder">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>70</y>
+        <width>60</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="images.qrc">:/Icons/Icons/bt-extruder</pixmap>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_home_X">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>30</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Home X</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/Icons/Icons/bt-eixox</normaloff>:/Icons/Icons/bt-eixox</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>35</width>
+        <height>35</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_home_Y">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>120</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Home Y</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/Icons/Icons/bt-eixoy</normaloff>:/Icons/Icons/bt-eixoy</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>35</width>
+        <height>35</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_home_Z">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>30</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Home Z</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/Icons/Icons/bt-eixoz</normaloff>:/Icons/Icons/bt-eixoz</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>35</width>
+        <height>35</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="Line" name="line_4">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>160</y>
+        <width>371</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_home_XYZ">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>120</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Home XYZ</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/Icons/Icons/bt-eixoxyz</normaloff>:/Icons/Icons/bt-eixoxyz</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>35</width>
+        <height>35</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_extruderTemp">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>360</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Esquentar Extrusor</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/Icons/Icons/bt-hotend</normaloff>:/Icons/Icons/bt-hotend</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>25</width>
+        <height>35</height>
+       </size>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_Bed">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>310</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Esquentar Mesa</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/Icons/Icons/bt-mesa_aquecida</normaloff>:/Icons/Icons/bt-mesa_aquecida</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>35</width>
+        <height>35</height>
+       </size>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QSlider" name="sl_extruder">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>45</x>
+        <y>370</y>
+        <width>290</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>290</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>290</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 10px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
+    background-image: url(:/Icons/Icons/bt-temper_bar);
+	border-radius: 5px;
+
+}
+
+QSlider::handle:horizontal {
+   background: black;
+    border: 1px solid black;
+    width: 2px;
+    margin: -2px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+    border-radius: 3px;
+}</string>
+      </property>
+      <property name="maximum">
+       <number>260</number>
+      </property>
+      <property name="singleStep">
+       <number>1</number>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+      <property name="sliderPosition">
+       <number>0</number>
+      </property>
+      <property name="tracking">
+       <bool>false</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="tickPosition">
+       <enum>QSlider::NoTicks</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="sl_bed">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>45</x>
+        <y>320</y>
+        <width>290</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>290</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>290</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="palette">
+       <palette>
+        <active/>
+        <inactive/>
+        <disabled/>
+       </palette>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 10px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
+    background-image: url(:/Icons/Icons/bt-temper_bar);
+	border-radius: 5px;
+
+}
+
+QSlider::handle:horizontal {
+   background: black;
+    border: 1px solid black;
+    width: 2px;
+    margin: -2px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+    border-radius: 3px;
+}</string>
+      </property>
+      <property name="maximum">
+       <number>115</number>
+      </property>
+      <property name="singleStep">
+       <number>1</number>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+      <property name="sliderPosition">
+       <number>0</number>
+      </property>
+      <property name="tracking">
+       <bool>false</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="invertedAppearance">
+       <bool>false</bool>
+      </property>
+      <property name="invertedControls">
+       <bool>false</bool>
+      </property>
+      <property name="tickPosition">
+       <enum>QSlider::NoTicks</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="sl_coolerFan">
+      <property name="geometry">
+       <rect>
+        <x>45</x>
+        <y>280</y>
+        <width>290</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 10px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
+    background-image: url(:/Icons/Icons/bt-slider);
+    border-radius:5px;
+
+}
+
+QSlider::handle:horizontal {
+   background: black;
+    border: 1px solid black;
+    width: 2px;
+    margin: -2px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+    border-radius: 3px;
+}</string>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="pageStep">
+       <number>1</number>
+      </property>
+      <property name="value">
+       <number>50</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="sl_filamentFlow">
+      <property name="geometry">
+       <rect>
+        <x>45</x>
+        <y>240</y>
+        <width>290</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 10px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
+    background-image: url(:/Icons/Icons/bt-slider);
+    border-radius:5px;
+
+}
+
+QSlider::handle:horizontal {
+   background: black;
+    border: 1px solid black;
+    width: 2px;
+    margin: -2px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+    border-radius: 3px;
+}</string>
+      </property>
+      <property name="maximum">
+       <number>120</number>
+      </property>
+      <property name="pageStep">
+       <number>1</number>
+      </property>
+      <property name="value">
+       <number>50</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QSlider" name="sl_speedFeedFilament">
+      <property name="geometry">
+       <rect>
+        <x>45</x>
+        <y>195</y>
+        <width>290</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 10px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
+    background-image: url(:/Icons/Icons/bt-slider);
+    border-radius:5px;
+
+}
+
+QSlider::handle:horizontal {
+   background: black;
+    border: 1px solid black;
+    width: 2px;
+    margin: -2px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+    border-radius: 3px;
+}</string>
+      </property>
+      <property name="maximum">
+       <number>250</number>
+      </property>
+      <property name="pageStep">
+       <number>1</number>
+      </property>
+      <property name="value">
+       <number>50</number>
+      </property>
+      <property name="tracking">
+       <bool>true</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_bedTemp">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>335</y>
+        <width>45</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_value_cooler">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>295</y>
+        <width>50</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_value_vazaofil">
+      <property name="geometry">
+       <rect>
+        <x>285</x>
+        <y>255</y>
+        <width>50</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_value_speedfil">
+      <property name="geometry">
+       <rect>
+        <x>285</x>
+        <y>210</y>
+        <width>50</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_extruder1">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>415</y>
+        <width>30</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>1</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_extruder2">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>415</y>
+        <width>30</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>2</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="tb_speedFeedFilament">
+      <property name="geometry">
+       <rect>
+        <x>335</x>
+        <y>195</y>
+        <width>41</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="tb_filamentFlow">
+      <property name="geometry">
+       <rect>
+        <x>335</x>
+        <y>240</y>
+        <width>41</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="tb_coolerfan">
+      <property name="geometry">
+       <rect>
+        <x>335</x>
+        <y>280</y>
+        <width>41</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="tb_BedTempMC">
+      <property name="geometry">
+       <rect>
+        <x>335</x>
+        <y>320</y>
+        <width>41</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="tb_ExtruderTempMC">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>370</y>
+        <width>41</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_16">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>185</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Rate of Feed</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="images.qrc">:/Icons/Icons/bt-velocidade_impressao</pixmap>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_17">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>230</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Flow Rate</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="images.qrc">:/Icons/Icons/bt-vazao_filamento</pixmap>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>270</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Cooler Fan</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="images.qrc">:/Icons/Icons/bt-cooler_fan</pixmap>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_19">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>210</y>
+        <width>16</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>%</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_20">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>255</y>
+        <width>16</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>%</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_21">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>295</y>
+        <width>16</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>%</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_22">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>335</y>
+        <width>16</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ºC</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_23">
+      <property name="geometry">
+       <rect>
+        <x>315</x>
+        <y>385</y>
+        <width>16</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ºC</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_extruder3">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>415</y>
+        <width>30</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>3</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_extruder4">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>415</y>
+        <width>30</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>4</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_extruderTemp_4">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>420</y>
+        <width>45</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbC4">
+      <property name="geometry">
+       <rect>
+        <x>375</x>
+        <y>420</y>
+        <width>16</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ºC</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_extruderTemp_3">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>420</y>
+        <width>45</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbC3">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>420</y>
+        <width>16</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ºC</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbC2">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>420</y>
+        <width>16</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ºC</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_extruderTemp_2">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>420</y>
+        <width>45</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_extruderTemp_1">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>420</y>
+        <width>45</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbC1">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>420</y>
+        <width>16</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ºC</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_extruderTemp0">
+      <property name="geometry">
+       <rect>
+        <x>265</x>
+        <y>385</y>
+        <width>45</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_up_Z">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>40</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Z Up</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/Icons/Icons/bt-arrowup</normaloff>:/Icons/Icons/bt-arrowup</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="bt_down_Z">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>130</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>Z Down</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/Icons/Icons/bt-arrowdown</normaloff>:/Icons/Icons/bt-arrowdown</iconset>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cb_valuePosXY">
+      <property name="geometry">
+       <rect>
+        <x>115</x>
+        <y>5</y>
+        <width>60</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Descolamento referente aos eixos X e Y&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>0.1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>10</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_26">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>5</y>
+        <width>111</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Displacement:</string>
+      </property>
+     </widget>
+     <zorder>label</zorder>
+     <zorder>label_2</zorder>
+     <zorder>label_3</zorder>
+     <zorder>tb_posicaoeixoX</zorder>
+     <zorder>tb_posicaoeixoY</zorder>
+     <zorder>tb_posicaoeixoZ</zorder>
+     <zorder>line</zorder>
+     <zorder>bt_up_Y</zorder>
+     <zorder>bt_down_Y</zorder>
+     <zorder>bt_right_X</zorder>
+     <zorder>bt_left_X</zorder>
+     <zorder>line_2</zorder>
+     <zorder>line_3</zorder>
+     <zorder>bt_filamentoOneSpeed</zorder>
+     <zorder>bt_filamentoTwoSpeed</zorder>
+     <zorder>lb_eixoXY</zorder>
+     <zorder>tb_eixoZ</zorder>
+     <zorder>lb_Extruder</zorder>
+     <zorder>bt_home_X</zorder>
+     <zorder>bt_home_Y</zorder>
+     <zorder>bt_home_Z</zorder>
+     <zorder>line_4</zorder>
+     <zorder>bt_home_XYZ</zorder>
+     <zorder>bt_extruderTemp</zorder>
+     <zorder>bt_Bed</zorder>
+     <zorder>sl_extruder</zorder>
+     <zorder>sl_bed</zorder>
+     <zorder>sl_coolerFan</zorder>
+     <zorder>sl_filamentFlow</zorder>
+     <zorder>sl_speedFeedFilament</zorder>
+     <zorder>lb_bedTemp</zorder>
+     <zorder>lb_value_cooler</zorder>
+     <zorder>lb_value_vazaofil</zorder>
+     <zorder>lb_value_speedfil</zorder>
+     <zorder>bt_extruder1</zorder>
+     <zorder>bt_extruder2</zorder>
+     <zorder>tb_speedFeedFilament</zorder>
+     <zorder>tb_filamentFlow</zorder>
+     <zorder>tb_coolerfan</zorder>
+     <zorder>tb_BedTempMC</zorder>
+     <zorder>tb_ExtruderTempMC</zorder>
+     <zorder>label_16</zorder>
+     <zorder>label_17</zorder>
+     <zorder>label_18</zorder>
+     <zorder>label_19</zorder>
+     <zorder>label_20</zorder>
+     <zorder>label_21</zorder>
+     <zorder>label_22</zorder>
+     <zorder>label_23</zorder>
+     <zorder>bt_extruder3</zorder>
+     <zorder>bt_extruder4</zorder>
+     <zorder>lb_extruderTemp_4</zorder>
+     <zorder>lbC4</zorder>
+     <zorder>lb_extruderTemp_3</zorder>
+     <zorder>lbC3</zorder>
+     <zorder>lbC2</zorder>
+     <zorder>lb_extruderTemp_2</zorder>
+     <zorder>lb_extruderTemp_1</zorder>
+     <zorder>lbC1</zorder>
+     <zorder>lb_extruderTemp0</zorder>
+     <zorder>bt_up_Z</zorder>
+     <zorder>bt_down_Z</zorder>
+     <zorder>cb_valuePosXY</zorder>
+     <zorder>label_26</zorder>
+     <zorder>bt_filamentoRetract</zorder>
+    </widget>
+    <widget class="QWidget" name="Tool_Box">
+     <attribute name="title">
+      <string>Toolbox</string>
+     </attribute>
+    </widget>
+   </widget>
+   <zorder>bt_hide</zorder>
+   <zorder>Menu_Control_Left</zorder>
+   <zorder>lb_import</zorder>
+   <zorder>lb_open</zorder>
+   <zorder>bt_emergency</zorder>
+   <zorder>lb_connect</zorder>
+   <zorder>lb_play</zorder>
+   <zorder>lb_pause</zorder>
+   <zorder>lb_stop</zorder>
+   <zorder>line_5</zorder>
+   <zorder>lb_emergency</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>openGLWidget</zorder>
+   <zorder>label_7</zorder>
+   <zorder>label_15</zorder>
+   <zorder>bt_play</zorder>
+   <zorder>bt_pause</zorder>
+   <zorder>bt_stop</zorder>
+   <zorder>Configuracoes</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -2891,14 +2906,14 @@ QSlider::handle:horizontal {
    </property>
    <widget class="QMenu" name="menuArquivo">
     <property name="title">
-     <string>Arquivo</string>
+     <string>File</string>
     </property>
     <addaction name="separator"/>
     <addaction name="actionFechar"/>
    </widget>
    <widget class="QMenu" name="menuLinguagem">
     <property name="title">
-     <string>Linguagem</string>
+     <string>Language</string>
     </property>
     <addaction name="actionEnglish"/>
     <addaction name="actionPortuguese"/>
@@ -2906,7 +2921,7 @@ QSlider::handle:horizontal {
    </widget>
    <widget class="QMenu" name="menuSobre">
     <property name="title">
-     <string>Sobre</string>
+     <string>About</string>
     </property>
     <addaction name="actionAviso_Legal"/>
     <addaction name="actionDocumenta_o"/>
@@ -3107,92 +3122,9 @@ QSlider::handle:horizontal {
   <tabstop>tb_extruder_vol_max</tabstop>
   <tabstop>bt_default</tabstop>
   <tabstop>cb_Connection_Port</tabstop>
-  <tabstop>Gcode_Slicer</tabstop>
-  <tabstop>GCodePreview</tabstop>
  </tabstops>
  <resources>
   <include location="images.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>sl_coolerFan</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>lb_value_cooler</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1197</x>
-     <y>480</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1273</x>
-     <y>495</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tb_Table_Temperature</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>tb_BedTempMC</receiver>
-   <slot>setText(QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>334</x>
-     <y>442</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1329</x>
-     <y>521</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tb_ExtruderTemperature</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>tb_ExtruderTempMC</receiver>
-   <slot>setText(QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>325</x>
-     <y>420</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1334</x>
-     <y>571</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>sl_filamentFlow</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>lb_value_vazaofil</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1248</x>
-     <y>440</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1288</x>
-     <y>455</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>sl_speedFeedFilament</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>lb_value_speedfil</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1226</x>
-     <y>395</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1288</x>
-     <y>410</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
