@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
         QFont font("MyFont");
         app.setFont(font);
     }
-
+/*
     QTranslator translator;
     QLocale locale;
     QString lang = QLocale::languageToString(locale.language());
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
         translator.load(":/Translations/EN_english.qm");
         app.installTranslator(&translator);
 
-    }
+    }*/
     BrPrint3D w;
 
     w.show();
