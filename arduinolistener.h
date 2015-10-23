@@ -18,7 +18,7 @@ private:
     bool garbage,test;
     QString file;
 signals:
-    void arduinoConnect(bool b, QString word);
+    void arduinoConnect(bool b);
 };
 
 #endif // ARDUINOLISTENER_H

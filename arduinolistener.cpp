@@ -16,23 +16,24 @@ void arduinoListener::run()
         {
             garbage=std::system("lsusb > arduinoListener.txt");
             QFile arduino("arduinoListener.txt");
-            QString word;
             if(arduino.open(QIODevice::ReadOnly|QIODevice::Text))
             {       QTextStream in(&arduino);
                     QString file = in.readAll();
                     arduino.close();
                     if((test=file.contains("Arduino"))==true)
-                    {    word = "Arduino";
-                         emit arduinoConnect(true, word);
+                    {   emit arduinoConnect(true);
+                        break;
                     }
-                    else if((test=file.contains("QinHeng"))==true)
+                    /*else if((test=file.contains("QinHeng"))==true)
                     {   word = "ch341-uart";
                         emit arduinoConnect(true,word);
-                    }
+                    }*/
                     else
                         usleep(5000);
             }
         }
+   // this->sleep(1);
+   // this->~arduinoListener();
 
 }
 
