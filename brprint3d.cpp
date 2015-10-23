@@ -210,7 +210,7 @@ void BrPrint3D::init()
     ui->lb_bedTemp->setText(QVariant (ui->sl_bed->value()).toString());
     ui->lb_value_speedfil->setText(QVariant (ui->sl_speedFeedFilament->value()).toString());
     ui->lb_value_vazaofil->setText(QVariant (ui->sl_filamentFlow->value()).toString());
-    ui->lb_extruderTemp0->setText(QVariant (ui->sl_extruder->value()).toString());
+    ui->lb_extruderTemp_0->setText(QVariant (ui->sl_extruder->value()).toString());
 
     //Hide Config Menu
     ui->Menu_Control_Left->hide();
@@ -906,7 +906,6 @@ void BrPrint3D::on_bt_Bed_clicked(bool checked)
 {
     if(checked==true)
     {       float tmp = ui->tb_BedTempMC->text().toFloat();
-            ui->bt_Bed->setStyleSheet("background-color:yellow;");
             this->printer_object->setBedTemp(tmp);
     }
     else
@@ -919,30 +918,9 @@ void BrPrint3D::on_bt_extruderTemp_clicked(bool checked)
 {
     if(checked==true)
     {
-        ui->bt_extruderTemp->setStyleSheet("background-color:yellow;");
-        ui->bt_extruder1->setChecked(true);
-
         for(int i=1;i<=extrudersInUse;i++)
-        {
            this->printer_object->setExtrTemp(i-1,ui->tb_ExtruderTempMC->text().toFloat());
-            switch (i)
-            {
-            case 1:
-                ui->bt_extruder1->setStyleSheet("background-color:yellow;");
-            break;
-            case 2:
-                ui->bt_extruder2->setStyleSheet("background-color:yellow;");
-            break;
-            case 3:
-               ui->bt_extruder3->setStyleSheet("background-color:yellow;");
-            break;
-            case 4:
-                ui->bt_extruder4->setStyleSheet("background-color:yellow;");
-            break;
-            default:
-                break;
-            }
-        }
+
     }
     if(checked==false)
     {
@@ -990,11 +968,11 @@ void BrPrint3D::updateTemp(double *temp_Extruders, double tempBed)
      if(extrudersInUse==1)
      {
         ui->sl_extruder->setValue(temp_Extruders[0]);//Set temperature on slider
-        ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[0]).toString());//Set Label of slider
+        ui->lb_extruderTemp_0->setText(QVariant(temp_Extruders[0]).toString());//Set Label of slider
         ui->lb_extruderTemp_1->setText(QVariant(temp_Extruders[0]).toString());//Set label on Ext 1
         //Change color status
         if(ui->bt_extruderTemp->isChecked())
-        {   if(ui->lb_extruderTemp_1->text().toInt()>=ui->tb_ExtruderTempMC->text().toInt())
+        {   if(ui->lb_extruderTemp_1->text().toFloat()>=ui->tb_ExtruderTempMC->text().toInt())
             {    ui->bt_extruder1->setStyleSheet("background-color:red;");
                  ui->bt_extruderTemp->setStyleSheet("background-color:red;");
             }
@@ -1016,11 +994,11 @@ void BrPrint3D::updateTemp(double *temp_Extruders, double tempBed)
                 {   if(ui->bt_extruder1->isChecked())//Slider belongs to extruder 1
                     {
                         ui->sl_extruder->setValue(temp_Extruders[i-1]); //Set Slider value
-                        ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[i-1]).toString());//Set Label of slider
+                        ui->lb_extruderTemp_0->setText(QVariant(temp_Extruders[i-1]).toString());//Set Label of slider
                     }
                     //Refresh Color Status
                     if(ui->bt_extruderTemp->isChecked())
-                    {   if(ui->lb_extruderTemp_1->text().toInt()>=ui->tb_ExtruderTempMC->text().toInt() && ui->bt_extruderTemp->isChecked())
+                    {   if(ui->lb_extruderTemp_1->text().toFloat()>=ui->tb_ExtruderTempMC->text().toInt() && ui->bt_extruderTemp->isChecked())
                             ui->bt_extruder1->setStyleSheet("background-color:red;");
                         else
                             ui->bt_extruder1->setStyleSheet("background-color:yellow;");
@@ -1031,11 +1009,11 @@ void BrPrint3D::updateTemp(double *temp_Extruders, double tempBed)
                 case 2:
                 {   if(ui->bt_extruder2->isChecked())//Slider belongs to extruder two
                     {   ui->sl_extruder->setValue(temp_Extruders[i-1]);
-                        ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[i-1]).toString());//Set Label of slider
+                        ui->lb_extruderTemp_0->setText(QVariant(temp_Extruders[i-1]).toString());//Set Label of slider
                     }
                    //Refresh Color Status
                    if(ui->bt_extruderTemp->isChecked())
-                   {    if(ui->lb_extruderTemp_2->text().toInt()>=ui->tb_ExtruderTempMC->text().toInt() && ui->bt_extruderTemp->isChecked())//Refresh Color Status
+                   {    if(ui->lb_extruderTemp_2->text().toFloat()>=ui->tb_ExtruderTempMC->text().toInt() && ui->bt_extruderTemp->isChecked())//Refresh Color Status
                             ui->bt_extruder2->setStyleSheet("background-color:red;");
                         else
                             ui->bt_extruder2->setStyleSheet("background-color:yellow;");
@@ -1045,13 +1023,13 @@ void BrPrint3D::updateTemp(double *temp_Extruders, double tempBed)
                 case 3:
                 {  if(ui->bt_extruder3->isChecked())//Slider belongs to extruder two
                    {   ui->sl_extruder->setValue(temp_Extruders[i-1]);
-                       ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[i-1]).toString());//Set Label of slider
+                       ui->lb_extruderTemp_0->setText(QVariant(temp_Extruders[i-1]).toString());//Set Label of slider
                    }
 
                     //Refresh Color Status
                    if(ui->bt_extruderTemp->isChecked())
                    {
-                       if(ui->lb_extruderTemp_3->text().toInt()>=ui->tb_ExtruderTempMC->text().toInt() && ui->bt_extruderTemp->isChecked())//Refresh Color Status
+                       if(ui->lb_extruderTemp_3->text().toFloat()>=ui->tb_ExtruderTempMC->text().toInt() && ui->bt_extruderTemp->isChecked())//Refresh Color Status
                             ui->bt_extruder3->setStyleSheet("background-color:red;");
                         else
                             ui->bt_extruder3->setStyleSheet("background-color:yellow;");
@@ -1061,12 +1039,12 @@ void BrPrint3D::updateTemp(double *temp_Extruders, double tempBed)
                 case 4:
                 {  if(ui->bt_extruder4->isChecked())//Slider belongs to extruder two
                    {   ui->sl_extruder->setValue(temp_Extruders[i-1]);
-                       ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[i-1]).toString());//Set Label of slider
+                       ui->lb_extruderTemp_0->setText(QVariant(temp_Extruders[i-1]).toString());//Set Label of slider
                    }
                    //Change Color Status
                    if(ui->bt_extruderTemp->isChecked())
                    {
-                        if(ui->lb_extruderTemp_4->text().toInt()>=ui->tb_ExtruderTempMC->text().toInt() && ui->bt_extruderTemp->isChecked())//Refresh Color Status
+                        if(ui->lb_extruderTemp_4->text().toFloat()>=ui->tb_ExtruderTempMC->text().toInt() && ui->bt_extruderTemp->isChecked())//Refresh Color Status
                             ui->bt_extruder4->setStyleSheet("background-color:red;");
                         else
                             ui->bt_extruder4->setStyleSheet("background-color:yellow;");
