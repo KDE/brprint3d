@@ -1,6 +1,6 @@
 project(Br-Print)
 
-cmake_minimum_required(VERSION 3.2.0)
+cmake_minimum_required(VERSION 3.0.0)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
@@ -9,9 +9,10 @@ if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUXX)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
 endif()
 
+find_package(VTK REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
-find_package(Qt5 REQUIRED COMPONENTS Core Widgets Svg Test LinguistTools OpenGL)
+find_package(Qt5 REQUIRED COMPONENTS Core Widgets Test LinguistTools OpenGL)
 
 include_directories(.
 	${CMAKE_CURRENT_BINARY_DIR}
@@ -46,7 +47,7 @@ set(Br-Print_SRCS
 	threadRotine.cpp
 )
 
-qt5_add_translation(TRANSLATIONS EN_english.ts PT_portuguese.ts)
+#qt5_add_translation(TRANSLATIONS EN_english.ts PT_portuguese.ts)
 
 if(LINUX)
 	install_files(TRANSLATIONS DESTINATION share/br-print/translations)
@@ -63,6 +64,7 @@ add_custom_target(resources ALL DEPENDS ${Resources})
 #add_dependencies(resources translations)
 
 add_executable(BRPrint ${KI_SRCS} ${Widgets_SRCS} ${Br-Print_SRCS} ${Resources})
-target_link_libraries(BRPrint Qt5::Core Qt5::Widgets Qt5::Svg Qt5::OpenGL pthread ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+
+target_link_libraries(BRPrint Qt5::Core Qt5::Widgets Qt5::OpenGL pthread ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${VTK_LIBRARIES})
 
 enable_testing()
