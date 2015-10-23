@@ -25,6 +25,7 @@
 #include <QList>
 #include <QInputDialog>
 #include <QList>
+#include <QStandardPaths>
 
 namespace Ui {
 class BrPrint3D;
@@ -43,7 +44,7 @@ public:
     void readgcode(QString text);
 
 private slots:
-    //void locate_Arduino(bool b,QString word);
+    void locate_Arduino(bool b);
     void on_bt_hide_clicked();
     void on_actionPortuguese_triggered();
     void on_actionFechar_triggered();

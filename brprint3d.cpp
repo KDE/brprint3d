@@ -160,7 +160,7 @@ Loading previously saved settings, locating slicers and Arduino connection.*/
 void BrPrint3D::init()
 {    Loading *l=new Loading();
      //l->setParent(this,Qt::Window);
-     l->show();
+     //l->show();
     //Init the translator
     this->translator.load(":/Translations/PT_portuguese.qm");
     //Load the previous configs if them exists
@@ -240,14 +240,12 @@ void BrPrint3D::init()
     //Disable Slicer Tab - Because is not done
     ui->Slicer->setEnabled(false);
 
-   /* //Start the thread that is listening if Arduino is connect or not
-    //this->ard_List = new arduinoListener;
-    //connect(ard_List,SIGNAL(arduinoConnect(bool,QString)),this,SLOT(locate_Arduino(bool,QString)));
-    //this->ard_List->start();
+   //Start the thread that is listening if Arduino is connect or not
+    this->ard_List = new arduinoListener;
+    connect(ard_List,SIGNAL(arduinoConnect(bool)),this,SLOT(locate_Arduino(bool)));
+    this->ard_List->start();
     QStringList ports;
-    ports.append("/dev/ttyACM0");
-    ports.append("/dev/ttyUSB0");
-    ui->cb_Connection_Port->addItems(ports);*/
+    ui->cb_Connection_Port->addItems(ports);
 
 }
 /*-----------Actions of MenuBar----------*/
@@ -343,7 +341,7 @@ void BrPrint3D::locate_Slicer()
                     pathslicer+=path[i];
                 }
                 ui->cb_Slicer->addItem("Slic3r");
-                settings.setValue("slic3r",pathslicer);//Salva o path no arquivo ini
+                settings.setValue("slic3r",pathslicer);//Save the path on ini file
                 settings.sync();//Atualiza ini
             }
         }
@@ -363,7 +361,7 @@ void BrPrint3D::locate_Cura()
     {
         if(!cura.eof())
         {
-            cura.getline(path,sizeof(path));//Lê a linha do arquivo
+            cura.getline(path,sizeof(path));//read line of the file
             if(path[5]=='\0')
             {
                 ui->cb_Slicer->addItem("Cura Engine (Not Found)");
@@ -381,48 +379,47 @@ void BrPrint3D::locate_Cura()
         }
     }
 }
-/*//This function locate the port that the arduino is connect
-void BrPrint3D::locate_Arduino(bool b,QString word)
-{   /*this->ard_List->wait(2000);
+//This function locate the port that the arduino is connect
+void BrPrint3D::locate_Arduino(bool b)
+{   this->ard_List->wait(2000);
     this->ard_List->quit();
     this->ard_List->deleteLater();
     QList<QString> ports;
-    garbage=std::system("dmesg | grep -i usb | grep -i tty > usbport.txt");
+    garbage=std::system("dmesg | grep -i usb > usbport.txt");
     QFile usbport("usbport.txt");
     if(usbport.open(QIODevice::ReadOnly|QIODevice::Text))
-    {       QTextStream in(&usbport);
-            QString file = in.readAll();
-             usbport.close();
-             QString port,ant=NULL;
-               std::string temp = file.toStdString();
-               const char *look = temp.c_str();
-               qDebug()<<QString(word);
-               if(word=="Arduino")
-               {
-                    look = strstr(look, "Arduino");
-                    while(look != NULL)
-                    {
-                        look = strstr(look, "tty");
-                        for(int i = 0; look[i] != ':'; i++)
-                            port+=look[i];
-
-                        if(ant!=port)
-                        {   ports.append("/dev/"+port);
-                            ant=port;
-                        }
-                        port.clear();
-                        look = strstr(look, "Arduino");
-                    }
-                }
-               else
-                   ports.append("/dev/ttyUSB0");
-
+    {   QTextStream in(&usbport);
+        QString file = in.readAll();
+        usbport.close();
+        QString port,ant=NULL;
+        std::string temp = file.toStdString();
+        const char *look = temp.c_str();
+        //qDebug()<<QString(word)
+        look = strstr(look, "Arduino");
+        while(look != NULL)
+        {
+            look = strstr(look, "tty");
+            for(int i = 0; look[i] != ':'; i++)
+                port+=look[i];
+            if(ant!=port)
+            {   ports.append("/dev/"+port);
+                ant=port;
+            }
+            port.clear();
+            look = strstr(look, "Arduino");
+        }
     }
-    ui->cb_Connection_Port->clear();
+    if(ports=!NULL)
+    {
+        QMessageBox msg;
+        msg.setText("The arduino is connect at new ports then default, please check on Configs Menu \n to swich ports!");
+        msg.setIcon(QMessageBox::Information);
+        msg.show();
+    }
     ui->cb_Connection_Port->addItems(ports);
 
 
-}*/
+}
 //This action search for Slic3er manually, if the slic3er isnt installed, the user could user the bin
 void BrPrint3D::on_bt_addSlicer_clicked()
 {
@@ -979,31 +976,35 @@ void BrPrint3D::updateTemp(double *temp_Extruders, double tempBed)
            else
                ui->bt_Bed->setStyleSheet("background-color:yellow;");
       }
+      //If the printer is using one extruder, the slider will belongs all the time to extruder 1
+      if(extrudersInUse==1)
+      {  ui->sl_extruder->setValue(temp_Extruders[i]);
+         ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[i]).toString());//Set Label of slider
+         if(ui->lb_extruderTemp_1->text().toFloat()>=ui->tb_ExtruderTempMC->text().toInt())
+             ui->bt_extruder1->setStyleSheet("background-color:red;");
+         else
+             ui->bt_extruder1->setStyleSheet("background-color:yellow;");
 
-    //Change extruders temp
-        for(int i=1;i<=extrudersInUse;i++)
+      }
+      else
+      {  //Change extruders temp
+         for(int i=1;i<extrudersInUse+1;i++)//Difference???
+         {
+            switch (i)
             {
-               switch (i)
-               {
                 case 1:
                 {  if(ui->bt_extruder1->isChecked())//Slider belongs to extruder 1
                    {
                         ui->sl_extruder->setValue(temp_Extruders[i]); //Set Slider value
                         ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[i]).toString());//Set Label of slider
                    }
-                    ui->lb_extruderTemp_1->setText(QVariant(temp_Extruders[i]).toString());//Set label extruder value
-
                     //Refresh Color Status
                     if(ui->lb_extruderTemp_1->text().toFloat()>=ui->tb_ExtruderTempMC->text().toInt())
                         ui->bt_extruder1->setStyleSheet("background-color:red;");
                     else
                         ui->bt_extruder1->setStyleSheet("background-color:yellow;");
-                    //If the printer is using one extruder, the slider will belongs all the time to extruder 1
-                    if(extrudersInUse==1)
-                    {    ui->sl_extruder->setValue(temp_Extruders[i]);
-                       ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[i]).toString());//Set Label of slider
+                    ui->lb_extruderTemp_1->setText(QVariant(temp_Extruders[i]).toString());//Set label extruder value
 
-                    }
                 }break;
                 case 2:
                 {   if(ui->bt_extruder2->isChecked())//Slider belongs to extruder two
