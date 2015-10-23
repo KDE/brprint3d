@@ -982,6 +982,7 @@ void BrPrint3D::updateTemp(double *temp_Extruders, double tempBed)
             ui->bt_extruder1->setStyleSheet("background-color:red;");
         else
             ui->bt_extruder1->setStyleSheet("background-color:yellow;");
+        ui->lb_extruderTemp_1->setText(QVariant(temp_Extruders[0]).toString());
      }
      else
      {  //Change extruders temp
