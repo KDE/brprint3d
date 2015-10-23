@@ -426,7 +426,7 @@ void BrPrint3D::locate_Arduino(bool b,QString word)
 //This action search for Slic3er manually, if the slic3er isnt installed, the user could user the bin
 void BrPrint3D::on_bt_addSlicer_clicked()
 {
-    QString filename=QFileDialog::getOpenFileName(this, "Open File","/home/~","slic3r");
+    QString filename=QFileDialog::getOpenFileName(this, "Open File",QDir::homePath(),"slic3r");
     ui->cb_Slicer->setItemText(0,"Slic3r");
     settings.setValue("slic3r",filename);
     settings.sync();
@@ -452,7 +452,7 @@ void BrPrint3D::on_bt_killSlicer_clicked()
 //This action import a GCODE file to print
 void BrPrint3D::on_bt_import_clicked()
 {
-    pathGcode=QFileDialog::getOpenFileName(this, "Open File","/home/~","*.gcode");
+    pathGcode=QFileDialog::getOpenFileName(this, "Open File",QDir::homePath(),"*.gcode");
 
     if(!pathGcode.isEmpty() && QFileInfo(pathGcode).completeSuffix()=="gcode")
     {   QFile gcode(pathGcode);
@@ -472,7 +472,7 @@ void BrPrint3D::on_bt_import_clicked()
 //This action open a GCODE or STL file
 void BrPrint3D::on_bt_open_clicked()
 {
-    pathGcode=QFileDialog::getOpenFileName(this, "Open File","/home","*.gcode");
+    pathGcode=QFileDialog::getOpenFileName(this, "Open File",QDir::homePath(),"*.gcode");
 
     if(!pathGcode.isEmpty() && QFileInfo(pathGcode).completeSuffix()=="gcode")
     {   QFile gcode(pathGcode);
