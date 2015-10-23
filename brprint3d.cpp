@@ -791,8 +791,19 @@ void BrPrint3D::on_bt_stop_clicked()
     ui->bt_stop->setEnabled(false);
     this->printer_object->stopPrintJob();
     this->printer_object->closeFile();
+    try{
     this->printer_object->setBedTemp(0);
-    for(int i=1;i<=this->extrudersInUse;i++)
+    }
+    catch(std::string exc)
+    {
+        QMessageBox msg;
+        msg.setIcon(QMessageBox::Warning);
+        QString str = QString::fromUtf8(exc.c_str());
+        msg.setText(str);
+        msg.exec();
+    }
+
+    for(int i=0;i<this->extrudersInUse;i++)
         this->printer_object->setExtrTemp(i,0);
     enableAxisButtons();
 }
