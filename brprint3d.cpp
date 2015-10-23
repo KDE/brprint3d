@@ -408,14 +408,15 @@ void BrPrint3D::locate_Arduino(bool b)
             look = strstr(look, "Arduino");
         }
     }
-    if(ports=!NULL)
-    {
+    if(!ports.isEmpty())
+    {   ui->cb_Connection_Port->addItems(ports);
         QMessageBox msg;
-        msg.setText("The arduino is connect at new ports then default, please check on Configs Menu \n to swich ports!");
+        msg.setText("The arduino is connect at new ports then default, please check on Configs Menu to switch ports!");
         msg.setIcon(QMessageBox::Information);
-        msg.show();
+        msg.exec();
     }
-    ui->cb_Connection_Port->addItems(ports);
+
+
 }
 //This action search for Slic3er manually, if the slic3er isnt installed, the user could user the bin
 void BrPrint3D::on_bt_addSlicer_clicked()
