@@ -15,7 +15,7 @@ BrPrint3D::~BrPrint3D()
 
 }
 
-QSettings settings(QDir::currentPath()+"/br.ini",QSettings::IniFormat); //Arquivo INI
+QSettings settings(QDir::currentPath()+"/br.ini",QSettings::IniFormat); //INI File
 
 
 /*******************************************************************************************************************/
@@ -158,9 +158,9 @@ QSettings settings(QDir::currentPath()+"/br.ini",QSettings::IniFormat); //Arquiv
 /*This function makes the initialization of the UI.
 Loading previously saved settings, locating slicers and Arduino connection.*/
 void BrPrint3D::init()
-{    Loading *l=new Loading();
-     //l->setParent(this,Qt::Window);
-     //l->show();
+{   Loading *l=new Loading();
+    //l->setParent(this,Qt::Window);
+    //l->show();
     //Init the translator
     this->translator.load(":/Translations/PT_portuguese.qm");
     //Load the previous configs if them exists
@@ -222,10 +222,10 @@ void BrPrint3D::init()
     //If slic3er exists in Ini file, load path, else locate
     pathslicer=QVariant (settings.value("slic3r")).toString();
     if(pathslicer.isEmpty())
-       locate_Slicer();
+        locate_Slicer();
     else
-    {     ui->cb_Slicer->addItem("Slic3r");
-          ui->bt_addSlicer->setEnabled(false);
+    {   ui->cb_Slicer->addItem("Slic3r");
+        ui->bt_addSlicer->setEnabled(false);
     }
 
     //If cura exists in Ini file, load path, else locate
@@ -240,19 +240,18 @@ void BrPrint3D::init()
     //Disable Slicer Tab - Because is not done
     ui->Slicer->setEnabled(false);
 
-   //Start the thread that is listening if Arduino is connect or not
+    //Start the thread that is listening if Arduino is connect or not
     this->ard_List = new arduinoListener;
     connect(ard_List,SIGNAL(arduinoConnect(bool)),this,SLOT(locate_Arduino(bool)));
     this->ard_List->start();
     QStringList ports;
     ui->cb_Connection_Port->addItems(ports);
-
 }
 /*-----------Actions of MenuBar----------*/
 //This Action Close the program - Necessary???
 void BrPrint3D::on_actionFechar_triggered()
 {
-    //Do some things -> Is print job running? alert Is something that need to be safe? alert...
+    //Do some things -> Is print job running? alert Is something that need to be save? alert...
 }
 //This Action change the language of the program to Portuguese
 void BrPrint3D::on_actionPortuguese_triggered()
@@ -322,7 +321,6 @@ void BrPrint3D::locate_Slicer()
     char path[201];
     if(!slicer)
     {
-
         msg.setText("Bin Slic3r could not be open!");
         msg.exec();
     }
@@ -356,6 +354,7 @@ void BrPrint3D::locate_Cura()
     if(!cura)
     {
         msg.setText("Bin Cura could not be open!");
+        msg.exec();
     }
     else
     {
@@ -417,8 +416,6 @@ void BrPrint3D::locate_Arduino(bool b)
         msg.show();
     }
     ui->cb_Connection_Port->addItems(ports);
-
-
 }
 //This action search for Slic3er manually, if the slic3er isnt installed, the user could user the bin
 void BrPrint3D::on_bt_addSlicer_clicked()
