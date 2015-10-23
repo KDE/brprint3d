@@ -59,7 +59,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Config - Show</string>
+     <string>Configuration - Show</string>
     </property>
    </widget>
    <widget class="QWidget" name="Menu_Control_Left" native="true">
@@ -2708,7 +2708,7 @@ QSlider::handle:horizontal {
        <string>ºC</string>
       </property>
      </widget>
-     <widget class="QLabel" name="lb_extruderTemp0">
+     <widget class="QLabel" name="lb_extruderTemp_0">
       <property name="geometry">
        <rect>
         <x>265</x>
@@ -2861,7 +2861,7 @@ QSlider::handle:horizontal {
      <zorder>lb_extruderTemp_2</zorder>
      <zorder>lb_extruderTemp_1</zorder>
      <zorder>lbC1</zorder>
-     <zorder>lb_extruderTemp0</zorder>
+     <zorder>lb_extruderTemp_0</zorder>
      <zorder>bt_up_Z</zorder>
      <zorder>bt_down_Z</zorder>
      <zorder>cb_valuePosXY</zorder>
