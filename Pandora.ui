@@ -434,7 +434,7 @@
          </layout>
         </widget>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -557,7 +557,7 @@
        <attribute name="title">
         <string>Slicer</string>
        </attribute>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -585,7 +585,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -633,7 +633,7 @@
          <enum>Qt::Horizontal</enum>
         </property>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>15</x>
@@ -708,7 +708,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>15</x>
@@ -741,7 +741,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>5</x>
@@ -1563,7 +1563,7 @@ QSlider::handle:horizontal {
        <string/>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -1937,26 +1937,6 @@ QSlider::handle:horizontal {
        </item>
       </layout>
      </widget>
-     <zorder>label</zorder>
-     <zorder>label_2</zorder>
-     <zorder>label_3</zorder>
-     <zorder>tb_posicaoeixoX</zorder>
-     <zorder>tb_posicaoeixoY</zorder>
-     <zorder>tb_posicaoeixoZ</zorder>
-     <zorder>bt_up_Y</zorder>
-     <zorder>bt_down_Y</zorder>
-     <zorder>bt_right_X</zorder>
-     <zorder>bt_left_X</zorder>
-     <zorder>bt_filamentoOneSpeed</zorder>
-     <zorder>bt_filamentoTwoSpeed</zorder>
-     <zorder>lb_eixoXY</zorder>
-     <zorder>tb_eixoZ</zorder>
-     <zorder>lb_Extruder</zorder>
-     <zorder>bt_home_X</zorder>
-     <zorder>bt_home_Y</zorder>
-     <zorder>bt_home_Z</zorder>
-     <zorder>bt_home_XYZ</zorder>
-     <zorder>bt_extruderTemp</zorder>
      <zorder>bt_Bed</zorder>
      <zorder>sl_extruder</zorder>
      <zorder>sl_bed</zorder>
@@ -1993,13 +1973,8 @@ QSlider::handle:horizontal {
      <zorder>lb_extruderTemp_1</zorder>
      <zorder>lbC1</zorder>
      <zorder>lb_extruderTemp_0</zorder>
-     <zorder>bt_up_Z</zorder>
-     <zorder>bt_down_Z</zorder>
-     <zorder>cb_valuePosXY</zorder>
-     <zorder>label_26</zorder>
-     <zorder>bt_filamentoRetract</zorder>
-     <zorder></zorder>
-     <zorder></zorder>
+     <zorder>layoutWidget</zorder>
+     <zorder>bt_extruderTemp</zorder>
     </widget>
     <widget class="QWidget" name="Tool_Box">
      <attribute name="title">
@@ -2007,7 +1982,7 @@ QSlider::handle:horizontal {
      </attribute>
     </widget>
    </widget>
-   <widget class="QOpenGLWidget" name="openGLWidget">
+   <widget class="GLWidget" name="openGLWidget">
     <property name="geometry">
      <rect>
       <x>430</x>
@@ -2017,7 +1992,7 @@ QSlider::handle:horizontal {
      </rect>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>3</x>
@@ -2459,6 +2434,13 @@ QSlider::handle:horizontal {
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GLWidget</class>
+   <extends>QOpenGLWidget</extends>
+   <header>glwidget.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>Config</tabstop>
   <tabstop>cb_printer</tabstop>
