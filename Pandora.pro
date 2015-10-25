@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Pandora
+TARGET = BrPrint3D
 TEMPLATE = app
 TRANSLATIONS = EN_english.ts \
                PT_portuguese.ts\
