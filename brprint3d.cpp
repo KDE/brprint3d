@@ -162,7 +162,7 @@ void BrPrint3D::init()
     //l->setParent(this,Qt::Window);
     //l->show();
     //Init the translator
-    this->translator.load(":/Translations/PT_portuguese.qm");
+    //this->translator.load(":/Translations/PT_portuguese.qm");
     //Load the previous configs if them exists
     QStringList groups;
     settings.beginGroup("Printer_Configs");
