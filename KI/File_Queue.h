@@ -27,7 +27,8 @@
 #include <cstdlib>
 #include <iostream>
 
-class FQueue{
+class FQueue
+{
 private:
     unsigned long size, np, last, resize;
     void **vector;
