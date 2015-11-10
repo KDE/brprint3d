@@ -2,7 +2,7 @@
 
  BRPrint3D, Open Source 3D Printing Host
 
- (c) 2015 BRPrint3D Authors 
+ (c) 2015 BRPrint3D Authors
 
  This file is part of the BRPrint3D project
 
@@ -30,15 +30,15 @@ class Points
 {
 private:
 
-        float x;
-        float y;
-        float z;
+    float x;
+    float y;
+    float z;
 
 public:
     Points();
     ~Points();
     void addPoint(float x, float y, float z) throw (QString);
-    void getPoint(float *x,float *y, float *z) throw (QString);
+    void getPoint(float *x, float *y, float *z) throw (QString);
 };
 
 #endif // POINTS_H

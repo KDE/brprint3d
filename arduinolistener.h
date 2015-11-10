@@ -2,7 +2,7 @@
 
  BRPrint3D, Open Source 3D Printing Host
 
- (c) 2015 BRPrint3D Authors 
+ (c) 2015 BRPrint3D Authors
 
  This file is part of the BRPrint3D project
 
@@ -38,7 +38,7 @@ public:
     virtual void run() Q_DECL_OVERRIDE;
     ~arduinoListener();
 private:
-    bool garbage,test;
+    bool garbage, test;
     QString file;
 signals:
     void arduinoConnect(bool b);

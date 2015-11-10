@@ -2,7 +2,7 @@
 
  BRPrint3D, Open Source 3D Printing Host
 
- (c) 2015 BRPrint3D Authors 
+ (c) 2015 BRPrint3D Authors
 
  This file is part of the BRPrint3D project
 
@@ -60,7 +60,7 @@ public:
 private:
     void paintAxis();
     void paintCube();
-    GLfloat xRot,yRot,zRot;
+    GLfloat xRot, yRot, zRot;
     int zoomFactor;
     QPoint lastPos;
     GLfloat angle, fAspect;
@@ -70,7 +70,7 @@ private:
     QOpenGLContext context;
     QList<Points*> *gcodeDots;
     void draw();
-    float x,y,z;
+    float x, y, z;
 
 };
 

@@ -2,7 +2,7 @@
 
  BRPrint3D, Open Source 3D Printing Host
 
- (c) 2015 BRPrint3D Authors 
+ (c) 2015 BRPrint3D Authors
 
  This file is part of the BRPrint3D project
 
@@ -38,24 +38,22 @@ ThreadRoutine::ThreadRoutine(Repetier *printer, int *extrudersInUse)
 
 void ThreadRoutine::run()
 {
-    while(true)
-    {
-        for(int i=0;i<(*extrudersInUse);i++)
-        {
-            this->extrudersTemp[i]=this->printer->getExtruderTemp(i);
+    while (true) {
+        for (int i = 0; i < (*extrudersInUse); i++) {
+            this->extrudersTemp[i] = this->printer->getExtruderTemp(i);
         }
 
         this->posX = this->printer->getCurrentXPos();
         this->posY = this->printer->getCurrentYPos();
         this->posZ = this->printer->getCurrentZPos();
         sleep(2);
-        emit updateTemp(extrudersTemp,printer->getBedTemp());
-        emit updateExt(this->posX,this->posY,this->posZ);
+        emit updateTemp(extrudersTemp, printer->getBedTemp());
+        emit updateExt(this->posX, this->posY, this->posZ);
         this->isPrintJobRunning = this->printer->isPrintJobRunning();
-        if(this->isPrintJobRunning==false)
+        if (this->isPrintJobRunning == false)
             emit finishedJob(true);
-       if(stopLoop==true)
-                break;
+        if (stopLoop == true)
+            break;
     }
 }
 
@@ -64,7 +62,8 @@ void ThreadRoutine::setLoop(bool b)
     this->stopLoop = b;
 }
 
-ThreadRoutine::~ThreadRoutine(){
+ThreadRoutine::~ThreadRoutine()
+{
     this->deleteLater();
 }
 

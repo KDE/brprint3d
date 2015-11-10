@@ -2,7 +2,7 @@
 
  BRPrint3D, Open Source 3D Printing Host
 
- (c) 2015 BRPrint3D Authors 
+ (c) 2015 BRPrint3D Authors
 
  This file is part of the BRPrint3D project
 
@@ -38,7 +38,7 @@ private:
     Repetier *printer;
     QMutex mutexIno;
     bool stopLoop;
-    double posX, posY,posZ;
+    double posX, posY, posZ;
     bool isPrintJobRunning;
     double extrudersTemp[4];
     int *extrudersInUse;

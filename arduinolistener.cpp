@@ -2,7 +2,7 @@
 
  BRPrint3D, Open Source 3D Printing Host
 
- (c) 2015 BRPrint3D Authors 
+ (c) 2015 BRPrint3D Authors
 
  This file is part of the BRPrint3D project
 
@@ -30,28 +30,27 @@ arduinoListener::arduinoListener()
 
 void arduinoListener::run()
 {
-    while(true)
-        {
-            garbage=std::system("lsusb > arduinoListener.txt");
-            QFile arduino("arduinoListener.txt");
-            if(arduino.open(QIODevice::ReadOnly|QIODevice::Text))
-            {       QTextStream in(&arduino);
-                    QString file = in.readAll();
-                    arduino.close();
-                    if((test=file.contains("Arduino"))==true)
-                    {   emit arduinoConnect(true);
-                        break;
-                    }
-                    /*else if((test=file.contains("QinHeng"))==true)
-                    {   word = "ch341-uart";
-                        emit arduinoConnect(true,word);
-                    }*/
-                    else
-                        usleep(5000);
+    while (true) {
+        garbage = std::system("lsusb > arduinoListener.txt");
+        QFile arduino("arduinoListener.txt");
+        if (arduino.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QTextStream in(&arduino);
+            QString file = in.readAll();
+            arduino.close();
+            if ((test = file.contains("Arduino")) == true) {
+                emit arduinoConnect(true);
+                break;
             }
+            /*else if((test=file.contains("QinHeng"))==true)
+            {   word = "ch341-uart";
+                emit arduinoConnect(true,word);
+            }*/
+            else
+                usleep(5000);
         }
-   // this->sleep(1);
-   // this->~arduinoListener();
+    }
+    // this->sleep(1);
+    // this->~arduinoListener();
 
 }
 

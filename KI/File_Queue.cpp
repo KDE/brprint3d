@@ -8,27 +8,30 @@
 
 #include "File_Queue.h"
 
-FQueue::FQueue(unsigned long initialSize, unsigned long resize) throw (std::string){
+FQueue::FQueue(unsigned long initialSize, unsigned long resize) throw (std::string)
+{
     this->size = initialSize;
     this->resize = resize;
     this->np = this->last = 0;
     this->vector = (void**)malloc(this->size * sizeof(void*));
-    if(this->vector == NULL){
+    if (this->vector == NULL) {
         std::string exc = "FQueue: Could not allocate memory.";
         throw exc;
     }
-    for(int i = 0; i < this->size; i++){
+    for (int i = 0; i < this->size; i++) {
         this->vector[i] = NULL;
     }
 }
 
-FQueue::~FQueue(){
+FQueue::~FQueue()
+{
     this->emptyFQueue();
     free(this->vector);
 }
 
-void FQueue::emptyFQueue(){
-    for(int i = 0; i < this->size && vector[i] != NULL; i++){
+void FQueue::emptyFQueue()
+{
+    for (int i = 0; i < this->size && vector[i] != NULL; i++) {
         free(vector[i]);
         vector[i] = NULL;
     }
@@ -38,15 +41,16 @@ void FQueue::emptyFQueue(){
     this->resize = 0;
 }
 
-bool FQueue::optimizeFQueue() throw (std::string){
+bool FQueue::optimizeFQueue() throw (std::string)
+{
     void **temp;
-    if(this->last < this->size){
+    if (this->last < this->size) {
         temp = (void**)malloc(this->last * sizeof(void*));
-        if(temp == NULL){
+        if (temp == NULL) {
             std::string exc = "FQueue: Could not optmize.";
             throw exc;
         }
-        for(unsigned int i = 0; i < this->last; i++){
+        for (unsigned int i = 0; i < this->last; i++) {
             temp[i] = this->vector[i];
         }
         free(this->vector);
@@ -57,26 +61,28 @@ bool FQueue::optimizeFQueue() throw (std::string){
     return false;
 }
 
-unsigned long FQueue::getFQueueSize(){
+unsigned long FQueue::getFQueueSize()
+{
     return this->size;
 }
 
-void FQueue::insertInfo(void *info) throw (std::string){
+void FQueue::insertInfo(void *info) throw (std::string)
+{
     void **temp;
-    if(this->last < this->size){
+    if (this->last < this->size) {
         this->vector[this->last] = info;
         this->last++;
-    }else{
+    } else {
         temp = (void**)malloc((size + resize) * sizeof(void*));
-        if(temp == NULL){
+        if (temp == NULL) {
             std::string exc = "FQueue: Could not reallocate space.";
             throw exc;
         }
-        this->size+=this->resize;
-        for(unsigned int i = 0; i < this->size; i++){
-            if(i < last){
+        this->size += this->resize;
+        for (unsigned int i = 0; i < this->size; i++) {
+            if (i < last) {
                 temp[i] = this->vector[i];
-            }else{
+            } else {
                 temp[i] = NULL;
             }
         }
@@ -87,17 +93,20 @@ void FQueue::insertInfo(void *info) throw (std::string){
     }
 }
 
-void* FQueue::returnInfo(){
+void* FQueue::returnInfo()
+{
     void *temp;
     temp = this->vector[this->np];
     this->np++;
     return temp;
 }
 
-void FQueue::resetFQueue(){
+void FQueue::resetFQueue()
+{
     this->np = 0;
 }
 
-bool FQueue::hasFQueueEnded(){
+bool FQueue::hasFQueueEnded()
+{
     return this->np == this->last ? true : false;
 }

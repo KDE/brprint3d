@@ -2,7 +2,7 @@
 
  BRPrint3D, Open Source 3D Printing Host
 
- (c) 2015 BRPrint3D Authors 
+ (c) 2015 BRPrint3D Authors
 
  This file is part of the BRPrint3D project
 
@@ -50,7 +50,8 @@
 #include <QList>
 #include <QStandardPaths>
 
-namespace Ui {
+namespace Ui
+{
 class BrPrint3D;
 }
 
@@ -126,17 +127,17 @@ private:
     bool isCommaDecimalMark;
     bool resetWhenConnect;
     QTranslator translator;
-    Repetier *printer_object=NULL;
+    Repetier *printer_object = NULL;
     QStringList *open_files;                            //Lista de arquivos abertos
-    ThreadRoutine *temp=NULL;
+    ThreadRoutine *temp = NULL;
     arduinoListener *ard_List;
-    QString extruderTemperature="";         //Temperatura Default Extrusor
-    QString bedTemperature="";            //Temperatura Default Mesa
-    QString extruderMAXTemp="";             //Temperatura Maxima do Extrusor
-    QString bedMAXTemp="";                //Temperatura Maxima da Mesa
-    QString areaX="2";                       //Tamanho da mesa no eixo X
-    QString areaY="2";                       //Tamanho da mesa no eixo Y
-    QString areaZ="2";                       //Tamanho da mesa no eixo Z
+    QString extruderTemperature = "";       //Temperatura Default Extrusor
+    QString bedTemperature = "";          //Temperatura Default Mesa
+    QString extruderMAXTemp = "";           //Temperatura Maxima do Extrusor
+    QString bedMAXTemp = "";              //Temperatura Maxima da Mesa
+    QString areaX = "2";                     //Tamanho da mesa no eixo X
+    QString areaY = "2";                     //Tamanho da mesa no eixo Y
+    QString areaZ = "2";                     //Tamanho da mesa no eixo Z
     QString rateMoviment;                        //Taxa de Movimento da Mesa
     QString extruderSpeed;                       //Velocidade do Extrusor
     QString extruderRetraction;                  //Velocidade de Retracao do Extrusor

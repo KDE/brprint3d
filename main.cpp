@@ -2,7 +2,7 @@
 
  BRPrint3D, Open Source 3D Printing Host
 
- (c) 2015 BRPrint3D Authors 
+ (c) 2015 BRPrint3D Authors
 
  This file is part of the BRPrint3D project
 
@@ -46,28 +46,27 @@ int main(int argc, char *argv[])
 
     QString fontPath = ":/Fonts/Ubuntu-R.ttf";
     int fontId = QFontDatabase::addApplicationFont(fontPath);
-    if (fontId != -1)
-    {
+    if (fontId != -1) {
         QFont font("MyFont");
         app.setFont(font);
     }
-/*
-    QTranslator translator;
-    QLocale locale;
-    QString lang = QLocale::languageToString(locale.language());
+    /*
+        QTranslator translator;
+        QLocale locale;
+        QString lang = QLocale::languageToString(locale.language());
 
-    if(lang=="Portuguese")
-    {
-      translator.load(":/Translations/PT_portuguese.qm");
-      app.installTranslator(&translator);
+        if(lang=="Portuguese")
+        {
+          translator.load(":/Translations/PT_portuguese.qm");
+          app.installTranslator(&translator);
 
-    }
-    else
-    {
-        translator.load(":/Translations/EN_english.qm");
-        app.installTranslator(&translator);
+        }
+        else
+        {
+            translator.load(":/Translations/EN_english.qm");
+            app.installTranslator(&translator);
 
-    }*/
+        }*/
     BrPrint3D w;
 
     w.show();

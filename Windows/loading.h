@@ -2,7 +2,7 @@
 
  BRPrint3D, Open Source 3D Printing Host
 
- (c) 2015 BRPrint3D Authors 
+ (c) 2015 BRPrint3D Authors
 
  This file is part of the BRPrint3D project
 
@@ -25,7 +25,8 @@
 #define LOADING_H
 #include <QDialog>
 
-namespace Ui {
+namespace Ui
+{
 class Loading;
 }
 

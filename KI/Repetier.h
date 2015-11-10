@@ -23,7 +23,8 @@
 
 #define WAIT_TIME 100
 
-class Repetier{
+class Repetier
+{
 private:
     ASerial *arduino;
     int bufsize, *tempExtr, tempBed, nExtruders;
