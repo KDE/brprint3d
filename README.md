@@ -14,13 +14,19 @@ git.kde.org:brprint3d
 
 Basic Usage:
 ============
-
-Install and start from the desktop, or you can run it locally from the
-build directory:
-
 On Linux:
+Grab the source code from this repository using git and then
+Run the following commands to install dependencies and to build the program:
 
-$ ./brprint3d
+```sh
+git clone https://github.com/Simple-BR/Br-Print3D.git
+sudo apt-get install libxmu-dev qttools5-dev qttools5-dev-tools freeglut3-dev
+mkdir build
+cd build
+cmake ..
+make
+./brprint3d
+```
 
 Contributing:
 =============
