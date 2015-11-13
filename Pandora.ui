@@ -2224,7 +2224,7 @@ QSlider::handle:horizontal {
      </item>
     </layout>
    </widget>
-   <widget class="vtkWidget" name="widget" native="true">
+   <widget class="vtkWidget" name="vtkView" native="true">
     <property name="geometry">
      <rect>
       <x>425</x>
