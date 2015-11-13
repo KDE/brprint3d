@@ -638,7 +638,7 @@
          <rect>
           <x>15</x>
           <y>10</y>
-          <width>184</width>
+          <width>186</width>
           <height>116</height>
          </rect>
         </property>
@@ -713,7 +713,7 @@
          <rect>
           <x>15</x>
           <y>135</y>
-          <width>197</width>
+          <width>199</width>
           <height>78</height>
          </rect>
         </property>
@@ -1982,16 +1982,6 @@ QSlider::handle:horizontal {
      </attribute>
     </widget>
    </widget>
-   <widget class="GLWidget" name="openGLWidget">
-    <property name="geometry">
-     <rect>
-      <x>430</x>
-      <y>120</y>
-      <width>300</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
@@ -2234,6 +2224,16 @@ QSlider::handle:horizontal {
      </item>
     </layout>
    </widget>
+   <widget class="vtkWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>425</x>
+      <y>140</y>
+      <width>491</width>
+      <height>521</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -2436,9 +2436,10 @@ QSlider::handle:horizontal {
  </widget>
  <customwidgets>
   <customwidget>
-   <class>GLWidget</class>
-   <extends>QOpenGLWidget</extends>
-   <header>glwidget.h</header>
+   <class>vtkWidget</class>
+   <extends>QWidget</extends>
+   <header>vtkWidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>
