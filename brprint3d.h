@@ -33,6 +33,7 @@
 #include "KI/Repetier.h"
 #include "threadRotine.h"
 #include "arduinolistener.h"
+#include "vtkWidget.h"
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
@@ -120,6 +121,7 @@ private slots:
 private:
 
     Ui::BrPrint3D *ui;
+    vtkWidget *vtkView;
     double *tempMesa;
     double *tempExtruders;
     int extrudersInUse;
