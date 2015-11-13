@@ -12,7 +12,7 @@ endif()
 find_package(VTK REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Test LinguistTools OpenGL)
-
+include(${VTK_USE_FILE})
 include_directories(.
 	${CMAKE_CURRENT_BINARY_DIR}
 	${CMAKE_BINARY_DIR}
