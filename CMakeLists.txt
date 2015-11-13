@@ -42,7 +42,6 @@ set(Br-Print_SRCS
 	arduinolistener.cpp
 	brprint3d.cpp
 	main.cpp
-	points.cpp
 	threadRotine.cpp
 	vtkWidget.cpp
 )
