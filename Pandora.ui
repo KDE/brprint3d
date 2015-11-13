@@ -1043,7 +1043,7 @@
         </size>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="GCode_Slicer_Control">
         <attribute name="title">
@@ -1962,6 +1962,12 @@ QSlider::handle:horizontal {
               </item>
               <item>
                <widget class="QComboBox" name="cb_valuePosXY">
+                <property name="maximumSize">
+                 <size>
+                  <width>80</width>
+                  <height>25</height>
+                 </size>
+                </property>
                 <property name="toolTip">
                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Descolamento referente aos eixos X e Y&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
@@ -2000,6 +2006,12 @@ QSlider::handle:horizontal {
                   <property name="enabled">
                    <bool>true</bool>
                   </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>80</width>
+                    <height>25</height>
+                   </size>
+                  </property>
                   <property name="font">
                    <font>
                     <pointsize>9</pointsize>
@@ -2020,6 +2032,12 @@ QSlider::handle:horizontal {
                 </item>
                 <item>
                  <widget class="QLineEdit" name="tb_posicaoeixoY">
+                  <property name="maximumSize">
+                   <size>
+                    <width>80</width>
+                    <height>25</height>
+                   </size>
+                  </property>
                   <property name="font">
                    <font>
                     <pointsize>9</pointsize>
@@ -2040,6 +2058,12 @@ QSlider::handle:horizontal {
                 </item>
                 <item>
                  <widget class="QLineEdit" name="tb_posicaoeixoZ">
+                  <property name="maximumSize">
+                   <size>
+                    <width>80</width>
+                    <height>25</height>
+                   </size>
+                  </property>
                   <property name="font">
                    <font>
                     <pointsize>9</pointsize>
