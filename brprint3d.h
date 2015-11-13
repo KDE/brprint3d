@@ -166,7 +166,7 @@ private:
     QString pathcura;                           //Caminho Cura
     QString pathextern;                         //Caminho slicer externo
 
-    QString pathGcode;                  //Caminho do GCODE
+    QString filePath;                  //Caminho do GCODE
 
     bool garbage; //Garbage - variable unused
 
