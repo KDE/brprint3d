@@ -321,7 +321,7 @@ void BrPrint3D::on_bt_import_clicked()
         if (gcode.open(QFile::ReadOnly | QFile::Text)) {
             QTextStream in(&gcode);
             QString text = in.readAll();
-            readgcode(text);
+            vtkView.renderGcode(text);
             gcode.close();
             ui->GCodePreview->setPlainText(text);
             if (ui->bt_connect->isChecked())
@@ -340,7 +340,7 @@ void BrPrint3D::on_bt_open_clicked()
         if (gcode.open(QFile::ReadOnly | QFile::Text)) {
             QTextStream in(&gcode);
             QString text = in.readAll();
-            readgcode(text);
+            vtkView.renderGcode(text);
             gcode.close();
             ui->GCodePreview->setPlainText(text);
         }
