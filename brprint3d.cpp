@@ -373,22 +373,15 @@ void BrPrint3D::readgcode(QString text)
                     x = x_str.toFloat();
                     QString y_str = aux[j + 1].section("Y", 1);
                     y = y_str.toFloat();
-                    Points *p = new Points();
-                    p->addPoint(x, y, z);
-                    gcodeDots.append(p);
+                   
                 } else if (aux[j].startsWith("Z")) {
                     //ler ponto
                     QString z_str = aux[j].section("Z", 1);
                     z = z_str.toFloat();
-                    Points *p = new Points();
-                    p->addPoint(x, y, z);
-                    gcodeDots.append(p);
                 }
             }//fim for j
         }
     }//fim for i
-    ui->openGLWidget->openGcode(&gcodeDots);
-    ui->openGLWidget->update();
 }
 //This action connect the 3D printer
 void BrPrint3D::on_bt_connect_clicked(bool checked)
