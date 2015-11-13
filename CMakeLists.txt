@@ -41,10 +41,10 @@ set(Widgets_SRCS
 set(Br-Print_SRCS
 	arduinolistener.cpp
 	brprint3d.cpp
-	glwidget.cpp
 	main.cpp
 	points.cpp
 	threadRotine.cpp
+	vtkWidget.cpp
 )
 
 #qt5_add_translation(TRANSLATIONS EN_english.ts PT_portuguese.ts)
