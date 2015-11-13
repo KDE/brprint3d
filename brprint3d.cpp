@@ -48,6 +48,8 @@ void BrPrint3D::init()
     //Init the translator
     //this->translator.load(":/Translations/PT_portuguese.qm");
     //Load the previous configs if them exists
+    vtkView = new vtkWidget();
+    ui->vtkConteiner->addWidget(vtkView);
     QStringList groups;
     settings.beginGroup("Printer_Configs");
     groups = settings.childGroups();
@@ -97,7 +99,6 @@ void BrPrint3D::init()
 
     //Hide Config Menu
     ui->Menu_Control_Left->hide();
-    ui->openGLWidget->setGeometry(20, 160, 900, 510);
 
     //Disable Play Button
     ui->bt_play->setEnabled(false);
@@ -186,11 +187,9 @@ void BrPrint3D::on_bt_hide_clicked()
     if (ui->bt_hide->text() == tr("Configuration - Show")) {
         ui->bt_hide->setText(tr("Configuration - Hide"));
         ui->Menu_Control_Left->show();
-        ui->openGLWidget->setGeometry(460, 160, 480, 510);
     } else {
         ui->bt_hide->setText(tr("Configuration - Show"));
         ui->Menu_Control_Left->hide();
-        ui->openGLWidget->setGeometry(20, 160, 900, 510);
     }
 }
 //This function locate the Sli3er program and save on Ini file
@@ -321,7 +320,7 @@ void BrPrint3D::on_bt_import_clicked()
         if (gcode.open(QFile::ReadOnly | QFile::Text)) {
             QTextStream in(&gcode);
             QString text = in.readAll();
-            vtkView.renderGcode(text);
+            vtkView->renderGcode(text);
             gcode.close();
             ui->GCodePreview->setPlainText(text);
             if (ui->bt_connect->isChecked())
@@ -340,7 +339,7 @@ void BrPrint3D::on_bt_open_clicked()
         if (gcode.open(QFile::ReadOnly | QFile::Text)) {
             QTextStream in(&gcode);
             QString text = in.readAll();
-            vtkView.renderGcode(text);
+            vtkView->renderGcode(text);
             gcode.close();
             ui->GCodePreview->setPlainText(text);
         }
