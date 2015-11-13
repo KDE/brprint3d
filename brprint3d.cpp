@@ -313,10 +313,10 @@ void BrPrint3D::on_bt_killSlicer_clicked()
 //This action import a GCODE file to print
 void BrPrint3D::on_bt_import_clicked()
 {
-    pathGcode = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), "*.gcode");
+    filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), "*.gcode");
 
-    if (!pathGcode.isEmpty() && QFileInfo(pathGcode).completeSuffix() == "gcode") {
-        QFile gcode(pathGcode);
+    if (!filePath.isEmpty() && QFileInfo(filePath).completeSuffix() == "gcode") {
+        QFile gcode(filePath);
         if (gcode.open(QFile::ReadOnly | QFile::Text)) {
             QTextStream in(&gcode);
             QString text = in.readAll();
@@ -332,10 +332,10 @@ void BrPrint3D::on_bt_import_clicked()
 //This action open a GCODE or STL file
 void BrPrint3D::on_bt_open_clicked()
 {
-    pathGcode = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), "*.gcode");
+    filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), "*.gcode *.stl *.STL");
 
-    if (!pathGcode.isEmpty() && QFileInfo(pathGcode).completeSuffix() == "gcode") {
-        QFile gcode(pathGcode);
+    if (!filePath.isEmpty() && QFileInfo(filePath).completeSuffix() == "gcode") {
+        QFile gcode(filePath);
         if (gcode.open(QFile::ReadOnly | QFile::Text)) {
             QTextStream in(&gcode);
             QString text = in.readAll();
@@ -344,15 +344,10 @@ void BrPrint3D::on_bt_open_clicked()
             ui->GCodePreview->setPlainText(text);
         }
     }
-    /* else if(QFileInfo(filename).completeSuffix()=="STL" ||QFileInfo(filename).completeSuffix()=="stl")
+   else if(QFileInfo(filePath).completeSuffix()=="STL" ||QFileInfo(filePath).completeSuffix()=="stl")
      {
-         //ui->GCodePreview->setPlainText("");
-         //QVector<triangle> QFileInfo(filename).baseName();
-         //ERRADO!
-        // QFile stl(filename);
-         //readstl(filename);
-         //Renderiza Imagem
-     }*/
+         vtkView->renderSTL(filePath);
+     }
 }
 //This function transform the gcode file on a vector of points and send to OpenGL to draw
 void BrPrint3D::readgcode(QString text)
@@ -575,14 +570,14 @@ void BrPrint3D::loadConfigs(QString q)
 void BrPrint3D::on_bt_play_clicked()
 {
     QMessageBox msg;
-    if (!pathGcode.isEmpty()) {
+    if (!filePath.isEmpty()) {
         //destroy the thread
         this->temp->setLoop(true);
         this->temp->wait(2000);
         this->temp->quit();
         this->temp->~ThreadRoutine();
         try {
-            std::string path = pathGcode.toUtf8().constData();
+            std::string path = filePath.toUtf8().constData();
             this->printer_object->openFile(path, ui->ck_logImpressao->isChecked());
 
         } catch (std::string exc) {
