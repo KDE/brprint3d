@@ -25,7 +25,7 @@
 
 arduinoListener::arduinoListener()
 {
-    this->test = false;
+    test = false;
 }
 
 void arduinoListener::run()
@@ -38,19 +38,13 @@ void arduinoListener::run()
             QString file = in.readAll();
             arduino.close();
             if ((test = file.contains("Arduino")) == true) {
-                emit arduinoConnect(true);
+                emit arduinoConnect();
                 break;
             }
-            /*else if((test=file.contains("QinHeng"))==true)
-            {   word = "ch341-uart";
-                emit arduinoConnect(true,word);
-            }*/
             else
                 usleep(5000);
         }
     }
-    // this->sleep(1);
-    // this->~arduinoListener();
 
 }
 

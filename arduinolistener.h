@@ -41,7 +41,7 @@ private:
     bool garbage, test;
     QString file;
 signals:
-    void arduinoConnect(bool b);
+    void arduinoConnect();
 };
 
 #endif // ARDUINOLISTENER_H
