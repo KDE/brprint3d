@@ -53,7 +53,7 @@ public:
 
 signals:
     void updateTemp(double *extrudersTemp, double tempBed);
-    void updateExt(double posX, double posY, double posZ);
+    void updatePos(double posX, double posY, double posZ);
     void finishedJob(bool b);
 };
 
