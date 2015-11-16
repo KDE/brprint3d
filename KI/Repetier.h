@@ -63,6 +63,7 @@ public:
     bool setExtrTemp(int extrNo, int temp) throw (std::string);
     void extruderControl(double extrude, double atSpeed);
     bool setFeedRate(int percentage);
+    bool setFlowRate(int percentage);
     void startPrintJob(bool fromBegining);
     void stopPrintJob();
     void scramPrinter() throw (std::string);
