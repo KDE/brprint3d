@@ -37,143 +37,6 @@ BrPrint3D::~BrPrint3D()
 
 QSettings settings(QDir::currentPath() + "/br.ini", QSettings::IniFormat); //INI File
 
-
-/*******************************************************************************************************************/
-/* Code Organization - English
- * Function Init
- *
- * --Actions MenuBar--
- * Exit
- * Change Language
- * About -> BrPrint, Documentation, Help, Legal Warning
- *
- * Function Hide/Show Configuration
- * Function's of Search
- *  Locate Slier
- *  Locar Cura
- *  Locate Arduino -> Not used
- * Actions about Slicer
- *  Start Slicing
- *  Stop Slicing
- * Actions MenuBar
- *  Import Gcode ready to print
- *  Open Gcode or STL
- *  Connect/Disconnect 3DPrinter
- * Actions Save Configs
- * Action Statics of Print Job
- * Action Load Cofigs
- *
- * --Actions RTO--
- * MenuBar
- *  Start Print Job(Play)
- *  Pause Print Job
- *  Stop Print Job
- *  Stop Print job on Emergency
- * Manual Control:
- *  Move X to 0
- *  Move Y to 0
- *  Move Z to 0
- *  Move XYZ to 0
- *  Move X to Left - width
- *  Move X to Right - width
- *  Move Y to Back -heigh
- *  Move Y to Front -heigh
- *  Move Z to Up -Vertical
- *  Move Z to Down -Vertical
- *  Retract Fill
- *  Expulse Fill 1x
- *  Expulse Fill 2x
- *  Set Speed of feed fill
- *  Set flow rate of fill
- *  Set cooler fan
- *  ON/OFF bed heating
- *  ON/OFF Extruders heating
- *
- * --3D Actions--
- * Render model from GCODE
- * Render model fom STL
- * Rotate model
- * Zoom in/out
- * Prism Print Area
- * Render model during the print job
- * --Convenience Functions--
- * Thread monitoring of temperature
- * Thread monitoring of extruder position
- * Thread monitoring connection of arduino -> not used
- * Block/Unblock button position of extruder to safety
- * Close Event
- * */
-//Below comments its only for me-> Lays
-/*Organização do Código - Portuguese
- * Função de Inicialização da Pandora
- *
- * --Ações MenuBar--
- *  Sair
- *  Alterar Idioma -> Portugues/Ingles
- *  Sobre -> BrPrint, Documentação, Ajuda, Aviso Legal
- *
- * Função Hide/Show Configurações
- * Funções de Busca
- *  Locate Slicer
- *  Locate Cura
- *  Locate Arduino
- * Funções de Ações sobre Slicer
- *  Iniciar Fatiamento
- *  Cancelar Fatiamento
- * Ações Barra de Menu
- *  Importar GCODE pronto pra impressão
- *  Abrir GCODE ou STL
- *  Conectar/Desconectar Impressora
- * Ação Salvar Configurações
- * Ação estatísticas de impressão
- * Ação Carregar Configurações
- *
- * --Ações com a Impressora--
- * Ações Barra de Menu
- *  Iniciar Impressão
- *  Pausar Impressão
- *  Cancelar Impressão
- *  Parada de Emergência
- * Controle Manual:
- *  Mover X para 0
- *  Mover Y para 0
- *  Mover Z para 0
- *  Mover XYZ para 0
- *  Mover X para Esquerda - largura
- *  Mover X para Direita - largura
- *  Mover Y para Trás -profundidade
- *  Mover Y para Frente -profundidade
- *  Mover Z para Cima -altura
- *  Mover Z para Baixo -altura
- *  Recolher Filamento
- *  Expulsar Filamento 1x
- *  Expulsar Filamento 2x
- *  Set Velocidade de alimentação de filamento
- *  Set Vazão de saída de filamento
- *  Set velocidade do cooler
- *  Ligar/Desligar aquecimento da Mesa
- *  Ligar/Desligar aquecimento do(s) Extrusore(s)
- *
- *--Ações 3D--
- * Renderizar Objeto a partir de um GCODE
- * Renderizar Objeto a partir de um STL
- * Rotacionar Objeto
- * Zoom in/out do Objeto
- * Ter um cubo de impressão nas medidas de área inseridas pelo usuário
- * Renderizar objeto durante impressão
- *
- * --Funções de Conveniencia--
- * Thread de Monitoramento de Temperatura
- * Thread de Monitoramento de Posição do Extrusor
- * Thread de Monitoramento de Conexão de Arduino
- * Função de Liberação de Botões de Extrusores a partir da qnt selecionada
- * Desabilitar botões de movimento de extrusor durante impressão
- * Ação CloseEvent - Verificar se o usuario deseja mesmo fechar o programa
- * Detectar idioma da máquina e carregar pandora com o idioma do sistema
- *
-
-*/
-
 /*-----------Pandora Initialization--------*/
 /*This function makes the initialization of the UI.
 Loading previously saved settings, locating slicers and Arduino connection.*/
@@ -185,6 +48,8 @@ void BrPrint3D::init()
     //Init the translator
     //this->translator.load(":/Translations/PT_portuguese.qm");
     //Load the previous configs if them exists
+    vtkView = new vtkWidget();
+    ui->vtkConteiner->addWidget(vtkView);
     QStringList groups;
     settings.beginGroup("Printer_Configs");
     groups = settings.childGroups();
@@ -234,7 +99,6 @@ void BrPrint3D::init()
 
     //Hide Config Menu
     ui->Menu_Control_Left->hide();
-    ui->openGLWidget->setGeometry(20, 160, 900, 510);
 
     //Disable Play Button
     ui->bt_play->setEnabled(false);
@@ -323,11 +187,9 @@ void BrPrint3D::on_bt_hide_clicked()
     if (ui->bt_hide->text() == tr("Configuration - Show")) {
         ui->bt_hide->setText(tr("Configuration - Hide"));
         ui->Menu_Control_Left->show();
-        ui->openGLWidget->setGeometry(460, 160, 480, 510);
     } else {
         ui->bt_hide->setText(tr("Configuration - Show"));
         ui->Menu_Control_Left->hide();
-        ui->openGLWidget->setGeometry(20, 160, 900, 510);
     }
 }
 //This function locate the Sli3er program and save on Ini file
@@ -451,14 +313,14 @@ void BrPrint3D::on_bt_killSlicer_clicked()
 //This action import a GCODE file to print
 void BrPrint3D::on_bt_import_clicked()
 {
-    pathGcode = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), "*.gcode");
+    filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), "*.gcode");
 
-    if (!pathGcode.isEmpty() && QFileInfo(pathGcode).completeSuffix() == "gcode") {
-        QFile gcode(pathGcode);
+    if (!filePath.isEmpty() && QFileInfo(filePath).completeSuffix() == "gcode") {
+        QFile gcode(filePath);
         if (gcode.open(QFile::ReadOnly | QFile::Text)) {
             QTextStream in(&gcode);
             QString text = in.readAll();
-            readgcode(text);
+            vtkView->renderGcode(text);
             gcode.close();
             ui->GCodePreview->setPlainText(text);
             if (ui->bt_connect->isChecked())
@@ -470,27 +332,22 @@ void BrPrint3D::on_bt_import_clicked()
 //This action open a GCODE or STL file
 void BrPrint3D::on_bt_open_clicked()
 {
-    pathGcode = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), "*.gcode");
+    filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), "*.gcode *.stl *.STL");
 
-    if (!pathGcode.isEmpty() && QFileInfo(pathGcode).completeSuffix() == "gcode") {
-        QFile gcode(pathGcode);
+    if (!filePath.isEmpty() && QFileInfo(filePath).completeSuffix() == "gcode") {
+        QFile gcode(filePath);
         if (gcode.open(QFile::ReadOnly | QFile::Text)) {
             QTextStream in(&gcode);
             QString text = in.readAll();
-            readgcode(text);
+            vtkView->renderGcode(text);
             gcode.close();
             ui->GCodePreview->setPlainText(text);
         }
     }
-    /* else if(QFileInfo(filename).completeSuffix()=="STL" ||QFileInfo(filename).completeSuffix()=="stl")
+   else if(QFileInfo(filePath).completeSuffix()=="STL" ||QFileInfo(filePath).completeSuffix()=="stl")
      {
-         //ui->GCodePreview->setPlainText("");
-         //QVector<triangle> QFileInfo(filename).baseName();
-         //ERRADO!
-        // QFile stl(filename);
-         //readstl(filename);
-         //Renderiza Imagem
-     }*/
+         vtkView->renderSTL(filePath);
+     }
 }
 //This function transform the gcode file on a vector of points and send to OpenGL to draw
 void BrPrint3D::readgcode(QString text)
@@ -510,22 +367,15 @@ void BrPrint3D::readgcode(QString text)
                     x = x_str.toFloat();
                     QString y_str = aux[j + 1].section("Y", 1);
                     y = y_str.toFloat();
-                    Points *p = new Points();
-                    p->addPoint(x, y, z);
-                    gcodeDots.append(p);
+                   
                 } else if (aux[j].startsWith("Z")) {
                     //ler ponto
                     QString z_str = aux[j].section("Z", 1);
                     z = z_str.toFloat();
-                    Points *p = new Points();
-                    p->addPoint(x, y, z);
-                    gcodeDots.append(p);
                 }
             }//fim for j
         }
     }//fim for i
-    ui->openGLWidget->openGcode(&gcodeDots);
-    ui->openGLWidget->update();
 }
 //This action connect the 3D printer
 void BrPrint3D::on_bt_connect_clicked(bool checked)
@@ -720,14 +570,14 @@ void BrPrint3D::loadConfigs(QString q)
 void BrPrint3D::on_bt_play_clicked()
 {
     QMessageBox msg;
-    if (!pathGcode.isEmpty()) {
+    if (!filePath.isEmpty()) {
         //destroy the thread
         this->temp->setLoop(true);
         this->temp->wait(2000);
         this->temp->quit();
         this->temp->~ThreadRoutine();
         try {
-            std::string path = pathGcode.toUtf8().constData();
+            std::string path = filePath.toUtf8().constData();
             this->printer_object->openFile(path, ui->ck_logImpressao->isChecked());
 
         } catch (std::string exc) {

@@ -30,10 +30,10 @@
 #include <Windows/help.h>
 #include <Windows/legalwarning.h>
 #include <Windows/loading.h>
-#include "points.h"
 #include "KI/Repetier.h"
 #include "threadRotine.h"
 #include "arduinolistener.h"
+#include "vtkWidget.h"
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
@@ -121,6 +121,7 @@ private slots:
 private:
 
     Ui::BrPrint3D *ui;
+    vtkWidget *vtkView;
     double *tempMesa;
     double *tempExtruders;
     int extrudersInUse;
@@ -165,10 +166,7 @@ private:
     QString pathcura;                           //Caminho Cura
     QString pathextern;                         //Caminho slicer externo
 
-    //Lista de Pontos do gcode
-    QList<Points*> gcodeDots;
-    //
-    QString pathGcode;                  //Caminho do GCODE
+    QString filePath;                  //Caminho do GCODE
 
     bool garbage; //Garbage - variable unused
 
