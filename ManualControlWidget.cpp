@@ -17,8 +17,6 @@ void ManualControlWidget::init()
 {   ui->ManualControlTab->setDisabled(true);
     ui->Slicer->setDisabled(true);
     ui->GCodePreview->setPlainText(tr("No Open File."));
-    ExtruderControlWidget *extruderControl = new ExtruderControlWidget;
-    ui->ly_ExtruderConteiner->addWidget(extruderControl);
 
     //If slic3er exists in Ini file, load path, else locate
     pathslicer=QVariant (this->settings.value("slic3r")).toString();
@@ -37,6 +35,73 @@ void ManualControlWidget::init()
         ui->cb_slicer->addItem("Cura Engine");
 
 }
+void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
+{
+    QMessageBox msg;
+    int maxX, maxY, maxZ, transmissionRate, bufferSize;
+    std::string connectionPort;
+    bool resetOnconnect,isCommaDecimalMark;
+    if(pSettings.areaX.isEmpty() || pSettings.areaY.isEmpty() || pSettings.areaZ.isEmpty())
+    {
+        msg.setText(tr("Make sure you have all the necessary settings for connection!"));
+        msg.setIcon(QMessageBox::Warning);
+        msg.exec();
+        emit checkConnectButton(false);
+    }
+    else
+    {   ui->ManualControl->setEnabled(true);
+        QLocale locale;
+        QChar c = locale.decimalPoint();
+        if(c=='.')
+            isCommaDecimalMark = false;
+        else
+            isCommaDecimalMark = true;
+        maxX = pSettings.areaX.toInt();
+        maxY = pSettings.areaY.toInt();
+        maxZ = pSettings.areaZ.toInt();
+        transmissionRate = pSettings.transmissionRate.toInt();
+        connectionPort = pSettings.connectionPort.toStdString();
+        bufferSize = pSettings.cacheSize.toInt();
+        if(pSettings.resetOnConnect==0)
+            resetOnconnect = false;
+        else
+            resetOnconnect = true;
+
+    }
+    try{
+        printerObject = new Repetier(transmissionRate,connectionPort,bufferSize,maxX,maxY,maxZ,resetOnconnect,isCommaDecimalMark);
+        extruderQnt = printerObject->getNoOfExtruders();
+        startThreadRoutine();
+        emit enablePlayButton(true);
+        msg.setText(tr("Successful Connection"));
+        msg.setIcon(QMessageBox::Information);
+        msg.exec();
+
+    }
+    catch(std::string exc){
+        QString e =QString::fromUtf8(exc.c_str());
+        msg.setText(e);
+        msg.setIcon(QMessageBox::Warning);
+        msg.exec();
+        ui->ManualControl->setEnabled(false);
+        emit checkConnectButton(false);
+
+    }
+    setInitialMarks();
+
+}
+void ManualControlWidget::destructPrinterObject()
+{
+    printerObject->setBedTemp(0);
+    for(int i=0;i<extruderQnt;i++)
+        printerObject->setExtrTemp(i,0);
+    stopThreadRoutine();
+    printerObject->~Repetier();
+    ui->bt_Bed->setChecked(false);
+    ui->bt_extruderTemp0->setChecked(false);
+    ui->ManualControl->setDisabled(true);
+}
+
 /*//This action start the job of slicing
 void ManualControlWidget::on_bt_startSlicer_clicked()
 {
@@ -57,51 +122,6 @@ void ManualControlWidget::on_bt_addSlicer_clicked()
     ui->bt_addSlicer->setEnabled(false);
 }
 
-
-/*-----------Printer Actions - Manual Control----*/
-/*Home Extruder Functions
-//This action set Home X Axis
-void ManualControlWidget::on_bt_home_X_clicked()
-{
-    this->printer_object->homeAxis('X');
-
-}
-//This action set Home Y Axis
-void ManualControlWidget::on_bt_home_Y_clicked()
-{
-    this->printer_object->homeAxis('Y');
-
-}
-//This action set home Z Axis
-void ManualControlWidget::on_bt_home_Z_clicked()
-{
-    this->printer_object->homeAxis('Z');
-
-}
-//This action set home XYZ Axis
-void ManualControlWidget::on_bt_home_XYZ_clicked()
-{
-    this->printer_object->homeAllAxis();
-
-}
-/*Filament Retract
-//This action retract the filament
-void ManualControlWidget::on_bt_filamentoRetract_clicked()
-{
-    //this->printer_object->extruderControl(0.1,0.1);
-}
-//This action expulse the filament at 1x
-void ManualControlWidget::on_bt_filamentoOneSpeed_clicked()
-{
-
-
-}
-//This action expulse the filament at 2x
-void ManualControlWidget::on_bt_filamentoTwoSpeed_clicked()
-{
-
-
-}
 
 /*Sliders Values Set
 //This action set the value of velocity of feed of filament to slider and printer
@@ -247,22 +267,14 @@ void ManualControlWidget::on_tb_ExtruderTempMC_textEdited(const QString &arg1)
 void ManualControlWidget::getPrinterObject(Repetier *printer_object)
 {
     this->printer_object = printer_object;
-}
+}*/
 void ManualControlWidget::setInitialMarks()
 {
-    this->qntExtruders = this->printer_object->getNoOfExtruders();
-
-    //Add initial position of the extruder
-   //Create the tread for read temperatures and position
-   this->temp = new ThreadRoutine(this->printer_object,&extrudersInUse);
-   this->temp->start();
-   //Connect some signals
-   connect(temp,SIGNAL(updateTemp(double*,double)),this,SLOT(updateTemp(double*,double)));
 }
 
 //This slot update on UI the value of Temperatures of the Bed and Extruders
 //There some inconsistency on the tests here - CHECK!
-void ManualControlWidget::updateTemp(double *temp_Extruders, double tempBed)
+void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
 {   //This function update the printer temperatures on the screen
     float temp_Bed = tempBed;
     //Change bed temperatures
@@ -279,9 +291,9 @@ void ManualControlWidget::updateTemp(double *temp_Extruders, double tempBed)
      //If the printer is using one extruder, the slider will belongs all the time to extruder 1
      if(extrudersInUse==1)
      {
-        ui->sl_extruder->setValue(temp_Extruders[0]);//Set temperature on slider
-        ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[0]).toString());//Set Label of slider
-        ui->lb_extruderTemp1->setText(QVariant(temp_Extruders[0]).toString());//Set label on Ext 1
+        ui->sl_extruder->setValue(tempExtruders[0]);//Set temperature on slider
+        ui->lb_extruderTemp0->setText(QVariant(tempExtruders[0]).toString());//Set Label of slider
+        ui->lb_extruderTemp1->setText(QVariant(tempExtruders[0]).toString());//Set label on Ext 1
         //Change color status
         if(ui->bt_extruderTemp0->isChecked())
         {   if(ui->lb_extruderTemp1->text().toFloat()>=ui->tb_ExtruderTempMC->text().toInt())
@@ -305,8 +317,8 @@ void ManualControlWidget::updateTemp(double *temp_Extruders, double tempBed)
                 case 1:
                 {   if(ui->bt_extruder1->isChecked())//Slider belongs to extruder 1
                     {
-                        ui->sl_extruder->setValue(temp_Extruders[i-1]); //Set Slider value
-                        ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[i-1]).toString());//Set Label of slider
+                        ui->sl_extruder->setValue(tempExtruders[i-1]); //Set Slider value
+                        ui->lb_extruderTemp0->setText(QVariant(tempExtruders[i-1]).toString());//Set Label of slider
                     }
                     //Refresh Color Status
                     if(ui->bt_extruderTemp0->isChecked())
@@ -315,13 +327,13 @@ void ManualControlWidget::updateTemp(double *temp_Extruders, double tempBed)
                         else
                             ui->bt_extruder1->setStyleSheet("background-color:yellow;");
                     }
-                    ui->lb_extruderTemp1->setText(QVariant(temp_Extruders[i-1]).toString());//Set label extruder value
+                    ui->lb_extruderTemp1->setText(QVariant(tempExtruders[i-1]).toString());//Set label extruder value
 
                 }break;
                 case 2:
                 {   if(ui->bt_extruder2->isChecked())//Slider belongs to extruder two
-                    {   ui->sl_extruder->setValue(temp_Extruders[i-1]);
-                        ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[i-1]).toString());//Set Label of slider
+                    {   ui->sl_extruder->setValue(tempExtruders[i-1]);
+                        ui->lb_extruderTemp0->setText(QVariant(tempExtruders[i-1]).toString());//Set Label of slider
                     }
                    //Refresh Color Status
                    if(ui->bt_extruderTemp0->isChecked())
@@ -330,12 +342,12 @@ void ManualControlWidget::updateTemp(double *temp_Extruders, double tempBed)
                         else
                             ui->bt_extruder2->setStyleSheet("background-color:yellow;");
                    }
-                   ui->lb_extruderTemp2->setText(QVariant(temp_Extruders[i-1]).toString());
+                   ui->lb_extruderTemp2->setText(QVariant(tempExtruders[i-1]).toString());
                 }break;
                 case 3:
                 {  if(ui->bt_extruder3->isChecked())//Slider belongs to extruder two
-                   {   ui->sl_extruder->setValue(temp_Extruders[i-1]);
-                       ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[i-1]).toString());//Set Label of slider
+                   {   ui->sl_extruder->setValue(tempExtruders[i-1]);
+                       ui->lb_extruderTemp0->setText(QVariant(tempExtruders[i-1]).toString());//Set Label of slider
                    }
 
                     //Refresh Color Status
@@ -346,12 +358,12 @@ void ManualControlWidget::updateTemp(double *temp_Extruders, double tempBed)
                         else
                             ui->bt_extruder3->setStyleSheet("background-color:yellow;");
                    }
-                    ui->lb_extruderTemp3->setText(QVariant(temp_Extruders[i-1]).toString());
+                    ui->lb_extruderTemp3->setText(QVariant(tempExtruders[i-1]).toString());
                 }break;
                 case 4:
                 {  if(ui->bt_extruder4->isChecked())//Slider belongs to extruder two
-                   {   ui->sl_extruder->setValue(temp_Extruders[i-1]);
-                       ui->lb_extruderTemp0->setText(QVariant(temp_Extruders[i-1]).toString());//Set Label of slider
+                   {   ui->sl_extruder->setValue(tempExtruders[i-1]);
+                       ui->lb_extruderTemp0->setText(QVariant(tempExtruders[i-1]).toString());//Set Label of slider
                    }
                    //Change Color Status
                    if(ui->bt_extruderTemp0->isChecked())
@@ -361,7 +373,7 @@ void ManualControlWidget::updateTemp(double *temp_Extruders, double tempBed)
                         else
                             ui->bt_extruder4->setStyleSheet("background-color:yellow;");
                    }
-                    ui->lb_extruderTemp4->setText(QVariant(temp_Extruders[i-1]).toString());
+                    ui->lb_extruderTemp4->setText(QVariant(tempExtruders[i-1]).toString());
                 }break;
                 default:
                     break;
@@ -369,56 +381,41 @@ void ManualControlWidget::updateTemp(double *temp_Extruders, double tempBed)
             }
 }
 }
-
 void ManualControlWidget::stopThreadRoutine()
 {
-    this->temp->setLoop(true);
-    this->temp->wait(2000);
-    this->temp->quit();
-    this->temp->~ThreadRoutine();
+    temp->setLoop(true);
+    temp->wait(2000);
+    temp->quit();
+    temp->~ThreadRoutine();
 }
 void ManualControlWidget::startThreadRoutine()
 {
-     temp = new ThreadRoutine(this->printer_object,&extrudersInUse);
-     this->temp->start();
+     temp = new ThreadRoutine(printerObject,&extrudersInUse);
+     temp->start();
      connect(temp,SIGNAL(updateTemp(double*,double)),this,SLOT(updateTemp(double*,double)));
+     connect(temp,SIGNAL(updatePos(double, double, double)), ui->extruderControlWidget, SLOT(updatePos(double, double, double)));
 
-}
-
-void ManualControlWidget::setBedStatus(bool b)
-{
-    ui->bt_Bed->setChecked(b);
-    if(b==false)
-        ui->bt_Bed->setStyleSheet("");
-
-}
-void ManualControlWidget::setExtruderStatus(bool b)
-{
-    ui->bt_extruderTemp0->setChecked(b);
-    if(b==false)
-        ui->bt_extruderTemp0->setStyleSheet("");
 }
 void ManualControlWidget::hideExtruders(int e)
 {
     switch (e){
     case 1:{   
-	ui->wg_group2->hide();
+        ui->wg_group2->hide();
         ui->wg_group3->hide();
-	ui->wg_group4->hide();
+        ui->wg_group4->hide();
     }break;
     case 2:{   
-	ui->wg_group3->hide();
-	ui->wg_group4->hide();
+        ui->wg_group3->hide();
+        ui->wg_group4->hide();
     }break;
     case 3:{
-	ui->wg_group4->hide();
+        ui->wg_group4->hide();
     }break;
 
     default:
         break;
     }
 }
-*/
 //This function locate the Sli3er program and save on Ini file
 void ManualControlWidget::locateSlicer()
 {   QMessageBox msg;
@@ -484,23 +481,9 @@ void ManualControlWidget::locateCura()
         }
     }
 }
-/*
-void ManualControlWidget::setGcodePreview(QString t)
-{
-    ui->GCodePreview->setPlainText(t);
-}
 
-
-void ManualControlWidget::_extrudersInUse(int e)
+void ManualControlWidget::setExtrudersInUse(int e)
 {
-    this->extrudersInUse = e;
+    extrudersInUse = e;
+    hideExtruders(e);
 }
-void ManualControlWidget::btPlayStatus(bool b)
-{
-    playStatus = b;
-}
-void ManualControlWidget::disableManualControlTb(bool b)
-{
-    ui->ManualControlTab->setDisabled(b);
-}
-*/
