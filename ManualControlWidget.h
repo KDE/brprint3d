@@ -2,8 +2,9 @@
 #define MANUALCONTROLWIDGET_H
 #include "ExtruderControlWidget.h"
 #include <QWidget>
-#include <KI/Repetier.h>
-#include <threadRotine.h>
+#include "KI/Repetier.h"
+#include "threadRotine.h"
+#include "PrinterSettings.h"
 #include <QTabWidget>
 #include <QSettings>
 #include <QInputDialog>
@@ -30,17 +31,20 @@ public:
     void setExtruderStatus(bool b);
     void getPrinterObject(Repetier *printer_object);
     void setInitialMarks();
+    void constructPrinterObject(PrinterSettings pSettings);
+    void destructPrinterObject();
     ThreadRoutine *temp=NULL;
 
 private:
     Ui::ManualControlWidget *ui;
-    Repetier *printer_object;
+    Repetier *printerObject;
     int qntExtruders,extrudersInUse;
     QString pathslicer,pathcura;
     void locateSlicer();
     void locateCura();
     QSettings settings;
     bool garbage,playStatus;
+    int extruderQnt;
    
 };
 
