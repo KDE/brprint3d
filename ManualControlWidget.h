@@ -33,18 +33,25 @@ public:
     void setInitialMarks();
     void constructPrinterObject(PrinterSettings pSettings);
     void destructPrinterObject();
+    void hideExtruders(int e);
     ThreadRoutine *temp=NULL;
 
 private:
     Ui::ManualControlWidget *ui;
     Repetier *printerObject;
-    int qntExtruders,extrudersInUse;
+    int extrudersInUse;
     QString pathslicer,pathcura;
     void locateSlicer();
     void locateCura();
     QSettings settings;
     bool garbage,playStatus;
     int extruderQnt;
+signals:
+    void checkConnectButton(bool b);
+    void enablePlayButton(bool b);
+private slots:
+    void updateTemp(double *tempExtruders,double tempBed);
+    void setExtrudersInUse(int e);
    
 };
 
