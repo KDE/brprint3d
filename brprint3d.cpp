@@ -37,5 +37,7 @@ BrPrint3D::~BrPrint3D()
 void BrPrint3D::init()
 {
     vtkView = new vtkWidget();
-    ui->vtkConteiner->addWidget(vtkView);
+    ui->_vtkConteiner->addWidget(vtkView);
+
+
 }
