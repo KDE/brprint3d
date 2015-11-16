@@ -62,8 +62,10 @@ class BrPrint3D : public QMainWindow
 public:
     explicit BrPrint3D(QWidget *parent = 0);
     ~BrPrint3D();
+    void init();
 private:
     Ui::BrPrint3D *ui;
+    vtkWidget *vtkView;
 
 };
 
