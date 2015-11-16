@@ -2,7 +2,9 @@
 #define PRINTERSETTINGSWIDGET_H
 
 #include <QWidget>
+#include <QMessageBox>
 #include "PrinterSettings.h"
+#include "arduinolistener.h"
 
 namespace Ui {
 class PrinterSettingsWidget;
@@ -22,10 +24,13 @@ public:
 private slots:
     void on_cb_Extruder_qnt_currentTextChanged(const QString &arg1);
     void disableExtrudersQntCb(bool d);
+    void locateArduino();
 
 private:
     Ui::PrinterSettingsWidget *ui;
     int extrudersInUse;
+    arduinoListener *arduino_Listener;
+    bool garbage;
 signals:
    void s_hideExtruders(int n);
    void s_extrudersInUse(int n);

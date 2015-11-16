@@ -14,7 +14,13 @@ PrinterSettingsWidget::~PrinterSettingsWidget()
 }
 
 void PrinterSettingsWidget::init()
-{   /*this->settings = settings;
+{
+    arduino_Listener = new arduinoListener();
+    connect(arduino_Listener,SIGNAL(arduinoConnect(bool)),this,SLOT(locateArduino(bool)));
+    arduino_Listener->start();
+
+
+    /*this->settings = settings;
     //Load the previous configs if them exists
     QStringList groups;
     settings->beginGroup("Printer_Configs");
@@ -184,5 +190,47 @@ void PrinterSettingsWidget::on_cb_Extruder_qnt_currentTextChanged(const QString 
     extrudersInUse = arg1.toInt();
     emit s_hideExtruders(extrudersInUse);
     emit s_extrudersInUse(extrudersInUse);
+
+}
+
+void PrinterSettingsWidget::locateArduino()
+{   arduino_Listener->wait(2000);
+    arduino_Listener->quit();
+    arduino_Listener->deleteLater();
+    QStringList ports;
+    garbage=std::system("dmesg | grep -i usb > usbport.txt");
+    QFile usbport("usbport.txt");
+    if(usbport.open(QIODevice::ReadOnly|QIODevice::Text))
+    {   QTextStream in(&usbport);
+        QString file = in.readAll();
+        usbport.close();
+        QString port,ant=NULL;
+        std::string temp = file.toStdString();
+        const char *look = temp.c_str();
+        //qDebug()<<QString(word)
+        look = strstr(look, "Arduino");
+        while(look != NULL)
+        {
+            look = strstr(look, "tty");
+            for(int i = 0; look[i] != ':'; i++)
+                port+=look[i];
+            if(ant!=port)
+            {   if(port!="ttyACM0" && port!="ttyUSB0")
+                {   ports.append("/dev/"+port);
+                    ant=port;
+                }
+            }
+            port.clear();
+            look = strstr(look, "Arduino");
+        }
+    }
+    if(!ports.isEmpty())
+    {   ui->cb_ConnectionPort->addItems(ports);
+        QMessageBox msg;
+        msg.setText("The arduino is connect at new ports then default, please check on Configs Menu to switch ports!");
+        msg.setIcon(QMessageBox::Information);
+        msg.exec();
+    }
+
 
 }
