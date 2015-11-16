@@ -64,6 +64,7 @@ public:
     void extruderControl(double extrude, double atSpeed);
     bool setFeedRate(int percentage);
     bool setFlowRate(int percentage);
+    bool setFanSpeed(int speed);
     void startPrintJob(bool fromBegining);
     void stopPrintJob();
     void scramPrinter() throw (std::string);
