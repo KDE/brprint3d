@@ -407,7 +407,8 @@ void Repetier::extruderControl(double extrude, double atSpeed)
     } while (strstr(serialAns, "ok") == NULL);
 }
 
-bool Repetier::setFeedRate(int percentage){
+bool Repetier::setFeedRate(int percentage)
+{
     char send[this->bufsize], serialAns[this->bufsize];
     sprintf(send, "M220 S%d", percentage);
     prepareStringToSend(send, this->bufsize);
@@ -420,6 +421,29 @@ bool Repetier::setFeedRate(int percentage){
     }while(strstr(serialAns, "ok") == NULL);
     arduino->readUntil(serialAns, '\n', this->bufsize);
     if(strstr(serialAns, "Speed") != NULL){
+        arduinoAccess.unlock();
+        communicationBool.unlock();
+        return true;
+    }
+    arduinoAccess.unlock();
+    communicationBool.unlock();
+    return false;
+}
+
+bool Repetier::setFlowRate(int percentage)
+{
+    char send[this->bufsize], serialAns[this->bufsize];
+    sprintf(send, "M221 S%d", percentage);
+    prepareStringToSend(send, this->bufsize);
+    communicationBool.lock();
+    arduinoAccess.lock();
+    arduino->writeStr(send);
+    usleep(WAIT_TIME);
+    do{
+        arduino->readUntil(serialAns, '\n', this->bufsize);
+    }while(strstr(serialAns, "ok") == NULL);
+    arduino->readUntil(serialAns, '\n', this->bufsize);
+    if(strstr(serialAns, "Flow") != NULL){
         arduinoAccess.unlock();
         communicationBool.unlock();
         return true;
