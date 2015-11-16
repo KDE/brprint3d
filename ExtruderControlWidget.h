@@ -32,7 +32,7 @@ class ExtruderControlWidget : public QWidget
 {
     Q_OBJECT
 public:
-ExtruderControlWidget();
+explicit ExtruderControlWidget(QWidget *parent = 0);
 ~ExtruderControlWidget();
 void init();
 

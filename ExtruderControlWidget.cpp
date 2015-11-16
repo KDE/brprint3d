@@ -20,9 +20,10 @@
 #include "ExtruderControlWidget.h"
 #include "ui_ExtruderControlWidget.h"
 
-ExtruderControlWidget::ExtruderControlWidget()
+ExtruderControlWidget::ExtruderControlWidget(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::ExtruderControlWidget)
 {
-    ui = new Ui::ExtruderControlWidget;
     ui->setupUi(this);
 }
 
