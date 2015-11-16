@@ -22,7 +22,6 @@
  ======================================================================*/
 
 #include "Repetier.h"
-#include <QDebug>
 
 Repetier::Repetier(int baudrate, std::string serialport, int buffersize, double maxX, double maxY, double maxZ, bool resetWhenConnect, const bool isCommaDecimalMark) throw (std::string)
 {
