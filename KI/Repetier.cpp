@@ -453,6 +453,28 @@ bool Repetier::setFlowRate(int percentage)
     return false;
 }
 
+bool Repetier::setFanSpeed(int speed)
+{
+    char send[this->bufsize], serialAns[this->bufsize];
+    sprintf(send, "M106 S%d", speed);
+    prepareStringToSend(send, this->bufsize);
+    communicationBool.lock();
+    arduinoAccess.lock();
+    arduino->writeStr(send);
+    do{
+        arduino->readUntil(serialAns, '\n', this->bufsize);
+    }while(strstr(serialAns, "ok") == NULL);
+    arduino->readUntil(serialAns, '\n', this->bufsize);
+    if(strstr(serialAns, "Fan")!=NULL){
+        arduinoAccess.unlock();
+        communicationBool.unlock();
+        return true;
+    }
+    arduinoAccess.unlock();
+    communicationBool.unlock();
+    return false;
+}
+
 void Repetier::printJob() throw (std::string)
 {
     unsigned long read = 0;
