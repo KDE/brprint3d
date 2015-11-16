@@ -1,7 +1,6 @@
 #ifndef PRINTERSETTINGS_H
 #define PRINTERSETTINGS_H
 #include <QString>
-#include <ManualControlWidget.h>
 
 class PrinterSettings
 {
