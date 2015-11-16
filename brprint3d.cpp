@@ -38,6 +38,6 @@ void BrPrint3D::init()
 {
     vtkView = new vtkWidget();
     ui->_vtkConteiner->addWidget(vtkView);
-
+    connect(ui->_PrinterSettings,SIGNAL(s_extrudersInUse(int)),ui->_ManualControl,SLOT(setExtrudersInUse(int)));
 
 }
