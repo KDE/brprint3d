@@ -23,7 +23,6 @@
  */
 
 #include "Arduino_Serial.h"
-#include <QDebug>
 
 ASerial::ASerial(std::string serialport, int baudrate) throw (std::string)
 {
