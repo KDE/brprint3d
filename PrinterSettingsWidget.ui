@@ -22,6 +22,11 @@
     <height>550</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -35,7 +40,7 @@
       </size>
      </property>
      <property name="title">
-      <string>Printer  Configs</string>
+      <string>Printer  Settings</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
@@ -50,21 +55,21 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="cb_printer"/>
+           <widget class="QComboBox" name="cb_PrinterSettings"/>
           </item>
          </layout>
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QPushButton" name="bt_saveConfig">
+           <widget class="QPushButton" name="bt_SaveSettings">
             <property name="text">
              <string>Save</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="bt_default">
+           <widget class="QPushButton" name="bt_DefaultSettings">
             <property name="text">
              <string>Reset</string>
             </property>
@@ -77,7 +82,7 @@
       <item>
        <widget class="QTabWidget" name="Config">
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="Connection_Config">
          <attribute name="title">
@@ -101,7 +106,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QComboBox" name="cb_Connection_Type">
+             <widget class="QComboBox" name="cb_ConnectionType">
               <property name="minimumSize">
                <size>
                 <width>120</width>
@@ -130,7 +135,7 @@
              </widget>
             </item>
             <item row="5" column="1">
-             <widget class="QCheckBox" name="ck_resetonConnect">
+             <widget class="QCheckBox" name="ck_ResetOnConnect">
               <property name="text">
                <string/>
               </property>
@@ -151,7 +156,7 @@
              </widget>
             </item>
             <item row="6" column="1">
-             <widget class="QCheckBox" name="ck_resetonEmergency">
+             <widget class="QCheckBox" name="ck_ResetOnEmergency">
               <property name="text">
                <string/>
               </property>
@@ -191,7 +196,7 @@
              </widget>
             </item>
             <item row="4" column="1">
-             <widget class="QComboBox" name="cb_Cache_Size">
+             <widget class="QComboBox" name="cb_CacheSize">
               <property name="minimumSize">
                <size>
                 <width>120</width>
@@ -226,7 +231,7 @@
              </widget>
             </item>
             <item row="1" column="1" colspan="2">
-             <widget class="QComboBox" name="cb_Connection_Port">
+             <widget class="QComboBox" name="cb_ConnectionPort">
               <property name="minimumSize">
                <size>
                 <width>120</width>
@@ -252,14 +257,14 @@
              </widget>
             </item>
             <item row="8" column="1">
-             <widget class="QCheckBox" name="ck_logImpressao">
+             <widget class="QCheckBox" name="ck_PrintLog">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QComboBox" name="cb_Transmition_Rate">
+             <widget class="QComboBox" name="cb_TransmitionRate">
               <property name="minimumSize">
                <size>
                 <width>120</width>
@@ -332,282 +337,180 @@
          <attribute name="title">
           <string>Printer Specs</string>
          </attribute>
-         <widget class="QLabel" name="lb_RateMoviment">
+         <widget class="QWidget" name="">
           <property name="geometry">
            <rect>
             <x>10</x>
             <y>17</y>
-            <width>168</width>
-            <height>16</height>
+            <width>321</width>
+            <height>275</height>
            </rect>
           </property>
-          <property name="text">
-           <string>Moviment Rate(mm/min):</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="tb_RateMoviment">
-          <property name="geometry">
-           <rect>
-            <x>202</x>
-            <y>17</y>
-            <width>80</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>25</height>
-           </size>
-          </property>
-         </widget>
-         <widget class="QLabel" name="lb_Feed_Z">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>48</y>
-            <width>145</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Feed Z Axis(mm/min):</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="tb_FeedZ">
-          <property name="geometry">
-           <rect>
-            <x>202</x>
-            <y>48</y>
-            <width>80</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>25</height>
-           </size>
-          </property>
-         </widget>
-         <widget class="QLabel" name="lb_ExtruderV">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>79</y>
-            <width>152</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Extruder Speed(mm/s):</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="tb_ExtrusorSpeed_mm">
-          <property name="geometry">
-           <rect>
-            <x>202</x>
-            <y>79</y>
-            <width>40</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>40</width>
-            <height>25</height>
-           </size>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="tb_ExtruderSpeed_Sec">
-          <property name="geometry">
-           <rect>
-            <x>248</x>
-            <y>79</y>
-            <width>40</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>40</width>
-            <height>25</height>
-           </size>
-          </property>
-         </widget>
-         <widget class="QLabel" name="lg_Velocity_R">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>110</y>
-            <width>164</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Retraction Speed(mm/s):</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="tb_SpeedRetraction">
-          <property name="geometry">
-           <rect>
-            <x>202</x>
-            <y>110</y>
-            <width>80</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>25</height>
-           </size>
-          </property>
-         </widget>
-         <widget class="QLabel" name="lb_Extruder_Temper">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>141</y>
-            <width>175</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Extruder Temperature(ºC):</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="tb_ExtruderTemperature">
-          <property name="geometry">
-           <rect>
-            <x>202</x>
-            <y>141</y>
-            <width>80</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>25</height>
-           </size>
-          </property>
-         </widget>
-         <widget class="QLabel" name="lb_TableTemperature">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>172</y>
-            <width>144</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Bed Temperature(ºC):</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="tb_Table_Temperature">
-          <property name="geometry">
-           <rect>
-            <x>202</x>
-            <y>172</y>
-            <width>80</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>25</height>
-           </size>
-          </property>
-         </widget>
-         <widget class="QLabel" name="lb_areax">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>203</y>
-            <width>175</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Print Area - Width(mm)(X):</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="tb_AreaPrint_X">
-          <property name="geometry">
-           <rect>
-            <x>202</x>
-            <y>203</y>
-            <width>80</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>25</height>
-           </size>
-          </property>
-         </widget>
-         <widget class="QLabel" name="lb_areay">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>234</y>
-            <width>179</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Print Area - Height(mm)(Y):</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="tb_AreaPrint_Y">
-          <property name="geometry">
-           <rect>
-            <x>202</x>
-            <y>234</y>
-            <width>80</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>25</height>
-           </size>
-          </property>
-         </widget>
-         <widget class="QLabel" name="lb_areaz">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>265</y>
-            <width>186</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Print Area - Vertical(mm)(Z):</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="tb_AreaPrint_Z">
-          <property name="geometry">
-           <rect>
-            <x>202</x>
-            <y>265</y>
-            <width>80</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>25</height>
-           </size>
-          </property>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0">
+            <widget class="QLabel" name="lb_RateMoviment">
+             <property name="text">
+              <string>Moviment Rate(mm/min):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" colspan="2">
+            <widget class="QLineEdit" name="tb_RateMoviment">
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="lb_Feed_Z">
+             <property name="text">
+              <string>Feed Z Axis(mm/min):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1" colspan="2">
+            <widget class="QLineEdit" name="tb_FeedZ">
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="lb_ExtruderV">
+             <property name="text">
+              <string>Extruder Speed(mm/s):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="tb_ExtruderSpeed_mm">
+             <property name="maximumSize">
+              <size>
+               <width>40</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLineEdit" name="tb_ExtruderSpeed_Sec">
+             <property name="maximumSize">
+              <size>
+               <width>40</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="lg_Velocity_R">
+             <property name="text">
+              <string>Retraction Speed(mm/s):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1" colspan="2">
+            <widget class="QLineEdit" name="tb_SpeedRetraction">
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="lb_Extruder_Temper">
+             <property name="text">
+              <string>Extruder Temperature(ºC):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1" colspan="2">
+            <widget class="QLineEdit" name="tb_ExtruderTemperature">
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="lb_TableTemperature">
+             <property name="text">
+              <string>Bed Temperature(ºC):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1" colspan="2">
+            <widget class="QLineEdit" name="tb_Table_Temperature">
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="lb_areax">
+             <property name="text">
+              <string>Print Area - Width(mm)(X):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1" colspan="2">
+            <widget class="QLineEdit" name="tb_AreaPrintX">
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="lb_areay">
+             <property name="text">
+              <string>Print Area - Height(mm)(Y):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1" colspan="2">
+            <widget class="QLineEdit" name="tb_AreaPrintY">
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QLabel" name="lb_areaz">
+             <property name="text">
+              <string>Print Area - Vertical(mm)(Z):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="1" colspan="2">
+            <widget class="QLineEdit" name="tb_AreaPrintZ">
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>25</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </widget>
         <widget class="QWidget" name="Extrusor_Config">
@@ -619,20 +522,20 @@
            <rect>
             <x>10</x>
             <y>10</y>
-            <width>463</width>
+            <width>331</width>
             <height>311</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
            <item row="0" column="0">
-            <widget class="QLabel" name="ln_extruder_number">
+            <widget class="QLabel" name="lb_extruder_number">
              <property name="text">
               <string>Number of Extruders:</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QComboBox" name="cb_Extruder_qnt">
+            <widget class="QComboBox" name="cb_ExtruderQnt">
              <property name="maximumSize">
               <size>
                <width>80</width>
@@ -649,7 +552,7 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QLineEdit" name="tb_extruderMaxTemp">
+            <widget class="QLineEdit" name="tb_ExtruderMaxTemp">
              <property name="maximumSize">
               <size>
                <width>80</width>
@@ -666,7 +569,7 @@
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QLineEdit" name="tb_bedMaxTemp">
+            <widget class="QLineEdit" name="tb_BedMaxTemp">
              <property name="maximumSize">
               <size>
                <width>80</width>
@@ -683,7 +586,7 @@
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QLineEdit" name="tb_extruder_vol_max">
+            <widget class="QLineEdit" name="tb_ExtruderMaxVol">
              <property name="maximumSize">
               <size>
                <width>80</width>
