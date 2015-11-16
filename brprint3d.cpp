@@ -34,7 +34,7 @@ BrPrint3D::~BrPrint3D()
 {
     delete ui;
 }
-BrPrint3D::init()
+void BrPrint3D::init()
 {
     vtkView = new vtkWidget();
     ui->vtkConteiner->addWidget(vtkView);

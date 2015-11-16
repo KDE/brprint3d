@@ -34,6 +34,7 @@
 #include "threadRotine.h"
 #include "arduinolistener.h"
 #include "vtkWidget.h"
+#include "PrinterSettings.h"
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
@@ -66,6 +67,8 @@ public:
 private:
     Ui::BrPrint3D *ui;
     vtkWidget *vtkView;
+
+    PrinterSettings psettings;
 
 };
 
