@@ -48,7 +48,7 @@ void ThreadRoutine::run()
         this->posZ = this->printer->getCurrentZPos();
         sleep(2);
         emit updateTemp(extrudersTemp, printer->getBedTemp());
-        emit updateExt(this->posX, this->posY, this->posZ);
+        emit updatePos(this->posX, this->posY, this->posZ);
         this->isPrintJobRunning = this->printer->isPrintJobRunning();
         if (this->isPrintJobRunning == false)
             emit finishedJob(true);
