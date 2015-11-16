@@ -22,9 +22,10 @@ public:
     void setConnectionPorts(QStringList list);
 
 private slots:
-    void on_cb_Extruder_qnt_currentTextChanged(const QString &arg1);
     void disableExtrudersQntCb(bool d);
     void locateArduino();
+
+    void on_cb_ExtruderQnt_currentTextChanged(const QString &arg1);
 
 private:
     Ui::PrinterSettingsWidget *ui;

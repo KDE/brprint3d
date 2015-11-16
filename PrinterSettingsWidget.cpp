@@ -185,14 +185,6 @@ void PrinterSettingsWidget::disableExtrudersQntCb(bool d)
     ui->cb_ExtruderQnt->setDisabled(d);
 }
 
-void PrinterSettingsWidget::on_cb_Extruder_qnt_currentTextChanged(const QString &arg1)
-{
-    extrudersInUse = arg1.toInt();
-    emit s_hideExtruders(extrudersInUse);
-    emit s_extrudersInUse(extrudersInUse);
-
-}
-
 void PrinterSettingsWidget::locateArduino()
 {   arduino_Listener->wait(2000);
     arduino_Listener->quit();
@@ -232,5 +224,13 @@ void PrinterSettingsWidget::locateArduino()
         msg.exec();
     }
 
+
+}
+
+void PrinterSettingsWidget::on_cb_ExtruderQnt_currentTextChanged(const QString &arg1)
+{
+    extrudersInUse = arg1.toInt();
+    emit s_hideExtruders(extrudersInUse);
+    emit s_extrudersInUse(extrudersInUse);
 
 }
