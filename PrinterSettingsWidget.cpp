@@ -230,7 +230,6 @@ void PrinterSettingsWidget::locateArduino()
 void PrinterSettingsWidget::on_cb_ExtruderQnt_currentTextChanged(const QString &arg1)
 {
     extrudersInUse = arg1.toInt();
-    emit s_hideExtruders(extrudersInUse);
     emit s_extrudersInUse(extrudersInUse);
 
 }

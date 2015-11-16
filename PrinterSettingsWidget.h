@@ -33,7 +33,6 @@ private:
     arduinoListener *arduino_Listener;
     bool garbage;
 signals:
-   void s_hideExtruders(int n);
    void s_extrudersInUse(int n);
 };
 
