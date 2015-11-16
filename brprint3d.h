@@ -32,7 +32,6 @@
 #include <Windows/loading.h>
 #include "KI/Repetier.h"
 #include "threadRotine.h"
-#include "arduinolistener.h"
 #include "vtkWidget.h"
 #include "PrinterSettings.h"
 #include <stdlib.h>
@@ -67,6 +66,7 @@ public:
 private:
     Ui::BrPrint3D *ui;
     vtkWidget *vtkView;
+
 
     PrinterSettings psettings;
 
