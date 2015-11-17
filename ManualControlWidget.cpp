@@ -6,9 +6,9 @@ ManualControlWidget::ManualControlWidget(QWidget *parent) :
     ui(new Ui::ManualControlWidget)
 {
     ui->setupUi(this);
-    connect(this,SIGNAL(_destructPrinterObject()),ui->extruderControlWidget,SLOT(destructPrinterObject()));
-    connect(ui->bt_Bed,SIGNAL(clicked(bool)),this,SLOT(startBed(bool)));
-    connect(ui->bt_extruder0,SIGNAL(clicked(bool)),this,SLOT(startExtruders(bool)));
+    connect(this,&ManualControlWidget::_destructPrinterObject,ui->extruderControlWidget,&ExtruderControlWidget::destructPrinterObject);
+    connect(ui->bt_Bed,&QPushButton::clicked,this,&ManualControlWidget::startBed);
+    connect(ui->bt_extruder0,&QPushButton::clicked,this,&ManualControlWidget::startExtruders);
     connect(ui->ds_bedTemp,&QDoubleSpinBox::editingFinished,this,&ManualControlWidget::setNewBedTemp);
     connect(ui->ds_extruderTemp,&QDoubleSpinBox::editingFinished,this,&ManualControlWidget::setNewExtruderTemp);
 
