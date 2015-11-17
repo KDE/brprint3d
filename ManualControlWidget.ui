@@ -363,25 +363,10 @@
               <height>55</height>
              </size>
             </property>
-            <widget class="QLineEdit" name="tb_speedFeedFilament">
-             <property name="geometry">
-              <rect>
-               <x>355</x>
-               <y>15</y>
-               <width>40</width>
-               <height>20</height>
-              </rect>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>9</pointsize>
-              </font>
-             </property>
-            </widget>
             <widget class="QSlider" name="sl_speedFeedFilament">
              <property name="geometry">
               <rect>
-               <x>55</x>
+               <x>45</x>
                <y>15</y>
                <width>290</width>
                <height>20</height>
@@ -423,7 +408,7 @@ QSlider::handle:horizontal {
             <widget class="QLabel" name="label_24">
              <property name="geometry">
               <rect>
-               <x>5</x>
+               <x>0</x>
                <y>10</y>
                <width>40</width>
                <height>40</height>
@@ -468,6 +453,16 @@ QSlider::handle:horizontal {
               </item>
              </layout>
             </widget>
+            <widget class="QDoubleSpinBox" name="ds_speedFilament">
+             <property name="geometry">
+              <rect>
+               <x>340</x>
+               <y>15</y>
+               <width>65</width>
+               <height>20</height>
+              </rect>
+             </property>
+            </widget>
            </widget>
           </item>
           <item>
@@ -484,25 +479,10 @@ QSlider::handle:horizontal {
               <height>50</height>
              </size>
             </property>
-            <widget class="QLineEdit" name="tb_filamentFlow">
-             <property name="geometry">
-              <rect>
-               <x>355</x>
-               <y>10</y>
-               <width>40</width>
-               <height>20</height>
-              </rect>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>9</pointsize>
-              </font>
-             </property>
-            </widget>
             <widget class="QSlider" name="sl_filamentFlow">
              <property name="geometry">
               <rect>
-               <x>55</x>
+               <x>45</x>
                <y>10</y>
                <width>290</width>
                <height>20</height>
@@ -541,7 +521,7 @@ QSlider::handle:horizontal {
             <widget class="QLabel" name="label_26">
              <property name="geometry">
               <rect>
-               <x>5</x>
+               <x>0</x>
                <y>0</y>
                <width>40</width>
                <height>40</height>
@@ -586,6 +566,16 @@ QSlider::handle:horizontal {
               </item>
              </layout>
             </widget>
+            <widget class="QDoubleSpinBox" name="ds_filamentFlow">
+             <property name="geometry">
+              <rect>
+               <x>340</x>
+               <y>10</y>
+               <width>65</width>
+               <height>20</height>
+              </rect>
+             </property>
+            </widget>
            </widget>
           </item>
           <item>
@@ -605,25 +595,10 @@ QSlider::handle:horizontal {
             <property name="layoutDirection">
              <enum>Qt::LeftToRight</enum>
             </property>
-            <widget class="QLineEdit" name="tb_coolerFan">
-             <property name="geometry">
-              <rect>
-               <x>355</x>
-               <y>10</y>
-               <width>40</width>
-               <height>20</height>
-              </rect>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>9</pointsize>
-              </font>
-             </property>
-            </widget>
             <widget class="QSlider" name="sl_coolerFan">
              <property name="geometry">
               <rect>
-               <x>55</x>
+               <x>45</x>
                <y>10</y>
                <width>290</width>
                <height>20</height>
@@ -662,7 +637,7 @@ QSlider::handle:horizontal {
             <widget class="QLabel" name="label_28">
              <property name="geometry">
               <rect>
-               <x>5</x>
+               <x>0</x>
                <y>0</y>
                <width>40</width>
                <height>40</height>
@@ -707,6 +682,16 @@ QSlider::handle:horizontal {
               </item>
              </layout>
             </widget>
+            <widget class="QDoubleSpinBox" name="ds_coolerFan">
+             <property name="geometry">
+              <rect>
+               <x>340</x>
+               <y>10</y>
+               <width>65</width>
+               <height>20</height>
+              </rect>
+             </property>
+            </widget>
            </widget>
           </item>
           <item>
@@ -723,25 +708,10 @@ QSlider::handle:horizontal {
               <height>50</height>
              </size>
             </property>
-            <widget class="QLineEdit" name="tb_BedTempMC">
-             <property name="geometry">
-              <rect>
-               <x>355</x>
-               <y>15</y>
-               <width>40</width>
-               <height>20</height>
-              </rect>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>9</pointsize>
-              </font>
-             </property>
-            </widget>
             <widget class="QPushButton" name="bt_Bed">
              <property name="geometry">
               <rect>
-               <x>5</x>
+               <x>0</x>
                <y>10</y>
                <width>45</width>
                <height>40</height>
@@ -776,7 +746,7 @@ QSlider::handle:horizontal {
              </property>
              <property name="geometry">
               <rect>
-               <x>60</x>
+               <x>45</x>
                <y>15</y>
                <width>290</width>
                <height>20</height>
@@ -873,6 +843,16 @@ QSlider::handle:horizontal {
               </item>
              </layout>
             </widget>
+            <widget class="QDoubleSpinBox" name="ds_bedTemp">
+             <property name="geometry">
+              <rect>
+               <x>340</x>
+               <y>15</y>
+               <width>65</width>
+               <height>20</height>
+              </rect>
+             </property>
+            </widget>
            </widget>
           </item>
           <item>
@@ -889,28 +869,13 @@ QSlider::handle:horizontal {
               <height>50</height>
              </size>
             </property>
-            <widget class="QLineEdit" name="tb_ExtruderTempMC">
-             <property name="geometry">
-              <rect>
-               <x>355</x>
-               <y>15</y>
-               <width>40</width>
-               <height>20</height>
-              </rect>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>9</pointsize>
-              </font>
-             </property>
-            </widget>
             <widget class="QSlider" name="sl_extruder">
              <property name="enabled">
               <bool>false</bool>
              </property>
              <property name="geometry">
               <rect>
-               <x>62</x>
+               <x>50</x>
                <y>20</y>
                <width>290</width>
                <height>20</height>
@@ -974,7 +939,7 @@ QSlider::handle:horizontal {
             <widget class="QPushButton" name="bt_extruder0">
              <property name="geometry">
               <rect>
-               <x>5</x>
+               <x>0</x>
                <y>10</y>
                <width>45</width>
                <height>40</height>
@@ -1025,6 +990,16 @@ QSlider::handle:horizontal {
                </widget>
               </item>
              </layout>
+            </widget>
+            <widget class="QDoubleSpinBox" name="ds_extruderTemp">
+             <property name="geometry">
+              <rect>
+               <x>340</x>
+               <y>15</y>
+               <width>65</width>
+               <height>20</height>
+              </rect>
+             </property>
             </widget>
            </widget>
           </item>
