@@ -113,3 +113,6 @@ void ExtruderControlWidget::setPosZ()
 
 }
 
+void ExtruderControlWidget::destructPrinterObject(){
+    printerObject->~Repetier;
+}
