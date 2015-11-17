@@ -47,6 +47,7 @@ set(Br-Print_SRCS
         PrinterSettings.cpp
         ManualControlWidget.cpp
         ExtruderControlWidget.cpp
+        BigButton.cpp
 )
 
 #qt5_add_translation(TRANSLATIONS EN_english.ts PT_portuguese.ts)
