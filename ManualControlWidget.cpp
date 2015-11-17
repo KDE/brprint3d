@@ -9,6 +9,9 @@ ManualControlWidget::ManualControlWidget(QWidget *parent) :
     connect(this,SIGNAL(_destructPrinterObject()),ui->extruderControlWidget,SLOT(destructPrinterObject()));
     connect(ui->bt_Bed,SIGNAL(clicked(bool)),this,SLOT(startBed(bool)));
     connect(ui->bt_extruder0,SIGNAL(clicked(bool)),this,SLOT(startExtruders(bool)));
+    connect(ui->ds_bedTemp,&QDoubleSpinBox::editingFinished,this,&ManualControlWidget::setNewBedTemp);
+    connect(ui->ds_extruderTemp,&QDoubleSpinBox::editingFinished,this,&ManualControlWidget::setNewExtruderTemp);
+
 }
 
 ManualControlWidget::~ManualControlWidget()
@@ -108,7 +111,7 @@ void ManualControlWidget::destructPrinterObject()
 }
 void ManualControlWidget::startBed(bool checked){
     if(checked==true)
-    {       float tmp = ui->tb_BedTempMC->text().toFloat();
+    {       float tmp = ui->ds_bedTemp->value();
             this->printerObject->setBedTemp(tmp);
     }
     else
@@ -121,7 +124,7 @@ void ManualControlWidget::startExtruders(bool checked){
     if(checked)
     {
         for(int i=1;i<=extrudersInUse;i++)
-           this->printerObject->setExtrTemp(i-1,ui->tb_ExtruderTempMC->text().toFloat());
+           this->printerObject->setExtrTemp(i-1,ui->ds_extruderTemp->value());
 
     }
     else
@@ -216,61 +219,22 @@ void ManualControlWidget::disableExtrudersButtons(bool checked)
     }
 
 }
-
-/*//This action start the job of slicing
-void ManualControlWidget::on_bt_startSlicer_clicked()
-{
-
+void ManualControlWidget::setNewBedTemp(){
+    if(playStatus && ui->bt_Bed->isChecked())
+        printerObject->setBedTemp(ui->ds_bedTemp->value());
 }
-//This action kill the job of slicing
-void ManualControlWidget::on_bt_killSlicer_clicked()
-{
-
+void ManualControlWidget::setPlayStatus(bool b){
+    playStatus = b;
 }
-//This action search for Slic3er manually, if the slic3er isnt installed, the user could user the bin
-void ManualControlWidget::on_bt_addSlicer_clicked()
-{
-    QString filename=QFileDialog::getOpenFileName(this, "Open File",QDir::homePath(),"slic3r");
-    ui->cb_slicer->setItemText(0,"Slic3r");
-    settings.setValue("slic3r",filename);
-    settings.sync();
-    ui->bt_addSlicer->setEnabled(false);
+void ManualControlWidget::setNewExtruderTemp(){
+    if(playStatus && ui->bt_extruder0->isChecked())
+    {
+        for(int i=0;i<extrudersInUse;i++)
+            printerObject->setExtrTemp(i,ui->ds_extruderTemp->value());
+    }
 }
 
 
-/*Sliders Values Set
-//This action set the value of velocity of feed of filament to slider and printer
-void ManualControlWidget::on_tb_speedFeedFilament_textChanged(const QString &arg1)
-{
-    ui->sl_speedFeedFilament->setValue(arg1.toInt());
-}
-//This action set the value of filament Flow to slider and printer
-void ManualControlWidget::on_tb_filamentFlow_textChanged(const QString &arg1)
-{
-    ui->sl_speedFeedFilament->setValue(arg1.toInt());
-}
-//This action set the value of cooler fan to slider and printer
-void ManualControlWidget::on_tb_coolerfan_textChanged(const QString &arg1)
-{
-    ui->sl_coolerFan->setValue(arg1.toInt());
-}
-
-//This Action update the temperature of the bed if the print job is on
-void ManualControlWidget::on_tb_BedTempMC_textEdited(const QString &arg1)
-{   if(playStatus==true && ui->bt_Bed->isChecked())
-        this->printerObject->setBedTemp(arg1.toInt());
-}
-//This Action update the temperature of the extruders if the print job is on
-void ManualControlWidget::on_tb_ExtruderTempMC_textEdited(const QString &arg1)
-{   if(playStatus==true && ui->bt_extruder0->isChecked() )
-    for(int i=1;i<=extrudersInUse;i++)
-        this->printerObject->setExtrTemp(i-1,arg1.toInt());
-}
-
-void ManualControlWidget::getPrinterObject(Repetier *printerObject)
-{
-    this->printerObject = printerObject;
-}*/
 void ManualControlWidget::setInitialMarks()
 {
 }
@@ -286,7 +250,7 @@ void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
     //Update Color Status
     if(ui->bt_Bed->isChecked())
     {
-        if(ui->sl_bed->value()>=ui->tb_BedTempMC->text().toInt())
+        if(ui->sl_bed->value()>=ui->ds_bedTemp->value())
             ui->bt_Bed->setStyleSheet("background-color:red;");
         else
             ui->bt_Bed->setStyleSheet("background-color:yellow;");
@@ -299,7 +263,7 @@ void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
         ui->lb_extruderTemp1->setText(QVariant(tempExtruders[0]).toString());//Set label on Ext 1
         //Change color status
         if(ui->bt_extruder0->isChecked())
-        {   if(ui->lb_extruderTemp1->text().toFloat()>=ui->tb_ExtruderTempMC->text().toInt())
+        {   if(ui->lb_extruderTemp1->text().toFloat()>=ui->ds_extruderTemp->value())
             {    ui->bt_extruder1->setStyleSheet("background-color:red;");
                  ui->bt_extruder0->setStyleSheet("background-color:red;");
             }
@@ -325,7 +289,7 @@ void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
                     }
                     //Refresh Color Status
                     if(ui->bt_extruder0->isChecked())
-                    {   if(ui->lb_extruderTemp1->text().toFloat()>=ui->tb_ExtruderTempMC->text().toInt() && ui->bt_extruder0->isChecked())
+                    {   if(ui->lb_extruderTemp1->text().toFloat()>=ui->ds_extruderTemp->value() && ui->bt_extruder0->isChecked())
                             ui->bt_extruder1->setStyleSheet("background-color:red;");
                         else
                             ui->bt_extruder1->setStyleSheet("background-color:yellow;");
@@ -340,7 +304,7 @@ void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
                     }
                    //Refresh Color Status
                    if(ui->bt_extruder0->isChecked())
-                   {    if(ui->lb_extruderTemp2->text().toFloat()>=ui->tb_ExtruderTempMC->text().toInt() && ui->bt_extruder0->isChecked())//Refresh Color Status
+                   {    if(ui->lb_extruderTemp2->text().toFloat()>=ui->ds_extruderTemp->value() && ui->bt_extruder0->isChecked())//Refresh Color Status
                             ui->bt_extruder2->setStyleSheet("background-color:red;");
                         else
                             ui->bt_extruder2->setStyleSheet("background-color:yellow;");
@@ -356,7 +320,7 @@ void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
                     //Refresh Color Status
                    if(ui->bt_extruder0->isChecked())
                    {
-                       if(ui->lb_extruderTemp3->text().toFloat()>=ui->tb_ExtruderTempMC->text().toInt() && ui->bt_extruder0->isChecked())//Refresh Color Status
+                       if(ui->lb_extruderTemp3->text().toFloat()>=ui->ds_extruderTemp->value() && ui->bt_extruder0->isChecked())//Refresh Color Status
                             ui->bt_extruder3->setStyleSheet("background-color:red;");
                         else
                             ui->bt_extruder3->setStyleSheet("background-color:yellow;");
@@ -371,7 +335,7 @@ void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
                    //Change Color Status
                    if(ui->bt_extruder0->isChecked())
                    {
-                        if(ui->lb_extruderTemp4->text().toFloat()>=ui->tb_ExtruderTempMC->text().toInt() && ui->bt_extruder0->isChecked())//Refresh Color Status
+                        if(ui->lb_extruderTemp4->text().toFloat()>=ui->ds_extruderTemp->value() && ui->bt_extruder0->isChecked())//Refresh Color Status
                             ui->bt_extruder4->setStyleSheet("background-color:red;");
                         else
                             ui->bt_extruder4->setStyleSheet("background-color:yellow;");
