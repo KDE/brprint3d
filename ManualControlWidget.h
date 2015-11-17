@@ -49,9 +49,13 @@ private:
 signals:
     void checkConnectButton(bool b);
     void enablePlayButton(bool b);
+    void _destructPrinterObject();
 private slots:
     void updateTemp(double *tempExtruders,double tempBed);
     void setExtrudersInUse(int e);
+    void startBed(bool checked);
+    void startExtruders(bool checked);
+    void disableExtrudersButtons(bool checked);
    
 };
 

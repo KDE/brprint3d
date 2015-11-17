@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>440</width>
-    <height>640</height>
+    <height>627</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>440</width>
-    <height>640</height>
+    <height>550</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -322,30 +322,32 @@
       <attribute name="title">
        <string>Manual Control</string>
       </attribute>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>4</x>
          <y>5</y>
-         <width>411</width>
-         <height>576</height>
+         <width>414</width>
+         <height>571</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <property name="spacing">
-         <number>1</number>
+         <number>0</number>
         </property>
         <item>
-         <layout class="QHBoxLayout" name="ly_ExtruderConteiner">
-          <property name="sizeConstraint">
-           <enum>QLayout::SetMinimumSize</enum>
-          </property>
-         </layout>
+         <widget class="ExtruderControlWidget" name="extruderControlWidget" native="true">
+          <layout class="QHBoxLayout" name="ly_ExtruderConteiner">
+           <property name="sizeConstraint">
+            <enum>QLayout::SetMinimumSize</enum>
+           </property>
+          </layout>
+         </widget>
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <property name="spacing">
-           <number>1</number>
+           <number>0</number>
           </property>
           <item>
            <widget class="QWidget" name="wg_SpeedFilament" native="true">
@@ -431,10 +433,10 @@ QSlider::handle:horizontal {
               <string>Rate of Feed</string>
              </property>
              <property name="text">
-              <string>A</string>
+              <string/>
              </property>
              <property name="pixmap">
-              <pixmap>:/Icons/Icons/bt-velocidade_impressao</pixmap>
+              <pixmap resource="images.qrc">:/Icons/Icons/bt-velocidade_impressao</pixmap>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -549,10 +551,10 @@ QSlider::handle:horizontal {
               <string>Flow Rate</string>
              </property>
              <property name="text">
-              <string>B</string>
+              <string/>
              </property>
              <property name="pixmap">
-              <pixmap>:/Icons/Icons/bt-vazao_filamento</pixmap>
+              <pixmap resource="images.qrc">:/Icons/Icons/bt-vazao_filamento</pixmap>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -670,10 +672,10 @@ QSlider::handle:horizontal {
               <string>Cooler Fan</string>
              </property>
              <property name="text">
-              <string>C</string>
+              <string/>
              </property>
              <property name="pixmap">
-              <pixmap>:/Icons/Icons/bt-cooler_fan</pixmap>
+              <pixmap resource="images.qrc">:/Icons/Icons/bt-cooler_fan</pixmap>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -755,7 +757,7 @@ QSlider::handle:horizontal {
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="images.qrc">
                <normaloff>:/Icons/Icons/bt-mesa_aquecida</normaloff>:/Icons/Icons/bt-mesa_aquecida</iconset>
              </property>
              <property name="iconSize">
@@ -969,7 +971,7 @@ QSlider::handle:horizontal {
               <enum>QSlider::NoTicks</enum>
              </property>
             </widget>
-            <widget class="QPushButton" name="bt_extruderTemp0">
+            <widget class="QPushButton" name="bt_extruder0">
              <property name="geometry">
               <rect>
                <x>5</x>
@@ -985,7 +987,7 @@ QSlider::handle:horizontal {
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="images.qrc">
                <normaloff>:/Icons/Icons/bt-hotend</normaloff>:/Icons/Icons/bt-hotend</iconset>
              </property>
              <property name="iconSize">
@@ -1166,6 +1168,14 @@ QSlider::handle:horizontal {
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ExtruderControlWidget</class>
+   <extends>QWidget</extends>
+   <header>ExtruderControlWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="images.qrc"/>
   <include location="Dropbox/Br-Print/Pandora/images.qrc"/>
