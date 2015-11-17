@@ -28,6 +28,13 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::BrPrint3D)
 {
     ui->setupUi(this);
+    BigButton *bt_import = new BigButton(0,"Import GCode");
+    BigButton *bt_open = new BigButton(0,"Open File");
+    BigButton *bt_connect = new BigButton(0,"Connect");
+    BigButton *bt_play = new BigButton(0,"Play");
+    BigButton *bt_pause = new BigButton(0,"Pause");
+    BigButton *bt_stop = new BigButton(0,"Stop");
+    BigButton *bt_stopOnEmergency = new BigButton(0,"Emergency Stop");
 }
 
 BrPrint3D::~BrPrint3D()

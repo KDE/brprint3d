@@ -34,6 +34,7 @@
 #include "threadRotine.h"
 #include "vtkWidget.h"
 #include "PrinterSettings.h"
+#include "BigButton.h"
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
