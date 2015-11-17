@@ -22,6 +22,9 @@
     <height>210</height>
    </size>
   </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0" colspan="3">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -33,26 +36,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="cb_valuePosXY_2">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Descolamento referente aos eixos X e Y&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <item>
-        <property name="text">
-         <string>0.1</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>1</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>10</string>
-        </property>
-       </item>
-      </widget>
+      <widget class="QDoubleSpinBox" name="sb_displacement"/>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_14">
@@ -126,11 +110,11 @@
    <item row="1" column="0">
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
-      <widget class="QPushButton" name="bt_home_X">
+      <widget class="QPushButton" name="bt_homeX">
        <property name="minimumSize">
         <size>
-         <width>30</width>
-         <height>30</height>
+         <width>40</width>
+         <height>40</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -160,12 +144,41 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="bt_home_Z">
+     <item row="0" column="1">
+      <widget class="QPushButton" name="bt_upY">
        <property name="minimumSize">
         <size>
          <width>40</width>
-         <height>45</height>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Up Y</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>:/Icons/Icons/bt-arrowup</normaloff>:/Icons/Icons/bt-arrowup</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="bt_homeZ">
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -195,12 +208,71 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0" rowspan="2">
-      <widget class="QPushButton" name="bt_home_Y">
+     <item row="1" column="0">
+      <widget class="QPushButton" name="bt_leftX">
        <property name="minimumSize">
         <size>
          <width>40</width>
-         <height>45</height>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Left X</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>:/Icons/Icons/bt-arrowleft</normaloff>:/Icons/Icons/bt-arrowleft</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>A</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QPushButton" name="bt_rightX">
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Right X</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>:/Icons/Icons/bt-arrowright</normaloff>:/Icons/Icons/bt-arrowright</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QPushButton" name="bt_homeY">
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -230,12 +302,38 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="2" rowspan="2">
-      <widget class="QPushButton" name="bt_home_XYZ">
+     <item row="2" column="1">
+      <widget class="QPushButton" name="bt_downY">
        <property name="minimumSize">
         <size>
          <width>40</width>
-         <height>45</height>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Down Y</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>:/Icons/Icons/bt-arrowdown</normaloff>:/Icons/Icons/bt-arrowdown</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QPushButton" name="bt_homeXYZ">
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -265,138 +363,12 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QPushButton" name="bt_left_X">
-       <property name="minimumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="toolTip">
-        <string>Left X</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>:/Icons/Icons/bt-arrowleft</normaloff>:/Icons/Icons/bt-arrowleft</iconset>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="bt_up_Y">
-       <property name="minimumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="toolTip">
-        <string>Up Y</string>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>:/Icons/Icons/bt-arrowup</normaloff>:/Icons/Icons/bt-arrowup</iconset>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QPushButton" name="bt_down_Y">
-       <property name="minimumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="toolTip">
-        <string>Down Y</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>:/Icons/Icons/bt-arrowdown</normaloff>:/Icons/Icons/bt-arrowdown</iconset>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QPushButton" name="bt_right_X">
-       <property name="minimumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="toolTip">
-        <string>Right X</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>:/Icons/Icons/bt-arrowright</normaloff>:/Icons/Icons/bt-arrowright</iconset>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1" rowspan="2">
-      <widget class="QLabel" name="lb_eixoXY">
-       <property name="minimumSize">
-        <size>
-         <width>50</width>
-         <height>50</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>:/Icons/Icons/bt-xy</pixmap>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
    <item row="1" column="1">
     <layout class="QGridLayout" name="gridLayout_4">
      <item row="0" column="0">
-      <widget class="QPushButton" name="bt_up_Z">
+      <widget class="QPushButton" name="bt_upZ">
        <property name="minimumSize">
         <size>
          <width>40</width>
@@ -425,7 +397,7 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="tb_eixoZ">
+      <widget class="QLabel" name="lb_axisZ">
        <property name="minimumSize">
         <size>
          <width>45</width>
@@ -450,7 +422,7 @@
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QPushButton" name="bt_down_Z">
+      <widget class="QPushButton" name="bt_downZ">
        <property name="minimumSize">
         <size>
          <width>40</width>
@@ -479,31 +451,8 @@
    </item>
    <item row="1" column="2">
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="1">
-      <widget class="QPushButton" name="bt_filamentoRetract">
-       <property name="minimumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>:/Icons/Icons/bt-arrowup</normaloff>:/Icons/Icons/bt-arrowup</iconset>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="0">
-      <widget class="QPushButton" name="bt_filamentoOneSpeed">
+      <widget class="QPushButton" name="bt_filOneSpeed">
        <property name="minimumSize">
         <size>
          <width>40</width>
@@ -525,27 +474,8 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="lb_Extruder">
-       <property name="minimumSize">
-        <size>
-         <width>50</width>
-         <height>50</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>:/Icons/Icons/bt-extruder</pixmap>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="2">
-      <widget class="QPushButton" name="bt_filamentoTwoSpeed">
+      <widget class="QPushButton" name="bt_filTwoSpeed">
        <property name="minimumSize">
         <size>
          <width>40</width>
@@ -564,6 +494,48 @@
        <property name="icon">
         <iconset>
          <normaloff>:/Icons/Icons/bt-arrowright</normaloff>:/Icons/Icons/bt-arrowright</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="bt_filRetract">
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>:/Icons/Icons/bt-arrowup</normaloff>:/Icons/Icons/bt-arrowup</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="lb_Extruder">
+       <property name="minimumSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>:/Icons/Icons/bt-extruder</pixmap>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
