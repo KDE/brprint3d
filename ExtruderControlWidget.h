@@ -49,7 +49,9 @@ public:
         void setPosX();
         void setPosY();
         void setPosZ();
-        void destructPrinterObject();
+public slots:
+         void destructPrinterObject();
+
 };
 
 #endif // EXTRUDERCONTROLWIDGET_H
