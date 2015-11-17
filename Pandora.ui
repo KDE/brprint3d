@@ -49,311 +49,81 @@
    <enum>Qt::ToolButtonTextUnderIcon</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="bt_hide">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>100</y>
-      <width>150</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>150</width>
-      <height>30</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>Configuration - Show</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>980</width>
-      <height>92</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="bt_import">
-       <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="images.qrc">
-         <normaloff>:/Icons/Icons/bt-import</normaloff>:/Icons/Icons/bt-import</iconset>
-       </property>
-       <property name="iconSize">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="ly_ConteinerLeft"/>
+    </item>
+    <item row="0" column="2">
+     <layout class="QHBoxLayout" name="ly_ConteinerRight"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="bt_hide">
+      <property name="maximumSize">
+       <size>
+        <width>150</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Configuration - Show</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="3">
+     <widget class="QSplitter" name="splitter">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="PrinterSettingsWidget" name="_PrinterSettings" native="true">
+       <property name="minimumSize">
         <size>
-         <width>70</width>
-         <height>70</height>
+         <width>390</width>
+         <height>550</height>
         </size>
        </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-       <property name="default">
-        <bool>false</bool>
-       </property>
-       <property name="flat">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="bt_open">
-       <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="images.qrc">
-         <normaloff>:/Icons/Icons/bt-file</normaloff>:/Icons/Icons/bt-file</iconset>
-       </property>
-       <property name="iconSize">
+       <property name="maximumSize">
         <size>
-         <width>70</width>
-         <height>70</height>
+         <width>390</width>
+         <height>550</height>
         </size>
        </property>
       </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="bt_connect">
-       <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="images.qrc">
-         <normaloff>:/Icons/Icons/bt-connect</normaloff>
-         <normalon>:/Icons/Icons/bt-connect-onclick</normalon>:/Icons/Icons/bt-connect</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="checkable">
-        <bool>true</bool>
-       </property>
+      <widget class="QWidget" name="horizontalLayoutWidget">
+       <layout class="QHBoxLayout" name="_vtkConteiner"/>
       </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
+      <widget class="ManualControlWidget" name="_ManualControl" native="true">
+       <property name="minimumSize">
         <size>
-         <width>40</width>
-         <height>20</height>
+         <width>410</width>
+         <height>550</height>
         </size>
        </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_7">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="images.qrc">:/Icons/Icons/brlogo.png</pixmap>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
+       <property name="maximumSize">
         <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="bt_play">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="images.qrc">
-         <normaloff>:/Icons/Icons/bt-play</normaloff>
-         <disabledon>:/Icons/Icons/bt-play-onclick</disabledon>:/Icons/Icons/bt-play</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="bt_stop">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="images.qrc">
-         <normaloff>:/Icons/Icons/bt-stop</normaloff>:/Icons/Icons/bt-stop</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="bt_pause">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="images.qrc">
-         <normaloff>:/Icons/Icons/bt-pause</normaloff>
-         <normalon>:/Icons/Icons/bt-pause-onclick</normalon>:/Icons/Icons/bt-pause</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
-        </size>
-       </property>
-       <property name="checkable">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="bt_emergency">
-       <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="images.qrc">
-         <normaloff>:/Icons/Icons/bt-emergency.png</normaloff>:/Icons/Icons/bt-emergency.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>70</width>
-         <height>70</height>
+         <width>410</width>
+         <height>550</height>
         </size>
        </property>
       </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QSplitter" name="splitter">
-    <property name="geometry">
-     <rect>
-      <x>5</x>
-      <y>145</y>
-      <width>1016</width>
-      <height>550</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-    <widget class="PrinterSettingsWidget" name="PrinterSettings" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>390</width>
-       <height>550</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>390</width>
-       <height>550</height>
-      </size>
-     </property>
-    </widget>
-    <widget class="QWidget" name="horizontalLayoutWidget">
-     <layout class="QHBoxLayout" name="vtkConteiner"/>
-    </widget>
-    <widget class="QWidget" name="ManualControl" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>410</width>
-       <height>550</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>410</width>
-       <height>550</height>
-      </size>
-     </property>
-    </widget>
-   </widget>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Preferred</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -559,6 +329,12 @@
    <class>PrinterSettingsWidget</class>
    <extends>QWidget</extends>
    <header>PrinterSettingsWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ManualControlWidget</class>
+   <extends>QWidget</extends>
+   <header>ManualControlWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
