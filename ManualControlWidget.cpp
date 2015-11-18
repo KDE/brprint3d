@@ -458,19 +458,42 @@ void ManualControlWidget::setGcodePreview(QString t){
     ui->GCodePreview->setPlainText(t);
 }
 void ManualControlWidget::startPrintJob(QString filePath){
+   QMessageBox msg;
    stopThreadRoutine();
    try {    std::string path = filePath.toUtf8().constData();
             printerObject->openFile(path,printLogStatus);
-
-          }
+       }
    catch (std::string exc){
-           QMessageBox msg;
+
            msg.setIcon(QMessageBox::Critical);
            QString str = QString::fromUtf8(exc.c_str());
            msg.setText(str);
            msg.exec();
           }
+   printerObject->startPrintJob(true);
+   msg.setText(tr("Print job started!"));
+   msg.exec();
+   startThreadRoutine();
+   ui->extruderControlWidget->setDisabled(true);
+   connect(temp, SIGNAL(finishedJob(bool)), this, SLOT(isPrintJobRunning(bool)));
+
 }
 void ManualControlWidget::setPrintLogStatus(bool b){
     printLogStatus = b;
+}
+void ManualControlWidget::isPrintJobRunning(bool b)
+{
+    //This function return if the print job is finalized
+    QMessageBox msg;
+    if (b == true) {
+        disconnect(temp, SIGNAL(finishedJob(bool)), this, SLOT(isPrintJobRunning(bool)));
+        msg.setText("Print job finish or paused!");
+        msg.setIcon(QMessageBox::Information);
+        msg.exec();
+        emit disableCbExtruderQnt(true);
+        /*if (ui->bt_pause->isChecked() == false) {
+            enableAxisButtons();
+            ui->cb_Extruder_qnt->setEnabled(true);
+        }*/
+    }
 }
