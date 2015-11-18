@@ -50,6 +50,8 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     ui->_vtkConteiner->addWidget(vtkView);
 
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::s_extrudersInUse,ui->_ManualControl,&ManualControlWidget::setExtrudersInUse);
+    connect(bt_import,&BigButton::clicked,this,&BrPrint3D::openFile);
+    connect(bt_open,&BigButton::clicked,this,&BrPrint3D::openFile);
 
 
 
