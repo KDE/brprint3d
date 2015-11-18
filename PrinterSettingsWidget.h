@@ -21,10 +21,11 @@ public:
     PrinterSettings getCurrentSettings();
     void setConnectionPorts(QStringList list);
 
+
 private slots:
     void disableExtrudersQntCb(bool d);
     void locateArduino();
-
+    void printLogStatusChanged();
     void on_cb_ExtruderQnt_currentTextChanged(const QString &arg1);
 
 private:
@@ -34,6 +35,7 @@ private:
     bool garbage;
 signals:
    void s_extrudersInUse(int n);
+   void s_printLogStatus(bool b);
 };
 
 #endif // PRINTERSETTINGSWIDGET_H

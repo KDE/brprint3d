@@ -6,6 +6,7 @@ PrinterSettingsWidget::PrinterSettingsWidget(QWidget *parent) :
     ui(new Ui::PrinterSettingsWidget)
 {
     ui->setupUi(this);
+    connect(ui->ck_PrintLog,&QCheckBox::toggled,this,&PrinterSettingsWidget::printLogStatusChanged);
 }
 
 PrinterSettingsWidget::~PrinterSettingsWidget()
@@ -232,4 +233,7 @@ void PrinterSettingsWidget::on_cb_ExtruderQnt_currentTextChanged(const QString &
     extrudersInUse = arg1.toInt();
     emit s_extrudersInUse(extrudersInUse);
 
+}
+void PrinterSettingsWidget::printLogStatusChanged(){
+    emit s_printLogStatus(ui->ck_PrintLog->isChecked());
 }
