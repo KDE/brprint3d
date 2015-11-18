@@ -52,7 +52,7 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::s_extrudersInUse,ui->_ManualControl,&ManualControlWidget::setExtrudersInUse);
     connect(bt_import,&BigButton::clicked,this,&BrPrint3D::openFile);
     connect(bt_open,&BigButton::clicked,this,&BrPrint3D::openFile);
-
+    connect(bt_connect,&BigButton::clicked,this,&BrPrint3D::connectPrinter);
 
 
 
@@ -92,5 +92,10 @@ void BrPrint3D::openFile()
         else if(QFileInfo(filePath).completeSuffix()=="STL" ||QFileInfo(filePath).completeSuffix()=="stl"){
                  vtkView->renderSTL(filePath);
              }
+}
+
+void BrPrint3D::connectPrinter(){
+    psettings = ui->_PrinterSettings->getCurrentSettings();
+    ui->_ManualControl->constructPrinterObject(psettings);
 }
 
