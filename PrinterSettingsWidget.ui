@@ -82,7 +82,7 @@
       <item>
        <widget class="QTabWidget" name="Config">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="Connection_Config">
          <attribute name="title">
@@ -522,8 +522,8 @@
            <rect>
             <x>10</x>
             <y>10</y>
-            <width>301</width>
-            <height>311</height>
+            <width>315</width>
+            <height>326</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
@@ -601,7 +601,7 @@
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="images.qrc">:/Icons/Icons/bt-warningmax</pixmap>
+              <pixmap resource="resources.qrc">:/Icons/Icons/warningMax.png</pixmap>
              </property>
             </widget>
            </item>
@@ -616,7 +616,7 @@
               <string notr="true">text-align: center;</string>
              </property>
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Check with the manufacturer or the specifications of your&lt;br/&gt;printer to set Max temperatures on bed and (s) extruder(s). &lt;br/&gt;As for security, if any error occurs systemic or printer,&lt;br/&gt;these variables serve for emergency shutdown.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Check with the manufacturer&lt;br/&gt; or the specifications of your&lt;br/&gt;printer to set Max temperatures on bed &lt;br/&gt;and (s) extruder(s). &lt;br/&gt;As for security, if any error&lt;br/&gt; occurs systemic or printer,&lt;br/&gt;these variables &lt;br/&gt;serve for emergency shutdown.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
@@ -631,8 +631,9 @@
   </layout>
  </widget>
  <resources>
+  <include location="resources.qrc"/>
+  <include location="resources.qrc"/>
   <include location="images.qrc"/>
-  <include location="Br-Print3D/images.qrc"/>
  </resources>
  <connections/>
 </ui>
