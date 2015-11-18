@@ -28,23 +28,29 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::BrPrint3D)
 {
     ui->setupUi(this);
-    BigButton *bt_import = new BigButton(0,"Import \nGCode");
-    BigButton *bt_open = new BigButton(0,"Open File");
-    BigButton *bt_connect = new BigButton(0,"Connect");
+    bt_import = new BigButton(0,"Import \nGCode");
+    bt_open = new BigButton(0,"Open File");
+    bt_connect = new BigButton(0,"Connect",true);
+
     ui->ly_ConteinerLeft->addWidget(bt_import);
     ui->ly_ConteinerLeft->addWidget(bt_open);
     ui->ly_ConteinerLeft->addWidget(bt_connect);
-    BigButton *bt_play = new BigButton(0,"Play");
-    BigButton *bt_pause = new BigButton(0,"Pause");
-    BigButton *bt_stop = new BigButton(0,"Stop");
-    BigButton *bt_stopOnEmergency = new BigButton(0,"Emergency \nStop");
+
+    bt_play = new BigButton(0,"Play",true);
+    bt_pause = new BigButton(0,"Pause",true);
+    bt_stop = new BigButton(0,"Stop",true);
+    bt_stopOnEmergency = new BigButton(0,"Emergency \nStop");
+
     ui->ly_ConteinerRight->addWidget(bt_play);
     ui->ly_ConteinerRight->addWidget(bt_pause);
     ui->ly_ConteinerRight->addWidget(bt_stop);
     ui->ly_ConteinerRight->addWidget(bt_stopOnEmergency);
+
     vtkView = new vtkWidget();
     ui->_vtkConteiner->addWidget(vtkView);
-    connect(ui->_PrinterSettings,SIGNAL(s_extrudersInUse(int)),ui->_ManualControl,SLOT(setExtrudersInUse(int)));
+
+    connect(ui->_PrinterSettings,&PrinterSettingsWidget::s_extrudersInUse,ui->_ManualControl,&ManualControlWidget::setExtrudersInUse);
+
 
 
 
@@ -59,3 +65,30 @@ void BrPrint3D::init()
 
 
 }
+void BrPrint3D::openFile()
+{   QString typeGcode("*.gcode");
+    QString typeAll("*.gcode *.stl *.STL");
+    if(sender()==bt_import){
+        filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), typeGcode);
+    }
+    if(sender()==bt_open){
+        filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), typeAll);
+    }
+        if (!filePath.isEmpty() && QFileInfo(filePath).completeSuffix() == "gcode") {
+            QFile gcode(filePath);
+            if (gcode.open(QFile::ReadOnly | QFile::Text)) {
+                QTextStream in(&gcode);
+                QString text = in.readAll();
+                vtkView->renderGcode(text);
+                gcode.close();
+                ui->_ManualControl->setGcodePreview(text);
+                if (bt_connect->getCheckedStatus())
+                    bt_play->setEnabled(true);
+
+            }
+        }
+        else if(QFileInfo(filePath).completeSuffix()=="STL" ||QFileInfo(filePath).completeSuffix()=="stl"){
+                 vtkView->renderSTL(filePath);
+             }
+}
+
