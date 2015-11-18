@@ -56,6 +56,10 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::s_printLogStatus,ui->_ManualControl,&ManualControlWidget::setPrintLogStatus);
     connect(bt_play,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::startPrintJob);
     connect(ui->_ManualControl,&ManualControlWidget::disableCbExtruderQnt,ui->_PrinterSettings,&PrinterSettingsWidget::disableExtrudersQntCb);
+    connect(bt_pause,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::pausePrintJob);
+    connect(bt_stop,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopPrintJob);
+    connect(bt_stop,&BigButton::clicked,this,&BrPrint3D::stopPrintJob);
+
 
 }
 
@@ -105,5 +109,10 @@ void BrPrint3D::startPrintJob(){
     bt_play->setEnabled(false);
     bt_pause->setEnabled(true);
     bt_stop->setEnabled(true);
-
 }
+void BrPrint3D::stopPrintJob(){
+    bt_play->setEnabled(true);
+    bt_pause->setEnabled(false);
+    bt_stop->setEnabled(false);
+}
+
