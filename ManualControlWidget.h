@@ -51,6 +51,7 @@ signals:
     void checkConnectButton(bool b);
     void enablePlayButton(bool b);
     void _destructPrinterObject();
+    void disableCbExtruderQnt(bool b);
 private slots:
     void updateTemp(double *tempExtruders,double tempBed);
     void startBed(bool checked);
@@ -59,6 +60,8 @@ private slots:
     void setNewBedTemp();
     void setNewExtruderTemp();
     void setPlayStatus(bool b);
+    void setPauseStatus(bool b);
+    void isPrintJobRunning(bool b);
 
 public slots:
     void setExtrudersInUse(int e);
