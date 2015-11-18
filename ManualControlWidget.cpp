@@ -457,3 +457,20 @@ void ManualControlWidget::setExtrudersInUse(int e)
 void ManualControlWidget::setGcodePreview(QString t){
     ui->GCodePreview->setPlainText(t);
 }
+void ManualControlWidget::startPrintJob(QString filePath){
+   stopThreadRoutine();
+   try {    std::string path = filePath.toUtf8().constData();
+            printerObject->openFile(path,printLogStatus);
+
+          }
+   catch (std::string exc){
+           QMessageBox msg;
+           msg.setIcon(QMessageBox::Critical);
+           QString str = QString::fromUtf8(exc.c_str());
+           msg.setText(str);
+           msg.exec();
+          }
+}
+void ManualControlWidget::setPrintLogStatus(bool b){
+    printLogStatus = b;
+}

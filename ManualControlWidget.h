@@ -34,6 +34,7 @@ public:
     void constructPrinterObject(PrinterSettings pSettings);
     void destructPrinterObject();
     void hideExtruders(int e);
+    void startPrintJob(QString filePath);
     ThreadRoutine *temp=NULL;
 
 private:
@@ -44,7 +45,7 @@ private:
     void locateSlicer();
     void locateCura();
     QSettings settings;
-    bool garbage,playStatus;
+    bool garbage,playStatus,printLogStatus;
     int extruderQnt;
 signals:
     void checkConnectButton(bool b);
@@ -52,15 +53,16 @@ signals:
     void _destructPrinterObject();
 private slots:
     void updateTemp(double *tempExtruders,double tempBed);
-
     void startBed(bool checked);
     void startExtruders(bool checked);
     void disableExtrudersButtons(bool checked);
     void setNewBedTemp();
     void setNewExtruderTemp();
     void setPlayStatus(bool b);
+
 public slots:
     void setExtrudersInUse(int e);
+    void setPrintLogStatus(bool b);
    
 };
 
