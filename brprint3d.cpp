@@ -60,6 +60,7 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(bt_stop,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopPrintJob);
     connect(bt_stop,&BigButton::clicked,this,&BrPrint3D::stopPrintJob);
     connect(bt_stopOnEmergency,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopOnEmergency);
+    connect(ui->bt_hide,&QPushButton::clicked,this,&BrPrint3D::hidePrinterSettings);
 
 
 }
@@ -117,3 +118,9 @@ void BrPrint3D::stopPrintJob(){
     bt_stop->setEnabled(false);
 }
 
+void BrPrint3D::hidePrinterSettings(){
+    if(ui->bt_hide->isChecked())
+        ui->_PrinterSettings->show();
+    else
+        ui->_PrinterSettings->hide();
+}
