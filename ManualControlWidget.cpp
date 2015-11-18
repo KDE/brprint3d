@@ -516,3 +516,22 @@ void ManualControlWidget::stopPrintJob(){
         printerObject->setExtrTemp(i,0);
     ui->extruderControlWidget->setEnabled(true);
 }
+
+void ManualControlWidget::stopOnEmergency(){
+    QMessageBox msg;
+    stopThreadRoutine();
+    msg.setText("Emergency Stop Clicked, click on 'Ok' and wait!");
+    msg.setIcon(QMessageBox::Critical);
+    msg.exec();
+    try{
+        printerObject->scramPrinter();
+        ui->extruderControlWidget->setEnabled(true);
+    }
+    catch(std::string exc){
+        QString str = QString::fromUtf8(exc.c_str());
+        msg.setText(str);
+        msg.setIcon(QMessageBox::Critical);
+        msg.exec();
+
+    }
+}

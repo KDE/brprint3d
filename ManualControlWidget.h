@@ -68,6 +68,7 @@ public slots:
     void setPrintLogStatus(bool b);
     void pausePrintJob(bool b);
     void stopPrintJob();
+    void stopOnEmergency();
    
 };
 
