@@ -66,6 +66,8 @@ private slots:
 public slots:
     void setExtrudersInUse(int e);
     void setPrintLogStatus(bool b);
+    void pausePrintJob(bool b);
+    void stopPrintJob();
    
 };
 

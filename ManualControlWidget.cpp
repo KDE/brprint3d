@@ -497,3 +497,22 @@ void ManualControlWidget::isPrintJobRunning(bool b)
         }*/
     }
 }
+void ManualControlWidget::pausePrintJob(bool b){
+    if (b){
+        printerObject->stopPrintJob();
+        disconnect(temp, SIGNAL(finishedJob(bool)), this, SLOT(isPrintJobRunning(bool)));
+       }
+    else{
+          printerObject->startPrintJob(false);
+          connect(temp, SIGNAL(finishedJob(bool)), this, SLOT(isPrintJobRunning(bool)));
+       }
+
+}
+void ManualControlWidget::stopPrintJob(){
+    printerObject->stopPrintJob();
+    printerObject->closeFile();
+    printerObject->setBedTemp(0);
+    for(int i=0;i<extrudersInUse;i++)
+        printerObject->setExtrTemp(i,0);
+    ui->extruderControlWidget->setEnabled(true);
+}
