@@ -52,10 +52,15 @@ signals:
     void _destructPrinterObject();
 private slots:
     void updateTemp(double *tempExtruders,double tempBed);
-    void setExtrudersInUse(int e);
+
     void startBed(bool checked);
     void startExtruders(bool checked);
     void disableExtrudersButtons(bool checked);
+    void setNewBedTemp();
+    void setNewExtruderTemp();
+    void setPlayStatus(bool b);
+public slots:
+    void setExtrudersInUse(int e);
    
 };
 
