@@ -454,3 +454,6 @@ void ManualControlWidget::setExtrudersInUse(int e)
     extrudersInUse = e;
     hideExtruders(e);
 }
+void ManualControlWidget::setGcodePreview(QString t){
+    ui->GCodePreview->setPlainText(t);
+}
