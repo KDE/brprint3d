@@ -52,11 +52,11 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::s_extrudersInUse,ui->_ManualControl,&ManualControlWidget::setExtrudersInUse);
     connect(bt_import,&BigButton::clicked,this,&BrPrint3D::openFile);
     connect(bt_open,&BigButton::clicked,this,&BrPrint3D::openFile);
-    connect(bt_connect,&BigButton::clicked,this,&BrPrint3D::connectPrinter);
+    //connect(bt_connect,&BigButton::clicked,this,&BrPrint3D::connectPrinter);
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::s_printLogStatus,ui->_ManualControl,&ManualControlWidget::setPrintLogStatus);
-    connect(bt_play,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::startPrintJob);
+    //connect(bt_play,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::startPrintJob);
     connect(ui->_ManualControl,&ManualControlWidget::disableCbExtruderQnt,ui->_PrinterSettings,&PrinterSettingsWidget::disableExtrudersQntCb);
-    connect(bt_pause,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::pausePrintJob);
+    //connect(bt_pause,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::pausePrintJob);
     connect(bt_stop,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopPrintJob);
     connect(bt_stop,&BigButton::clicked,this,&BrPrint3D::stopPrintJob);
     connect(bt_stopOnEmergency,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopOnEmergency);
