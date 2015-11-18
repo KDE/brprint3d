@@ -42,6 +42,9 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     ui->ly_ConteinerRight->addWidget(bt_pause);
     ui->ly_ConteinerRight->addWidget(bt_stop);
     ui->ly_ConteinerRight->addWidget(bt_stopOnEmergency);
+    vtkView = new vtkWidget();
+    ui->_vtkConteiner->addWidget(vtkView);
+    connect(ui->_PrinterSettings,SIGNAL(s_extrudersInUse(int)),ui->_ManualControl,SLOT(setExtrudersInUse(int)));
 
 
 
@@ -53,8 +56,6 @@ BrPrint3D::~BrPrint3D()
 }
 void BrPrint3D::init()
 {
-    vtkView = new vtkWidget();
-    ui->_vtkConteiner->addWidget(vtkView);
-    connect(ui->_PrinterSettings,SIGNAL(s_extrudersInUse(int)),ui->_ManualControl,SLOT(setExtrudersInUse(int)));
+
 
 }
