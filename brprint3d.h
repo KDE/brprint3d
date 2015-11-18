@@ -76,9 +76,14 @@ private:
     vtkWidget *vtkView;
     PrinterSettings psettings;
     QString filePath;
+    void startPrintJob();
+
 private slots:
     void openFile();
-
+    void connectPrinter();
+signals:
+    void s_playStatus(bool b);
+    void s_pauseStatus(bool b);
 
 };
 
