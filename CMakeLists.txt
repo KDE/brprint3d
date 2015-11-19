@@ -58,9 +58,7 @@ if(LINUX)
 endif()
 
 qt5_add_resources(Resources
-#	translations.qrc
-	fonts.qrc
-	images.qrc
+    resources.qrc
 )
 add_custom_target(resources ALL DEPENDS ${Resources})
 
