@@ -53,6 +53,7 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(bt_import,&BigButton::clicked,this,&BrPrint3D::openFile);
     connect(bt_open,&BigButton::clicked,this,&BrPrint3D::openFile);
     connect(bt_connect,&BigButton::clicked,this,&BrPrint3D::connectPrinter);
+    connect(bt_connect,&BigButton::clicked,this,&BrPrint3D::changeIcon);
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::s_printLogStatus,ui->_ManualControl,&ManualControlWidget::setPrintLogStatus);
     connect(bt_play,&BigButton::clicked,this,&BrPrint3D::startPrintJob);
     connect(bt_play,&BigButton::clicked,this,&BrPrint3D::changeIcon);
@@ -64,6 +65,7 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(bt_stop,&BigButton::clicked,this,&BrPrint3D::changeIcon);
     connect(bt_stopOnEmergency,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopOnEmergency);
     connect(ui->bt_hide,&QPushButton::clicked,this,&BrPrint3D::hidePrinterSettings);
+    connect(ui->_ManualControl,&ManualControlWidget::checkConnectButton,bt_connect,&BigButton::setChecked);
 
 
 }
@@ -75,6 +77,7 @@ BrPrint3D::~BrPrint3D()
 void BrPrint3D::init()
 {
     ui->_PrinterSettings->hide();
+    ui->_ManualControl->init();
 
 
 }
@@ -114,6 +117,7 @@ void BrPrint3D::connectPrinter(bool checked){
     else
     {
         ui->_ManualControl->destructPrinterObject();
+
     }
 
 
