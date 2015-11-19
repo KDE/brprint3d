@@ -6,7 +6,6 @@ ManualControlWidget::ManualControlWidget(QWidget *parent) :
     ui(new Ui::ManualControlWidget)
 {
     ui->setupUi(this);
-    connect(this,&ManualControlWidget::_destructPrinterObject,ui->extruderControlWidget,&ExtruderControlWidget::destructPrinterObject);
     connect(ui->bt_Bed,&QPushButton::clicked,this,&ManualControlWidget::startBed);
     connect(ui->bt_extruder0,&QPushButton::clicked,this,&ManualControlWidget::startExtruders);
     connect(ui->ds_bedTemp,&QDoubleSpinBox::editingFinished,this,&ManualControlWidget::setNewBedTemp);
@@ -73,12 +72,13 @@ void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
         else
             resetOnconnect = true;
 
-    }
+
     try{
         printerObject = new Repetier(transmissionRate,connectionPort,bufferSize,maxX,maxY,maxZ,resetOnconnect,isCommaDecimalMark);
         extruderQnt = printerObject->getNoOfExtruders();
         ui->extruderControlWidget->getPrinterObject(printerObject);
         startThreadRoutine();
+        ui->ManualControlTab->setEnabled(true);
         emit enablePlayButton(true);
         msg.setText(tr("Successful Connection"));
         msg.setIcon(QMessageBox::Information);
@@ -90,11 +90,12 @@ void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
         msg.setText(e);
         msg.setIcon(QMessageBox::Warning);
         msg.exec();
-        ui->ManualControl->setEnabled(false);
+        ui->ManualControlTab->setEnabled(false);
         emit checkConnectButton(false);
 
     }
     setInitialMarks();
+    }
 
 }
 void ManualControlWidget::destructPrinterObject()
@@ -104,10 +105,9 @@ void ManualControlWidget::destructPrinterObject()
         printerObject->setExtrTemp(i,0);
     stopThreadRoutine();
     printerObject->~Repetier();
-    emit _destructPrinterObject();
     ui->bt_Bed->setChecked(false);
     ui->bt_extruder0->setChecked(false);
-    ui->ManualControl->setDisabled(true);
+    ui->ManualControlTab->setDisabled(true);
 }
 void ManualControlWidget::startBed(bool checked){
     if(checked==true)
@@ -237,6 +237,7 @@ void ManualControlWidget::setNewExtruderTemp(){
 
 void ManualControlWidget::setInitialMarks()
 {
+
 }
 
 //This slot update on UI the value of Temperatures of the Bed and Extruders
