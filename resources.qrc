@@ -31,5 +31,6 @@
         <file>Icons/temperSlider.png</file>
         <file>Icons/warningMax.png</file>
         <file>Icons/warningSkull.png</file>
+        <file>Icons/brlogo.png</file>
     </qresource>
 </RCC>
