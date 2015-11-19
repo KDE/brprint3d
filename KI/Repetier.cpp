@@ -27,6 +27,9 @@ Repetier::Repetier(int baudrate, std::string serialport, int buffersize, double 
 {
     char serialAns[buffersize * 2], send[buffersize], *vet;
     unsigned int pos;
+    unsigned int days;
+    unsigned int hour;
+    unsigned int min;
     this->isCommaDecimalMark = isCommaDecimalMark;
     printThread = nullptr;
     isPrintingRunning = false;
@@ -91,6 +94,18 @@ Repetier::Repetier(int baudrate, std::string serialport, int buffersize, double 
         delete arduino;
         std::string exc = "Repetier: Could not get the number of extruders.";
         throw exc;
+    }
+    arduino->readUntil(serialAns, '\n', bufsize * 2);
+    //Printed filament:10.02m Printing time:0 days 0 hours 54 min
+    vet = strstr(serialAns, "Printing");
+    _printedFilament = 0.0;
+    _timeOfUsage = 0;
+    if(vet != NULL){
+        sscanf(serialAns, "Printed filament:%lf", &_printedFilament);
+        sscanf(vet, "Printing time:%uld days %uld hours %uld", &days, &hour, &min);
+        _timeOfUsage+=(days * 86400);
+        _timeOfUsage+=(hour * 3600);
+        _timeOfUsage+=(min * 60);
     }
     this->tempExtr = (int*)malloc(this->nExtruders * sizeof(int)); //Initialize the vector with the extruders target temperatures
     if (tempExtr == NULL) {
@@ -877,6 +892,14 @@ double Repetier::getBedTemp()
     }
     // qDebug() << double(this->currentBedTemp);
     return this->currentBedTemp;
+}
+
+double Repetier::getPrintedFilamentInMeters(){
+    return _printedFilament;
+}
+
+unsigned long Repetier::getTimeOfUsageInSec(){
+    return _timeOfUsage;
 }
 
 bool Repetier::isLogOn()

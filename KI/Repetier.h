@@ -44,7 +44,8 @@ private:
     ASerial *arduino;
     int bufsize, *tempExtr, tempBed, nExtruders;
     double currentX, currentY, currentZ, currentE, maxX, maxY, maxZ, currentBedTemp, *currentExtrTemp;
-    double printedFilament;
+    double _printedFilament; //How much filament was used in meters.
+    unsigned long _timeOfUsage; //Time of printer usage in seconds
     bool isPrintingRunning, terminate;
     bool isCommaDecimalMark;
     FILE *GCode;
@@ -83,6 +84,8 @@ public:
     double getExtruderTemp(unsigned int extrNo) throw (std::string);
     double* getAllExtrudersTemp() throw (std::string);
     double getBedTemp();
+    double getPrintedFilamentInMeters();
+    unsigned long getTimeOfUsageInSec();
     bool isLogOn();
     bool isPrintJobRunning();
 };
