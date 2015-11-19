@@ -45,7 +45,7 @@ private:
     void locateSlicer();
     void locateCura();
     QSettings settings;
-    bool garbage,playStatus,printLogStatus;
+    bool garbage,playStatus,printLogStatus,pauseStatus=false;
     int extruderQnt;
 signals:
     void checkConnectButton(bool b);
@@ -60,7 +60,6 @@ private slots:
     void setNewBedTemp();
     void setNewExtruderTemp();
     void setPlayStatus(bool b);
-    void setPauseStatus(bool b);
     void isPrintJobRunning(bool b);
 
 public slots:

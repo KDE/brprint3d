@@ -491,10 +491,10 @@ void ManualControlWidget::isPrintJobRunning(bool b)
         msg.setIcon(QMessageBox::Information);
         msg.exec();
         emit disableCbExtruderQnt(true);
-        /*if (ui->bt_pause->isChecked() == false) {
-            enableAxisButtons();
-            ui->cb_Extruder_qnt->setEnabled(true);
-        }*/
+        if(!pauseStatus){
+            ui->extruderControlWidget->setEnabled(true);
+            emit disableCbExtruderQnt(false);
+        }
     }
 }
 void ManualControlWidget::pausePrintJob(bool b){
@@ -506,6 +506,7 @@ void ManualControlWidget::pausePrintJob(bool b){
           printerObject->startPrintJob(false);
           connect(temp, SIGNAL(finishedJob(bool)), this, SLOT(isPrintJobRunning(bool)));
        }
+    pauseStatus = b;
 
 }
 void ManualControlWidget::stopPrintJob(){
@@ -535,6 +536,4 @@ void ManualControlWidget::stopOnEmergency(){
 
     }
 }
-void ManualControlWidget::setPauseStatus(bool b){
 
-}
