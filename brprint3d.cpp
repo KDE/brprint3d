@@ -28,18 +28,18 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::BrPrint3D)
 {
     ui->setupUi(this);
-    bt_import = new BigButton(0,"Import \nGCode");
-    bt_open = new BigButton(0,"Open File");
-    bt_connect = new BigButton(0,"Connect",true);
+    bt_import = new BigButton(0,"Import \nGCode",false,":/Icons/Icons/import.png");
+    bt_open = new BigButton(0,"Open File",false,":/Icons/Icons/openFile.png");
+    bt_connect = new BigButton(0,"Connect",true,":/Icons/Icons/connect.png");
 
     ui->ly_ConteinerLeft->addWidget(bt_import);
     ui->ly_ConteinerLeft->addWidget(bt_open);
     ui->ly_ConteinerLeft->addWidget(bt_connect);
 
-    bt_play = new BigButton(0,"Play",true);
-    bt_pause = new BigButton(0,"Pause",true);
-    bt_stop = new BigButton(0,"Stop",true);
-    bt_stopOnEmergency = new BigButton(0,"Emergency \nStop");
+    bt_play = new BigButton(0,"Play",true,":/Icons/Icons/play.png");
+    bt_pause = new BigButton(0,"Pause",true,":/Icons/Icons/pause.png");
+    bt_stop = new BigButton(0,"Stop",true,":/Icons/Icons/stop.png");
+    bt_stopOnEmergency = new BigButton(0,"Emergency \nStop",false,":/Icons/Icons/emergency.png");
 
     ui->ly_ConteinerRight->addWidget(bt_play);
     ui->ly_ConteinerRight->addWidget(bt_pause);
@@ -71,6 +71,7 @@ BrPrint3D::~BrPrint3D()
 }
 void BrPrint3D::init()
 {
+    ui->_PrinterSettings->hide();
 
 
 }
@@ -120,7 +121,11 @@ void BrPrint3D::stopPrintJob(){
 
 void BrPrint3D::hidePrinterSettings(){
     if(ui->bt_hide->isChecked())
-        ui->_PrinterSettings->show();
+    {    ui->_PrinterSettings->show();
+        ui->bt_hide->setText(tr("Settings - Hide"));
+    }
     else
-        ui->_PrinterSettings->hide();
+    {    ui->_PrinterSettings->hide();
+        ui->bt_hide->setText(tr("Settings - Show"));
+    }
 }
