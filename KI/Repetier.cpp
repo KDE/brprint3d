@@ -96,7 +96,6 @@ Repetier::Repetier(int baudrate, std::string serialport, int buffersize, double 
         throw exc;
     }
     arduino->readUntil(serialAns, '\n', bufsize * 2);
-    //Printed filament:10.02m Printing time:0 days 0 hours 54 min
     vet = strstr(serialAns, "Printing");
     _printedFilament = 0.0;
     _timeOfUsage = 0;
