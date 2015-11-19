@@ -78,6 +78,7 @@ void BrPrint3D::init()
 {
     ui->_PrinterSettings->hide();
     ui->_ManualControl->init();
+    stopPrintJob();
 
 
 }
@@ -151,31 +152,33 @@ void BrPrint3D::hidePrinterSettings(){
 void BrPrint3D::changeIcon(bool checked){
     if(sender()==bt_play){
         if(checked){
-            bt_play->setIcon(":/Icons/Icons/playOnClick.png");
-
+            QIcon icon(":/Icons/Icons/playOnClick.png");
+            QPixmap pix(":/Icons/Icons/playOnClick.png");
+            icon.addPixmap(pix,QIcon::Disabled,QIcon::Off);
+            bt_play->setIcon(icon);
         }
         else{
-             bt_play->setIcon(":/Icons/Icons/play.png");
+             bt_play->setIcon(QIcon(":/Icons/Icons/play.png"));
 
         }
     }
     if(sender()==bt_pause){
         if(checked){
-            bt_pause->setIcon(":/Icons/Icons/pause.png");
+            bt_pause->setIcon(QIcon(":/Icons/Icons/pauseOnClick.png"));
 
         }
         else{
-            bt_pause->setIcon(":/Icons/Icons/pauseOnClick.png");
+            bt_pause->setIcon(QIcon(":/Icons/Icons/pause.png"));
 
         }
     }
     if(sender()==bt_connect){
         if(checked){
-             bt_connect->setIcon(":/Icons/Icons/connectOnClick.png");
+             bt_connect->setIcon(QIcon(":/Icons/Icons/connectOnClick.png"));
 
         }
         else{
-            bt_connect->setIcon(":/Icons/Icons/connect.png");
+            bt_connect->setIcon(QIcon(":/Icons/Icons/connect.png"));
 
         }
     }
