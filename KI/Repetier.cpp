@@ -630,7 +630,9 @@ void Repetier::stopPrintJob()
 {
     if (isPrintingRunning == true) {
         communicationBool.lock();
+        arduinoAccess.lock();
         terminate = true;
+        arduinoAccess.unlock();
         communicationBool.unlock();
         while (isPrintingRunning != false) {
             usleep(10000);
