@@ -350,8 +350,23 @@
          </size>
         </property>
         <layout class="QHBoxLayout" name="ly_ExtruderConteiner">
+         <property name="spacing">
+          <number>3</number>
+         </property>
          <property name="sizeConstraint">
           <enum>QLayout::SetMinimumSize</enum>
+         </property>
+         <property name="leftMargin">
+          <number>3</number>
+         </property>
+         <property name="topMargin">
+          <number>3</number>
+         </property>
+         <property name="rightMargin">
+          <number>3</number>
+         </property>
+         <property name="bottomMargin">
+          <number>3</number>
          </property>
         </layout>
        </widget>
@@ -1164,7 +1179,7 @@ QSlider::handle:horizontal {
  <resources>
   <include location="resources.qrc"/>
   <include location="resources.qrc"/>
-  <include location="images.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections/>
  <designerdata>
