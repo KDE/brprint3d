@@ -24,7 +24,7 @@ ExtruderControlWidget::ExtruderControlWidget(QWidget *parent) :
     ui(new Ui::ExtruderControlWidget)
 {
     ui->setupUi(this);
-    connect(ui->bt_homeX,SIGNAL(clicked()),this,SLOT(setHomeX()));
+        connect(ui->bt_homeX,SIGNAL(clicked()),this,SLOT(setHomeX()));
         connect(ui->bt_homeY,SIGNAL(clicked()),this,SLOT(setHomeY()));
         connect(ui->bt_homeZ,SIGNAL(clicked()),this,SLOT(setHomeZ()));
         connect(ui->bt_homeXYZ,SIGNAL(clicked()),this,SLOT(setHomeXYZ()));
@@ -50,6 +50,7 @@ ExtruderControlWidget::ExtruderControlWidget(QWidget *parent) :
         ui->lb_XY->setPixmap(QPixmap(":/Icons/Icons/axisXY.png"));
         ui->lb_axisZ->setPixmap(QPixmap(":/Icons/Icons/axisZ.png"));
         ui->lb_Extruder->setPixmap(QPixmap(":/Icons/Icons/filamentRetract.png"));
+
 
 
 }
@@ -131,6 +132,3 @@ void ExtruderControlWidget::setPosZ()
 
 }
 
-void ExtruderControlWidget::destructPrinterObject(){
-    printerObject->~Repetier();
-}

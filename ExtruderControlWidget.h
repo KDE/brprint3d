@@ -49,8 +49,7 @@ public:
         void setPosX();
         void setPosY();
         void setPosZ();
-public slots:
-         void destructPrinterObject();
+
 
 };
 
