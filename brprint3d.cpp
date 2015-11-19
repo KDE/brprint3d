@@ -38,7 +38,7 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
 
     bt_play = new BigButton(0,"Play",true,":/Icons/Icons/play.png");
     bt_pause = new BigButton(0,"Pause",true,":/Icons/Icons/pause.png");
-    bt_stop = new BigButton(0,"Stop",true,":/Icons/Icons/stop.png");
+    bt_stop = new BigButton(0,"Stop",false,":/Icons/Icons/stop.png");
     bt_stopOnEmergency = new BigButton(0,"Emergency \nStop",false,":/Icons/Icons/emergency.png");
 
     ui->ly_ConteinerRight->addWidget(bt_play);
@@ -52,11 +52,11 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::s_extrudersInUse,ui->_ManualControl,&ManualControlWidget::setExtrudersInUse);
     connect(bt_import,&BigButton::clicked,this,&BrPrint3D::openFile);
     connect(bt_open,&BigButton::clicked,this,&BrPrint3D::openFile);
-    //connect(bt_connect,&BigButton::clicked,this,&BrPrint3D::connectPrinter);
+    connect(bt_connect,&BigButton::clicked,this,&BrPrint3D::connectPrinter);
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::s_printLogStatus,ui->_ManualControl,&ManualControlWidget::setPrintLogStatus);
-    //connect(bt_play,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::startPrintJob);
+    connect(bt_play,&BigButton::clicked,this,&BrPrint3D::startPrintJob);
     connect(ui->_ManualControl,&ManualControlWidget::disableCbExtruderQnt,ui->_PrinterSettings,&PrinterSettingsWidget::disableExtrudersQntCb);
-    //connect(bt_pause,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::pausePrintJob);
+    connect(bt_pause,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::pausePrintJob);
     connect(bt_stop,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopPrintJob);
     connect(bt_stop,&BigButton::clicked,this,&BrPrint3D::stopPrintJob);
     connect(bt_stopOnEmergency,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopOnEmergency);
@@ -102,16 +102,33 @@ void BrPrint3D::openFile()
              }
 }
 
-void BrPrint3D::connectPrinter(){
-    psettings = ui->_PrinterSettings->getCurrentSettings();
-    ui->_ManualControl->constructPrinterObject(psettings);
+void BrPrint3D::connectPrinter(bool checked){
+    if(checked){
+        psettings = ui->_PrinterSettings->getCurrentSettings();
+        ui->_ManualControl->constructPrinterObject(psettings);
+        bt_connect->setIcon(":/Icons/Icons/connectOnClick.png");
+    }
+    else
+    {
+        ui->_ManualControl->destructPrinterObject();
+        bt_connect->setIcon(":/Icons/Icons/connect.png");
+    }
+
+
 }
 
-void BrPrint3D::startPrintJob(){
-    ui->_ManualControl->startPrintJob(filePath);
-    bt_play->setEnabled(false);
-    bt_pause->setEnabled(true);
-    bt_stop->setEnabled(true);
+void BrPrint3D::startPrintJob(bool checked){
+    if(checked){
+        ui->_ManualControl->startPrintJob(filePath);
+        bt_play->setEnabled(false);
+        bt_pause->setEnabled(true);
+        bt_stop->setEnabled(true);
+        bt_play->setIcon(":/Icons/Icons/playOnClick.png");
+
+    }
+    else
+        bt_play->setIcon(":/Icons/Icons/play.png");
+
 }
 void BrPrint3D::stopPrintJob(){
     bt_play->setEnabled(true);
