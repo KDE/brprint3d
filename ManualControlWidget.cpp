@@ -535,3 +535,6 @@ void ManualControlWidget::stopOnEmergency(){
 
     }
 }
+void ManualControlWidget::setPauseStatus(bool b){
+
+}
