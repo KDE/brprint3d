@@ -590,7 +590,7 @@ void Repetier::printJob() throw (std::string)
             sprintf(format, "T%d:", i);
             tempTxt = strstr(serialAns, format);
             sprintf(format, "T%d:%%lf /%%d ", i);
-            sscanf(serialAns, format, &this->currentExtrTemp[i], &this->tempExtr[i]);
+            sscanf(tempTxt, format, &this->currentExtrTemp[i], &this->tempExtr[i]);
         }
     }
     communicationBool.lock();

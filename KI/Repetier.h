@@ -44,6 +44,7 @@ private:
     ASerial *arduino;
     int bufsize, *tempExtr, tempBed, nExtruders;
     double currentX, currentY, currentZ, currentE, maxX, maxY, maxZ, currentBedTemp, *currentExtrTemp;
+    double printedFilament;
     bool isPrintingRunning, terminate;
     bool isCommaDecimalMark;
     FILE *GCode;
