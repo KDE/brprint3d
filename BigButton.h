@@ -14,8 +14,10 @@ class BigButton : public QWidget
 public:
     explicit BigButton(QWidget *parent = 0, QString name = "", bool isCheckable = false, QString pix = "");
     ~BigButton();
+public slots:
     bool getCheckedStatus();
     void setIcon(QString pix);
+    void setChecked(bool b);
 
 private:
     Ui::BigButton *ui;

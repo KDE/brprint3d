@@ -25,3 +25,6 @@ bool BigButton::getCheckedStatus(){
 void BigButton::setIcon(QString pix){
     ui->pushButton->setIcon(QIcon(pix));
 }
+void BigButton::setChecked(bool b){
+    ui->pushButton->setChecked(b);
+}
