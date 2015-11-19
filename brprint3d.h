@@ -80,8 +80,8 @@ private:
 
 private slots:
     void openFile();
-    void connectPrinter();
-    void startPrintJob();
+    void connectPrinter(bool checked);
+    void startPrintJob(bool checked);
     void stopPrintJob();
     void hidePrinterSettings();
 signals:
