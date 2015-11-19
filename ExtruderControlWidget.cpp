@@ -34,6 +34,24 @@ ExtruderControlWidget::ExtruderControlWidget(QWidget *parent) :
         connect(ui->bt_downY,SIGNAL(clicked()),this,SLOT(setPosY()));
         connect(ui->bt_upZ,SIGNAL(clicked()),this,SLOT(setPosZ()));
         connect(ui->bt_downZ,SIGNAL(clicked()),this,SLOT(setPosZ()));
+        ui->bt_homeX->setIcon(QIcon(QPixmap(":/Icons/Icons/homeAxisX.png")));
+        ui->bt_homeY->setIcon(QIcon(QPixmap(":/Icons/Icons/homeaxisY.png")));
+        ui->bt_homeZ->setIcon(QIcon(QPixmap(":/Icons/Icons/homeAxisZ.png")));
+        ui->bt_homeXYZ->setIcon(QIcon(QPixmap(":/Icons/Icons/homeAxisXYZ.png")));
+        ui->bt_rightX->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowRight.png")));
+        ui->bt_leftX->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowLeft.png")));
+        ui->bt_upY->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowUp.png")));
+        ui->bt_downY->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowDown.png")));
+        ui->bt_upZ->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowUp.png")));
+        ui->bt_downZ->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowDown.png")));
+        ui->bt_filOneSpeed->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowLeft.png")));
+        ui->bt_filTwoSpeed->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowRight.png")));
+        ui->bt_filRetract->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowUp.png")));
+        ui->lb_XY->setPixmap(QPixmap(":/Icons/Icons/axisXY.png"));
+        ui->lb_axisZ->setPixmap(QPixmap(":/Icons/Icons/axisZ.png"));
+        ui->lb_Extruder->setPixmap(QPixmap(":/Icons/Icons/filamentRetract.png"));
+
+
 }
 
 ExtruderControlWidget::~ExtruderControlWidget()
