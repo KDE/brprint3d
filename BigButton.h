@@ -2,6 +2,7 @@
 #define BIGBUTTON_H
 
 #include <QWidget>
+#include <QtGui/QIcon>
 
 namespace Ui {
 class BigButton;
@@ -16,7 +17,7 @@ public:
     ~BigButton();
 public slots:
     bool getCheckedStatus();
-    void setIcon(QString pix);
+    void setIcon(QIcon icon);
     void setChecked(bool b);
 
 private:
