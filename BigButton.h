@@ -12,7 +12,7 @@ class BigButton : public QWidget
     Q_OBJECT
 
 public:
-    explicit BigButton(QWidget *parent = 0, QString name = "", bool isCheckable = false);
+    explicit BigButton(QWidget *parent = 0, QString name = "", bool isCheckable = false, QString pix = "");
     ~BigButton();
     bool getCheckedStatus();
 
