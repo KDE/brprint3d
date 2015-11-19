@@ -19,7 +19,7 @@ public:
 private:
     Ui::BigButton *ui;
 signals:
-    void clicked();
+    void clicked(bool checked);
 };
 
 #endif // BIGBUTTON_H
