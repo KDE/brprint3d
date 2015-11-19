@@ -55,10 +55,13 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(bt_connect,&BigButton::clicked,this,&BrPrint3D::connectPrinter);
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::s_printLogStatus,ui->_ManualControl,&ManualControlWidget::setPrintLogStatus);
     connect(bt_play,&BigButton::clicked,this,&BrPrint3D::startPrintJob);
+    connect(bt_play,&BigButton::clicked,this,&BrPrint3D::changeIcon);
     connect(ui->_ManualControl,&ManualControlWidget::disableCbExtruderQnt,ui->_PrinterSettings,&PrinterSettingsWidget::disableExtrudersQntCb);
     connect(bt_pause,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::pausePrintJob);
+    connect(bt_pause,&BigButton::clicked,this,&BrPrint3D::changeIcon);
     connect(bt_stop,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopPrintJob);
     connect(bt_stop,&BigButton::clicked,this,&BrPrint3D::stopPrintJob);
+    connect(bt_stop,&BigButton::clicked,this,&BrPrint3D::changeIcon);
     connect(bt_stopOnEmergency,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopOnEmergency);
     connect(ui->bt_hide,&QPushButton::clicked,this,&BrPrint3D::hidePrinterSettings);
 
@@ -106,12 +109,11 @@ void BrPrint3D::connectPrinter(bool checked){
     if(checked){
         psettings = ui->_PrinterSettings->getCurrentSettings();
         ui->_ManualControl->constructPrinterObject(psettings);
-        bt_connect->setIcon(":/Icons/Icons/connectOnClick.png");
+
     }
     else
     {
         ui->_ManualControl->destructPrinterObject();
-        bt_connect->setIcon(":/Icons/Icons/connect.png");
     }
 
 
@@ -123,12 +125,7 @@ void BrPrint3D::startPrintJob(bool checked){
         bt_play->setEnabled(false);
         bt_pause->setEnabled(true);
         bt_stop->setEnabled(true);
-        bt_play->setIcon(":/Icons/Icons/playOnClick.png");
-
     }
-    else
-        bt_play->setIcon(":/Icons/Icons/play.png");
-
 }
 void BrPrint3D::stopPrintJob(){
     bt_play->setEnabled(true);
@@ -144,5 +141,38 @@ void BrPrint3D::hidePrinterSettings(){
     else
     {    ui->_PrinterSettings->hide();
         ui->bt_hide->setText(tr("Settings - Show"));
+    }
+}
+
+void BrPrint3D::changeIcon(bool checked){
+    if(sender()==bt_play){
+        if(checked){
+            bt_play->setIcon(":/Icons/Icons/playOnClick.png");
+
+        }
+        else{
+             bt_play->setIcon(":/Icons/Icons/play.png");
+
+        }
+    }
+    if(sender()==bt_pause){
+        if(checked){
+            bt_pause->setIcon(":/Icons/Icons/pause.png");
+
+        }
+        else{
+            bt_pause->setIcon(":/Icons/Icons/pauseOnClick.png");
+
+        }
+    }
+    if(sender()==bt_connect){
+        if(checked){
+             bt_connect->setIcon(":/Icons/Icons/connectOnClick.png");
+
+        }
+        else{
+            bt_connect->setIcon(":/Icons/Icons/connect.png");
+
+        }
     }
 }

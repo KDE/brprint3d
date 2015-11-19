@@ -84,6 +84,7 @@ private slots:
     void startPrintJob(bool checked);
     void stopPrintJob();
     void hidePrinterSettings();
+    void changeIcon(bool checked);
 signals:
     void s_playStatus(bool b);
     void s_pauseStatus(bool b);
