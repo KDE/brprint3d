@@ -50,8 +50,8 @@ private:
 signals:
     void checkConnectButton(bool b);
     void enablePlayButton(bool b);
-    void _destructPrinterObject();
     void disableCbExtruderQnt(bool b);
+    void disablePositionButtons(bool b);
 private slots:
     void updateTemp(double *tempExtruders,double tempBed);
     void startBed(bool checked);
