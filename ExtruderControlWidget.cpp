@@ -106,18 +106,18 @@ void ExtruderControlWidget::setPosX()
 {
     double pos = printerObject->getCurrentXPos();
     if(sender()==ui->bt_leftX)
-        pos+=ui->sb_displacement->value();
+        pos+=ui->cb_displacement->currentText().toDouble();
     if(sender()==ui->bt_rightX)
-        pos-=ui->sb_displacement->value();
+        pos-=ui->cb_displacement->currentText().toDouble();
     printerObject->moveAxisToPos('X',pos);
 }
 void ExtruderControlWidget::setPosY()
 {
     double pos = printerObject->getCurrentYPos();
     if(sender()==ui->bt_upY)
-        pos+=ui->sb_displacement->value();
+        pos+=ui->cb_displacement->currentText().toDouble();
     if(sender()==ui->bt_downY)
-        pos-=ui->sb_displacement->value();
+        pos-=ui->cb_displacement->currentText().toDouble();
     printerObject->moveAxisToPos('Y',pos);
 
 }
@@ -125,10 +125,13 @@ void ExtruderControlWidget::setPosZ()
 {
     double pos = printerObject->getCurrentZPos();
     if(sender()==ui->bt_upZ)
-        pos+=ui->sb_displacement->value();
+        pos+=ui->cb_displacement->currentText().toDouble();
     if(sender()==ui->bt_downZ)
-        pos-=ui->sb_displacement->value();
+        pos-=ui->cb_displacement->currentText().toDouble();
     printerObject->moveAxisToPos('Z',pos);
 
 }
 
+void ExtruderControlWidget::disablePositionsButtons(bool b){
+    ui->wg_ExtruderButtons->setDisabled(b);
+}
