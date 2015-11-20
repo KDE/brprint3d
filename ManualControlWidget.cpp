@@ -10,6 +10,7 @@ ManualControlWidget::ManualControlWidget(QWidget *parent) :
     connect(ui->bt_extruder0,&QPushButton::clicked,this,&ManualControlWidget::startExtruders);
     connect(ui->ds_bedTemp,&QDoubleSpinBox::editingFinished,this,&ManualControlWidget::setNewBedTemp);
     connect(ui->ds_extruderTemp,&QDoubleSpinBox::editingFinished,this,&ManualControlWidget::setNewExtruderTemp);
+    connect(this,&ManualControlWidget::disablePositionButtons,ui->extruderControlWidget,&ExtruderControlWidget::disablePositionsButtons);
 
 }
 
@@ -475,7 +476,7 @@ void ManualControlWidget::startPrintJob(QString filePath){
    msg.setText(tr("Print job started!"));
    msg.exec();
    startThreadRoutine();
-   ui->extruderControlWidget->setDisabled(true);
+   emit disablePositionButtons(true);
    connect(temp, SIGNAL(finishedJob(bool)), this, SLOT(isPrintJobRunning(bool)));
 
 }
@@ -493,7 +494,7 @@ void ManualControlWidget::isPrintJobRunning(bool b)
         msg.exec();
         emit disableCbExtruderQnt(true);
         if(!pauseStatus){
-            ui->extruderControlWidget->setEnabled(true);
+            emit disablePositionButtons(false);
             emit disableCbExtruderQnt(false);
         }
     }
@@ -511,13 +512,34 @@ void ManualControlWidget::pausePrintJob(bool b){
 
 }
 void ManualControlWidget::stopPrintJob(){
+    QMessageBox msg;
     stopThreadRoutine();
     printerObject->stopPrintJob();
     printerObject->closeFile();
-    printerObject->setBedTemp(0);
+    try {
+        if(printerObject->getBedTemp()!=0)
+            printerObject->setBedTemp(0);
+    }
+    catch(std::string exc){
+
+        msg.setIcon(QMessageBox::Critical);
+        QString str = QString::fromUtf8(exc.c_str());
+        msg.setText(str);
+        msg.exec();
+
+    }
+    try{
     for(int i=0;i<extrudersInUse;i++)
         printerObject->setExtrTemp(i,0);
-    ui->extruderControlWidget->setEnabled(true);
+    }
+    catch(std::string exc){
+        msg.setIcon(QMessageBox::Critical);
+        QString str = QString::fromUtf8(exc.c_str());
+        msg.setText(str);
+        msg.exec();
+    }
+
+    emit disablePositionButtons(false);
     startThreadRoutine();
 }
 
@@ -529,7 +551,7 @@ void ManualControlWidget::stopOnEmergency(){
     msg.exec();
     try{
         printerObject->scramPrinter();
-        ui->extruderControlWidget->setEnabled(true);
+        emit disablePositionButtons(false);
     }
     catch(std::string exc){
         QString str = QString::fromUtf8(exc.c_str());
