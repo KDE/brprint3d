@@ -145,8 +145,11 @@ void BrPrint3D::startPrintJob(bool checked){
 }
 void BrPrint3D::stopPrintJob(){
     bt_play->setEnabled(true);
+    bt_play->setChecked(false);
+    bt_play->setIcon(QIcon(":/Icons/Icons/play.png"));
     bt_pause->setEnabled(false);
     bt_stop->setEnabled(false);
+
 }
 
 void BrPrint3D::hidePrinterSettings(){
@@ -195,3 +198,8 @@ void BrPrint3D::changeIcon(bool checked){
         }
     }
 }
+/*void BrPrint3D::resetPlayButton(){
+    bt_play->setChecked(false);
+    bt_play->setIcon(QIcon(":/Icons/Icons/play.png"));
+
+}*/
