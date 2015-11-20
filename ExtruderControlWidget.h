@@ -35,11 +35,13 @@ public:
     ~ExtruderControlWidget();
 
     void init();
-        void getPrinterObject(Repetier *pObject);
+    void getPrinterObject(Repetier *pObject);
+public slots:
+    void disablePositionsButtons(bool b);
 
     private:
         Ui::ExtruderControlWidget* ui;
-        Repetier *printerObject;
+        Repetier *printerObject=NULL;
     private slots:
         void updatePos(double posX, double posY, double posZ);
         void setHomeX();

@@ -39,7 +39,7 @@ public:
 
 private:
     Ui::ManualControlWidget *ui;
-    Repetier *printerObject;
+    Repetier *printerObject=NULL;
     int extrudersInUse=1;
     QString pathslicer,pathcura;
     void locateSlicer();
