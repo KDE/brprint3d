@@ -511,14 +511,14 @@ void ManualControlWidget::pausePrintJob(bool b){
 
 }
 void ManualControlWidget::stopPrintJob(){
-    //stopThreadRoutine();
+    stopThreadRoutine();
     printerObject->stopPrintJob();
     printerObject->closeFile();
     printerObject->setBedTemp(0);
     for(int i=0;i<extrudersInUse;i++)
         printerObject->setExtrTemp(i,0);
     ui->extruderControlWidget->setEnabled(true);
-    //startThreadRoutine();
+    startThreadRoutine();
 }
 
 void ManualControlWidget::stopOnEmergency(){
