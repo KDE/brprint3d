@@ -464,6 +464,12 @@ void ManualControlWidget::startPrintJob(QString filePath){
    stopThreadRoutine();
    try {    std::string path = filePath.toUtf8().constData();
             printerObject->openFile(path,printLogStatus);
+            printerObject->startPrintJob(true);
+            msg.setText(tr("Print job started!"));
+            msg.exec();
+            startThreadRoutine();
+            emit disablePositionButtons(true);
+            connect(temp, SIGNAL(finishedJob(bool)), this, SLOT(isPrintJobRunning(bool)));
        }
    catch (std::string exc){
 
@@ -471,13 +477,9 @@ void ManualControlWidget::startPrintJob(QString filePath){
            QString str = QString::fromUtf8(exc.c_str());
            msg.setText(str);
            msg.exec();
+
           }
-   printerObject->startPrintJob(true);
-   msg.setText(tr("Print job started!"));
-   msg.exec();
-   startThreadRoutine();
-   emit disablePositionButtons(true);
-   connect(temp, SIGNAL(finishedJob(bool)), this, SLOT(isPrintJobRunning(bool)));
+
 
 }
 void ManualControlWidget::setPrintLogStatus(bool b){
