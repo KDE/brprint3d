@@ -76,6 +76,7 @@ private:
     vtkWidget *vtkView;
     PrinterSettings psettings;
     QString filePath;
+    void setEnabled(bool b);
 
 
 private slots:

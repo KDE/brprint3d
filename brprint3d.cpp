@@ -78,10 +78,18 @@ void BrPrint3D::init()
 {
     ui->_PrinterSettings->hide();
     ui->_ManualControl->init();
-    stopPrintJob();
+    setEnabled(false);
+
 
 
 }
+void BrPrint3D::setEnabled(bool b){
+    bt_play->setEnabled(b);
+    bt_pause->setEnabled(b);
+    bt_stop->setEnabled(b);
+    bt_stopOnEmergency->setEnabled(b);
+}
+
 void BrPrint3D::openFile()
 {   QString typeGcode("*.gcode");
     QString typeAll("*.gcode *.stl *.STL");
@@ -113,6 +121,9 @@ void BrPrint3D::connectPrinter(bool checked){
     if(checked){
         psettings = ui->_PrinterSettings->getCurrentSettings();
         ui->_ManualControl->constructPrinterObject(psettings);
+        setEnabled(true);
+        bt_pause->setEnabled(false);
+        bt_stop->setEnabled(false);
 
     }
     else
@@ -159,6 +170,7 @@ void BrPrint3D::changeIcon(bool checked){
         }
         else{
              bt_play->setIcon(QIcon(":/Icons/Icons/play.png"));
+             bt_play->setChecked(false);
 
         }
     }
