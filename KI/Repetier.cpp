@@ -508,18 +508,15 @@ void Repetier::printJob() throw (std::string)
             return;
         }
         communicationBool.unlock();
+        if (read % 200 == 0) {
+            std::this_thread::yield();
+        }
         send = (char*)this->LGCode->returnInfo();
         if (send[0] == ';') {
             read++;
             continue;
         }
         arduinoAccess.lock();
-        if (read % 200 == 0) {
-            arduino->writeStr("M117 Job Running\n\r");
-            do {
-                arduino->readUntil(serialAns, '\n', this->bufsize * 2);
-            } while (strstr(serialAns, "ok") == NULL);
-        }
         arduino->writeStr(send);
 #ifdef WAIT_TIME
         usleep(WAIT_TIME);
