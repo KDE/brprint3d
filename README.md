@@ -5,12 +5,12 @@ changes since last release
 
 BRPrint3d can be found at http://projects.kde.org/brprint3d
 
-License: GPLv2
+License: GPLv3
 
 You can get the sources to the latest development version from the git
 repository, configured :
 
-git.kde.org:brprint3d
+git.kde.org:brprint3d (not available yet)
 
 Basic Usage:
 ============
@@ -27,6 +27,10 @@ cmake ..
 make
 ./brprint3d
 ```
+Help us:
+========
+-To find leek memories
+-To find bugs or inconsistecies
 
 Contributing:
 =============
