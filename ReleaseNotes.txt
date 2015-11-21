@@ -1,0 +1,10 @@
+Release Nov 21,2015 
+-Made 5 new Class
+	-Printer Settings - To manage the data from the PrinterSettingsWidget.
+	-Printer Settings Widget - Widget set on the Left of the App. This widget serves to the user set the settings of the 3DPrinter.
+	-Manual Control Widget - Widget set on the Right of the App. This widget serves to the user set values as temperatures on the Extruder, Bed, Print Speed, Flow Rate of filament and cooler fan. 
+	-Extruder Control Widget - Widget set inside the Manual Control Widget. This widget serves to the user control the position of the HotEnd and Retract/Extrude filament.
+	-Big Button - Generic Class to manage top buttons inside the App.
+-Update use of QtSignals - I was using qt4 signal's, so I update to use qt5 signal's.
+
+-Create the 3D Enviroment - Load GCODE and STL files. But have a bug on load STL files type ASCII.
