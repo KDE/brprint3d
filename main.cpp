@@ -42,14 +42,6 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setApplicationName("Br-Print3D");
 
-    //DEFININDO FONTE
-
-    QString fontPath = ":/Fonts/Ubuntu-R.ttf";
-    int fontId = QFontDatabase::addApplicationFont(fontPath);
-    if (fontId != -1) {
-        QFont font("MyFont");
-        app.setFont(font);
-    }
     /*
         QTranslator translator;
         QLocale locale;
