@@ -55,7 +55,7 @@ void ManualControlWidget::init()
     ui->GCodePreview->setPlainText(tr("No Open File."));
 
     //If slic3er exists in Ini file, load path, else locate
-    pathslicer=QVariant (this->settings.value("slic3r")).toString();
+    pathslicer=QVariant ( settings.value("slic3r")).toString();
     if(pathslicer.isEmpty())
         locateSlicer();
     else
@@ -143,11 +143,11 @@ void ManualControlWidget::destructPrinterObject()
 void ManualControlWidget::startBed(bool checked){
     if(checked==true)
     {       float tmp = ui->ds_bedTemp->value();
-            this->printerObject->setBedTemp(tmp);
+             printerObject->setBedTemp(tmp);
     }
     else
     {   ui->bt_Bed->setStyleSheet("");
-       this->printerObject->setBedTemp(0);
+        printerObject->setBedTemp(0);
     }
 
 }
@@ -155,14 +155,14 @@ void ManualControlWidget::startExtruders(bool checked){
     if(checked)
     {
         for(int i=1;i<=extrudersInUse;i++)
-           this->printerObject->setExtrTemp(i-1,ui->ds_extruderTemp->value());
+            printerObject->setExtrTemp(i-1,ui->ds_extruderTemp->value());
 
     }
     else
     {
         ui->bt_extruder0->setStyleSheet("");
         for(int i=1;i<=extrudersInUse;i++)
-        {   this->printerObject->setExtrTemp(i-1,0);
+        {    printerObject->setExtrTemp(i-1,0);
             switch (i)
             {
             case 1:
