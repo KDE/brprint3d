@@ -35,9 +35,9 @@ class ThreadRoutine : public QThread
     Q_OBJECT
 
 private:
-    Repetier *printer=nullptr;
+    Repetier *printerObject=nullptr;
     bool stopLoop;
-    double posX, posY, posZ;
+    double posX=0, posY=0, posZ=0;
     bool isPrintJobRunning;
     double extrudersTemp[4];
     int *extrudersInUse;

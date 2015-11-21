@@ -27,12 +27,12 @@
 #include "threadRotine.h"
 #include <QDebug>
 
-ThreadRoutine::ThreadRoutine(Repetier *printer, int *extrudersInUse)
+ThreadRoutine::ThreadRoutine(Repetier *printer, int *InUse)
 {
-     printer = printer;
+     printerObject = printer;
      stopLoop = false;
      isPrintJobRunning = true;
-     extrudersInUse = extrudersInUse;
+     extrudersInUse = InUse;
 }
 
 
@@ -40,19 +40,19 @@ void ThreadRoutine::run()
 {
     while (true) {
         for (int i = 0; i < (*extrudersInUse); i++) {
-             extrudersTemp[i] =  printer->getExtruderTemp(i);
+             extrudersTemp[i] =  printerObject->getExtruderTemp(i);
         }
 
-         posX =  printer->getCurrentXPos();
-         posY =  printer->getCurrentYPos();
-         posZ =  printer->getCurrentZPos();
+         posX =  printerObject->getCurrentXPos();
+         posY =  printerObject->getCurrentYPos();
+         posZ =  printerObject->getCurrentZPos();
         sleep(2);
-        emit updateTemp(extrudersTemp, printer->getBedTemp());
+        emit updateTemp(extrudersTemp, printerObject->getBedTemp());
         emit updatePos( posX,  posY,  posZ);
-         isPrintJobRunning =  printer->isPrintJobRunning();
-        if ( isPrintJobRunning == false)
+         isPrintJobRunning =  printerObject->isPrintJobRunning();
+        if (!isPrintJobRunning)
             emit finishedJob(true);
-        if (stopLoop == true)
+        if (stopLoop)
             break;
     }
 }
