@@ -33,7 +33,11 @@ ManualControlWidget::ManualControlWidget(QWidget *parent) :
     connect(ui->ds_bedTemp,&QDoubleSpinBox::editingFinished,this,&ManualControlWidget::setNewBedTemp);
     connect(ui->ds_extruderTemp,&QDoubleSpinBox::editingFinished,this,&ManualControlWidget::setNewExtruderTemp);
     connect(this,&ManualControlWidget::disablePositionButtons,ui->extruderControlWidget,&ExtruderControlWidget::disablePositionsButtons);
-    connect(ui->ds_printSpeed,&QDoubleSpinBox::editingFinished,this,&ManualControlWidget::setPrintSpeed);
+
+    connect(ui->ds_printSpeed,&QSpinBox::editingFinished,this,&ManualControlWidget::spinEditFinished);
+    connect(ui->ds_filamentFlow,&QSpinBox::editingFinished,this,&ManualControlWidget::spinEditFinished);
+    connect(ui->ds_coolerFan,&QSpinBox::editingFinished,this,&ManualControlWidget::spinEditFinished);
+
     connect(ui->sl_printSpeed,&QSlider::valueChanged, this, &ManualControlWidget::setValue);
     connect(ui->sl_filamentFlow,&QSlider::valueChanged,this,&ManualControlWidget::setValue);
     connect(ui->sl_coolerFan,&QSlider::valueChanged,this,&ManualControlWidget::setValue);
@@ -590,11 +594,29 @@ void ManualControlWidget::stopOnEmergency(){
     }
 }
 
-void ManualControlWidget::setPrintSpeed(){
-    double speed = ui->ds_printSpeed->value();
-    printerObject->setFeedRate(speed);
-    ui->sl_printSpeed->setValue(speed);
-    ui->lb_printSpeed->setText(QVariant(speed).toString());
+void ManualControlWidget::spinEditFinished(){
+
+    if(sender()==ui->ds_printSpeed){
+        int speed = ui->ds_printSpeed->value();
+        printerObject->setFeedRate(speed);
+        ui->sl_printSpeed->setValue(speed);
+        ui->lb_printSpeed->setText(QString::number(speed));
+    }
+    if(sender()==ui->ds_filamentFlow){
+        int flow = ui->ds_filamentFlow->value();
+        printerObject->setFlowRate(flow);
+        ui->sl_filamentFlow->setValue(flow);
+        ui->lb_filFlowValue->setText(QString::number(flow));
+
+    }
+    if(sender()==ui->ds_coolerFan)
+    {
+        int fan = ui->ds_coolerFan->value();
+        printerObject->setFanSpeed(fan);
+        ui->sl_coolerFan->setValue(fan);
+        ui->lb_coolerValue->setText(QString::number(fan));
+    }
+
 }
 void ManualControlWidget::setValue(int v){
     if(sender()==ui->sl_printSpeed)
