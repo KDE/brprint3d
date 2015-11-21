@@ -32,5 +32,8 @@
         <file>Icons/warningMax.png</file>
         <file>Icons/warningSkull.png</file>
         <file>Icons/brlogo.png</file>
+        <file>Icons/extOut.png</file>
+        <file>Icons/extOut2.png</file>
+        <file>Icons/extruderRetract.png</file>
     </qresource>
 </RCC>
