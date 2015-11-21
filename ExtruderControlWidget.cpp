@@ -28,10 +28,10 @@ ExtruderControlWidget::ExtruderControlWidget(QWidget *parent) :
     ui(new Ui::ExtruderControlWidget)
 {
     ui->setupUi(this);
-        connect(ui->bt_homeX,&QPushButton::clicked,this,&ExtruderControlWidget::setHomeX);
-        connect(ui->bt_homeY,&QPushButton::clicked,this,&ExtruderControlWidget::setHomeY);
-        connect(ui->bt_homeZ,&QPushButton::clicked,this,&ExtruderControlWidget::setHomeZ);
-        connect(ui->bt_homeXYZ,&QPushButton::clicked,this,&ExtruderControlWidget::setHomeXYZ);
+        connect(ui->bt_homeX,&QPushButton::clicked,this,&ExtruderControlWidget::setHome);
+        connect(ui->bt_homeY,&QPushButton::clicked,this,&ExtruderControlWidget::setHome);
+        connect(ui->bt_homeZ,&QPushButton::clicked,this,&ExtruderControlWidget::setHome);
+        connect(ui->bt_homeXYZ,&QPushButton::clicked,this,&ExtruderControlWidget::setHome);
 
         connect(ui->bt_leftX,&QPushButton::clicked,this,&ExtruderControlWidget::setPosX);
         connect(ui->bt_rightX,&QPushButton::clicked,this,&ExtruderControlWidget::setPosX);
@@ -93,23 +93,19 @@ void ExtruderControlWidget::getPrinterObject(Repetier *pObject){
     maxY = pObject->getMaxY();
     maxZ = pObject->getMaxZ();
 }
-
-void ExtruderControlWidget::setHomeX()
-{
-    printerObject->homeAxis('X');
-}
-void ExtruderControlWidget::setHomeY()
-{
-    printerObject->homeAxis('Y');
-}
-void ExtruderControlWidget::setHomeZ()
-{
-    printerObject->homeAxis('Z');
-}
-void ExtruderControlWidget::setHomeXYZ()
-{
-    printerObject->homeAllAxis();
-
+void ExtruderControlWidget::setHome(){
+    if(sender()==ui->bt_homeX){
+         printerObject->homeAxis('X');
+    }
+    if(sender()==ui->bt_homeY){
+        printerObject->homeAxis('Y');
+    }
+    if(sender()==ui->bt_homeZ){
+        printerObject->homeAxis('Z');
+    }
+    if(sender()==ui->bt_homeXYZ){
+        printerObject->homeAllAxis();
+    }
 }
 void ExtruderControlWidget::setPosX()
 {

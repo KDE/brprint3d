@@ -49,10 +49,7 @@ public slots:
         double maxX=0,maxY=0,maxZ=0;
     private slots:
         void updatePos(double posX, double posY, double posZ);
-        void setHomeX();
-        void setHomeY();
-        void setHomeZ();
-        void setHomeXYZ();
+        void setHome();
         void setPosX();
         void setPosY();
         void setPosZ();
