@@ -48,9 +48,9 @@ ExtruderControlWidget::ExtruderControlWidget(QWidget *parent) :
         ui->bt_downY->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowDown.png")));
         ui->bt_upZ->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowUp.png")));
         ui->bt_downZ->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowDown.png")));
-        ui->bt_filOneSpeed->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowLeft.png")));
-        ui->bt_filTwoSpeed->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowRight.png")));
-        ui->bt_filRetract->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowUp.png")));
+        ui->bt_filOneSpeed->setIcon(QIcon(QPixmap(":/Icons/Icons/extOut.png")));
+        ui->bt_filTwoSpeed->setIcon(QIcon(QPixmap(":/Icons/Icons/extOut2.png")));
+        ui->bt_filRetract->setIcon(QIcon(QPixmap(":/Icons/Icons/extruderRetract.png")));
         ui->lb_XY->setPixmap(QPixmap(":/Icons/Icons/axisXY.png"));
         ui->lb_axisZ->setPixmap(QPixmap(":/Icons/Icons/axisZ.png"));
         ui->lb_Extruder->setPixmap(QPixmap(":/Icons/Icons/filamentRetract.png"));
