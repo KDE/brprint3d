@@ -84,7 +84,7 @@ private slots:
     void setPlayStatus(bool b);
     void isPrintJobRunning(bool b);
     void spinEditFinished();
-    void setValue(int v);
+    void sliderValueChanged(int v);
 
 public slots:
     void setExtrudersInUse(int e);

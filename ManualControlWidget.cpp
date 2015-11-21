@@ -38,9 +38,9 @@ ManualControlWidget::ManualControlWidget(QWidget *parent) :
     connect(ui->ds_filamentFlow,&QSpinBox::editingFinished,this,&ManualControlWidget::spinEditFinished);
     connect(ui->ds_coolerFan,&QSpinBox::editingFinished,this,&ManualControlWidget::spinEditFinished);
 
-    connect(ui->sl_printSpeed,&QSlider::valueChanged, this, &ManualControlWidget::setValue);
-    connect(ui->sl_filamentFlow,&QSlider::valueChanged,this,&ManualControlWidget::setValue);
-    connect(ui->sl_coolerFan,&QSlider::valueChanged,this,&ManualControlWidget::setValue);
+    connect(ui->sl_printSpeed,&QSlider::valueChanged, this, &ManualControlWidget::sliderValueChanged);
+    connect(ui->sl_filamentFlow,&QSlider::valueChanged,this,&ManualControlWidget::sliderValueChanged);
+    connect(ui->sl_coolerFan,&QSlider::valueChanged,this,&ManualControlWidget::sliderValueChanged);
 
 }
 
@@ -618,7 +618,7 @@ void ManualControlWidget::spinEditFinished(){
     }
 
 }
-void ManualControlWidget::setValue(int v){
+void ManualControlWidget::sliderValueChanged(int v){
     if(sender()==ui->sl_printSpeed)
     {
         ui->ds_printSpeed->setValue(v);
