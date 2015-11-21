@@ -29,10 +29,10 @@
 
 ThreadRoutine::ThreadRoutine(Repetier *printer, int *extrudersInUse)
 {
-    this->printer = printer;
-    this->stopLoop = false;
-    this->isPrintJobRunning = true;
-    this->extrudersInUse = extrudersInUse;
+     printer = printer;
+     stopLoop = false;
+     isPrintJobRunning = true;
+     extrudersInUse = extrudersInUse;
 }
 
 
@@ -40,17 +40,17 @@ void ThreadRoutine::run()
 {
     while (true) {
         for (int i = 0; i < (*extrudersInUse); i++) {
-            this->extrudersTemp[i] = this->printer->getExtruderTemp(i);
+             extrudersTemp[i] =  printer->getExtruderTemp(i);
         }
 
-        this->posX = this->printer->getCurrentXPos();
-        this->posY = this->printer->getCurrentYPos();
-        this->posZ = this->printer->getCurrentZPos();
+         posX =  printer->getCurrentXPos();
+         posY =  printer->getCurrentYPos();
+         posZ =  printer->getCurrentZPos();
         sleep(2);
         emit updateTemp(extrudersTemp, printer->getBedTemp());
-        emit updatePos(this->posX, this->posY, this->posZ);
-        this->isPrintJobRunning = this->printer->isPrintJobRunning();
-        if (this->isPrintJobRunning == false)
+        emit updatePos( posX,  posY,  posZ);
+         isPrintJobRunning =  printer->isPrintJobRunning();
+        if ( isPrintJobRunning == false)
             emit finishedJob(true);
         if (stopLoop == true)
             break;
@@ -59,11 +59,11 @@ void ThreadRoutine::run()
 
 void ThreadRoutine::setLoop(bool b)
 {
-    this->stopLoop = b;
+     stopLoop = b;
 }
 
 ThreadRoutine::~ThreadRoutine()
 {
-    this->deleteLater();
+     deleteLater();
 }
 
