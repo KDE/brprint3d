@@ -32,12 +32,16 @@ ExtruderControlWidget::ExtruderControlWidget(QWidget *parent) :
         connect(ui->bt_homeY,SIGNAL(clicked()),this,SLOT(setHomeY()));
         connect(ui->bt_homeZ,SIGNAL(clicked()),this,SLOT(setHomeZ()));
         connect(ui->bt_homeXYZ,SIGNAL(clicked()),this,SLOT(setHomeXYZ()));
+
         connect(ui->bt_leftX,SIGNAL(clicked()),this,SLOT(setPosX()));
         connect(ui->bt_rightX,SIGNAL(clicked()),this,SLOT(setPosX()));
+
         connect(ui->bt_upY,SIGNAL(clicked()),this,SLOT(setPosY()));
         connect(ui->bt_downY,SIGNAL(clicked()),this,SLOT(setPosY()));
+
         connect(ui->bt_upZ,SIGNAL(clicked()),this,SLOT(setPosZ()));
         connect(ui->bt_downZ,SIGNAL(clicked()),this,SLOT(setPosZ()));
+
         ui->bt_homeX->setIcon(QIcon(QPixmap(":/Icons/Icons/homeAxisX.png")));
         ui->bt_homeY->setIcon(QIcon(QPixmap(":/Icons/Icons/homeaxisY.png")));
         ui->bt_homeZ->setIcon(QIcon(QPixmap(":/Icons/Icons/homeAxisZ.png")));
@@ -54,6 +58,10 @@ ExtruderControlWidget::ExtruderControlWidget(QWidget *parent) :
         ui->lb_XY->setPixmap(QPixmap(":/Icons/Icons/axisXY.png"));
         ui->lb_axisZ->setPixmap(QPixmap(":/Icons/Icons/axisZ.png"));
         ui->lb_Extruder->setPixmap(QPixmap(":/Icons/Icons/filamentRetract.png"));
+
+        connect(ui->bt_filRetract,&QPushButton::clicked,this,&ExtruderControlWidget::setFillExtruder);
+        connect(ui->bt_filOneSpeed,&QPushButton::clicked,this,&ExtruderControlWidget::setFillExtruder);
+        connect(ui->bt_filTwoSpeed,&QPushButton::clicked,this,&ExtruderControlWidget::setFillExtruder);
 
 
 
@@ -138,4 +146,16 @@ void ExtruderControlWidget::setPosZ()
 
 void ExtruderControlWidget::disablePositionsButtons(bool b){
     ui->wg_ExtruderButtons->setDisabled(b);
+}
+
+void ExtruderControlWidget::setFillExtruder(){
+    if(sender()==ui->bt_filRetract){
+
+    }
+    if(sender()==ui->bt_filOneSpeed){
+
+    }
+    if(sender()==ui->bt_filTwoSpeed){
+
+    }
 }

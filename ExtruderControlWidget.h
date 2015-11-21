@@ -56,6 +56,7 @@ public slots:
         void setPosX();
         void setPosY();
         void setPosZ();
+        void setFillExtruder();
 
 
 };
