@@ -28,19 +28,19 @@ ExtruderControlWidget::ExtruderControlWidget(QWidget *parent) :
     ui(new Ui::ExtruderControlWidget)
 {
     ui->setupUi(this);
-        connect(ui->bt_homeX,SIGNAL(clicked()),this,SLOT(setHomeX()));
-        connect(ui->bt_homeY,SIGNAL(clicked()),this,SLOT(setHomeY()));
-        connect(ui->bt_homeZ,SIGNAL(clicked()),this,SLOT(setHomeZ()));
-        connect(ui->bt_homeXYZ,SIGNAL(clicked()),this,SLOT(setHomeXYZ()));
+        connect(ui->bt_homeX,&QPushButton::clicked,this,&ExtruderControlWidget::setHomeX);
+        connect(ui->bt_homeY,&QPushButton::clicked,this,&ExtruderControlWidget::setHomeY);
+        connect(ui->bt_homeZ,&QPushButton::clicked,this,&ExtruderControlWidget::setHomeZ);
+        connect(ui->bt_homeXYZ,&QPushButton::clicked,this,&ExtruderControlWidget::setHomeXYZ);
 
-        connect(ui->bt_leftX,SIGNAL(clicked()),this,SLOT(setPosX()));
-        connect(ui->bt_rightX,SIGNAL(clicked()),this,SLOT(setPosX()));
+        connect(ui->bt_leftX,&QPushButton::clicked,this,&ExtruderControlWidget::setPosX);
+        connect(ui->bt_rightX,&QPushButton::clicked,this,&ExtruderControlWidget::setPosX);
 
-        connect(ui->bt_upY,SIGNAL(clicked()),this,SLOT(setPosY()));
-        connect(ui->bt_downY,SIGNAL(clicked()),this,SLOT(setPosY()));
+        connect(ui->bt_upY,&QPushButton::clicked,this,&ExtruderControlWidget::setPosY);
+        connect(ui->bt_downY,&QPushButton::clicked,this,&ExtruderControlWidget::setPosY);
 
-        connect(ui->bt_upZ,SIGNAL(clicked()),this,SLOT(setPosZ()));
-        connect(ui->bt_downZ,SIGNAL(clicked()),this,SLOT(setPosZ()));
+        connect(ui->bt_upZ,&QPushButton::clicked,this,&ExtruderControlWidget::setPosZ);
+        connect(ui->bt_downZ,&QPushButton::clicked,this,&ExtruderControlWidget::setPosZ);
 
         ui->bt_homeX->setIcon(QIcon(QPixmap(":/Icons/Icons/homeAxisX.png")));
         ui->bt_homeY->setIcon(QIcon(QPixmap(":/Icons/Icons/homeaxisY.png")));
