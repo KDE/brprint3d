@@ -278,7 +278,7 @@ void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
     float temp_Bed = tempBed;
     //Change bed temperatures
     ui->sl_bed->setValue(temp_Bed);
-    ui->lb_bedTemp->setText(QVariant(temp_Bed).toString());
+    ui->lb_bedTemp->setText(QString::number(temp_Bed));
     //Update Color Status
     if(ui->bt_Bed->isChecked())
     {
@@ -291,8 +291,8 @@ void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
      if(extrudersInUse==1)
      {
         ui->sl_extruder->setValue(tempExtruders[0]);//Set temperature on slider
-        ui->lb_extruderTemp0->setText(QVariant(tempExtruders[0]).toString());//Set Label of slider
-        ui->lb_extruderTemp1->setText(QVariant(tempExtruders[0]).toString());//Set label on Ext 1
+        ui->lb_extruderTemp0->setText(QString::number(tempExtruders[0]));//Set Label of slider
+        ui->lb_extruderTemp1->setText(QString::number(tempExtruders[0]));//Set label on Ext 1
         //Change color status
         if(ui->bt_extruder0->isChecked())
         {   if(ui->lb_extruderTemp1->text().toFloat()>=ui->ds_extruderTemp->value())
@@ -317,7 +317,7 @@ void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
                 {   if(ui->bt_extruder1->isChecked())//Slider belongs to extruder 1
                     {
                         ui->sl_extruder->setValue(tempExtruders[i-1]); //Set Slider value
-                        ui->lb_extruderTemp0->setText(QVariant(tempExtruders[i-1]).toString());//Set Label of slider
+                        ui->lb_extruderTemp0->setText(QString::number(tempExtruders[i-1]));//Set Label of slider
                     }
                     //Refresh Color Status
                     if(ui->bt_extruder0->isChecked())
@@ -326,13 +326,13 @@ void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
                         else
                             ui->bt_extruder1->setStyleSheet("background-color:yellow;");
                     }
-                    ui->lb_extruderTemp1->setText(QVariant(tempExtruders[i-1]).toString());//Set label extruder value
+                    ui->lb_extruderTemp1->setText(QString::number(tempExtruders[i-1]));//Set label extruder value
 
                 }break;
                 case 2:
                 {   if(ui->bt_extruder2->isChecked())//Slider belongs to extruder two
                     {   ui->sl_extruder->setValue(tempExtruders[i-1]);
-                        ui->lb_extruderTemp0->setText(QVariant(tempExtruders[i-1]).toString());//Set Label of slider
+                        ui->lb_extruderTemp0->setText(QString::number(tempExtruders[i-1]));//Set Label of slider
                     }
                    //Refresh Color Status
                    if(ui->bt_extruder0->isChecked())
@@ -341,12 +341,12 @@ void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
                         else
                             ui->bt_extruder2->setStyleSheet("background-color:yellow;");
                    }
-                   ui->lb_extruderTemp2->setText(QVariant(tempExtruders[i-1]).toString());
+                   ui->lb_extruderTemp2->setText(QString::number(tempExtruders[i-1]));
                 }break;
                 case 3:
                 {  if(ui->bt_extruder3->isChecked())//Slider belongs to extruder two
                    {   ui->sl_extruder->setValue(tempExtruders[i-1]);
-                       ui->lb_extruderTemp0->setText(QVariant(tempExtruders[i-1]).toString());//Set Label of slider
+                       ui->lb_extruderTemp0->setText(QString::number(tempExtruders[i-1]));//Set Label of slider
                    }
 
                     //Refresh Color Status
@@ -357,12 +357,12 @@ void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
                         else
                             ui->bt_extruder3->setStyleSheet("background-color:yellow;");
                    }
-                    ui->lb_extruderTemp3->setText(QVariant(tempExtruders[i-1]).toString());
+                    ui->lb_extruderTemp3->setText(QString::number(tempExtruders[i-1]));
                 }break;
                 case 4:
                 {  if(ui->bt_extruder4->isChecked())//Slider belongs to extruder two
                    {   ui->sl_extruder->setValue(tempExtruders[i-1]);
-                       ui->lb_extruderTemp0->setText(QVariant(tempExtruders[i-1]).toString());//Set Label of slider
+                       ui->lb_extruderTemp0->setText(QString::number(tempExtruders[i-1]));//Set Label of slider
                    }
                    //Change Color Status
                    if(ui->bt_extruder0->isChecked())
@@ -372,7 +372,7 @@ void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
                         else
                             ui->bt_extruder4->setStyleSheet("background-color:yellow;");
                    }
-                    ui->lb_extruderTemp4->setText(QVariant(tempExtruders[i-1]).toString());
+                    ui->lb_extruderTemp4->setText(QString::number(tempExtruders[i-1]));
                 }break;
                 default:
                     break;
