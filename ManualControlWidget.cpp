@@ -33,6 +33,10 @@ ManualControlWidget::ManualControlWidget(QWidget *parent) :
     connect(ui->ds_bedTemp,&QDoubleSpinBox::editingFinished,this,&ManualControlWidget::setNewBedTemp);
     connect(ui->ds_extruderTemp,&QDoubleSpinBox::editingFinished,this,&ManualControlWidget::setNewExtruderTemp);
     connect(this,&ManualControlWidget::disablePositionButtons,ui->extruderControlWidget,&ExtruderControlWidget::disablePositionsButtons);
+    connect(ui->ds_printSpeed,&QDoubleSpinBox::editingFinished,this,&ManualControlWidget::setPrintSpeed);
+    connect(ui->sl_printSpeed,&QSlider::valueChanged, this, &ManualControlWidget::setValue);
+    connect(ui->sl_filamentFlow,&QSlider::valueChanged,this,&ManualControlWidget::setValue);
+    connect(ui->sl_coolerFan,&QSlider::valueChanged,this,&ManualControlWidget::setValue);
 
 }
 
@@ -586,3 +590,29 @@ void ManualControlWidget::stopOnEmergency(){
     }
 }
 
+void ManualControlWidget::setPrintSpeed(){
+    double speed = ui->ds_printSpeed->value();
+    printerObject->setFeedRate(speed);
+    ui->sl_printSpeed->setValue(speed);
+    ui->lb_printSpeed->setText(QVariant(speed).toString());
+}
+void ManualControlWidget::setValue(int v){
+    if(sender()==ui->sl_printSpeed)
+    {
+        ui->ds_printSpeed->setValue(v);
+        ui->lb_printSpeed->setText(QString::number(v));
+        printerObject->setFeedRate(v);
+    }
+    if(sender()==ui->sl_filamentFlow)
+    {
+        ui->ds_filamentFlow->setValue(v);
+        ui->lb_filFlowValue->setText(QString::number(v));
+        printerObject->setFlowRate(v);
+    }
+    if(sender()==ui->sl_coolerFan)
+    {
+        ui->ds_coolerFan->setValue(v);
+        ui->lb_coolerValue->setText(QString::number(v));
+        printerObject->setFanSpeed(v);
+    }
+}
