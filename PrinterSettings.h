@@ -14,19 +14,19 @@ public:
     QString areaX="2";
     QString areaY="2";
     QString areaZ="2";
-    QString rateMoviment;
-    QString extruderSpeedMM;
-    QString extruderSpeedS;
-    QString extruderRetraction;
-    QString extruderQnt;
-    QString connectionType;
-    QString transmissionRate;
-    QString firmwareType;
-    QString cacheSize;
-    QString connectionPort;
-    int resetOnConnect, resetOnEmergency, printLog, extrudersInUse;
-    QString feedZ;
-    QString extruderMAXVol;
+    QString rateMoviment="";
+    QString extruderSpeedMM="";
+    QString extruderSpeedS="";
+    QString extruderRetraction="";
+    QString extruderQnt="";
+    QString connectionType="";
+    QString transmissionRate="";
+    QString firmwareType="";
+    QString cacheSize="";
+    QString connectionPort="";
+    int resetOnConnect=0, resetOnEmergency=0, printLog=0, extrudersInUse=1;
+    QString feedZ="";
+    QString extruderMAXVol="";
 
 
 };
