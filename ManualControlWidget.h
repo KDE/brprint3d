@@ -83,6 +83,7 @@ private slots:
     void setNewExtruderTemp();
     void setPlayStatus(bool b);
     void isPrintJobRunning(bool b);
+    void setPrintSpeed();
 
 public slots:
     void setExtrudersInUse(int e);
