@@ -431,6 +431,9 @@ QSlider::handle:horizontal {
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
+           <property name="tickPosition">
+            <enum>QSlider::NoTicks</enum>
+           </property>
           </widget>
           <widget class="QLabel" name="label_24">
            <property name="geometry">
@@ -444,9 +447,6 @@ QSlider::handle:horizontal {
            <property name="toolTip">
             <string>Rate of Feed</string>
            </property>
-           <property name="text">
-            <string/>
-           </property>
            <property name="pixmap">
             <pixmap resource="resources.qrc">:/Icons/Icons/printSpeed.png</pixmap>
            </property>
@@ -454,38 +454,7 @@ QSlider::handle:horizontal {
             <set>Qt::AlignCenter</set>
            </property>
           </widget>
-          <widget class="QWidget" name="layoutWidget_7">
-           <property name="geometry">
-            <rect>
-             <x>275</x>
-             <y>30</y>
-             <width>73</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_17">
-            <item>
-             <widget class="QLabel" name="lb_printSpeed">
-              <property name="minimumSize">
-               <size>
-                <width>50</width>
-                <height>17</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>50</width>
-                <height>17</height>
-               </size>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QDoubleSpinBox" name="ds_printSpeed">
+          <widget class="QSpinBox" name="ds_printSpeed">
            <property name="geometry">
             <rect>
              <x>340</x>
@@ -494,7 +463,43 @@ QSlider::handle:horizontal {
              <height>20</height>
             </rect>
            </property>
+           <property name="maximum">
+            <number>400</number>
+           </property>
+           <property name="value">
+            <number>70</number>
+           </property>
           </widget>
+          <widget class="QLabel" name="lb_printSpeed">
+           <property name="geometry">
+            <rect>
+             <x>310</x>
+             <y>30</y>
+             <width>30</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>30</width>
+             <height>17</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>17</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>70</string>
+           </property>
+          </widget>
+          <zorder>sl_printSpeed</zorder>
+          <zorder>label_24</zorder>
+          <zorder>ds_printSpeed</zorder>
+          <zorder>lb_printSpeed</zorder>
+          <zorder>lb_printSpeed</zorder>
          </widget>
         </item>
         <item>
@@ -572,38 +577,7 @@ QSlider::handle:horizontal {
             <set>Qt::AlignCenter</set>
            </property>
           </widget>
-          <widget class="QWidget" name="layoutWidget_8">
-           <property name="geometry">
-            <rect>
-             <x>280</x>
-             <y>30</y>
-             <width>66</width>
-             <height>19</height>
-            </rect>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_18">
-            <item>
-             <widget class="QLabel" name="lb_filFlowValue">
-              <property name="minimumSize">
-               <size>
-                <width>50</width>
-                <height>17</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>50</width>
-                <height>17</height>
-               </size>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QDoubleSpinBox" name="ds_filamentFlow">
+          <widget class="QSpinBox" name="ds_filamentFlow">
            <property name="geometry">
             <rect>
              <x>340</x>
@@ -611,6 +585,37 @@ QSlider::handle:horizontal {
              <width>65</width>
              <height>20</height>
             </rect>
+           </property>
+           <property name="maximum">
+            <number>110</number>
+           </property>
+           <property name="value">
+            <number>100</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="lb_filFlowValue">
+           <property name="geometry">
+            <rect>
+             <x>300</x>
+             <y>30</y>
+             <width>30</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>30</width>
+             <height>17</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>17</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>100</string>
            </property>
           </widget>
          </widget>
@@ -696,9 +701,9 @@ QSlider::handle:horizontal {
           <widget class="QWidget" name="layoutWidget_9">
            <property name="geometry">
             <rect>
-             <x>275</x>
+             <x>280</x>
              <y>30</y>
-             <width>116</width>
+             <width>51</width>
              <height>19</height>
             </rect>
            </property>
@@ -707,18 +712,18 @@ QSlider::handle:horizontal {
              <widget class="QLabel" name="lb_coolerValue">
               <property name="minimumSize">
                <size>
-                <width>50</width>
+                <width>30</width>
                 <height>17</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>50</width>
+                <width>30</width>
                 <height>17</height>
                </size>
               </property>
               <property name="text">
-               <string/>
+               <string>50</string>
               </property>
              </widget>
             </item>
@@ -731,7 +736,7 @@ QSlider::handle:horizontal {
             </item>
            </layout>
           </widget>
-          <widget class="QDoubleSpinBox" name="ds_coolerFan">
+          <widget class="QSpinBox" name="ds_coolerFan">
            <property name="geometry">
             <rect>
              <x>340</x>
@@ -739,6 +744,12 @@ QSlider::handle:horizontal {
              <width>65</width>
              <height>20</height>
             </rect>
+           </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+           <property name="value">
+            <number>50</number>
            </property>
           </widget>
          </widget>
@@ -871,7 +882,7 @@ QSlider::handle:horizontal {
             <rect>
              <x>270</x>
              <y>35</y>
-             <width>116</width>
+             <width>76</width>
              <height>19</height>
             </rect>
            </property>
@@ -1031,7 +1042,7 @@ QSlider::handle:horizontal {
             <rect>
              <x>274</x>
              <y>35</y>
-             <width>111</width>
+             <width>76</width>
              <height>19</height>
             </rect>
            </property>
