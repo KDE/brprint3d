@@ -36,7 +36,6 @@ class ThreadRoutine : public QThread
 
 private:
     Repetier *printer=nullptr;
-    QMutex mutexIno;
     bool stopLoop;
     double posX, posY, posZ;
     bool isPrintJobRunning;
