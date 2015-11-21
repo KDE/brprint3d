@@ -31,7 +31,7 @@ private slots:
 private:
     Ui::PrinterSettingsWidget *ui;
     int extrudersInUse;
-    arduinoListener *arduino_Listener=NULL;
+    arduinoListener *arduino_Listener=nullptr;
     bool garbage;
 signals:
    void s_extrudersInUse(int n);

@@ -38,8 +38,8 @@ public:
     virtual void run() Q_DECL_OVERRIDE;
     ~arduinoListener();
 private:
-    bool garbage, test;
-    QString file;
+    bool garbage=false, test=false;
+    QString file="";
 signals:
     void arduinoConnect();
 };

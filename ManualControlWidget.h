@@ -35,11 +35,11 @@ public:
     void destructPrinterObject();
     void hideExtruders(int e);
     void startPrintJob(QString filePath);
-    ThreadRoutine *temp=NULL;
+    ThreadRoutine *temp=nullptr;
 
 private:
     Ui::ManualControlWidget *ui;
-    Repetier *printerObject=NULL;
+    Repetier *printerObject=nullptr;
     int extrudersInUse=1;
     QString pathslicer,pathcura;
     void locateSlicer();

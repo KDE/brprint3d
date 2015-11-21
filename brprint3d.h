@@ -64,16 +64,16 @@ public:
     explicit BrPrint3D(QWidget *parent = 0);
     ~BrPrint3D();
     void init();
-    BigButton *bt_import=NULL;
-    BigButton *bt_open=NULL;
-    BigButton *bt_connect=NULL;
-    BigButton *bt_play=NULL;
-    BigButton *bt_pause=NULL;
-    BigButton *bt_stop=NULL;
-    BigButton *bt_stopOnEmergency=NULL;
+    BigButton *bt_import=nullptr;
+    BigButton *bt_open=nullptr;
+    BigButton *bt_connect=nullptr;
+    BigButton *bt_play=nullptr;
+    BigButton *bt_pause=nullptr;
+    BigButton *bt_stop=nullptr;
+    BigButton *bt_stopOnEmergency=nullptr;
 private:
     Ui::BrPrint3D *ui;
-    vtkWidget *vtkView=NULL;
+    vtkWidget *vtkView=nullptr;
     PrinterSettings psettings;
     QString filePath;
     void setEnabled(bool b);
