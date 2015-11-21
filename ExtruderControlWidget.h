@@ -46,6 +46,7 @@ public slots:
     private:
         Ui::ExtruderControlWidget* ui;
         Repetier *printerObject=nullptr;
+        double maxX=0,maxY=0,maxZ=0;
     private slots:
         void updatePos(double posX, double posY, double posZ);
         void setHomeX();

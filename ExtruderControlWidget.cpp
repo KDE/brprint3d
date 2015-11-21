@@ -87,6 +87,9 @@ void ExtruderControlWidget::updatePos(double posX, double posY, double posZ)
 }
 void ExtruderControlWidget::getPrinterObject(Repetier *pObject){
     printerObject = pObject;
+    maxX = pObject->getMaxX();
+    maxY = pObject->getMaxY();
+    maxZ = pObject->getMaxZ();
 }
 
 void ExtruderControlWidget::setHomeX()
@@ -113,7 +116,8 @@ void ExtruderControlWidget::setPosX()
         pos+=ui->cb_displacement->currentText().toDouble();
     if(sender()==ui->bt_rightX)
         pos-=ui->cb_displacement->currentText().toDouble();
-    printerObject->moveAxisToPos('X',pos);
+    if(pos>=0 && pos<=maxX)
+        printerObject->moveAxisToPos('X',pos);
 }
 void ExtruderControlWidget::setPosY()
 {
@@ -122,7 +126,8 @@ void ExtruderControlWidget::setPosY()
         pos+=ui->cb_displacement->currentText().toDouble();
     if(sender()==ui->bt_downY)
         pos-=ui->cb_displacement->currentText().toDouble();
-    printerObject->moveAxisToPos('Y',pos);
+    if(pos>=0 && pos<=maxY)
+        printerObject->moveAxisToPos('Y',pos);
 
 }
 void ExtruderControlWidget::setPosZ()
@@ -132,7 +137,8 @@ void ExtruderControlWidget::setPosZ()
         pos+=ui->cb_displacement->currentText().toDouble();
     if(sender()==ui->bt_downZ)
         pos-=ui->cb_displacement->currentText().toDouble();
-    printerObject->moveAxisToPos('Z',pos);
+    if(pos>=0 && pos<=maxZ)
+        printerObject->moveAxisToPos('Z',pos);
 
 }
 
