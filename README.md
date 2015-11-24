@@ -2,6 +2,7 @@ This is the README file for the development version of BRPrint3d
 
 Please check the ReleaseNotes.txt for details about new features and
 changes since last release
+This version only have support to 3DPrinters with Repetier Firmware.
 
 BRPrint3d can be found at http://projects.kde.org/brprint3d
 
