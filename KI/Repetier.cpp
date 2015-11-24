@@ -804,7 +804,7 @@ double Repetier::getCurrentZPos()
             arduino->readUntil(serialAns, '\n', this->bufsize);
             p = strstr(serialAns, "Z:");
         } while (p == NULL);
-        sscanf(p, "Z:%lf ", &currentY);
+        sscanf(p, "Z:%lf ", &currentZ);
         arduinoAccess.unlock();
     }
     return currentZ;

@@ -111,9 +111,9 @@ void ExtruderControlWidget::setPosX()
 {
     double pos = printerObject->getCurrentXPos();
     if(sender()==ui->bt_leftX)
-        pos+=ui->cb_displacement->currentText().toDouble();
-    if(sender()==ui->bt_rightX)
         pos-=ui->cb_displacement->currentText().toDouble();
+    if(sender()==ui->bt_rightX)
+        pos+=ui->cb_displacement->currentText().toDouble();
     if(pos>=0 && pos<=maxX)
         printerObject->moveAxisToPos('X',pos);
 }
