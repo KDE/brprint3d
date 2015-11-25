@@ -41,6 +41,9 @@ ManualControlWidget::ManualControlWidget(QWidget *parent) :
     connect(ui->sl_printSpeed,&QSlider::valueChanged, this, &ManualControlWidget::sliderValueChanged);
     connect(ui->sl_filamentFlow,&QSlider::valueChanged,this,&ManualControlWidget::sliderValueChanged);
     connect(ui->sl_coolerFan,&QSlider::valueChanged,this,&ManualControlWidget::sliderValueChanged);
+    timer = new QTimer();
+    connect(timer,&QTimer::timeout,this,&ManualControlWidget::updateTemp);
+    connect(timer,&QTimer::timeout,ui->extruderControlWidget,&ExtruderControlWidget::updatePos);
 
 }
 
@@ -108,7 +111,7 @@ void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
         printerObject = new Repetier(transmissionRate,connectionPort,bufferSize,maxX,maxY,maxZ,resetOnconnect,isCommaDecimalMark);
         extruderQnt = printerObject->getNoOfExtruders();
         ui->extruderControlWidget->getPrinterObject(printerObject);
-        startThreadRoutine();
+        timer->start(1000);
         ui->ManualControlTab->setEnabled(true);
         emit enablePlayButton(true);
         msg.setText(tr("Successful Connection"));
@@ -130,11 +133,10 @@ void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
 
 }
 void ManualControlWidget::destructPrinterObject()
-{
+{   timer->stop();
     printerObject->setBedTemp(0);
     for(int i=0;i<extruderQnt;i++)
         printerObject->setExtrTemp(i,0);
-    stopThreadRoutine();
     printerObject->~Repetier();
     ui->bt_Bed->setChecked(false);
     ui->bt_extruder0->setChecked(false);
@@ -273,9 +275,13 @@ void ManualControlWidget::setInitialMarks()
 
 //This slot update on UI the value of Temperatures of the Bed and Extruders
 //There some inconsistency on the tests here - CHECK!
-void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
+void ManualControlWidget::updateTemp()
 {   //This function update the printer temperatures on the screen
-    float temp_Bed = tempBed;
+    double temp_Bed = printerObject->getBedTemp();
+    double tempExtruders[5];
+    for (int i = 0; i <extrudersInUse; i++) {
+         tempExtruders[i] =  printerObject->getExtruderTemp(i);
+    }
     //Change bed temperatures
     ui->sl_bed->setValue(temp_Bed);
     ui->lb_bedTemp->setText(QString::number(temp_Bed));
@@ -380,21 +386,6 @@ void ManualControlWidget::updateTemp(double *tempExtruders, double tempBed)
             }
 }
 }
-void ManualControlWidget::stopThreadRoutine()
-{
-    temp->setLoop(true);
-    temp->wait(2000);
-    temp->quit();
-    temp->~ThreadRoutine();
-}
-void ManualControlWidget::startThreadRoutine()
-{
-     temp = new ThreadRoutine(printerObject,&extrudersInUse);
-     temp->start();
-     connect(temp,SIGNAL(updateTemp(double*,double)),this,SLOT(updateTemp(double*,double)));
-     connect(temp,SIGNAL(updatePos(double, double, double)), ui->extruderControlWidget, SLOT(updatePos(double, double, double)));
-
-}
 void ManualControlWidget::hideExtruders(int e)
 {
     switch (e){
@@ -491,13 +482,11 @@ void ManualControlWidget::setGcodePreview(QString t){
 }
 void ManualControlWidget::startPrintJob(QString filePath){
    QMessageBox msg;
-   stopThreadRoutine();
    try {    std::string path = filePath.toUtf8().constData();
             printerObject->openFile(path,printLogStatus);
             printerObject->startPrintJob(true);
             msg.setText(tr("Print job started!"));
             msg.exec();
-            startThreadRoutine();
             emit disablePositionButtons(true);
             connect(temp, SIGNAL(finishedJob(bool)), this, SLOT(isPrintJobRunning(bool)));
        }
@@ -545,7 +534,6 @@ void ManualControlWidget::pausePrintJob(bool b){
 }
 void ManualControlWidget::stopPrintJob(){
     QMessageBox msg;
-    stopThreadRoutine();
     printerObject->stopPrintJob();
     printerObject->closeFile();
     try {
@@ -572,12 +560,10 @@ void ManualControlWidget::stopPrintJob(){
     }
 
     emit disablePositionButtons(false);
-    startThreadRoutine();
 }
 
 void ManualControlWidget::stopOnEmergency(){
     QMessageBox msg;
-    stopThreadRoutine();
     msg.setText("Emergency Stop Clicked, click on 'Ok' and wait!");
     msg.setIcon(QMessageBox::Critical);
     msg.exec();
