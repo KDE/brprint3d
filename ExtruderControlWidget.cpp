@@ -79,12 +79,12 @@ void ExtruderControlWidget::init()
 }
 
 //This slot update on UI the position of the Extruder
-void ExtruderControlWidget::updatePos(double posX, double posY, double posZ)
+void ExtruderControlWidget::updatePos()
 {   //This function update the extruder position on the screen
 
-    ui->tb_axisXPos->setText(QString::number(posX));
-    ui->tb_axisYPos->setText(QString::number(posY));
-    ui->tb_axisZPos->setText(QString::number(posZ));
+    ui->tb_axisXPos->setText(QString::number(printerObject->getCurrentXPos()));
+    ui->tb_axisYPos->setText(QString::number(printerObject->getCurrentYPos()));
+    ui->tb_axisZPos->setText(QString::number(printerObject->getCurrentZPos()));
 
 }
 void ExtruderControlWidget::getPrinterObject(Repetier *pObject){

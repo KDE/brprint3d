@@ -42,13 +42,15 @@ public:
     void getPrinterObject(Repetier *pObject);
 public slots:
     void disablePositionsButtons(bool b);
+    void updatePos();
 
     private:
         Ui::ExtruderControlWidget* ui;
         Repetier *printerObject=nullptr;
         double maxX=0,maxY=0,maxZ=0;
+        QTimer *timer;
     private slots:
-        void updatePos(double posX, double posY, double posZ);
+
         void setHome();
         void setPosX();
         void setPosY();
