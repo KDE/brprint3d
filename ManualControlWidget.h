@@ -25,7 +25,6 @@
 #include "ExtruderControlWidget.h"
 #include <QWidget>
 #include "KI/Repetier.h"
-#include "threadRotine.h"
 #include "PrinterSettings.h"
 #include <QTabWidget>
 #include <QSettings>
@@ -56,7 +55,6 @@ public:
     void destructPrinterObject();
     void hideExtruders(int e);
     void startPrintJob(QString filePath);
-    ThreadRoutine *temp=nullptr;
 
 private:
     Ui::ManualControlWidget *ui;
@@ -68,12 +66,14 @@ private:
     QSettings settings;
     bool garbage,playStatus,printLogStatus,pauseStatus=false;
     int extruderQnt;
-    QTimer *timer;
+    QTimer *timer=nullptr;
+
 signals:
     void checkConnectButton(bool b);
     void enablePlayButton(bool b);
     void disableCbExtruderQnt(bool b);
     void disablePositionButtons(bool b);
+
 private slots:
     void updateTemp();
     void startBed(bool checked);
@@ -82,7 +82,7 @@ private slots:
     void setNewBedTemp();
     void setNewExtruderTemp();
     void setPlayStatus(bool b);
-    void isPrintJobRunning(bool b);
+    void isPrintJobRunning();
     void spinEditFinished();
     void sliderValueChanged(int v);
 
