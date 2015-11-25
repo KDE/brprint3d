@@ -31,7 +31,6 @@
 #include <Windows/legalwarning.h>
 #include <Windows/loading.h>
 #include "KI/Repetier.h"
-#include "threadRotine.h"
 #include "vtkWidget.h"
 #include "PrinterSettings.h"
 #include "BigButton.h"
