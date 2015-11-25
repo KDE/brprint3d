@@ -512,8 +512,8 @@ void ManualControlWidget::isPrintJobRunning()
 {   bool b = printerObject->isPrintJobRunning();
     //This function return if the print job is finalized
     QMessageBox msg;
-    if (b) {
-        msg.setText("Print job finish or paused!");
+    if (!b && playStatus) {
+        msg.setText("Print job finish!");
         msg.setIcon(QMessageBox::Information);
         msg.exec();
         emit disableCbExtruderQnt(true);
@@ -524,8 +524,12 @@ void ManualControlWidget::isPrintJobRunning()
     }
 }
 void ManualControlWidget::pausePrintJob(bool b){
+   QMessageBox msg;
     if (b){
         printerObject->stopPrintJob();
+        msg.setText("Print job paused!");
+        msg.setIcon(QMessageBox::Information);
+        msg.exec();
        }
     else{
           printerObject->startPrintJob(false);
