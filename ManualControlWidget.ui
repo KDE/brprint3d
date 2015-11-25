@@ -910,7 +910,7 @@ QSlider::handle:horizontal {
             </item>
            </layout>
           </widget>
-          <widget class="QDoubleSpinBox" name="ds_bedTemp">
+          <widget class="QSpinBox" name="ds_bedTemp">
            <property name="geometry">
             <rect>
              <x>340</x>
@@ -919,11 +919,8 @@ QSlider::handle:horizontal {
              <height>20</height>
             </rect>
            </property>
-           <property name="decimals">
-            <number>2</number>
-           </property>
            <property name="maximum">
-            <double>200.000000000000000</double>
+            <number>115</number>
            </property>
           </widget>
          </widget>
@@ -949,7 +946,7 @@ QSlider::handle:horizontal {
            <property name="geometry">
             <rect>
              <x>50</x>
-             <y>20</y>
+             <y>15</y>
              <width>290</width>
              <height>20</height>
             </rect>
@@ -1076,7 +1073,7 @@ QSlider::handle:horizontal {
             </item>
            </layout>
           </widget>
-          <widget class="QDoubleSpinBox" name="ds_extruderTemp">
+          <widget class="QSpinBox" name="ds_extruderTemp">
            <property name="geometry">
             <rect>
              <x>340</x>
@@ -1086,7 +1083,7 @@ QSlider::handle:horizontal {
             </rect>
            </property>
            <property name="maximum">
-            <double>300.000000000000000</double>
+            <number>260</number>
            </property>
           </widget>
          </widget>
