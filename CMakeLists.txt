@@ -40,8 +40,7 @@ set(Widgets_SRCS
 set(Br-Print_SRCS
 	arduinolistener.cpp
 	brprint3d.cpp
-	main.cpp
-	threadRotine.cpp
+        main.cpp
 	vtkWidget.cpp
         PrinterSettingsWidget.cpp
         PrinterSettings.cpp
