@@ -44,6 +44,7 @@ ManualControlWidget::ManualControlWidget(QWidget *parent) :
     timer = new QTimer();
     connect(timer,&QTimer::timeout,this,&ManualControlWidget::updateTemp);
     connect(timer,&QTimer::timeout,ui->extruderControlWidget,&ExtruderControlWidget::updatePos);
+    connect(timer,&QTimer::timeout,this,&ManualControlWidget::isPrintJobRunning);
 
 }
 
@@ -134,12 +135,16 @@ void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
 }
 void ManualControlWidget::destructPrinterObject()
 {   timer->stop();
-    printerObject->setBedTemp(0);
-    for(int i=0;i<extruderQnt;i++)
-        printerObject->setExtrTemp(i,0);
+    if(ui->bt_Bed->isChecked()){
+        printerObject->setBedTemp(0);
+        ui->bt_Bed->setChecked(false);
+    }
+    if(ui->bt_extruder0->isChecked()){
+        for(int i=0;i<extrudersInUse;i++)
+            printerObject->setExtrTemp(i,0);
+        ui->bt_extruder0->setChecked(false);
+    }
     printerObject->~Repetier();
-    ui->bt_Bed->setChecked(false);
-    ui->bt_extruder0->setChecked(false);
     ui->ManualControlTab->setDisabled(true);
 }
 void ManualControlWidget::startBed(bool checked){
@@ -488,7 +493,6 @@ void ManualControlWidget::startPrintJob(QString filePath){
             msg.setText(tr("Print job started!"));
             msg.exec();
             emit disablePositionButtons(true);
-            connect(temp, SIGNAL(finishedJob(bool)), this, SLOT(isPrintJobRunning(bool)));
        }
    catch (std::string exc){
 
@@ -504,12 +508,11 @@ void ManualControlWidget::startPrintJob(QString filePath){
 void ManualControlWidget::setPrintLogStatus(bool b){
     printLogStatus = b;
 }
-void ManualControlWidget::isPrintJobRunning(bool b)
-{
+void ManualControlWidget::isPrintJobRunning()
+{   bool b = printerObject->isPrintJobRunning();
     //This function return if the print job is finalized
     QMessageBox msg;
-    if (b == true) {
-        disconnect(temp, SIGNAL(finishedJob(bool)), this, SLOT(isPrintJobRunning(bool)));
+    if (b) {
         msg.setText("Print job finish or paused!");
         msg.setIcon(QMessageBox::Information);
         msg.exec();
@@ -523,11 +526,9 @@ void ManualControlWidget::isPrintJobRunning(bool b)
 void ManualControlWidget::pausePrintJob(bool b){
     if (b){
         printerObject->stopPrintJob();
-        disconnect(temp, SIGNAL(finishedJob(bool)), this, SLOT(isPrintJobRunning(bool)));
        }
     else{
           printerObject->startPrintJob(false);
-          connect(temp, SIGNAL(finishedJob(bool)), this, SLOT(isPrintJobRunning(bool)));
        }
     pauseStatus = b;
 
