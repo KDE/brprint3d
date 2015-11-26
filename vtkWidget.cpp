@@ -71,26 +71,26 @@ void vtkWidget::renderGcode(QString text)
     double x=0,y=0,z=0,count=0;
     for(int i=0; i!=list.size(); i++)
     {
-        if(list[i].startsWith(";")==false)
+        if(list[i].startsWith(';')==false)
         {
             QStringList aux = list[i].split(" ");
             for(int j=1;j!=aux.size();j++)
             {
-                if(aux[j].startsWith("X") && aux[j+1].startsWith("Y"))
+                if(aux[j].startsWith('X') && aux[j+1].startsWith('Y'))
                 {
                     //ler ponto
-                    QString x_str = aux[j].section("X",1);
+                    QString x_str = aux[j].section('X',1);
                      x = x_str.toDouble();
-                    QString y_str = aux[j+1].section("Y",1);
+                    QString y_str = aux[j+1].section('Y',1);
                      y = y_str.toDouble();
                      points->InsertPoint(count,x,y,z);
                      count++;
 
                 }
-               else if(aux[j].startsWith("Z"))
+               else if(aux[j].startsWith('Z'))
                 {
                   //ler ponto
-                    QString z_str = aux[j].section("Z",1);
+                    QString z_str = aux[j].section('Z',1);
                     z = z_str.toDouble();
                     points->InsertPoint(count,x,y,z);
                     count++;
