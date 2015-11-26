@@ -29,7 +29,6 @@
 #include <Windows/aboutbrprint.h>
 #include <Windows/help.h>
 #include <Windows/legalwarning.h>
-#include <Windows/loading.h>
 #include "KI/Repetier.h"
 #include "vtkWidget.h"
 #include "PrinterSettings.h"
@@ -47,7 +46,6 @@
 #include <QObject>
 #include <QList>
 #include <QInputDialog>
-#include <QList>
 #include <QStandardPaths>
 
 namespace Ui
