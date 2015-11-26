@@ -487,7 +487,7 @@ void ManualControlWidget::setGcodePreview(QString t){
 }
 void ManualControlWidget::startPrintJob(QString filePath){
    QMessageBox msg;
-   try {    std::string path = filePath.toUtf8().constData();
+   try {    std::string path = filePath.toStdString();
             printerObject->openFile(path,printLogStatus);
             printerObject->startPrintJob(true);
             msg.setText(tr("Print job started!"));
