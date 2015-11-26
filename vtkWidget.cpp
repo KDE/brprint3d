@@ -67,13 +67,13 @@ void vtkWidget::renderSTL(QString pathStl)
 
 void vtkWidget::renderGcode(QString text)
 {   vtkSmartPointer<vtkPoints> points = vtkSmartPointer<vtkPoints>::New();
-    QStringList list = text.split("\n",QString::SkipEmptyParts);
+    QStringList list = text.split('\n',QString::SkipEmptyParts);
     double x=0,y=0,z=0,count=0;
     for(int i=0; i!=list.size(); i++)
     {
         if(list[i].startsWith(';')==false)
         {
-            QStringList aux = list[i].split(" ");
+            QStringList aux = list[i].split(' ');
             for(int j=1;j!=aux.size();j++)
             {
                 if(aux[j].startsWith('X') && aux[j+1].startsWith('Y'))
