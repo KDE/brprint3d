@@ -46,6 +46,13 @@
 #include <vtkDoubleArray.h>
 #include <vtkPoints.h>
 #include <vtkPolyLine.h>
+#include <vtkTransform.h>
+#include <vtkTriangleFilter.h>
+#include <vtkCubeSource.h>
+#include <vtkProperty.h>
+#define DEFAULTX 200
+#define DEFAULTY 200
+#define DEFAULTZ 200
 
 class vtkWidget : public QVTKWidget
 {
@@ -56,7 +63,20 @@ vtkWidget();
     void renderSTL(QString path);
     void renderGcode(QString text);
 
+
 private:
+    void drawCube();
+    void cleanup();
+
+    //Vtk Variables
+    vtkSmartPointer<vtkRenderer> renderer;
+    vtkRenderWindow* renderWindow;
+    vtkSmartPointer<vtkPolyDataMapper> mapperStl;
+    vtkSmartPointer<vtkPolyDataMapper> mapperGcode;
+     vtkSmartPointer<vtkPolyDataMapper> mapperCube;
+    vtkSmartPointer<vtkActor> actorStl;
+    vtkSmartPointer<vtkActor> actorGcode;
+    vtkSmartPointer<vtkActor> actorCube;
 
 };
 

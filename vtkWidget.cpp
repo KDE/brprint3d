@@ -34,6 +34,18 @@
 
 vtkWidget::vtkWidget()
 {
+    renderer = vtkSmartPointer<vtkRenderer>::New();
+    renderWindow = this->GetRenderWindow();
+    renderWindow->AddRenderer(renderer);
+    renderer->SetBackground(0,0.5,1);
+    mapperStl = vtkSmartPointer<vtkPolyDataMapper>::New();
+    mapperGcode = vtkSmartPointer<vtkPolyDataMapper>::New();
+    mapperCube = vtkSmartPointer<vtkPolyDataMapper>::New();
+    actorStl = vtkSmartPointer<vtkActor>::New();
+    actorGcode = vtkSmartPointer<vtkActor>::New();
+    actorCube = vtkSmartPointer<vtkActor>::New();
+    drawCube();
+
     
 }
 
@@ -42,31 +54,20 @@ vtkWidget::~vtkWidget()
     
 }
 void vtkWidget::renderSTL(QString pathStl)
-{
+{   cleanup();
     vtkSmartPointer<vtkSTLReader> reader = vtkSmartPointer<vtkSTLReader>::New();
     reader->SetFileName(pathStl.toStdString().c_str());
     reader->Update();
-
-    vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-    mapper->SetInputConnection(reader->GetOutputPort());
-
-    vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
-    actor->SetMapper(mapper);
-
-    vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
-    vtkRenderWindow* renderWindow = this->GetRenderWindow();
-
-    renderWindow->AddRenderer(renderer);
-
-    renderer->AddActor(actor);
-    renderer->SetBackground(0, .5, 1); // Background color blue
-
+    mapperStl->SetInputConnection(reader->GetOutputPort());
+    actorStl->SetMapper(mapperStl);
+    renderer->AddActor(actorStl);
     renderer->ResetCamera();
     renderWindow->Render();
 }
 
 void vtkWidget::renderGcode(QString text)
-{   vtkSmartPointer<vtkPoints> points = vtkSmartPointer<vtkPoints>::New();
+{   cleanup();
+    vtkSmartPointer<vtkPoints> points = vtkSmartPointer<vtkPoints>::New();
     QStringList list = text.split('\n',QString::SkipEmptyParts);
     double x=0,y=0,z=0,count=0;
     for(int i=0; i!=list.size(); i++)
@@ -119,21 +120,45 @@ void vtkWidget::renderGcode(QString text)
      polyData->SetLines(cells);
 
      // Setup actor and mapper
-     vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-     mapper->SetInputData(polyData);
-
-
-     vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
-     actor->SetMapper(mapper);
-
-     vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
-     vtkRenderWindow* renderWindow = this->GetRenderWindow();
-
-     renderWindow->AddRenderer(renderer);
-
-     renderer->AddActor(actor);
-     renderer->SetBackground(0, .5, 1); // Background color blue
-
+     mapperGcode->SetInputData(polyData);
+     actorGcode->SetMapper(mapperGcode);
+     renderer->AddActor(actorGcode);
      renderer->ResetCamera();
      renderWindow->Render();
+}
+
+
+void vtkWidget::cleanup(){
+    if(actorStl!=0)
+    {
+        renderer->RemoveActor(actorStl);
+    }
+    if(actorGcode!=0)
+    {
+        renderer->RemoveActor(actorGcode);
+    }
+}
+
+void vtkWidget::drawCube(){
+    vtkSmartPointer <vtkCubeSource> res = vtkSmartPointer<vtkCubeSource>::New();
+    res->SetXLength(DEFAULTX);
+    res->SetYLength(DEFAULTY);
+    res->SetZLength(DEFAULTZ);
+    res->SetCenter(DEFAULTX/2, DEFAULTY/2, DEFAULTZ/2);
+    res->Update();
+
+    vtkSmartPointer<vtkTriangleFilter> triangulate = vtkSmartPointer<vtkTriangleFilter>::New();
+    triangulate->SetInputConnection(res->GetOutputPort());
+    triangulate->Update();
+
+    mapperCube->SetInputConnection(res->GetOutputPort());
+
+
+    actorCube->SetMapper(mapperCube);
+    actorCube->GetProperty()->SetRepresentationToWireframe();
+
+    renderer->AddActor(actorCube);
+    renderer->ResetCamera();
+    renderWindow->Render();
+
 }
