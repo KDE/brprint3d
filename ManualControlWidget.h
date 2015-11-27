@@ -64,7 +64,7 @@ private:
     void locateSlicer();
     void locateCura();
     QSettings settings;
-    bool garbage,playStatus,printLogStatus,pauseStatus=false;
+    bool garbage,playStatus=false,printLogStatus,pauseStatus=false;
     int extruderQnt;
     QTimer *timer=nullptr;
 
@@ -81,7 +81,7 @@ private slots:
     void disableExtrudersButtons(bool checked);
     void setNewBedTemp();
     void setNewExtruderTemp();
-    void setPlayStatus(bool b);
+
     void isPrintJobRunning();
     void spinEditFinished();
     void sliderValueChanged(int v);
@@ -90,6 +90,7 @@ public slots:
     void setExtrudersInUse(int e);
     void setPrintLogStatus(bool b);
     void pausePrintJob(bool b);
+    void setPlayStatus(bool b);
     void stopPrintJob();
     void stopOnEmergency();
    
