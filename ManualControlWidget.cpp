@@ -518,7 +518,7 @@ void ManualControlWidget::isPrintJobRunning()
         msg.exec();
         emit disableCbExtruderQnt(false);
         emit disableExtrudersButtons(false);
-        disconnect(timer,&QTimer::timeout,this,&ManualControlWidget::isPrintJobRunning)
+        disconnect(timer,&QTimer::timeout,this,&ManualControlWidget::isPrintJobRunning);
     }
 }
 void ManualControlWidget::pausePrintJob(bool b){
