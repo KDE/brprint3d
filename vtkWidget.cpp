@@ -62,8 +62,17 @@ void vtkWidget::renderSTL(QString pathStl)
     vtkSmartPointer<vtkSTLReader> reader = vtkSmartPointer<vtkSTLReader>::New();
     reader->SetFileName(pathStl.toStdString().c_str());
     reader->Update();
+    vtkSmartPointer<vtkTriangleFilter> triangulate = vtkSmartPointer<vtkTriangleFilter>::New();
+    triangulate->SetInputConnection(reader->GetOutputPort());
+    triangulate->Update();
+
+     vtkSmartPointer<vtkTransform> scaleSTL = vtkSmartPointer<vtkTransform>::New();
+     scaleSTL->Translate(areaX/2,areaY/2,areaZ/4);
+     scaleSTL->Scale(10,10,10);
+
     mapperStl->SetInputConnection(reader->GetOutputPort());
     actorStl->SetMapper(mapperStl);
+    actorStl->SetUserTransform(scaleSTL);
     renderer->AddActor(actorStl);
     renderer->ResetCamera();
     renderWindow->Render();
@@ -147,6 +156,7 @@ void vtkWidget::drawCube(){
 
     if(actorCube!=0)
         renderer->RemoveActor(actorCube);
+
     cube->SetXLength(areaX);
     cube->SetYLength(areaY);
     cube->SetZLength(areaZ);
@@ -162,7 +172,12 @@ void vtkWidget::drawCube(){
 
     actorCube->SetMapper(mapperCube);
     actorCube->GetProperty()->SetRepresentationToWireframe();
-
+    vtkSmartPointer<vtkTransform> transform = vtkSmartPointer<vtkTransform>::New();
+    transform->Translate(-10,-10,0);
+    transform->Scale(50,50,50);
+    vtkSmartPointer<vtkAxesActor> axes = vtkSmartPointer<vtkAxesActor>::New();
+    axes->SetUserTransform(transform);
+    renderer->AddActor(axes);
     renderer->AddActor(actorCube);
     renderer->ResetCamera();
     renderWindow->Render();

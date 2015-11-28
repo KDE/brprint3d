@@ -50,6 +50,7 @@
 #include <vtkTriangleFilter.h>
 #include <vtkCubeSource.h>
 #include <vtkProperty.h>
+#include <vtkAxesActor.h>
 #define DEFAULTX 200
 #define DEFAULTY 200
 #define DEFAULTZ 200
