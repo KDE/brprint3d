@@ -62,11 +62,14 @@ vtkWidget();
 ~vtkWidget();
     void renderSTL(QString path);
     void renderGcode(QString text);
+public slots:
+    void updateCube(QString v, QChar axis);
 
 
 private:
     void drawCube();
     void cleanup();
+    double areaX, areaY, areaZ;
 
     //Vtk Variables
     vtkSmartPointer<vtkRenderer> renderer;
@@ -77,6 +80,7 @@ private:
     vtkSmartPointer<vtkActor> actorStl;
     vtkSmartPointer<vtkActor> actorGcode;
     vtkSmartPointer<vtkActor> actorCube;
+    vtkSmartPointer <vtkCubeSource> cube;
 
 };
 

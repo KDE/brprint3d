@@ -68,6 +68,8 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(ui->bt_hide,&QPushButton::clicked,this,&BrPrint3D::hidePrinterSettings);
     connect(ui->_ManualControl,&ManualControlWidget::checkConnectButton,bt_connect,&BigButton::setChecked);
 
+    connect(ui->_PrinterSettings,&PrinterSettingsWidget::updateCube,vtkView,&vtkWidget::updateCube);
+
 
 }
 

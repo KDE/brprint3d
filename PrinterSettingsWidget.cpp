@@ -29,6 +29,9 @@ PrinterSettingsWidget::PrinterSettingsWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->ck_PrintLog,&QCheckBox::toggled,this,&PrinterSettingsWidget::printLogStatusChanged);
+    connect(ui->tb_AreaPrintX,&QLineEdit::textEdited,this,&PrinterSettingsWidget::sendValue);
+    connect(ui->tb_AreaPrintY,&QLineEdit::textEdited,this,&PrinterSettingsWidget::sendValue);
+    connect(ui->tb_AreaPrintZ,&QLineEdit::textEdited,this,&PrinterSettingsWidget::sendValue);
 }
 
 PrinterSettingsWidget::~PrinterSettingsWidget()
@@ -258,4 +261,13 @@ void PrinterSettingsWidget::on_cb_ExtruderQnt_currentTextChanged(const QString &
 }
 void PrinterSettingsWidget::printLogStatusChanged(){
     emit s_printLogStatus(ui->ck_PrintLog->isChecked());
+}
+void PrinterSettingsWidget::sendValue(QString v){
+    if(sender()==ui->tb_AreaPrintX)
+        emit updateCube(v,'X');
+    if(sender()==ui->tb_AreaPrintY)
+        emit updateCube(v,'Y');
+    if(sender()==ui->tb_AreaPrintZ)
+        emit updateCube(v,'Z');
+
 }

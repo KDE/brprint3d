@@ -44,6 +44,10 @@ vtkWidget::vtkWidget()
     actorStl = vtkSmartPointer<vtkActor>::New();
     actorGcode = vtkSmartPointer<vtkActor>::New();
     actorCube = vtkSmartPointer<vtkActor>::New();
+    cube = vtkSmartPointer<vtkCubeSource>::New();
+    areaX = DEFAULTX;
+    areaY = DEFAULTY;
+    areaZ = DEFAULTZ;
     drawCube();
 
     
@@ -140,18 +144,20 @@ void vtkWidget::cleanup(){
 }
 
 void vtkWidget::drawCube(){
-    vtkSmartPointer <vtkCubeSource> res = vtkSmartPointer<vtkCubeSource>::New();
-    res->SetXLength(DEFAULTX);
-    res->SetYLength(DEFAULTY);
-    res->SetZLength(DEFAULTZ);
-    res->SetCenter(DEFAULTX/2, DEFAULTY/2, DEFAULTZ/2);
-    res->Update();
+
+    if(actorCube!=0)
+        renderer->RemoveActor(actorCube);
+    cube->SetXLength(areaX);
+    cube->SetYLength(areaY);
+    cube->SetZLength(areaZ);
+    cube->SetCenter(areaX/2, areaY/2, areaZ/2);
+    cube->Update();
 
     vtkSmartPointer<vtkTriangleFilter> triangulate = vtkSmartPointer<vtkTriangleFilter>::New();
-    triangulate->SetInputConnection(res->GetOutputPort());
+    triangulate->SetInputConnection(cube->GetOutputPort());
     triangulate->Update();
 
-    mapperCube->SetInputConnection(res->GetOutputPort());
+    mapperCube->SetInputConnection(cube->GetOutputPort());
 
 
     actorCube->SetMapper(mapperCube);
@@ -161,4 +167,17 @@ void vtkWidget::drawCube(){
     renderer->ResetCamera();
     renderWindow->Render();
 
+}
+void vtkWidget::updateCube(QString v, QChar axis){
+    if(axis=='X'){
+        areaX = v.toDouble();
+    }
+    if(axis=='Y'){
+        areaY = v.toDouble();
+
+    }
+    if(axis=='Z'){
+        areaZ = v.toDouble();
+    }
+   drawCube();
 }
