@@ -2,31 +2,71 @@ This is the README file for the development version of BRPrint3d
 
 Please check the ReleaseNotes.txt for details about new features and
 changes since last release
+
 This version only have support to 3DPrinters with Repetier Firmware.
 
 BRPrint3d can be found at http://projects.kde.org/brprint3d
 
 License: GPLv3
 
-You can get the sources to the latest development version from the git
-repository, configured :
-
-git.kde.org:brprint3d (not available yet)
 
 Basic Usage:
 ============
+Before compile BrPrint-3D, check if your libraries are the version
+requireds:
+Cmake Version 3.0 or Major
+Qt Version 5.4 or Major
+http://www.qt.io/download-open-source/#section-2
+VTK Version 6 or Major
+The VTK library you can found in this link:
+www.vtk.org/download/
+Bind VTK with Qt5
+http://www.vtk.org/Wiki/VTK/Configure_and_Build#Configure_VTK_with_CMake
+```sh
+mkdir build-vtk && cd build-vtk
+ccmake ../VTKSource
+configure
+VTK_Group_Qt=ON
+configure
+Qt_Version=5
+generate and exit
+make -j2
+make install
+
+```
+
 On Linux:
 Grab the source code from this repository using git and then
 Run the following commands to install dependencies and to build the program:
 
+In some distros the Br-Print3D will show a error: 'Arduino Serial couldn't open
+serial port'.
+This error is because the Arduino is mount with sudo permissions. We have two solutions for that:
+-Runs Br-Print3D with sudo 
+-Change The Rules of your serial ports
+To change the rules, follow the steps:
 ```sh
-git clone https://github.com/Simple-BR/Br-Print3D.git
-sudo apt-get install libxmu-dev qttools5-dev qttools5-dev-tools freeglut3-dev
+cd /etc/udev/rules.d
+sudo vim 999-BrRule.rules
+KERNEL=="ttyACM[0-9]",MODE="0666"
+```
+
+If you're using Ubuntu or Debian:
+The repositories dont have the VTK and Qt version that Br-Print3D requires. You will need to
+download the source and compile. 
+
+If you're using Fedora 22 or Major:
+```sh
+sudo dnf install qt5-devel qt5-qtbase-devel qt5-qttools-devel mesa-libGLU-devel mesa-libGL-devel
+```
+Compile steps:
+```sh
+git clone git.kde.org:brprint3d
 mkdir build
 cd build
 cmake ..
 make
-./brprint3d
+./BRPrint
 ```
 Help us:
 ========
