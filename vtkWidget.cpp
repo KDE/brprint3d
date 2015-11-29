@@ -1,4 +1,4 @@
-/*
+    /*
  * This class has a deprecated library!
  * QVTKWidget is disused, so this class will not be used for long.
  * Only I'm working with her because I'm learning VTK and many Qt + VTK tutorials still use this library,
@@ -37,20 +37,23 @@ vtkWidget::vtkWidget()
     renderer = vtkSmartPointer<vtkRenderer>::New();
     renderWindow = this->GetRenderWindow();
     renderWindow->AddRenderer(renderer);
-    renderer->SetBackground(0,0.5,1);
+    renderer->SetBackground(0.576,0.749,0.874);
+    //actor->GetProperty()->SetColor();
     mapperStl = vtkSmartPointer<vtkPolyDataMapper>::New();
     mapperGcode = vtkSmartPointer<vtkPolyDataMapper>::New();
     mapperCube = vtkSmartPointer<vtkPolyDataMapper>::New();
+    mapperFloor = vtkSmartPointer<vtkPolyDataMapper>::New();
     actorStl = vtkSmartPointer<vtkActor>::New();
     actorGcode = vtkSmartPointer<vtkActor>::New();
     actorCube = vtkSmartPointer<vtkActor>::New();
+    actorFloor = vtkSmartPointer<vtkActor>::New();
     cube = vtkSmartPointer<vtkCubeSource>::New();
     areaX = DEFAULTX;
     areaY = DEFAULTY;
     areaZ = DEFAULTZ;
     drawCube();
 
-    
+
 }
 
 vtkWidget::~vtkWidget()
@@ -135,6 +138,8 @@ void vtkWidget::renderGcode(QString text)
      // Setup actor and mapper
      mapperGcode->SetInputData(polyData);
      actorGcode->SetMapper(mapperGcode);
+     actorGcode->GetProperty()->SetLineWidth(2);
+     actorGcode->GetProperty()->SetColor(0,0.5,1);
      renderer->AddActor(actorGcode);
      renderer->ResetCamera();
      renderWindow->Render();
@@ -181,6 +186,7 @@ void vtkWidget::drawCube(){
     renderer->AddActor(actorCube);
     renderer->ResetCamera();
     renderWindow->Render();
+    drawFloor();
 
 }
 void vtkWidget::updateCube(QString v, QChar axis){
@@ -195,4 +201,46 @@ void vtkWidget::updateCube(QString v, QChar axis){
         areaZ = v.toDouble();
     }
    drawCube();
+}
+void vtkWidget::drawFloor(){
+      double p0[3] = {0.0, 0.0, 0.0};
+      double p1[3] = {1.0, 0.0, 0.0};
+      double p2[3] = {1.0, 1.0, 0.0};
+      double p3[3] = {0.0, 1.0, 0.0};
+
+      // Add the points to a vtkPoints object
+      vtkSmartPointer<vtkPoints> points = vtkSmartPointer<vtkPoints>::New();
+      points->InsertNextPoint(p0);
+      points->InsertNextPoint(p1);
+      points->InsertNextPoint(p2);
+      points->InsertNextPoint(p3);
+
+      // Create a quad on the four points
+      vtkSmartPointer<vtkQuad> quad = vtkSmartPointer<vtkQuad>::New();
+      quad->GetPointIds()->SetId(0,0);
+      quad->GetPointIds()->SetId(1,1);
+      quad->GetPointIds()->SetId(2,2);
+      quad->GetPointIds()->SetId(3,3);
+
+      // Create a cell array to store the quad in
+      vtkSmartPointer<vtkCellArray> quads = vtkSmartPointer<vtkCellArray>::New();
+      quads->InsertNextCell(quad);
+
+      // Create a polydata to store everything in
+      vtkSmartPointer<vtkPolyData> polydata = vtkSmartPointer<vtkPolyData>::New();
+
+      // Add the points and quads to the dataset
+      polydata->SetPoints(points);
+      polydata->SetPolys(quads);
+
+      mapperFloor->SetInputData(polydata);
+
+
+      actorFloor->SetMapper(mapperFloor);
+      actorFloor->GetProperty()->SetColor(0.874,0.898,0.917);
+      vtkSmartPointer<vtkTransform> transform = vtkSmartPointer<vtkTransform>::New();
+      transform->Scale(areaX,areaY,areaZ);
+      actorFloor->SetUserTransform(transform);
+      renderer->AddActor(actorFloor);
+      renderWindow->Render();
 }

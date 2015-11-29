@@ -51,6 +51,8 @@
 #include <vtkCubeSource.h>
 #include <vtkProperty.h>
 #include <vtkAxesActor.h>
+#include <vtkQuad.h>
+#include <vtkInteractorStyleTrackballCamera.h>
 #define DEFAULTX 200
 #define DEFAULTY 200
 #define DEFAULTZ 200
@@ -70,6 +72,7 @@ public slots:
 private:
     void drawCube();
     void cleanup();
+    void drawFloor();
     double areaX, areaY, areaZ;
 
     //Vtk Variables
@@ -77,10 +80,12 @@ private:
     vtkRenderWindow* renderWindow;
     vtkSmartPointer<vtkPolyDataMapper> mapperStl;
     vtkSmartPointer<vtkPolyDataMapper> mapperGcode;
-     vtkSmartPointer<vtkPolyDataMapper> mapperCube;
+    vtkSmartPointer<vtkPolyDataMapper> mapperCube;
+    vtkSmartPointer<vtkPolyDataMapper> mapperFloor;
     vtkSmartPointer<vtkActor> actorStl;
     vtkSmartPointer<vtkActor> actorGcode;
     vtkSmartPointer<vtkActor> actorCube;
+    vtkSmartPointer<vtkActor> actorFloor;
     vtkSmartPointer <vtkCubeSource> cube;
 
 };
