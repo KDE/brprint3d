@@ -9,7 +9,7 @@ if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUXX)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
 endif()
 
-find_package(VTK REQUIRED)
+find_package(VTK 6.0 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Test LinguistTools OpenGL)
 include(${VTK_USE_FILE})
@@ -65,6 +65,6 @@ add_custom_target(resources ALL DEPENDS ${Resources})
 
 add_executable(BRPrint ${KI_SRCS} ${Widgets_SRCS} ${Br-Print_SRCS} ${Resources})
 
-target_link_libraries(BRPrint Qt5::Core Qt5::Widgets Qt5::OpenGL pthread ${OPENGL_LIBRARIES} ${VTK_LIBRARIES})
+target_link_libraries(BRPrint Qt5::Core Qt5::Widgets Qt5::OpenGL ${OPENGL_LIBRARIES} ${VTK_LIBRARIES})
 
 enable_testing()
