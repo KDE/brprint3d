@@ -29,7 +29,7 @@
     <rect>
      <x>5</x>
      <y>0</y>
-     <width>430</width>
+     <width>431</width>
      <height>566</height>
     </rect>
    </property>
@@ -146,7 +146,21 @@
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
-          <layout class="QFormLayout" name="formLayout">
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="2" column="2">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>minutes</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLabel" name="lb_estimatedTime">
+             <property name="text">
+              <string>0:00:00</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
             <widget class="QLabel" name="label_6">
              <property name="text">
@@ -154,45 +168,17 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
+           <item row="2" column="0">
             <widget class="QLabel" name="label_11">
              <property name="text">
               <string>Time Estimated</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
-            <widget class="QLabel" name="lb_estimatedTime">
-             <property name="text">
-              <string>0:00:00</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
+           <item row="3" column="0">
             <widget class="QLabel" name="label_8">
              <property name="text">
               <string>Layers Count</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLabel" name="lb_layerCounter">
-             <property name="text">
-              <string>0</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_9">
-             <property name="text">
-              <string>Total Lines:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QLabel" name="lb_lineCounter">
-             <property name="text">
-              <string>0</string>
              </property>
             </widget>
            </item>
@@ -209,6 +195,33 @@
               <string>0</string>
              </property>
             </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLabel" name="lb_layerCounter">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2">
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>meters</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="3">
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </item>
@@ -391,6 +404,9 @@
            </size>
           </property>
           <widget class="QSlider" name="sl_printSpeed">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="geometry">
             <rect>
              <x>45</x>
@@ -455,6 +471,9 @@ QSlider::handle:horizontal {
            </property>
           </widget>
           <widget class="QSpinBox" name="ds_printSpeed">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="geometry">
             <rect>
              <x>340</x>
@@ -471,6 +490,9 @@ QSlider::handle:horizontal {
            </property>
           </widget>
           <widget class="QLabel" name="lb_printSpeed">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="geometry">
             <rect>
              <x>310</x>
