@@ -27,8 +27,9 @@ set(KI_SRCS
 	KI/Repetier.cpp
 	KI/StringRepetierOps.cpp
 )
+add_library(KI STATIC ${KI_SRCS})
 
-set(Widgets_SRCS
+set(Dialogs_SRCS
 	Windows/aboutbrprint.cpp
 	Windows/documentation.cpp
 	Windows/help.cpp
@@ -36,11 +37,12 @@ set(Widgets_SRCS
 	Windows/loading.cpp
 	Windows/warning.cpp
 )
+add_library(BRPrintDialogs STATIC ${Dialogs_SRCS})
+target_link_libraries(BRPrintDialogs Qt5::Widgets)
 
-set(Br-Print_SRCS
+set(BRPrintInterface_SRCS
 	arduinolistener.cpp
 	brprint3d.cpp
-        main.cpp
 	vtkWidget.cpp
         PrinterSettingsWidget.cpp
         PrinterSettings.cpp
@@ -48,6 +50,8 @@ set(Br-Print_SRCS
         ExtruderControlWidget.cpp
         BigButton.cpp
 )
+add_library(BRPRintInterface STATIC ${BRPrintInterface_SRCS})
+target_link_libraries(BRPRintInterface KI Qt5::Widgets)
 
 #qt5_add_translation(TRANSLATIONS EN_english.ts PT_portuguese.ts)
 
@@ -63,8 +67,8 @@ add_custom_target(resources ALL DEPENDS ${Resources})
 
 #add_dependencies(resources translations)
 
-add_executable(BRPrint ${KI_SRCS} ${Widgets_SRCS} ${Br-Print_SRCS} ${Resources})
+add_executable(BRPrint main.cpp ${Resources})
 
-target_link_libraries(BRPrint Qt5::Core Qt5::Widgets Qt5::OpenGL ${OPENGL_LIBRARIES} ${VTK_LIBRARIES})
+target_link_libraries(BRPrint Qt5::Core Qt5::Widgets Qt5::OpenGL ${OPENGL_LIBRARIES} ${VTK_LIBRARIES} BRPrintDialogs BRPRintInterface)
 
 enable_testing()
