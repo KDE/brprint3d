@@ -47,7 +47,7 @@ FilCount::FilCount(std::string filePath) throw (std::string)
     if(this->GCode == NULL){
         std::string exc = "Could not open the file: ";
         exc+=filePath;
-        exc+=".";
+        exc+='.';
         throw exc;
     }
     _filePath = filePath;
