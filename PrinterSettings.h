@@ -46,7 +46,7 @@ public:
     QString firmwareType="";
     QString cacheSize="";
     QString connectionPort="";
-    int resetOnConnect=0, resetOnEmergency=0, printLog=0, extrudersInUse=1;
+    int resetOnConnect=0, printLog=0, extrudersInUse=1;
     QString feedZ="";
     QString extruderMAXVol="";
 
