@@ -163,6 +163,7 @@ void BrPrint3D::changeIcon(bool checked)
     // instead of a QPush button and let the button manage the OnClicked / OnChecked automatically.
     if( sender() == bt_play ) {
         if (checked){
+            // use btn_play->setEnabled();
             QIcon icon(":/Icons/Icons/playOnClick.png");
             QPixmap pix(":/Icons/Icons/playOnClick.png");
             icon.addPixmap(pix,QIcon::Disabled,QIcon::Off);
