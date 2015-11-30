@@ -68,6 +68,9 @@ vtkWidget();
 public slots:
     void updateCube(QString v, QChar axis);
 
+signals:
+    void layersCount(int l);
+
 
 private:
     void drawCube();

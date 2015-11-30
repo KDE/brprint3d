@@ -83,6 +83,7 @@ void vtkWidget::renderSTL(QString pathStl)
 
 void vtkWidget::renderGcode(QString text)
 {   cleanup();
+    int _layersCount=0;
     vtkSmartPointer<vtkPoints> points = vtkSmartPointer<vtkPoints>::New();
     QStringList list = text.split('\n',QString::SkipEmptyParts);
     double x=0,y=0,z=0,count=0;
@@ -110,12 +111,14 @@ void vtkWidget::renderGcode(QString text)
                     QString z_str = aux[j].section('Z',1);
                     z = z_str.toDouble();
                     points->InsertPoint(count,x,y,z);
+                    _layersCount++;
                     count++;
 
                 }
             }
         }
     }
+    emit layersCount(_layersCount);
     vtkSmartPointer<vtkPolyLine> polyLine = vtkSmartPointer<vtkPolyLine>::New();
      polyLine->GetPointIds()->SetNumberOfIds(count);
      for(unsigned int i = 0; i < count; i++)

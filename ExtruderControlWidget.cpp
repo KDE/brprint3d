@@ -108,9 +108,10 @@ void ExtruderControlWidget::setHome(){
 void ExtruderControlWidget::setPosX()
 {
     double pos = printerObject->getCurrentXPos();
-    if(sender() == ui->bt_leftX)
+    QPushButton *btn = qobject_cast<QPushButton*>(sender());
+    if(btn == ui->bt_leftX)
         pos -= ui->cb_displacement->currentText().toDouble();
-    else if(sender() == ui->bt_rightX)
+    else if(btn == ui->bt_rightX)
         pos += ui->cb_displacement->currentText().toDouble();
     if(pos >= 0 && pos<=maxX)
         printerObject->moveAxisToPos('X',pos);
@@ -134,10 +135,10 @@ void ExtruderControlWidget::setPosZ()
 {
     double pos = printerObject->getCurrentZPos();
 
-    QComboBox *cmb = qobject_cast<QComboBox*>(sender());
-    if(cmb == ui->bt_upZ)
+    QPushButton *btn = qobject_cast<QPushButton*>(sender());
+    if(btn == ui->bt_upZ)
         pos += ui->cb_displacement->currentText().toDouble();
-    else if(cmb == ui->bt_downZ)
+    else if(btn == ui->bt_downZ)
         pos -= ui->cb_displacement->currentText().toDouble();
 
     if(pos>=0 && pos<=maxZ)

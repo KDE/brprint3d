@@ -93,7 +93,7 @@ public slots:
     void setPlayStatus(bool b);
     void stopPrintJob();
     void stopOnEmergency();
-   
+    void setLayersCount(int l);
 };
 
 #endif // MANUALCONTROLWIDGET_H

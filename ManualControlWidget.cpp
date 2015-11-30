@@ -590,3 +590,9 @@ void ManualControlWidget::sliderValueChanged(int v){
         printerObject->setFanSpeed(v);
     }
 }
+
+void ManualControlWidget::setLayersCount(int l){
+    ui->lb_layerCounter->setText(QString::number(l));
+    ui->sl_layersFirst->setMaximum(l);
+    ui->sl_layersLast->setMaximum(l);
+}
