@@ -28,18 +28,18 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::BrPrint3D)
 {
     ui->setupUi(this);
-    bt_import = new BigButton(0,"Import \nGCode",false,":/Icons/Icons/import.png");
-    bt_open = new BigButton(0,"Open File",false,":/Icons/Icons/openFile.png");
-    bt_connect = new BigButton(0,"Connect",true,":/Icons/Icons/connect.png");
+    bt_import = new BigButton(this,tr("Import GCode"),":/Icons/Icons/import.png", false);
+    bt_open = new BigButton(this,tr("Open File"),":/Icons/Icons/openFile.png", false);
+    bt_connect = new BigButton(this,tr("Connect"),":/Icons/Icons/connect.png", true);
 
     ui->ly_ConteinerLeft->addWidget(bt_import);
     ui->ly_ConteinerLeft->addWidget(bt_open);
     ui->ly_ConteinerLeft->addWidget(bt_connect);
 
-    bt_play = new BigButton(0,"Play",true,":/Icons/Icons/play.png");
-    bt_pause = new BigButton(0,"Pause",true,":/Icons/Icons/pause.png");
-    bt_stop = new BigButton(0,"Stop",false,":/Icons/Icons/stop.png");
-    bt_stopOnEmergency = new BigButton(0,"Emergency \nStop",false,":/Icons/Icons/emergency.png");
+    bt_play = new BigButton(this,tr("Play"),":/Icons/Icons/play.png", true);
+    bt_pause = new BigButton(this,tr("Pause"),":/Icons/Icons/pause.png", true);
+    bt_stop = new BigButton(this,tr("Stop"),":/Icons/Icons/stop.png", false);
+    bt_stopOnEmergency = new BigButton(this,tr("Emergency Stop"),":/Icons/Icons/emergency.png", false);
 
     ui->ly_ConteinerRight->addWidget(bt_play);
     ui->ly_ConteinerRight->addWidget(bt_pause);
@@ -110,7 +110,7 @@ void BrPrint3D::openFile()
                 vtkView->renderGcode(text);
                 gcode.close();
                 ui->_ManualControl->setGcodePreview(text);
-                if (bt_connect->getCheckedStatus())
+                if (bt_connect->isChecked())
                     bt_play->setEnabled(true);
 
             }

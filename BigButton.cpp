@@ -23,31 +23,35 @@
 #include "BigButton.h"
 #include "ui_BigButton.h"
 
-BigButton::BigButton(QWidget *parent, QString name, bool isCheckable, QString iconPath) :
+BigButton::BigButton(QWidget *parent, const QString& name,const QString& iconPath,  bool isCheckable) :
     QWidget(parent),
     ui(new Ui::BigButton)
-{   QPixmap pix(iconPath);
+{   
+    QPixmap pix(iconPath);
     ui->setupUi(this);
     ui->label->setText(name);
     ui->pushButton->setCheckable(isCheckable);
-    connect(ui->pushButton,&QPushButton::clicked,this,&BigButton::clicked);
     ui->pushButton->setIcon(QIcon(pix));
-    ui->pushButton->setIconSize(QSize(50,50));
+    ui->pushButton->setIconSize(QSize(50,50)); //TODO: Hardcoded value, change this to something calculated for the current display.
+    connect(ui->pushButton, &QPushButton::clicked, this, &BigButton::clicked);
 }
 
 BigButton::~BigButton()
 {
     delete ui;
 }
-bool BigButton::getCheckedStatus(){
 
+bool BigButton::isChecked()
+{
     return ui->pushButton->isChecked();
-
 }
-void BigButton::setIcon(QIcon icon){
 
+void BigButton::setIcon(const QIcon& icon)
+{
     ui->pushButton->setIcon(icon);
 }
-void BigButton::setChecked(bool b){
+
+void BigButton::setChecked(bool b)
+{
     ui->pushButton->setChecked(b);
 }

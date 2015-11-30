@@ -35,11 +35,11 @@ class BigButton : public QWidget
     Q_OBJECT
 
 public:
-    explicit BigButton(QWidget *parent = 0, QString name = "", bool isCheckable = false, QString pix = "");
+    explicit BigButton(QWidget *parent, const QString& name, const QString& pix, bool isCheckable = false);
     ~BigButton();
-public slots:
-    bool getCheckedStatus();
-    void setIcon(QIcon icon);
+
+    bool isChecked();
+    void setIcon(const QIcon& icon);
     void setChecked(bool b);
 
 private:
