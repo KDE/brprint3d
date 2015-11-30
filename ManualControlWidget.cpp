@@ -195,65 +195,28 @@ void ManualControlWidget::disableExtrudersButtons(bool checked)
 {
     if(sender()==ui->bt_extruder1)
     {
-        if(checked)
-        {
-            ui->bt_extruder2->setEnabled(false);
-            ui->bt_extruder3->setEnabled(false);
-            ui->bt_extruder4->setEnabled(false);
-        }
-        else
-        {
-            ui->bt_extruder2->setEnabled(true);
-            ui->bt_extruder3->setEnabled(true);
-            ui->bt_extruder4->setEnabled(true);
-        }
-
+        ui->bt_extruder2->setEnabled(!checked);
+        ui->bt_extruder3->setEnabled(!checked);
+        ui->bt_extruder4->setEnabled(!checked);
     }
-    if(sender()==ui->bt_extruder2)
-    {   if(checked)
-        {
-            ui->bt_extruder1->setEnabled(false);
-            ui->bt_extruder3->setEnabled(false);
-            ui->bt_extruder4->setEnabled(false);
-        }
-        else
-        {
-            ui->bt_extruder1->setEnabled(true);
-            ui->bt_extruder3->setEnabled(true);
-            ui->bt_extruder4->setEnabled(true);
-        }
-
-    }
-    if(sender()==ui->bt_extruder3)
-    {    if(checked)
-        {
-            ui->bt_extruder2->setEnabled(false);
-            ui->bt_extruder1->setEnabled(false);
-            ui->bt_extruder4->setEnabled(false);
-        }
-        else
-        {
-            ui->bt_extruder2->setEnabled(true);
-            ui->bt_extruder1->setEnabled(true);
-            ui->bt_extruder4->setEnabled(true);
-        }
-
-    }
-    if(sender()==ui->bt_extruder4)
+    else if(sender()==ui->bt_extruder2)
     {
-        if(checked)
-        {
-            ui->bt_extruder2->setEnabled(false);
-            ui->bt_extruder3->setEnabled(false);
-            ui->bt_extruder1->setEnabled(false);
-        }
-        else
-        {
-            ui->bt_extruder2->setEnabled(true);
-            ui->bt_extruder3->setEnabled(true);
-            ui->bt_extruder1->setEnabled(true);
-        }
+        ui->bt_extruder1->setEnabled(!checked);
+        ui->bt_extruder3->setEnabled(!checked);
+        ui->bt_extruder4->setEnabled(!checked);
+    }
+    else if(sender()==ui->bt_extruder3)
+    {
+        ui->bt_extruder2->setEnabled(!checked);
+        ui->bt_extruder1->setEnabled(!checked);
+        ui->bt_extruder4->setEnabled(!checked);
 
+    }
+    else if(sender()==ui->bt_extruder4)
+    {
+        ui->bt_extruder2->setEnabled(!checked);
+        ui->bt_extruder3->setEnabled(!checked);
+        ui->bt_extruder1->setEnabled(!checked);
     }
 
 }
