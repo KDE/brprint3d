@@ -78,11 +78,10 @@ void BrPrint3D::init()
     ui->_PrinterSettings->hide();
     ui->_ManualControl->init();
     setEnabled(false);
-
-
-
 }
-void BrPrint3D::setEnabled(bool b){
+
+void BrPrint3D::setEnabled(bool b)
+{
     bt_play->setEnabled(b);
     bt_pause->setEnabled(b);
     bt_stop->setEnabled(b);
@@ -90,7 +89,8 @@ void BrPrint3D::setEnabled(bool b){
 }
 
 void BrPrint3D::openFile()
-{   QString typeGcode("*.gcode");
+{
+    QString typeGcode("*.gcode");
     QString typeAll("*.gcode *.stl *.STL");
     if(sender()==bt_import){
         filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), typeGcode);
@@ -98,105 +98,92 @@ void BrPrint3D::openFile()
     if(sender()==bt_open){
         filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), typeAll);
     }
-        if (!filePath.isEmpty() && QFileInfo(filePath).completeSuffix() == "gcode") {
-            QFile gcode(filePath);
-            if (gcode.open(QFile::ReadOnly | QFile::Text)) {
-                QTextStream in(&gcode);
-                QString text = in.readAll();
-                vtkView->renderGcode(text);
-                gcode.close();
-                ui->_ManualControl->setGcodePreview(text);
-                if (bt_connect->isChecked())
-                    bt_play->setEnabled(true);
-
-            }
+    if (!filePath.isEmpty() && QFileInfo(filePath).completeSuffix() == "gcode") {
+        QFile gcode(filePath);
+        if (gcode.open(QFile::ReadOnly | QFile::Text)) {
+            QTextStream in(&gcode);
+            QString text = in.readAll();
+            vtkView->renderGcode(text);
+            gcode.close();
+            ui->_ManualControl->setGcodePreview(text);
+            if (bt_connect->isChecked())
+                bt_play->setEnabled(true);
         }
-        else if(QFileInfo(filePath).completeSuffix()=="STL" ||QFileInfo(filePath).completeSuffix()=="stl"){
-                 vtkView->renderSTL(filePath);
-             }
+    }
+    else if(QFileInfo(filePath).completeSuffix()=="STL" ||QFileInfo(filePath).completeSuffix()=="stl"){
+        vtkView->renderSTL(filePath);
+    }
 }
 
-void BrPrint3D::connectPrinter(bool checked){
-    if(checked){
+void BrPrint3D::connectPrinter(bool checked)
+{
+    if (checked) {
         psettings = ui->_PrinterSettings->getCurrentSettings();
         ui->_ManualControl->constructPrinterObject(psettings);
         setEnabled(true);
         bt_pause->setEnabled(false);
         bt_stop->setEnabled(false);
-
-    }
-    else
-    {
+    } else {
         ui->_ManualControl->destructPrinterObject();
-
     }
-
-
 }
 
-void BrPrint3D::startPrintJob(bool checked){
-    if(checked){
+void BrPrint3D::startPrintJob(bool checked)
+{
+    if (checked) {
         ui->_ManualControl->startPrintJob(filePath);
         bt_play->setEnabled(false);
         bt_pause->setEnabled(true);
         bt_stop->setEnabled(true);
     }
 }
-void BrPrint3D::stopPrintJob(){
+void BrPrint3D::stopPrintJob()
+{
     bt_play->setEnabled(true);
     bt_play->setChecked(false);
     bt_play->setIcon(QIcon(":/Icons/Icons/play.png"));
     bt_pause->setEnabled(false);
     bt_stop->setEnabled(false);
-
 }
 
-void BrPrint3D::hidePrinterSettings(){
-    if(ui->bt_hide->isChecked())
-    {    ui->_PrinterSettings->show();
+void BrPrint3D::hidePrinterSettings()
+{
+    if(ui->bt_hide->isChecked()) {
+        ui->_PrinterSettings->show();
         ui->bt_hide->setText(tr("Settings - Hide"));
-    }
-    else
-    {    ui->_PrinterSettings->hide();
+    } else {    ui->_PrinterSettings->hide();
         ui->bt_hide->setText(tr("Settings - Show"));
     }
 }
 
 void BrPrint3D::changeIcon(bool checked){
-    if(sender()==bt_play){
-        if(checked){
+    if( sender() == bt_play ) {
+        if (checked){
             QIcon icon(":/Icons/Icons/playOnClick.png");
             QPixmap pix(":/Icons/Icons/playOnClick.png");
             icon.addPixmap(pix,QIcon::Disabled,QIcon::Off);
             bt_play->setIcon(icon);
-        }
-        else{
-             bt_play->setIcon(QIcon(":/Icons/Icons/play.png"));
-             bt_play->setChecked(false);
-
+        } else {
+            bt_play->setIcon(QIcon(":/Icons/Icons/play.png"));
+            bt_play->setChecked(false);
         }
     }
-    if(sender()==bt_pause){
-        if(checked){
+    if (sender()==bt_pause) {
+        if (checked) {
             bt_pause->setIcon(QIcon(":/Icons/Icons/pauseOnClick.png"));
-
-        }
-        else{
+        } else {
             bt_pause->setIcon(QIcon(":/Icons/Icons/pause.png"));
-
         }
     }
-    if(sender()==bt_connect){
-        if(checked){
-             bt_connect->setIcon(QIcon(":/Icons/Icons/connectOnClick.png"));
-
-        }
-        else{
+    if (sender()==bt_connect) {
+        if (checked) {
+            bt_connect->setIcon(QIcon(":/Icons/Icons/connectOnClick.png"));
+        } else {
             bt_connect->setIcon(QIcon(":/Icons/Icons/connect.png"));
-
         }
     }
 }
+
 /*void BrPrint3D::resetPlayButton(){
     bt_play->setChecked(false);
     bt_play->setIcon(QIcon(":/Icons/Icons/play.png"));
