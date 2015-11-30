@@ -67,6 +67,8 @@ vtkWidget();
     void renderGcode(QString text);
 public slots:
     void updateCube(QString v, QChar axis);
+signals:
+    void layersCount(int l);
 
 signals:
     void layersCount(int l);
@@ -77,7 +79,6 @@ private:
     void cleanup();
     void drawFloor();
     double areaX, areaY, areaZ;
-
     //Vtk Variables
     vtkSmartPointer<vtkRenderer> renderer;
     vtkRenderWindow* renderWindow;
