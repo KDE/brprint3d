@@ -25,28 +25,27 @@
 #include "ui_Pandora.h"
 
 BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
-    ui(new Ui::BrPrint3D)
+    ui(new Ui::BrPrint3D), 
+    bt_import(new BigButton(this,tr("Import GCode"),":/Icons/Icons/import.png", false)),
+    bt_open(new BigButton(this,tr("Open File"),":/Icons/Icons/openFile.png", false)),
+    bt_connect(new BigButton(this,tr("Connect"),":/Icons/Icons/connect.png", true)),
+    bt_play(new BigButton(this,tr("Play"),":/Icons/Icons/play.png", true)),
+    bt_pause(new BigButton(this,tr("Pause"),":/Icons/Icons/pause.png", true)),
+    bt_stop(new BigButton(this,tr("Stop"),":/Icons/Icons/stop.png", false)),
+    bt_stopOnEmergency(new BigButton(this,tr("Emergency Stop"),":/Icons/Icons/emergency.png", false)),
+    vtkView(new vtkWidget())
 {
     ui->setupUi(this);
-    bt_import = new BigButton(this,tr("Import GCode"),":/Icons/Icons/import.png", false);
-    bt_open = new BigButton(this,tr("Open File"),":/Icons/Icons/openFile.png", false);
-    bt_connect = new BigButton(this,tr("Connect"),":/Icons/Icons/connect.png", true);
-
+    
     ui->ly_ConteinerLeft->addWidget(bt_import);
     ui->ly_ConteinerLeft->addWidget(bt_open);
     ui->ly_ConteinerLeft->addWidget(bt_connect);
-
-    bt_play = new BigButton(this,tr("Play"),":/Icons/Icons/play.png", true);
-    bt_pause = new BigButton(this,tr("Pause"),":/Icons/Icons/pause.png", true);
-    bt_stop = new BigButton(this,tr("Stop"),":/Icons/Icons/stop.png", false);
-    bt_stopOnEmergency = new BigButton(this,tr("Emergency Stop"),":/Icons/Icons/emergency.png", false);
 
     ui->ly_ConteinerRight->addWidget(bt_play);
     ui->ly_ConteinerRight->addWidget(bt_pause);
     ui->ly_ConteinerRight->addWidget(bt_stop);
     ui->ly_ConteinerRight->addWidget(bt_stopOnEmergency);
 
-    vtkView = new vtkWidget();
     ui->_vtkConteiner->addWidget(vtkView);
 
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::s_extrudersInUse,ui->_ManualControl,&ManualControlWidget::setExtrudersInUse);
@@ -67,10 +66,7 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(bt_stopOnEmergency,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopOnEmergency);
     connect(ui->bt_hide,&QPushButton::clicked,this,&BrPrint3D::hidePrinterSettings);
     connect(ui->_ManualControl,&ManualControlWidget::checkConnectButton,bt_connect,&BigButton::setChecked);
-
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::updateCube,vtkView,&vtkWidget::updateCube);
-
-
 }
 
 BrPrint3D::~BrPrint3D()

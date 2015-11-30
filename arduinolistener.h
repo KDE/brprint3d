@@ -29,7 +29,7 @@
 #include <QTextStream>
 #include <QThread>
 
-
+//TODO: Remove this class, use a QTimer instead.
 class arduinoListener : public QThread
 {
     Q_OBJECT
