@@ -596,3 +596,26 @@ void ManualControlWidget::setLayersCount(int l){
     ui->sl_layersFirst->setMaximum(l);
     ui->sl_layersLast->setMaximum(l);
 }
+
+void ManualControlWidget::setFilCount(QString filePath){
+    double totalSize;
+    long timeNeed;
+    try{
+        FilCount fil = FilCount(filePath.toStdString());
+        totalSize = fil.getTotalSize();
+        totalSize/=1000;
+        ui->lb_filamentQnt->setText(QString::number(totalSize));
+        timeNeed = fil.getTimeInSeconds(ui->ds_printSpeed->value());
+        timeNeed /=60;
+        ui->lb_estimatedTime->setText(QString::number(timeNeed));
+    }
+    catch(std::string exc){
+        QMessageBox msg;
+        QString str = QString::fromUtf8(exc.c_str());
+        msg.setText(str);
+        msg.setIcon(QMessageBox::Information);
+        msg.exec();
+    }
+
+
+}

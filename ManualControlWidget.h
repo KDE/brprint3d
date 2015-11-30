@@ -26,6 +26,7 @@
 #include <QWidget>
 #include "KI/Repetier.h"
 #include "PrinterSettings.h"
+#include "FilCount.h"
 #include <QTabWidget>
 #include <QSettings>
 #include <QInputDialog>
@@ -94,6 +95,7 @@ public slots:
     void stopPrintJob();
     void stopOnEmergency();
     void setLayersCount(int l);
+    void setFilCount(QString path);
 };
 
 #endif // MANUALCONTROLWIDGET_H
