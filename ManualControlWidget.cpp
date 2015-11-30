@@ -603,7 +603,6 @@ void ManualControlWidget::setFilCount(QString filePath){
     try{
         FilCount fil = FilCount(filePath.toStdString());
         totalSize = fil.getTotalSize();
-        totalSize/=1000;
         ui->lb_filamentQnt->setText(QString::number(totalSize));
         timeNeed = fil.getTimeInSeconds(ui->ds_printSpeed->value());
         timeNeed /=60;
