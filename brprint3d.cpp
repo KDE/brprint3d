@@ -156,7 +156,11 @@ void BrPrint3D::hidePrinterSettings()
     }
 }
 
-void BrPrint3D::changeIcon(bool checked){
+void BrPrint3D::changeIcon(bool checked)
+{
+    //TODO: Remove this method - Icon handling should be on the BigButton class, not here.
+    // Since you are using 'onClick' to mark if a widget is checked, consider using a QToolButton
+    // instead of a QPush button and let the button manage the OnClicked / OnChecked automatically.
     if( sender() == bt_play ) {
         if (checked){
             QIcon icon(":/Icons/Icons/playOnClick.png");
@@ -167,15 +171,13 @@ void BrPrint3D::changeIcon(bool checked){
             bt_play->setIcon(QIcon(":/Icons/Icons/play.png"));
             bt_play->setChecked(false);
         }
-    }
-    if (sender()==bt_pause) {
+    } else if (sender()==bt_pause) {
         if (checked) {
             bt_pause->setIcon(QIcon(":/Icons/Icons/pauseOnClick.png"));
         } else {
             bt_pause->setIcon(QIcon(":/Icons/Icons/pause.png"));
         }
-    }
-    if (sender()==bt_connect) {
+    } else if (sender()==bt_connect) {
         if (checked) {
             bt_connect->setIcon(QIcon(":/Icons/Icons/connectOnClick.png"));
         } else {
