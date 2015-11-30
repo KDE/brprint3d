@@ -48,6 +48,8 @@
 #include <QInputDialog>
 #include <QStandardPaths>
 
+
+
 namespace Ui
 {
 class BrPrint3D;
@@ -89,6 +91,7 @@ private slots:
 signals:
     void s_playStatus(bool b);
     void s_pauseStatus(bool b);
+    void callFilCount(QString filePath);
 
 };
 

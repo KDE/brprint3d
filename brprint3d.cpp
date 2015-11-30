@@ -68,6 +68,7 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(ui->_ManualControl,&ManualControlWidget::checkConnectButton,bt_connect,&BigButton::setChecked);
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::updateCube,vtkView,&vtkWidget::updateCube);
     connect(vtkView,&vtkWidget::layersCount,ui->_ManualControl,&ManualControlWidget::setLayersCount);
+    connect(this,&BrPrint3D::callFilCount,ui->_ManualControl,&ManualControlWidget::setFilCount);
 
     connect(vtkView,&vtkWidget::layersCount,ui->_ManualControl,&ManualControlWidget::setLayersCount);
 
@@ -102,18 +103,21 @@ void BrPrint3D::openFile()
     if(sender()==bt_open){
         filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), typeAll);
     }
-    if (!filePath.isEmpty() && QFileInfo(filePath).completeSuffix() == "gcode") {
-        QFile gcode(filePath);
-        if (gcode.open(QFile::ReadOnly | QFile::Text)) {
-            QTextStream in(&gcode);
-            QString text = in.readAll();
-            vtkView->renderGcode(text);
-            gcode.close();
-            ui->_ManualControl->setGcodePreview(text);
-            if (bt_connect->isChecked())
-                bt_play->setEnabled(true);
+        if (!filePath.isEmpty() && QFileInfo(filePath).completeSuffix() == "gcode") {
+            QFile gcode(filePath);
+            if (gcode.open(QFile::ReadOnly | QFile::Text)) {
+                QTextStream in(&gcode);
+                QString text = in.readAll();
+                vtkView->renderGcode(text);
+                gcode.close();
+                emit callFilCount(filePath);
+                ui->_ManualControl->setGcodePreview(text);
+                if (bt_connect->getCheckedStatus())
+                    bt_play->setEnabled(true);
+
+            }
         }
-    }
+
     else if(QFileInfo(filePath).completeSuffix()=="STL" ||QFileInfo(filePath).completeSuffix()=="stl"){
         vtkView->renderSTL(filePath);
     }
