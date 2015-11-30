@@ -28,43 +28,40 @@ ExtruderControlWidget::ExtruderControlWidget(QWidget *parent) :
     ui(new Ui::ExtruderControlWidget)
 {
     ui->setupUi(this);
-        connect(ui->bt_homeX,&QPushButton::clicked,this,&ExtruderControlWidget::setHome);
-        connect(ui->bt_homeY,&QPushButton::clicked,this,&ExtruderControlWidget::setHome);
-        connect(ui->bt_homeZ,&QPushButton::clicked,this,&ExtruderControlWidget::setHome);
-        connect(ui->bt_homeXYZ,&QPushButton::clicked,this,&ExtruderControlWidget::setHome);
+    connect(ui->bt_homeX,&QPushButton::clicked,this,&ExtruderControlWidget::setHome);
+    connect(ui->bt_homeY,&QPushButton::clicked,this,&ExtruderControlWidget::setHome);
+    connect(ui->bt_homeZ,&QPushButton::clicked,this,&ExtruderControlWidget::setHome);
+    connect(ui->bt_homeXYZ,&QPushButton::clicked,this,&ExtruderControlWidget::setHome);
 
-        connect(ui->bt_leftX,&QPushButton::clicked,this,&ExtruderControlWidget::setPosX);
-        connect(ui->bt_rightX,&QPushButton::clicked,this,&ExtruderControlWidget::setPosX);
+    connect(ui->bt_leftX,&QPushButton::clicked,this,&ExtruderControlWidget::setPosX);
+    connect(ui->bt_rightX,&QPushButton::clicked,this,&ExtruderControlWidget::setPosX);
 
-        connect(ui->bt_upY,&QPushButton::clicked,this,&ExtruderControlWidget::setPosY);
-        connect(ui->bt_downY,&QPushButton::clicked,this,&ExtruderControlWidget::setPosY);
+    connect(ui->bt_upY,&QPushButton::clicked,this,&ExtruderControlWidget::setPosY);
+    connect(ui->bt_downY,&QPushButton::clicked,this,&ExtruderControlWidget::setPosY);
 
-        connect(ui->bt_upZ,&QPushButton::clicked,this,&ExtruderControlWidget::setPosZ);
-        connect(ui->bt_downZ,&QPushButton::clicked,this,&ExtruderControlWidget::setPosZ);
+    connect(ui->bt_upZ,&QPushButton::clicked,this,&ExtruderControlWidget::setPosZ);
+    connect(ui->bt_downZ,&QPushButton::clicked,this,&ExtruderControlWidget::setPosZ);
 
-        ui->bt_homeX->setIcon(QIcon(QPixmap(":/Icons/Icons/homeAxisX.png")));
-        ui->bt_homeY->setIcon(QIcon(QPixmap(":/Icons/Icons/homeaxisY.png")));
-        ui->bt_homeZ->setIcon(QIcon(QPixmap(":/Icons/Icons/homeAxisZ.png")));
-        ui->bt_homeXYZ->setIcon(QIcon(QPixmap(":/Icons/Icons/homeAxisXYZ.png")));
-        ui->bt_rightX->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowRight.png")));
-        ui->bt_leftX->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowLeft.png")));
-        ui->bt_upY->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowUp.png")));
-        ui->bt_downY->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowDown.png")));
-        ui->bt_upZ->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowUp.png")));
-        ui->bt_downZ->setIcon(QIcon(QPixmap(":/Icons/Icons/arrowDown.png")));
-        ui->bt_filOneSpeed->setIcon(QIcon(QPixmap(":/Icons/Icons/extOut.png")));
-        ui->bt_filTwoSpeed->setIcon(QIcon(QPixmap(":/Icons/Icons/extOut2.png")));
-        ui->bt_filRetract->setIcon(QIcon(QPixmap(":/Icons/Icons/extruderRetract.png")));
-        ui->lb_XY->setPixmap(QPixmap(":/Icons/Icons/axisXY.png"));
-        ui->lb_axisZ->setPixmap(QPixmap(":/Icons/Icons/axisZ.png"));
-        ui->lb_Extruder->setPixmap(QPixmap(":/Icons/Icons/filamentRetract.png"));
+    ui->bt_homeX->setIcon(QIcon(":/Icons/Icons/homeAxisX.png"));
+    ui->bt_homeY->setIcon(QIcon(":/Icons/Icons/homeaxisY.png"));
+    ui->bt_homeZ->setIcon(QIcon(":/Icons/Icons/homeAxisZ.png"));
+    ui->bt_homeXYZ->setIcon(QIcon(":/Icons/Icons/homeAxisXYZ.png"));
+    ui->bt_rightX->setIcon(QIcon(":/Icons/Icons/arrowRight.png"));
+    ui->bt_leftX->setIcon(QIcon(":/Icons/Icons/arrowLeft.png"));
+    ui->bt_upY->setIcon(QIcon(":/Icons/Icons/arrowUp.png"));
+    ui->bt_downY->setIcon(QIcon(":/Icons/Icons/arrowDown.png"));
+    ui->bt_upZ->setIcon(QIcon(":/Icons/Icons/arrowUp.png"));
+    ui->bt_downZ->setIcon(QIcon(":/Icons/Icons/arrowDown.png"));
+    ui->bt_filOneSpeed->setIcon(QIcon(":/Icons/Icons/extOut.png"));
+    ui->bt_filTwoSpeed->setIcon(QIcon(":/Icons/Icons/extOut2.png"));
+    ui->bt_filRetract->setIcon(QIcon(":/Icons/Icons/extruderRetract.png"));
+    ui->lb_XY->setPixmap(QPixmap(":/Icons/Icons/axisXY.png"));
+    ui->lb_axisZ->setPixmap(QPixmap(":/Icons/Icons/axisZ.png"));
+    ui->lb_Extruder->setPixmap(QPixmap(":/Icons/Icons/filamentRetract.png"));
 
-        connect(ui->bt_filRetract,&QPushButton::clicked,this,&ExtruderControlWidget::setFillExtruder);
-        connect(ui->bt_filOneSpeed,&QPushButton::clicked,this,&ExtruderControlWidget::setFillExtruder);
-        connect(ui->bt_filTwoSpeed,&QPushButton::clicked,this,&ExtruderControlWidget::setFillExtruder);
-
-
-
+    connect(ui->bt_filRetract,&QPushButton::clicked,this,&ExtruderControlWidget::setFillExtruder);
+    connect(ui->bt_filOneSpeed,&QPushButton::clicked,this,&ExtruderControlWidget::setFillExtruder);
+    connect(ui->bt_filTwoSpeed,&QPushButton::clicked,this,&ExtruderControlWidget::setFillExtruder);
 }
 
 ExtruderControlWidget::~ExtruderControlWidget()
@@ -74,84 +71,93 @@ ExtruderControlWidget::~ExtruderControlWidget()
 
 void ExtruderControlWidget::init()
 {
-
-
 }
 
-//This slot update on UI the position of the Extruder
+//This slot updates on UI the position of the Extruder
 void ExtruderControlWidget::updatePos()
-{   //This function update the extruder position on the screen
-
+{
     ui->tb_axisXPos->setText(QString::number(printerObject->getCurrentXPos()));
     ui->tb_axisYPos->setText(QString::number(printerObject->getCurrentYPos()));
     ui->tb_axisZPos->setText(QString::number(printerObject->getCurrentZPos()));
-
 }
-void ExtruderControlWidget::getPrinterObject(Repetier *pObject){
+
+// This function seems to have the wrong name: why it's get if it's not returning anything?
+void ExtruderControlWidget::getPrinterObject(Repetier *pObject)
+{
     printerObject = pObject;
     maxX = pObject->getMaxX();
     maxY = pObject->getMaxY();
     maxZ = pObject->getMaxZ();
 }
+
 void ExtruderControlWidget::setHome(){
-    if(sender()==ui->bt_homeX){
+    QPushButton *btn = qobject_cast<QPushButton*>(sender());
+    if(!btn)
+        return;
+
+    if(btn == ui->bt_homeX) {
          printerObject->homeAxis('X');
-    }
-    if(sender()==ui->bt_homeY){
+    } else if (btn == ui->bt_homeY) {
         printerObject->homeAxis('Y');
-    }
-    if(sender()==ui->bt_homeZ){
+    } else if (btn == ui->bt_homeZ) {
         printerObject->homeAxis('Z');
-    }
-    if(sender()==ui->bt_homeXYZ){
+    } else if (btn == ui->bt_homeXYZ) {
         printerObject->homeAllAxis();
     }
 }
 void ExtruderControlWidget::setPosX()
 {
     double pos = printerObject->getCurrentXPos();
-    if(sender()==ui->bt_leftX)
-        pos-=ui->cb_displacement->currentText().toDouble();
-    if(sender()==ui->bt_rightX)
-        pos+=ui->cb_displacement->currentText().toDouble();
-    if(pos>=0 && pos<=maxX)
+    if(sender() == ui->bt_leftX)
+        pos -= ui->cb_displacement->currentText().toDouble();
+    else if(sender() == ui->bt_rightX)
+        pos += ui->cb_displacement->currentText().toDouble();
+    if(pos >= 0 && pos<=maxX)
         printerObject->moveAxisToPos('X',pos);
 }
+
 void ExtruderControlWidget::setPosY()
 {
     double pos = printerObject->getCurrentYPos();
-    if(sender()==ui->bt_upY)
-        pos+=ui->cb_displacement->currentText().toDouble();
-    if(sender()==ui->bt_downY)
-        pos-=ui->cb_displacement->currentText().toDouble();
+    QPushButton *btn = qobject_cast<QPushButton*>(sender());
+
+    if(btn == ui->bt_upY)
+        pos += ui->cb_displacement->currentText().toDouble();
+    else if(btn == ui->bt_downY)
+        pos -= ui->cb_displacement->currentText().toDouble();
+
     if(pos>=0 && pos<=maxY)
         printerObject->moveAxisToPos('Y',pos);
-
 }
+
 void ExtruderControlWidget::setPosZ()
 {
     double pos = printerObject->getCurrentZPos();
-    if(sender()==ui->bt_upZ)
-        pos+=ui->cb_displacement->currentText().toDouble();
-    if(sender()==ui->bt_downZ)
-        pos-=ui->cb_displacement->currentText().toDouble();
+
+    QComboBox *cmb = qobject_cast<QComboBox*>(sender());
+    if(cmb == ui->bt_upZ)
+        pos += ui->cb_displacement->currentText().toDouble();
+    else if(cmb == ui->bt_downZ)
+        pos -= ui->cb_displacement->currentText().toDouble();
+
     if(pos>=0 && pos<=maxZ)
         printerObject->moveAxisToPos('Z',pos);
-
 }
 
-void ExtruderControlWidget::disablePositionsButtons(bool b){
+void ExtruderControlWidget::disablePositionsButtons(bool b)
+{
     ui->wg_ExtruderButtons->setDisabled(b);
 }
 
-void ExtruderControlWidget::setFillExtruder(){
-    if(sender()==ui->bt_filRetract){
+void ExtruderControlWidget::setFillExtruder()
+{
+    QPushButton *btn  = qobject_cast<QPushButton*>(sender());
 
-    }
-    if(sender()==ui->bt_filOneSpeed){
+    if(btn == ui->bt_filRetract) {
 
-    }
-    if(sender()==ui->bt_filTwoSpeed){
+    } else if(btn == ui->bt_filOneSpeed) {
+
+    } else if(btn == ui->bt_filTwoSpeed) {
 
     }
 }
