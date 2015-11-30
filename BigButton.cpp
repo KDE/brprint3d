@@ -27,11 +27,10 @@ BigButton::BigButton(QWidget *parent, const QString& name,const QString& iconPat
     QWidget(parent),
     ui(new Ui::BigButton)
 {   
-    QPixmap pix(iconPath);
     ui->setupUi(this);
     ui->label->setText(name);
     ui->pushButton->setCheckable(isCheckable);
-    ui->pushButton->setIcon(QIcon(pix));
+    ui->pushButton->setIcon(QIcon(iconPath));
     ui->pushButton->setIconSize(QSize(50,50)); //TODO: Hardcoded value, change this to something calculated for the current display.
     connect(ui->pushButton, &QPushButton::clicked, this, &BigButton::clicked);
 }
