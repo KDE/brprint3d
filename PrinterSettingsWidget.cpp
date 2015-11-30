@@ -182,7 +182,6 @@ PrinterSettings PrinterSettingsWidget::getCurrentSettings()
     p.firmwareType = ui->cb_Firmware->currentText();
     p.cacheSize = ui->cb_CacheSize->currentText();
     p.resetOnConnect = ui->ck_ResetOnConnect->isChecked();
-    p.resetOnEmergency = ui->ck_ResetOnEmergency->isChecked();
     p.printLog = ui->ck_PrintLog->isChecked();
     p.rateMoviment = ui->tb_RateMoviment->text();
     p.feedZ = ui->tb_FeedZ->text();
