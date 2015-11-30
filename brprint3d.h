@@ -24,11 +24,11 @@
 #ifndef BRPRINT3D_H
 #define BRPRINT3D_H
 #include <QMainWindow>
-#include <Windows/loading.h>
-#include <Windows/documentation.h>
-#include <Windows/aboutbrprint.h>
-#include <Windows/help.h>
-#include <Windows/legalwarning.h>
+#include "Dialogs/loading.h"
+#include "Dialogs/documentation.h"
+#include "Dialogs/aboutbrprint.h"
+#include "Dialogs/help.h"
+#include "Dialogs/legalwarning.h"
 #include "KI/Repetier.h"
 #include "vtkWidget.h"
 #include "PrinterSettings.h"

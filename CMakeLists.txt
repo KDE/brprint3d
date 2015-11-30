@@ -30,12 +30,12 @@ set(KI_SRCS
 add_library(KI STATIC ${KI_SRCS})
 
 set(Dialogs_SRCS
-	Windows/aboutbrprint.cpp
-	Windows/documentation.cpp
-	Windows/help.cpp
-	Windows/legalwarning.cpp
-	Windows/loading.cpp
-	Windows/warning.cpp
+	Dialogs/aboutbrprint.cpp
+	Dialogs/documentation.cpp
+	Dialogs/help.cpp
+	Dialogs/legalwarning.cpp
+	Dialogs/loading.cpp
+	Dialogs/warning.cpp
 )
 add_library(BRPrintDialogs STATIC ${Dialogs_SRCS})
 target_link_libraries(BRPrintDialogs Qt5::Widgets)

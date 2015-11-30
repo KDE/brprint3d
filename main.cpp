@@ -23,7 +23,7 @@
 
 #include "brprint3d.h"
 #include <QApplication>
-#include <Windows/loading.h>
+#include "Dialogs/loading.h"
 #include <QTranslator>
 #include <QSettings>
 #include <QFontDatabase>
