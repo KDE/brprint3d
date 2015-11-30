@@ -31,14 +31,26 @@
 
 class FilCount{
 private:
-    char *filePath;
+    std::string _filePath;
     FILE *GCode;
     double totalSize;
 public:
-    FilCount(const char *filePath) throw (std::string);
+    FilCount(std::string filePath) throw (std::string);
     ~FilCount();
+    /*=================== getTotalSize() ==========================
+        Return used filament in milimeters.
+      =============================================================*/
     double getTotalSize();
+
+    /*=================== getFilePath() ===========================
+        Return the file path associated with the class.
+      =============================================================*/
     std::string getFilePath();
+
+    /*=================== getTimeInSeconds(double speed) ==========
+        Given speed (in mm/s), returns the aproximated time
+        of the print job.
+      =============================================================*/
     long getTimeInSeconds(double speed);
 };
 

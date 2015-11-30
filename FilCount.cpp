@@ -23,20 +23,34 @@
 
 #include "FilCount.h"
 
-FilCount::FilCount(const char *filePath) throw (std::string)
+FilCount::FilCount(std::string filePath) throw (std::string)
 {
-    char instring[100001], *X, *Y, *Z;
-    bool first = true;
-    double vX[2], vY[2], vZ[2] /*0 - Inicial, 1 - Final*/, temp;
-    this->GCode = fopen(filePath, "rt");
+    char instring[100001];
+    char *X;
+    char *Y;
+    char *Z;
+    bool first;
+    double vX[2];
+    double vY[2];
+    double vZ[2]; /*0 - Initial, 1 - Final*/
+    double temp;
+    X = NULL;
+    Y = NULL;
+    Z = NULL;
+    for (instring[0] = 0; instring[0] < 2; instring[0]++){
+        vX[instring[0]] = 0.0;
+        vY[instring[0]] = 0.0;
+        vZ[instring[0]] = 0.0;
+    }
+    instring[0] = 0;
+    this->GCode = fopen(filePath.c_str(), "rt");
     if(this->GCode == NULL){
         std::string exc = "Could not open the file: ";
         exc+=filePath;
         exc+=".";
         throw exc;
     }
-    this->filePath = (char*)malloc((strlen(filePath) + 1) * sizeof(char));
-    strcpy(this->filePath, filePath);
+    _filePath = filePath;
     this->totalSize = 0.0;
     while(fscanf(this->GCode, "%[^\n]\n", instring) != EOF){
         if(!first){
@@ -93,8 +107,6 @@ FilCount::FilCount(const char *filePath) throw (std::string)
 
 FilCount::~FilCount()
 {
-    free(this->filePath);
-    this->filePath = NULL;
     this->totalSize = 0.0;
     fclose(this->GCode);
     this->GCode = NULL;
@@ -107,8 +119,7 @@ double FilCount::getTotalSize()
 
 std::string FilCount::getFilePath()
 {
-    std::string ret = this->filePath;
-    return ret;
+    return _filePath;
 }
 
 long FilCount::getTimeInSeconds(double speed)
