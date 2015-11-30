@@ -49,6 +49,7 @@ set(BRPrintInterface_SRCS
         ManualControlWidget.cpp
         ExtruderControlWidget.cpp
         BigButton.cpp
+        FilCount.cpp
 )
 add_library(BRPRintInterface STATIC ${BRPrintInterface_SRCS})
 target_link_libraries(BRPRintInterface KI Qt5::Widgets)
