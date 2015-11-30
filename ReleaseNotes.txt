@@ -1,3 +1,15 @@
+Release Nov 30, 2015
+-New Class
+	FilCount - Class to read a gcode file and calculate how much time the print job will spend and how many of filament will be used.
+
+-3D View
+	Improve the loading of gcodes and STL files
+	Set the floor of the cube
+	Set the update of the cube if the area(XYZ) is changed
+	
+
+
+=============================================================
 Release Nov 21,2015 
 -Made 5 new Class
 	-Printer Settings - To manage the data from the PrinterSettingsWidget.
