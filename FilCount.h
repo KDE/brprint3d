@@ -35,7 +35,7 @@ private:
     FILE *GCode;
     double totalSize;
 public:
-    FilCount(std::string filePath) throw (std::string);
+    explicit FilCount(std::string filePath) throw (std::string);
     ~FilCount();
     /*=================== getTotalSize() ==========================
         Return used filament in milimeters.
