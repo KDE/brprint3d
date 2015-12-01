@@ -35,8 +35,7 @@
 vtkWidget::vtkWidget()
 {
     renderer = vtkSmartPointer<vtkRenderer>::New();
-    renderWindow = this->GetRenderWindow();
-    renderWindow->AddRenderer(renderer);
+    GetRenderWindow()->AddRenderer(renderer);
     renderer->SetBackground(0.576,0.749,0.874);
     //actor->GetProperty()->SetColor();
     mapperStl = vtkSmartPointer<vtkPolyDataMapper>::New();
@@ -78,7 +77,7 @@ void vtkWidget::renderSTL(QString pathStl)
     actorStl->SetUserTransform(scaleSTL);
     renderer->AddActor(actorStl);
     renderer->ResetCamera();
-    renderWindow->Render();
+    GetRenderWindow()->Render();
 }
 
 void vtkWidget::renderGcode(QString text)
@@ -145,7 +144,7 @@ void vtkWidget::renderGcode(QString text)
      actorGcode->GetProperty()->SetColor(0,0.5,1);
      renderer->AddActor(actorGcode);
      renderer->ResetCamera();
-     renderWindow->Render();
+     GetRenderWindow()->Render();
 }
 
 
@@ -188,7 +187,7 @@ void vtkWidget::drawCube(){
     renderer->AddActor(axes);
     renderer->AddActor(actorCube);
     renderer->ResetCamera();
-    renderWindow->Render();
+    GetRenderWindow()->Render();
     drawFloor();
 
 }
@@ -245,5 +244,5 @@ void vtkWidget::drawFloor(){
       transform->Scale(areaX,areaY,areaZ);
       actorFloor->SetUserTransform(transform);
       renderer->AddActor(actorFloor);
-      renderWindow->Render();
+      GetRenderWindow()->Render();
 }

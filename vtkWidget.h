@@ -77,7 +77,6 @@ private:
     double areaX, areaY, areaZ;
     //Vtk Variables
     vtkSmartPointer<vtkRenderer> renderer;
-    vtkRenderWindow* renderWindow;
     vtkSmartPointer<vtkPolyDataMapper> mapperStl;
     vtkSmartPointer<vtkPolyDataMapper> mapperGcode;
     vtkSmartPointer<vtkPolyDataMapper> mapperCube;
