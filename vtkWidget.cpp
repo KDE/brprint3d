@@ -53,24 +53,25 @@
 #define DEFAULTY 200
 #define DEFAULTZ 200
 
-vtkWidget::vtkWidget()
+vtkWidget::vtkWidget() :
+    renderer(vtkSmartPointer<vtkRenderer>::New()),
+    mapperStl(vtkSmartPointer<vtkPolyDataMapper>::New()),
+    mapperGcode(vtkSmartPointer<vtkPolyDataMapper>::New()),
+    mapperCube(vtkSmartPointer<vtkPolyDataMapper>::New()),
+    mapperFloor(vtkSmartPointer<vtkPolyDataMapper>::New()),
+    actorStl(vtkSmartPointer<vtkActor>::New()),
+    actorGcode(vtkSmartPointer<vtkActor>::New()),
+    actorCube(vtkSmartPointer<vtkActor>::New()),
+    actorFloor(vtkSmartPointer<vtkActor>::New()),
+    cube(vtkSmartPointer<vtkCubeSource>::New()),
+    areaX(DEFAULTX),
+    areaY(DEFAULTY),
+    areaZ(DEFAULTZ)
 {
-    renderer = vtkSmartPointer<vtkRenderer>::New();
     GetRenderWindow()->AddRenderer(renderer);
     renderer->SetBackground(0.576,0.749,0.874);
     //actor->GetProperty()->SetColor();
-    mapperStl = vtkSmartPointer<vtkPolyDataMapper>::New();
-    mapperGcode = vtkSmartPointer<vtkPolyDataMapper>::New();
-    mapperCube = vtkSmartPointer<vtkPolyDataMapper>::New();
-    mapperFloor = vtkSmartPointer<vtkPolyDataMapper>::New();
-    actorStl = vtkSmartPointer<vtkActor>::New();
-    actorGcode = vtkSmartPointer<vtkActor>::New();
-    actorCube = vtkSmartPointer<vtkActor>::New();
-    actorFloor = vtkSmartPointer<vtkActor>::New();
-    cube = vtkSmartPointer<vtkCubeSource>::New();
-    areaX = DEFAULTX;
-    areaY = DEFAULTY;
-    areaZ = DEFAULTZ;
+
     drawCube();
 }
 
