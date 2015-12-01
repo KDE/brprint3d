@@ -72,16 +72,16 @@ vtkWidget::vtkWidget()
     areaY = DEFAULTY;
     areaZ = DEFAULTZ;
     drawCube();
-
-
 }
 
 vtkWidget::~vtkWidget()
 {
     
 }
+
 void vtkWidget::renderSTL(const QString& pathStl)
-{   cleanup();
+{
+    cleanup();
     vtkSmartPointer<vtkSTLReader> reader = vtkSmartPointer<vtkSTLReader>::New();
     reader->SetFileName(pathStl.toStdString().c_str());
     reader->Update();
@@ -102,20 +102,17 @@ void vtkWidget::renderSTL(const QString& pathStl)
 }
 
 void vtkWidget::renderGcode(const QString& text)
-{   cleanup();
+{
+    cleanup();
     int _layersCount=0;
     vtkSmartPointer<vtkPoints> points = vtkSmartPointer<vtkPoints>::New();
     QStringList list = text.split('\n',QString::SkipEmptyParts);
     double x=0,y=0,z=0,count=0;
-    for(int i=0; i!=list.size(); i++)
-    {
-        if(list[i].startsWith(';')==false)
-        {
+    for (int i = 0; i != list.size(); i++) {
+        if (list[i].startsWith(';') == false) {
             QStringList aux = list[i].split(' ');
-            for(int j=1;j!=aux.size();j++)
-            {
-                if(aux[j].startsWith('X') && aux[j+1].startsWith('Y'))
-                {
+            for (int j = 1;j != aux.size(); j++) {
+                if (aux[j].startsWith('X') && aux[j+1].startsWith('Y')) {
                     //ler ponto
                     QString x_str = aux[j].section('X',1);
                      x = x_str.toDouble();
@@ -123,27 +120,23 @@ void vtkWidget::renderGcode(const QString& text)
                      y = y_str.toDouble();
                      points->InsertPoint(count,x,y,z);
                      count++;
-
-                }
-               else if(aux[j].startsWith('Z'))
-                {
+                } else if(aux[j].startsWith('Z')) {
                   //ler ponto
                     QString z_str = aux[j].section('Z',1);
                     z = z_str.toDouble();
                     points->InsertPoint(count,x,y,z);
                     _layersCount++;
                     count++;
-
                 }
             }
         }
     }
+
     emit layersCount(_layersCount);
     vtkSmartPointer<vtkPolyLine> polyLine = vtkSmartPointer<vtkPolyLine>::New();
-     polyLine->GetPointIds()->SetNumberOfIds(count);
-     for(unsigned int i = 0; i < count; i++)
-       polyLine->GetPointIds()->SetId(i,i);
-
+    polyLine->GetPointIds()->SetNumberOfIds(count);
+    for(unsigned int i = 0; i < count; i++)
+        polyLine->GetPointIds()->SetId(i,i);
 
      // Create a cell array to store the lines in and add the lines to it
      vtkSmartPointer<vtkCellArray> cells = vtkSmartPointer<vtkCellArray>::New();
@@ -169,18 +162,19 @@ void vtkWidget::renderGcode(const QString& text)
 }
 
 
-void vtkWidget::cleanup(){
-    if(actorStl!=0)
-    {
+void vtkWidget::cleanup()
+{
+    if(actorStl!=0) {
         renderer->RemoveActor(actorStl);
     }
-    if(actorGcode!=0)
-    {
+
+    if(actorGcode!=0) {
         renderer->RemoveActor(actorGcode);
     }
 }
 
-void vtkWidget::drawCube(){
+void vtkWidget::drawCube()
+{
 
     if(actorCube!=0)
         renderer->RemoveActor(actorCube);
@@ -196,8 +190,6 @@ void vtkWidget::drawCube(){
     triangulate->Update();
 
     mapperCube->SetInputConnection(cube->GetOutputPort());
-
-
     actorCube->SetMapper(mapperCube);
     actorCube->GetProperty()->SetRepresentationToWireframe();
     vtkSmartPointer<vtkTransform> transform = vtkSmartPointer<vtkTransform>::New();
@@ -255,7 +247,6 @@ void vtkWidget::drawFloor(){
       polydata->SetPolys(quads);
 
       mapperFloor->SetInputData(polydata);
-
 
       actorFloor->SetMapper(mapperFloor);
       actorFloor->GetProperty()->SetColor(0.874,0.898,0.917);
