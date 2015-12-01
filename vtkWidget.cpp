@@ -103,31 +103,29 @@ void vtkWidget::renderSTL(const QString& pathStl)
 
 void vtkWidget::renderGcode(const QString& text)
 {
+    int nrLayers = 0;
+    auto points = vtkSmartPointer<vtkPoints>::New();
+    double x = 0, y = 0, z = 0;
+    int count = 0;
+    QStringList list = text.split('\n', QString::SkipEmptyParts);
+
     cleanup();
-    int nrLayers=0;
-    vtkSmartPointer<vtkPoints> points = vtkSmartPointer<vtkPoints>::New();
-    QStringList list = text.split('\n',QString::SkipEmptyParts);
-    double x=0,y=0,z=0,count=0;
-    for (int i = 0; i != list.size(); i++) {
-        if (list[i].startsWith(';') == false) {
-            QStringList aux = list[i].split(' ');
-            for (int j = 1;j != aux.size(); j++) {
-                if (aux[j].startsWith('X') && aux[j+1].startsWith('Y')) {
-                    //ler ponto
-                    QString x_str = aux[j].section('X',1);
-                     x = x_str.toDouble();
-                    QString y_str = aux[j+1].section('Y',1);
-                     y = y_str.toDouble();
-                     points->InsertPoint(count,x,y,z);
-                     count++;
-                } else if(aux[j].startsWith('Z')) {
-                  //ler ponto
-                    QString z_str = aux[j].section('Z',1);
-                    z = z_str.toDouble();
-                    points->InsertPoint(count,x,y,z);
-                    nrLayers++;
-                    count++;
-                }
+    for(const auto string : list) {
+        if (string.startsWith(';'))
+            continue;
+
+        QStringList aux = string.split(' ');
+        for (int j = 1, end = aux.size(); j != end; j++) {
+            if (aux.at(j).startsWith('X') && aux.at(j+1).startsWith('Y')) {
+                x = aux.at(j).section('X',1).toDouble();
+                y = aux.at(j+1).section('Y',1).toDouble();
+                points->InsertPoint(count,x,y,z);
+                count++;
+            } else if(aux[j].startsWith('Z')) {
+                z = aux.at(j).section('Z',1).toDouble();
+                nrLayers++;
+                points->InsertPoint(count,x,y,z);
+                count++;
             }
         }
     }
