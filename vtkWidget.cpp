@@ -131,32 +131,26 @@ void vtkWidget::renderGcode(const QString& text)
     }
 
     emit layersCount(nrLayers);
-    vtkSmartPointer<vtkPolyLine> polyLine = vtkSmartPointer<vtkPolyLine>::New();
+    auto polyLine = vtkSmartPointer<vtkPolyLine>::New();
     polyLine->GetPointIds()->SetNumberOfIds(count);
     for(unsigned int i = 0; i < count; i++)
         polyLine->GetPointIds()->SetId(i,i);
 
-     // Create a cell array to store the lines in and add the lines to it
-     vtkSmartPointer<vtkCellArray> cells = vtkSmartPointer<vtkCellArray>::New();
-     cells->InsertNextCell(polyLine);
+    auto cells = vtkSmartPointer<vtkCellArray>::New();
+    auto polyData = vtkSmartPointer<vtkPolyData>::New();
 
-     // Create a polydata to store everything in
-     vtkSmartPointer<vtkPolyData> polyData = vtkSmartPointer<vtkPolyData>::New();
+    cells->InsertNextCell(polyLine);
+    polyData->SetPoints(points);
+    polyData->SetLines(cells);
 
-     // Add the points to the dataset
-     polyData->SetPoints(points);
-
-     // Add the lines to the dataset
-     polyData->SetLines(cells);
-
-     // Setup actor and mapper
-     mapperGcode->SetInputData(polyData);
-     actorGcode->SetMapper(mapperGcode);
-     actorGcode->GetProperty()->SetLineWidth(2);
-     actorGcode->GetProperty()->SetColor(0,0.5,1);
-     renderer->AddActor(actorGcode);
-     renderer->ResetCamera();
-     GetRenderWindow()->Render();
+    // Setup actor and mapper
+    mapperGcode->SetInputData(polyData);
+    actorGcode->SetMapper(mapperGcode);
+    actorGcode->GetProperty()->SetLineWidth(2);
+    actorGcode->GetProperty()->SetColor(0,0.5,1); // TODO: Do not use colors as constants. 
+    renderer->AddActor(actorGcode);
+    renderer->ResetCamera();
+    GetRenderWindow()->Render();
 }
 
 
