@@ -112,7 +112,7 @@ void BrPrint3D::openFile()
                 gcode.close();
                 emit callFilCount(filePath);
                 ui->_ManualControl->setGcodePreview(text);
-                if (bt_connect->getCheckedStatus())
+                if (bt_connect->isChecked())
                     bt_play->setEnabled(true);
 
             }
