@@ -212,19 +212,17 @@ void vtkWidget::drawCube(){
     drawFloor();
 
 }
-void vtkWidget::updateCube(const QString& v, QChar axis){
-    if(axis=='X'){
-        areaX = v.toDouble();
-    }
-    if(axis=='Y'){
-        areaY = v.toDouble();
 
+void vtkWidget::updateCube(const QString& v, QChar axis)
+{
+    switch(axis.toLatin1()) {
+        case 'X' : areaX = v.toDouble(); break;
+        case 'Y' : areaY = v.toDouble(); break;
+        case 'Z' : areaZ = v.toDouble(); break;
     }
-    if(axis=='Z'){
-        areaZ = v.toDouble();
-    }
-   drawCube();
+    drawCube();
 }
+
 void vtkWidget::drawFloor(){
       double p0[3] = {0.0, 0.0, 0.0};
       double p1[3] = {1.0, 0.0, 0.0};
