@@ -82,16 +82,18 @@ vtkWidget::~vtkWidget()
 void vtkWidget::renderSTL(const QString& pathStl)
 {
     cleanup();
-    vtkSmartPointer<vtkSTLReader> reader = vtkSmartPointer<vtkSTLReader>::New();
+
+    auto reader = vtkSmartPointer<vtkSTLReader>::New();
     reader->SetFileName(pathStl.toStdString().c_str());
     reader->Update();
-    vtkSmartPointer<vtkTriangleFilter> triangulate = vtkSmartPointer<vtkTriangleFilter>::New();
+
+    auto triangulate = vtkSmartPointer<vtkTriangleFilter>::New();
     triangulate->SetInputConnection(reader->GetOutputPort());
     triangulate->Update();
 
-     vtkSmartPointer<vtkTransform> scaleSTL = vtkSmartPointer<vtkTransform>::New();
-     scaleSTL->Translate(areaX/2,areaY/2,areaZ/4);
-     scaleSTL->Scale(10,10,10);
+    vtkSmartPointer<vtkTransform> scaleSTL = vtkSmartPointer<vtkTransform>::New();
+    scaleSTL->Translate(areaX/2,areaY/2,areaZ/4);
+    scaleSTL->Scale(10,10,10);
 
     mapperStl->SetInputConnection(reader->GetOutputPort());
     actorStl->SetMapper(mapperStl);
@@ -156,20 +158,23 @@ void vtkWidget::renderGcode(const QString& text)
 
 void vtkWidget::cleanup()
 {
-    if(actorStl!=0) {
+    if(actorStl !=0 ) {
         renderer->RemoveActor(actorStl);
     }
 
-    if(actorGcode!=0) {
+    if(actorGcode !=0 ) {
         renderer->RemoveActor(actorGcode);
     }
 }
 
 void vtkWidget::drawCube()
 {
-
     if(actorCube!=0)
         renderer->RemoveActor(actorCube);
+
+    auto triangulate = vtkSmartPointer<vtkTriangleFilter>::New();
+    auto transform = vtkSmartPointer<vtkTransform>::New();
+    auto axes = vtkSmartPointer<vtkAxesActor>::New();
 
     cube->SetXLength(areaX);
     cube->SetYLength(areaY);
@@ -177,24 +182,23 @@ void vtkWidget::drawCube()
     cube->SetCenter(areaX/2, areaY/2, areaZ/2);
     cube->Update();
 
-    vtkSmartPointer<vtkTriangleFilter> triangulate = vtkSmartPointer<vtkTriangleFilter>::New();
     triangulate->SetInputConnection(cube->GetOutputPort());
     triangulate->Update();
 
     mapperCube->SetInputConnection(cube->GetOutputPort());
     actorCube->SetMapper(mapperCube);
     actorCube->GetProperty()->SetRepresentationToWireframe();
-    vtkSmartPointer<vtkTransform> transform = vtkSmartPointer<vtkTransform>::New();
-    transform->Translate(-10,-10,0);
-    transform->Scale(50,50,50);
-    vtkSmartPointer<vtkAxesActor> axes = vtkSmartPointer<vtkAxesActor>::New();
+
+    transform->Translate(-10,-10,0); // TODO: Hardcoded values
+    transform->Scale(50,50,50); // TODO: Hardcoded values
+
     axes->SetUserTransform(transform);
+
     renderer->AddActor(axes);
     renderer->AddActor(actorCube);
     renderer->ResetCamera();
     GetRenderWindow()->Render();
     drawFloor();
-
 }
 
 void vtkWidget::updateCube(const QString& v, QChar axis)
@@ -207,44 +211,45 @@ void vtkWidget::updateCube(const QString& v, QChar axis)
     drawCube();
 }
 
-void vtkWidget::drawFloor(){
-      double p0[3] = {0.0, 0.0, 0.0};
-      double p1[3] = {1.0, 0.0, 0.0};
-      double p2[3] = {1.0, 1.0, 0.0};
-      double p3[3] = {0.0, 1.0, 0.0};
+void vtkWidget::drawFloor()
+{
+    double p0[3] = {0.0, 0.0, 0.0};
+    double p1[3] = {1.0, 0.0, 0.0};
+    double p2[3] = {1.0, 1.0, 0.0};
+    double p3[3] = {0.0, 1.0, 0.0};
 
-      // Add the points to a vtkPoints object
-      vtkSmartPointer<vtkPoints> points = vtkSmartPointer<vtkPoints>::New();
-      points->InsertNextPoint(p0);
-      points->InsertNextPoint(p1);
-      points->InsertNextPoint(p2);
-      points->InsertNextPoint(p3);
+    auto points = vtkSmartPointer<vtkPoints>::New();
+    auto quad = vtkSmartPointer<vtkQuad>::New();
+    auto quads = vtkSmartPointer<vtkCellArray>::New();
+    auto transform = vtkSmartPointer<vtkTransform>::New();
+    auto polydata = vtkSmartPointer<vtkPolyData>::New();
 
-      // Create a quad on the four points
-      vtkSmartPointer<vtkQuad> quad = vtkSmartPointer<vtkQuad>::New();
-      quad->GetPointIds()->SetId(0,0);
-      quad->GetPointIds()->SetId(1,1);
-      quad->GetPointIds()->SetId(2,2);
-      quad->GetPointIds()->SetId(3,3);
+    // Add the points to a vtkPoints object
+    points->InsertNextPoint(p0);
+    points->InsertNextPoint(p1);
+    points->InsertNextPoint(p2);
+    points->InsertNextPoint(p3);
 
-      // Create a cell array to store the quad in
-      vtkSmartPointer<vtkCellArray> quads = vtkSmartPointer<vtkCellArray>::New();
-      quads->InsertNextCell(quad);
+    // Create a quad on the four points
+    quad->GetPointIds()->SetId(0,0);
+    quad->GetPointIds()->SetId(1,1);
+    quad->GetPointIds()->SetId(2,2);
+    quad->GetPointIds()->SetId(3,3);
 
-      // Create a polydata to store everything in
-      vtkSmartPointer<vtkPolyData> polydata = vtkSmartPointer<vtkPolyData>::New();
+    // Create a cell array to store the quad in
+    quads->InsertNextCell(quad);
 
-      // Add the points and quads to the dataset
-      polydata->SetPoints(points);
-      polydata->SetPolys(quads);
+    // Add the points and quads to the dataset
+    polydata->SetPoints(points);
+    polydata->SetPolys(quads);
 
-      mapperFloor->SetInputData(polydata);
+    mapperFloor->SetInputData(polydata);
 
-      actorFloor->SetMapper(mapperFloor);
-      actorFloor->GetProperty()->SetColor(0.874,0.898,0.917);
-      vtkSmartPointer<vtkTransform> transform = vtkSmartPointer<vtkTransform>::New();
-      transform->Scale(areaX,areaY,areaZ);
-      actorFloor->SetUserTransform(transform);
-      renderer->AddActor(actorFloor);
-      GetRenderWindow()->Render();
+    actorFloor->SetMapper(mapperFloor);
+    actorFloor->GetProperty()->SetColor(0.874,0.898,0.917);
+
+    transform->Scale(areaX,areaY,areaZ);
+    actorFloor->SetUserTransform(transform);
+    renderer->AddActor(actorFloor);
+    GetRenderWindow()->Render();
 }
