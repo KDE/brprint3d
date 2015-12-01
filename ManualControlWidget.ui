@@ -21,9 +21,6 @@
     <pointsize>10</pointsize>
    </font>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <widget class="QTabWidget" name="ManualControl">
    <property name="geometry">
     <rect>
