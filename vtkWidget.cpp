@@ -32,6 +32,27 @@
 
 #include "vtkWidget.h"
 
+#include <vtkPolyData.h>
+#include <vtkRenderWindow.h>
+#include <vtkRenderWindowInteractor.h>
+#include <vtkGenericOpenGLRenderWindow.h>
+#include <vtkCellArray.h>
+#include <vtkCellData.h>
+#include <vtkDoubleArray.h>
+#include <vtkPoints.h>
+#include <vtkPolyLine.h>
+#include <vtkTransform.h>
+#include <vtkTriangleFilter.h>
+#include <vtkProperty.h>
+#include <vtkAxesActor.h>
+#include <vtkQuad.h>
+#include <vtkInteractorStyleTrackballCamera.h>
+#include <vtkSTLReader.h>
+
+#define DEFAULTX 200
+#define DEFAULTY 200
+#define DEFAULTZ 200
+
 vtkWidget::vtkWidget()
 {
     renderer = vtkSmartPointer<vtkRenderer>::New();

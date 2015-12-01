@@ -32,30 +32,11 @@
 #define VTKWIDGET_H
 
 #include <QVTKWidget.h>
-#include <vtkPolyData.h>
-#include <vtkSTLReader.h>
 #include <vtkSmartPointer.h>
 #include <vtkPolyDataMapper.h>
 #include <vtkActor.h>
-#include <vtkRenderWindow.h>
 #include <vtkRenderer.h>
-#include <vtkRenderWindowInteractor.h>
-#include <vtkGenericOpenGLRenderWindow.h>
-#include <vtkCellArray.h>
-#include <vtkCellData.h>
-#include <vtkDoubleArray.h>
-#include <vtkPoints.h>
-#include <vtkPolyLine.h>
-#include <vtkTransform.h>
-#include <vtkTriangleFilter.h>
 #include <vtkCubeSource.h>
-#include <vtkProperty.h>
-#include <vtkAxesActor.h>
-#include <vtkQuad.h>
-#include <vtkInteractorStyleTrackballCamera.h>
-#define DEFAULTX 200
-#define DEFAULTY 200
-#define DEFAULTZ 200
 
 class vtkWidget : public QVTKWidget
 {
