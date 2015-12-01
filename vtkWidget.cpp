@@ -80,7 +80,7 @@ vtkWidget::~vtkWidget()
 {
     
 }
-void vtkWidget::renderSTL(QString pathStl)
+void vtkWidget::renderSTL(const QString& pathStl)
 {   cleanup();
     vtkSmartPointer<vtkSTLReader> reader = vtkSmartPointer<vtkSTLReader>::New();
     reader->SetFileName(pathStl.toStdString().c_str());
@@ -101,7 +101,7 @@ void vtkWidget::renderSTL(QString pathStl)
     GetRenderWindow()->Render();
 }
 
-void vtkWidget::renderGcode(QString text)
+void vtkWidget::renderGcode(const QString& text)
 {   cleanup();
     int _layersCount=0;
     vtkSmartPointer<vtkPoints> points = vtkSmartPointer<vtkPoints>::New();
@@ -212,7 +212,7 @@ void vtkWidget::drawCube(){
     drawFloor();
 
 }
-void vtkWidget::updateCube(QString v, QChar axis){
+void vtkWidget::updateCube(const QString& v, QChar axis){
     if(axis=='X'){
         areaX = v.toDouble();
     }

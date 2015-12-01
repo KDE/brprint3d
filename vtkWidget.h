@@ -44,10 +44,10 @@ class vtkWidget : public QVTKWidget
 public:
 vtkWidget();
 ~vtkWidget();
-    void renderSTL(QString path);
-    void renderGcode(QString text);
+    void renderSTL(const QString& path);
+    void renderGcode(const QString& text);
 public slots:
-    void updateCube(QString v, QChar axis);
+    void updateCube(const QString& v, QChar axis);
 signals:
     void layersCount(int l);
 
