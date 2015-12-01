@@ -70,10 +70,6 @@ public slots:
 signals:
     void layersCount(int l);
 
-signals:
-    void layersCount(int l);
-
-
 private:
     void drawCube();
     void cleanup();
