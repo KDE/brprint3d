@@ -81,6 +81,7 @@ BrPrint3D::~BrPrint3D()
 void BrPrint3D::init()
 {
     ui->_PrinterSettings->hide();
+    ui->_PrinterSettings->init();
     ui->_ManualControl->init();
     setEnabled(false);
 }
