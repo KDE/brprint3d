@@ -41,7 +41,6 @@ add_library(BRPrintDialogs STATIC ${Dialogs_SRCS})
 target_link_libraries(BRPrintDialogs Qt5::Widgets)
 
 set(BRPrintInterface_SRCS
-	arduinolistener.cpp
 	brprint3d.cpp
 	vtkWidget.cpp
         PrinterSettingsWidget.cpp
