@@ -32,7 +32,7 @@ PrinterSettingsWidget::PrinterSettingsWidget(QWidget *parent) :
     connect(ui->tb_AreaPrintX,&QLineEdit::textEdited,this,&PrinterSettingsWidget::sendValue);
     connect(ui->tb_AreaPrintY,&QLineEdit::textEdited,this,&PrinterSettingsWidget::sendValue);
     connect(ui->tb_AreaPrintZ,&QLineEdit::textEdited,this,&PrinterSettingsWidget::sendValue);
-    timer.start(2000);
+
     connect(&timer,&QTimer::timeout,this,&PrinterSettingsWidget::locateArduino);
 }
 
@@ -42,7 +42,7 @@ PrinterSettingsWidget::~PrinterSettingsWidget()
 }
 
 void PrinterSettingsWidget::init()
-{
+{   timer.start(2000);
     /*this->settings = settings;
     //Load the previous configs if them exists
     QStringList groups;
@@ -208,43 +208,21 @@ void PrinterSettingsWidget::disableExtrudersQntCb(bool d)
 }
 
 void PrinterSettingsWidget::locateArduino()
-{
-    QStringList ports;
-    garbage=std::system("dmesg | grep -i usb > usbport.txt");
-    QFile usbport("usbport.txt");
-    if(usbport.open(QIODevice::ReadOnly|QIODevice::Text))
-    {   QTextStream in(&usbport);
-        QString file = in.readAll();
-        usbport.close();
-        QString port,ant = '\0';
-        std::string temp = file.toStdString();
-        const char *look = temp.c_str();
-        look = strstr(look, "Arduino");
-        while(look != nullptr)
-        {
-            look = strstr(look, "tty");
-            for(int i = 0; look[i] != ':'; i++)
-                port+=look[i];
-            if(ant!=port)
-            {   if(port!="ttyACM0" && port!="ttyUSB0")
-                {   ports.append("/dev/"+port);
-                    ant=port;
-                }
-            }
-            port.clear();
-            look = strstr(look, "Arduino");
-        }
-    }
-    if(!ports.isEmpty())
-    {   ui->cb_ConnectionPort->addItems(ports);
-        QMessageBox msg;
-        msg.setText("The arduino is connect at new ports then default, please check on Configs Menu to switch ports!");
-        msg.setIcon(QMessageBox::Information);
-        msg.exec();
-        timer.stop();
-    }
+{          qDebug()<<"here";
+           QList<QSerialPortInfo> serialPortInfoList = QSerialPortInfo::availablePorts();
+           QString description="";
+           QString manufacturer="";
+           QString serialNumber="";
 
-
+           foreach (const QSerialPortInfo &serialPortInfo, serialPortInfoList) {
+               description = serialPortInfo.description();
+               manufacturer = serialPortInfo.manufacturer();
+               serialNumber = serialPortInfo.serialNumber();
+               qDebug() <<"teste";
+               qDebug() << "Desc" <<QString(description);
+               qDebug() <<"Manufacturer"<< QString(manufacturer);
+               qDebug() <<"Serial " <<QString(serialNumber);
+           }
 }
 
 void PrinterSettingsWidget::on_cb_ExtruderQnt_currentTextChanged(const QString &arg1)

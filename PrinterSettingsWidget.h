@@ -29,6 +29,10 @@
 #include <QTimer>
 #include <QFile>
 #include <QTextStream>
+#include <QtSerialPort/QSerialPort>
+#include <QtSerialPort/QSerialPortInfo>
+#include <QDebug>
+#include <QList>
 
 namespace Ui {
 class PrinterSettingsWidget;
