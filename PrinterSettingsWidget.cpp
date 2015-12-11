@@ -32,6 +32,8 @@ PrinterSettingsWidget::PrinterSettingsWidget(QWidget *parent) :
     connect(ui->tb_AreaPrintX,&QLineEdit::textEdited,this,&PrinterSettingsWidget::sendValue);
     connect(ui->tb_AreaPrintY,&QLineEdit::textEdited,this,&PrinterSettingsWidget::sendValue);
     connect(ui->tb_AreaPrintZ,&QLineEdit::textEdited,this,&PrinterSettingsWidget::sendValue);
+    timer.start(2000);
+    connect(&timer,&QTimer::timeout,this,&PrinterSettingsWidget::locateArduino);
 }
 
 PrinterSettingsWidget::~PrinterSettingsWidget()
@@ -41,11 +43,6 @@ PrinterSettingsWidget::~PrinterSettingsWidget()
 
 void PrinterSettingsWidget::init()
 {
-    arduino_Listener = new arduinoListener();
-    connect(arduino_Listener,SIGNAL(arduinoConnect(bool)),this,SLOT(locateArduino(bool)));
-    arduino_Listener->start();
-
-
     /*this->settings = settings;
     //Load the previous configs if them exists
     QStringList groups;
@@ -211,9 +208,7 @@ void PrinterSettingsWidget::disableExtrudersQntCb(bool d)
 }
 
 void PrinterSettingsWidget::locateArduino()
-{   arduino_Listener->wait(2000);
-    arduino_Listener->quit();
-    arduino_Listener->deleteLater();
+{
     QStringList ports;
     garbage=std::system("dmesg | grep -i usb > usbport.txt");
     QFile usbport("usbport.txt");
@@ -221,10 +216,9 @@ void PrinterSettingsWidget::locateArduino()
     {   QTextStream in(&usbport);
         QString file = in.readAll();
         usbport.close();
-        QString port,ant = "\0";
+        QString port,ant = '\0';
         std::string temp = file.toStdString();
         const char *look = temp.c_str();
-        //qDebug()<<QString(word)
         look = strstr(look, "Arduino");
         while(look != nullptr)
         {
@@ -247,6 +241,7 @@ void PrinterSettingsWidget::locateArduino()
         msg.setText("The arduino is connect at new ports then default, please check on Configs Menu to switch ports!");
         msg.setIcon(QMessageBox::Information);
         msg.exec();
+        timer.stop();
     }
 
 

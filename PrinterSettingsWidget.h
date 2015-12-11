@@ -26,7 +26,9 @@
 #include <QWidget>
 #include <QMessageBox>
 #include "PrinterSettings.h"
-#include "arduinolistener.h"
+#include <QTimer>
+#include <QFile>
+#include <QTextStream>
 
 namespace Ui {
 class PrinterSettingsWidget;
@@ -54,8 +56,8 @@ private slots:
 private:
     Ui::PrinterSettingsWidget *ui;
     int extrudersInUse=1;
-    arduinoListener *arduino_Listener=nullptr;
     bool garbage=false;
+    QTimer timer;
 signals:
    void s_extrudersInUse(int n);
    void s_printLogStatus(bool b);
