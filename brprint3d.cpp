@@ -66,6 +66,7 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(bt_stopOnEmergency,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopOnEmergency);
     connect(ui->bt_hide,&QPushButton::clicked,this,&BrPrint3D::hidePrinterSettings);
     connect(ui->_ManualControl,&ManualControlWidget::checkConnectButton,bt_connect,&BigButton::setChecked);
+    connect(ui->_ManualControl,&ManualControlWidget::checkConnectButton,this,&BrPrint3D::changeIcon);
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::updateCube,vtkView,&vtkWidget::updateCube);
     connect(vtkView,&vtkWidget::layersCount,ui->_ManualControl,&ManualControlWidget::setLayersCount);
     connect(this,&BrPrint3D::callFilCount,ui->_ManualControl,&ManualControlWidget::setFilCount);
@@ -126,10 +127,10 @@ void BrPrint3D::openFile()
 
 void BrPrint3D::connectPrinter(bool checked)
 {
-    if (checked) {
+    if (checked){
         psettings = ui->_PrinterSettings->getCurrentSettings();
         ui->_ManualControl->constructPrinterObject(psettings);
-        setEnabled(true);
+        bt_play->setEnabled(false);
         bt_pause->setEnabled(false);
         bt_stop->setEnabled(false);
     } else {
@@ -185,7 +186,7 @@ void BrPrint3D::changeIcon(bool checked)
             bt_pause->setIcon(QIcon(":/Icons/Icons/pause.png"));
         }
     } else if (btn == bt_connect) {
-        if (checked) {
+        if (checked){
             bt_connect->setIcon(QIcon(":/Icons/Icons/connectOnClick.png"));
         } else {
             bt_connect->setIcon(QIcon(":/Icons/Icons/connect.png"));
