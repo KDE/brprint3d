@@ -1,3 +1,12 @@
+Release Dez 12, 2015
+-Remove Class - arduinoListener
+	Remove this class, because is not the best way to know when a arduino is connected. And, this class only worked with
+original Arduino. 
+-Update Class
+	On the class PrinterSettingsWidget the method to locateArduino now use a QSerialPortInfo features and recognise
+	all serial devices that are connect to the computer.
+
+===========================================================
 Release Nov 30, 2015
 -New Class
 	FilCount - Class to read a gcode file and calculate how much time the print job will spend and how many of filament will be used.
