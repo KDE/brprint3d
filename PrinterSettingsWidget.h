@@ -31,8 +31,7 @@
 #include <QTextStream>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
-#include <QDebug>
-#include <QList>
+
 
 namespace Ui {
 class PrinterSettingsWidget;
@@ -62,6 +61,8 @@ private:
     int extrudersInUse=1;
     bool garbage=false;
     QTimer timer;
+    QStringList actPortList;
+    QStringList antPortList;
 signals:
    void s_extrudersInUse(int n);
    void s_printLogStatus(bool b);

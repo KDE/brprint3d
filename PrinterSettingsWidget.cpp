@@ -208,21 +208,25 @@ void PrinterSettingsWidget::disableExtrudersQntCb(bool d)
 }
 
 void PrinterSettingsWidget::locateArduino()
-{          qDebug()<<"here";
-           QList<QSerialPortInfo> serialPortInfoList = QSerialPortInfo::availablePorts();
-           QString description="";
-           QString manufacturer="";
-           QString serialNumber="";
+{   actPortList.clear();
+    QList<QSerialPortInfo> serialPortInfoList = QSerialPortInfo::availablePorts();
+    if(!serialPortInfoList.isEmpty())
+    {   foreach (const QSerialPortInfo &serialPortInfo, serialPortInfoList) {
+        actPortList.append(serialPortInfo.portName());
+        }
+        if(antPortList.isEmpty())
+        {
+            antPortList = actPortList;
+            ui->cb_ConnectionPort->addItems(actPortList);
+        }else if(actPortList!=antPortList){
+            ui->cb_ConnectionPort->clear();
+            ui->cb_ConnectionPort->addItems(actPortList);
+            antPortList = actPortList;
+        }
 
-           foreach (const QSerialPortInfo &serialPortInfo, serialPortInfoList) {
-               description = serialPortInfo.description();
-               manufacturer = serialPortInfo.manufacturer();
-               serialNumber = serialPortInfo.serialNumber();
-               qDebug() <<"teste";
-               qDebug() << "Desc" <<QString(description);
-               qDebug() <<"Manufacturer"<< QString(manufacturer);
-               qDebug() <<"Serial " <<QString(serialNumber);
-           }
+
+    }
+
 }
 
 void PrinterSettingsWidget::on_cb_ExtruderQnt_currentTextChanged(const QString &arg1)
