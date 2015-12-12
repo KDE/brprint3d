@@ -212,7 +212,7 @@ void PrinterSettingsWidget::locateArduino()
     QList<QSerialPortInfo> serialPortInfoList = QSerialPortInfo::availablePorts();
     if(!serialPortInfoList.isEmpty())
     {   foreach (const QSerialPortInfo &serialPortInfo, serialPortInfoList) {
-        actPortList.append(serialPortInfo.portName());
+        actPortList.append("/dev/"+serialPortInfo.portName());
         }
         if(antPortList.isEmpty())
         {
@@ -239,11 +239,12 @@ void PrinterSettingsWidget::printLogStatusChanged(){
     emit s_printLogStatus(ui->ck_PrintLog->isChecked());
 }
 void PrinterSettingsWidget::sendValue(QString v){
-    if(sender()==ui->tb_AreaPrintX)
+    QLineEdit *btn = qobject_cast<QLineEdit*>(sender());
+    if(btn==ui->tb_AreaPrintX)
         emit updateCube(v,'X');
-    if(sender()==ui->tb_AreaPrintY)
+    if(btn==ui->tb_AreaPrintY)
         emit updateCube(v,'Y');
-    if(sender()==ui->tb_AreaPrintZ)
+    if(btn==ui->tb_AreaPrintZ)
         emit updateCube(v,'Z');
 
 }
