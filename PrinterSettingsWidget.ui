@@ -102,16 +102,6 @@
                 <height>25</height>
                </size>
               </property>
-              <item>
-               <property name="text">
-                <string>/dev/ttyACM0</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>/dev/ttyUSB0</string>
-               </property>
-              </item>
              </widget>
             </item>
             <item row="5" column="1">
