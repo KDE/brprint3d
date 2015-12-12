@@ -192,27 +192,27 @@ void ManualControlWidget::startExtruders(bool checked){
 
 }
 void ManualControlWidget::disableExtrudersButtons(bool checked)
-{
-    if(sender()==ui->bt_extruder1)
+{   QPushButton *btn = qobject_cast<QPushButton*>(sender());
+    if(btn==ui->bt_extruder1)
     {
         ui->bt_extruder2->setEnabled(!checked);
         ui->bt_extruder3->setEnabled(!checked);
         ui->bt_extruder4->setEnabled(!checked);
     }
-    else if(sender()==ui->bt_extruder2)
+    else if(btn==ui->bt_extruder2)
     {
         ui->bt_extruder1->setEnabled(!checked);
         ui->bt_extruder3->setEnabled(!checked);
         ui->bt_extruder4->setEnabled(!checked);
     }
-    else if(sender()==ui->bt_extruder3)
+    else if(btn==ui->bt_extruder3)
     {
         ui->bt_extruder2->setEnabled(!checked);
         ui->bt_extruder1->setEnabled(!checked);
         ui->bt_extruder4->setEnabled(!checked);
 
     }
-    else if(sender()==ui->bt_extruder4)
+    else if(btn==ui->bt_extruder4)
     {
         ui->bt_extruder2->setEnabled(!checked);
         ui->bt_extruder3->setEnabled(!checked);
@@ -547,21 +547,21 @@ void ManualControlWidget::stopOnEmergency(){
 }
 
 void ManualControlWidget::spinEditFinished(){
-
-    if(sender()==ui->ds_printSpeed){
+    QSpinBox *btn = qobject_cast<QSpinBox*>(sender());
+    if(btn==ui->ds_printSpeed){
         int speed = ui->ds_printSpeed->value();
         printerObject->setFeedRate(speed);
         ui->sl_printSpeed->setValue(speed);
         ui->lb_printSpeed->setText(QString::number(speed));
     }
-    if(sender()==ui->ds_filamentFlow){
+    if(btn==ui->ds_filamentFlow){
         int flow = ui->ds_filamentFlow->value();
         printerObject->setFlowRate(flow);
         ui->sl_filamentFlow->setValue(flow);
         ui->lb_filFlowValue->setText(QString::number(flow));
 
     }
-    if(sender()==ui->ds_coolerFan)
+    if(btn==ui->ds_coolerFan)
     {
         int fan = ui->ds_coolerFan->value();
         printerObject->setFanSpeed(fan);
@@ -571,19 +571,20 @@ void ManualControlWidget::spinEditFinished(){
 
 }
 void ManualControlWidget::sliderValueChanged(int v){
-    if(sender()==ui->sl_printSpeed)
+    QSlider *btn = qobject_cast<QSlider*>(sender());
+    if(btn==ui->sl_printSpeed)
     {
         ui->ds_printSpeed->setValue(v);
         ui->lb_printSpeed->setText(QString::number(v));
         printerObject->setFeedRate(v);
     }
-    if(sender()==ui->sl_filamentFlow)
+    if(btn==ui->sl_filamentFlow)
     {
         ui->ds_filamentFlow->setValue(v);
         ui->lb_filFlowValue->setText(QString::number(v));
         printerObject->setFlowRate(v);
     }
-    if(sender()==ui->sl_coolerFan)
+    if(btn==ui->sl_coolerFan)
     {
         ui->ds_coolerFan->setValue(v);
         ui->lb_coolerValue->setText(QString::number(v));

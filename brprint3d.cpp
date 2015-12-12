@@ -95,13 +95,13 @@ void BrPrint3D::setEnabled(bool b)
 }
 
 void BrPrint3D::openFile()
-{
+{   BigButton *btn = qobject_cast<BigButton*>(sender());
     QString typeGcode("*.gcode");
     QString typeAll("*.gcode *.stl *.STL");
-    if(sender()==bt_import){
+    if(btn==bt_import){
         filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), typeGcode);
     }
-    if(sender()==bt_open){
+    if(btn==bt_open){
         filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), typeAll);
     }
         if (!filePath.isEmpty() && QFileInfo(filePath).completeSuffix() == "gcode") {
@@ -166,11 +166,8 @@ void BrPrint3D::hidePrinterSettings()
 }
 
 void BrPrint3D::changeIcon(bool checked)
-{
-    //TODO: Remove this method - Icon handling should be on the BigButton class, not here.
-    // Since you are using 'onClick' to mark if a widget is checked, consider using a QToolButton
-    // instead of a QPush button and let the button manage the OnClicked / OnChecked automatically.
-    if( sender() == bt_play ) {
+{   BigButton *btn = qobject_cast<BigButton*>(sender());
+    if( btn == bt_play ) {
         if (checked){
             // use btn_play->setEnabled();
             QIcon icon(":/Icons/Icons/playOnClick.png");
@@ -181,13 +178,13 @@ void BrPrint3D::changeIcon(bool checked)
             bt_play->setIcon(QIcon(":/Icons/Icons/play.png"));
             bt_play->setChecked(false);
         }
-    } else if (sender()==bt_pause) {
+    } else if (btn == bt_pause) {
         if (checked) {
             bt_pause->setIcon(QIcon(":/Icons/Icons/pauseOnClick.png"));
         } else {
             bt_pause->setIcon(QIcon(":/Icons/Icons/pause.png"));
         }
-    } else if (sender()==bt_connect) {
+    } else if (btn == bt_connect) {
         if (checked) {
             bt_connect->setIcon(QIcon(":/Icons/Icons/connectOnClick.png"));
         } else {
