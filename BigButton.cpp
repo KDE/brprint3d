@@ -31,7 +31,8 @@ BigButton::BigButton(QWidget *parent, const QString& name,const QString& iconPat
     ui->label->setText(name);
     ui->pushButton->setCheckable(isCheckable);
     ui->pushButton->setIcon(QIcon(iconPath));
-    ui->pushButton->setIconSize(QSize(50,50)); //TODO: Hardcoded value, change this to something calculated for the current display.
+    //The value bellow is the best size that the icon could have on the button
+    ui->pushButton->setIconSize(QSize(50,50));
     connect(ui->pushButton, &QPushButton::clicked, this, &BigButton::clicked);
 }
 
