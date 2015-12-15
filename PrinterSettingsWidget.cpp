@@ -52,39 +52,42 @@ void PrinterSettingsWidget::init()
     ui->cb_Printer->addItems(groups);
     if(!groups.isEmpty())
     {   //Criar init printer configs
-        QString a = ui->cb_Printer->currentText();
-        PrinterSettings p = loadConfigs(a);
-        //Connection Tab
-        ui->cb_Connection_Type->setCurrentText(p.connectionType);
-        ui->cb_Transmition_Rate->setCurrentText(p.transmissionRate);
-        ui->cb_Firmware->setCurrentText(p.firmwareType);
-        ui->cb_Cache_Size->setCurrentText(p.cacheSize);
 
-        //Resets
-        ui->ck_ResetonConnect->setChecked(p.resetOnConnect);
-        ui->ck_ResetonEmergency->setChecked(p.resetOnEmergency);
-        ui->ck_PrintLog->setChecked(p.printLog);
-
-        //Printer Tab
-        ui->tb_RateMoviment->setText(p.rateMoviment);
-        ui->tb_FeedZ->setText(p.feedZ);
-        ui->tb_ExtSpeedmm->setText(p.extruderSpeedMM);
-        ui->tb_ExtSpeedSec->setText(p.extruderSpeedS);
-        ui->tb_ExtMaxVol->setText(p.extruderMAXVol);
-        ui->tb_RetractionSpeed->setText(p.extruderRetraction);
-        ui->tb_BedTemp->setText(p.bedTemperature);
-        ui->tb_ExtTemperature->setText(p.extruderTemperature);
-        ui->tb_AreaPrintX->setText(p.areaX);
-        ui->tb_AreaPrintY->setText(p.areaY);
-        ui->tb_AreaPrintZ->setText(p.areaZ);
-
-        //Extruder Tab
-        ui->cb_ExtruderQnt->setCurrentText(p.extruderQnt);
-        ui->tb_ExtMaxTemp->setText(p.extruderMAXTemp);
-        ui->tb_BedMaxTemp->setText(p.bedMAXTemp);
     }*/
 
 }
+void PrinterSettingsWidget::setSettings(PrinterSettings p){
+
+    //Connection Tab
+    ui->cb_ConnectionType->setCurrentText(p.connectionType);
+    ui->cb_TransmitionRate->setCurrentText(p.transmissionRate);
+    ui->cb_Firmware->setCurrentText(p.firmwareType);
+    ui->cb_CacheSize->setCurrentText(p.cacheSize);
+
+    //Resets
+    ui->ck_ResetOnConnect->setChecked(p.resetOnConnect);
+    ui->ck_PrintLog->setChecked(p.printLog);
+
+    //Printer Tab
+    ui->tb_RateMoviment->setText(p.rateMoviment);
+    ui->tb_FeedZ->setText(p.feedZ);
+    ui->tb_ExtruderSpeed_mm->setText(p.extruderSpeedMM);
+    ui->tb_ExtruderSpeed_sec->setText(p.extruderSpeedS);
+    ui->tb_ExtruderMaxVol->setText(p.extruderMAXVol);
+    ui->tb_SpeedRetraction->setText(p.extruderRetraction);
+    ui->tb_BedTemperature->setText(p.bedTemperature);
+    ui->tb_ExtruderTemperature->setText(p.extruderTemperature);
+    ui->tb_AreaPrintX->setText(p.areaX);
+    ui->tb_AreaPrintY->setText(p.areaY);
+    ui->tb_AreaPrintZ->setText(p.areaZ);
+
+    //Extruder Tab
+    ui->cb_ExtruderQnt->setCurrentText(p.extruderQnt);
+    ui->tb_ExtruderMaxTemp->setText(p.extruderMAXTemp);
+    ui->tb_BedMaxTemp->setText(p.bedMAXTemp);
+
+}
+
 /*
 //This action save the configs insert by the user on Printer Configs in Ini File
 void PrinterSettingsWidget::on_bt_SaveConfig_clicked() //Save actual configs
