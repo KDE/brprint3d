@@ -31,6 +31,7 @@
 #include <QTextStream>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
+#include <QSettings>
 
 
 namespace Ui {
@@ -63,6 +64,9 @@ private:
     QTimer timer;
     QStringList actPortList;
     QStringList antPortList;
+    QSettings settings;
+
+    void setSettings(PrinterSettings p);
 signals:
    void s_extrudersInUse(int n);
    void s_printLogStatus(bool b);
