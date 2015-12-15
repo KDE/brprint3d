@@ -66,6 +66,7 @@ private:
     QStringList actPortList;
     QStringList antPortList;
     QSettings settings;
+    PrinterSettings pSettings;
 
     void setSettings(PrinterSettings p);
     PrinterSettings loadSettings(QString q);

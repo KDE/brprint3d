@@ -44,17 +44,17 @@ PrinterSettingsWidget::~PrinterSettingsWidget()
 
 void PrinterSettingsWidget::init()
 {   timer.start(2000);
-    /*settings = settings;
+
     //Load the previous configs if them exists
     QStringList groups;
     settings.beginGroup("Printer_Configs");
     groups = settings.childGroups();
     settings.endGroup();
-    ui->cb_Printer->addItems(groups);
-    if(!groups.isEmpty())
-    {   //Criar init printer configs
-
-    }*/
+    ui->cb_PrinterSettings->addItems(groups);
+    if(!groups.isEmpty()){
+        pSettings = loadSettings(ui->cb_PrinterSettings->currentText());
+        setSettings(pSettings);
+    }
 
 }
 void PrinterSettingsWidget::setSettings(PrinterSettings p){
@@ -93,7 +93,7 @@ void PrinterSettingsWidget::setSettings(PrinterSettings p){
 //This action save the configs insert by the user on Printer Configs in Ini File
 void PrinterSettingsWidget::saveSettings(){
     bool ok;
-    QString name = QInputDialog::getText(this, tr("Insert the name of config: "),tr("Name:"),QLineEdit::Normal,"ex.: Graber1",&ok);
+    QString name = QInputDialog::getText(this, tr("Insert the name of the setting: "),tr("Name:"),QLineEdit::Normal,"ex.: Graber1",&ok);
     settings.beginGroup("Printer_Configs");
     if(ok && !name.isEmpty())
     {   PrinterSettings p = getCurrentSettings();
