@@ -34,6 +34,7 @@ PrinterSettingsWidget::PrinterSettingsWidget(QWidget *parent) :
     connect(ui->tb_AreaPrintZ,&QLineEdit::textEdited,this,&PrinterSettingsWidget::sendValue);
 
     connect(&timer,&QTimer::timeout,this,&PrinterSettingsWidget::locateArduino);
+    connect(ui->bt_SaveSettings,&QPushButton::clicked,this,&PrinterSettingsWidget::saveSettings);
 }
 
 PrinterSettingsWidget::~PrinterSettingsWidget()
@@ -43,7 +44,7 @@ PrinterSettingsWidget::~PrinterSettingsWidget()
 
 void PrinterSettingsWidget::init()
 {   timer.start(2000);
-    /*this->settings = settings;
+    /*settings = settings;
     //Load the previous configs if them exists
     QStringList groups;
     settings.beginGroup("Printer_Configs");
@@ -88,50 +89,49 @@ void PrinterSettingsWidget::setSettings(PrinterSettings p){
 
 }
 
-/*
+
 //This action save the configs insert by the user on Printer Configs in Ini File
-void PrinterSettingsWidget::on_bt_SaveConfig_clicked() //Save actual configs
-{   bool ok;
+void PrinterSettingsWidget::saveSettings(){
+    bool ok;
     QString name = QInputDialog::getText(this, tr("Insert the name of config: "),tr("Name:"),QLineEdit::Normal,"ex.: Graber1",&ok);
-    this->settings.beginGroup("Printer_Configs");
+    settings.beginGroup("Printer_Configs");
     if(ok && !name.isEmpty())
-    {   PrinterSettings p = this->getCurrentSettings();
-        this->settings.beginGroup(name);
+    {   PrinterSettings p = getCurrentSettings();
+        settings.beginGroup(name);
         //Conexao
-        this->settings.setValue("Firmware",p.firmwareType);
-        this->settings.setValue("ResetOnConnect",p.resetOnConnect);
-        this->settings.setValue("ResetonEmergency",p.resetOnEmergency);
-        this->settings.setValue("CacheSize",p.cacheSize);
-        this->settings.setValue("TransmissionRate",p.transmissionRate);
-        this->settings.setValue("PrinterLog",p.printLog);
+        settings.setValue("Firmware",p.firmwareType);
+        settings.setValue("ResetOnConnect",p.resetOnConnect);
+        settings.setValue("CacheSize",p.cacheSize);
+        settings.setValue("TransmissionRate",p.transmissionRate);
+        settings.setValue("PrinterLog",p.printLog);
         //Impressora
-        this->settings.setValue("RateMoviment",p.rateMoviment);
-        this->settings.setValue("FeedZ",p.feedZ);
-        this->settings.setValue("ExtruderSpeedMM",p.extruderSpeedMM);
-        this->settings.setValue("ExtruderSpeedSec",p.extruderSpeedS);
-        this->settings.setValue("ExtruderRetraction",p.extruderRetraction);
-        this->settings.setValue("BedTemperature",p.bedTemperature);
-        this->settings.setValue("ExtruderTemperature",p.extruderTemperature);
-        this->settings.setValue("AreaX",p.areaX);
-        this->settings.setValue("AreaY",p.areaY);
-        this->settings.setValue("AreaZ",p.areaZ);
+        settings.setValue("RateMoviment",p.rateMoviment);
+        settings.setValue("FeedZ",p.feedZ);
+        settings.setValue("ExtruderSpeedMM",p.extruderSpeedMM);
+        settings.setValue("ExtruderSpeedSec",p.extruderSpeedS);
+        settings.setValue("ExtruderRetraction",p.extruderRetraction);
+        settings.setValue("BedTemperature",p.bedTemperature);
+        settings.setValue("ExtruderTemperature",p.extruderTemperature);
+        settings.setValue("AreaX",p.areaX);
+        settings.setValue("AreaY",p.areaY);
+        settings.setValue("AreaZ",p.areaZ);
         //Extrusor
-        this->settings.setValue("ExtruderQnt",p.extrudersInUse);
-        this->settings.setValue("ExtruderMaxTemp",p.extruderMAXTemp);
-        this->settings.setValue("BedMaxTemp",p.bedMAXTemp);
-        this->settings.setValue("VolumeMax",p.extruderMAXVol);
-        this->settings.endGroup();
+        settings.setValue("ExtruderQnt",p.extrudersInUse);
+        settings.setValue("ExtruderMaxTemp",p.extruderMAXTemp);
+        settings.setValue("BedMaxTemp",p.bedMAXTemp);
+        settings.setValue("VolumeMax",p.extruderMAXVol);
+        settings.endGroup();
 
     }
-    this->settings.endGroup();
+    settings.endGroup();
     QStringList groups;
-    this->settings.beginGroup("Printer_Configs");
-    groups = this->settings.childGroups();
-    this->settings.endGroup();
-    ui->cb_Printer->clear();
-    ui->cb_Printer->addItems(groups);
+    settings.beginGroup("Printer_Configs");
+    groups = settings.childGroups();
+    settings.endGroup();
+    ui->cb_PrinterSettings->clear();
+    ui->cb_PrinterSettings->addItems(groups);
 }
-*/
+
 PrinterSettings PrinterSettingsWidget::loadSettings(QString q){
        settings.beginGroup("Printer_Configs");
        settings.beginGroup(q);

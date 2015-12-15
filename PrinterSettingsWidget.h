@@ -32,6 +32,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 #include <QSettings>
+#include <QInputDialog>
 
 
 namespace Ui {
@@ -68,6 +69,7 @@ private:
 
     void setSettings(PrinterSettings p);
     PrinterSettings loadSettings(QString q);
+    void saveSettings();
 signals:
    void s_extrudersInUse(int n);
    void s_printLogStatus(bool b);
