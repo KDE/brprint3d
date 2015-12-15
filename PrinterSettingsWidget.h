@@ -67,6 +67,7 @@ private:
     QSettings settings;
 
     void setSettings(PrinterSettings p);
+    PrinterSettings loadSettings(QString q);
 signals:
    void s_extrudersInUse(int n);
    void s_printLogStatus(bool b);
