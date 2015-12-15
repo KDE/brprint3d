@@ -195,10 +195,7 @@ PrinterSettings PrinterSettingsWidget::getCurrentSettings()
 
 
 }
-void PrinterSettingsWidget::setConnectionPorts(QStringList p)
-{
-    ui->cb_ConnectionPort->addItems(p);
-}
+
 void PrinterSettingsWidget::disableExtrudersQntCb(bool d)
 {
     ui->cb_ExtruderQnt->setDisabled(d);

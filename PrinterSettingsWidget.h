@@ -47,7 +47,7 @@ public:
     ~PrinterSettingsWidget();
     void init();
     PrinterSettings getCurrentSettings();
-    void setConnectionPorts(QStringList list);
+
 
 
 private slots:
