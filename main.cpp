@@ -36,11 +36,11 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    QCoreApplication::setOrganizationName("BrPrint 3D Solutions");
+    QCoreApplication::setOrganizationName("KDE");
 
-    QCoreApplication::setOrganizationDomain("www.br-print3d.com.br");
+    QCoreApplication::setOrganizationDomain("kde.org");
 
-    QCoreApplication::setApplicationName("Br-Print3D");
+    QCoreApplication::setApplicationName("brprint3d");
 
     /*
         QTranslator translator;
