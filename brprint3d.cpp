@@ -82,8 +82,8 @@ void BrPrint3D::openFile()
     }
 
     filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), types);
-
-    if (!filePath.isEmpty() && QFileInfo(filePath).completeSuffix() == "gcode") {
+    QString filePathSuffix = QFileInfo(filePath).completeSuffix();
+    if (!filePath.isEmpty() && filePathSuffix == "gcode") {
         QFile gcode(filePath);
         if (gcode.open(QFile::ReadOnly | QFile::Text)) {
             QTextStream in(&gcode);
@@ -96,7 +96,7 @@ void BrPrint3D::openFile()
                 ui->bt_play->setEnabled(true);
 
         }
-    } else if(QFileInfo(filePath).completeSuffix()=="STL" ||QFileInfo(filePath).completeSuffix()=="stl"){
+    } else if(filePathSuffix == "STL" || filePathSuffix == "stl"){
         ui->vtkView->renderSTL(filePath);
     }
 }
