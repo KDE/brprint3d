@@ -445,10 +445,10 @@ void ManualControlWidget::setExtrudersInUse(int e)
     extrudersInUse = e;
     hideExtruders(e);
 }
-void ManualControlWidget::setGcodePreview(QString t){
+void ManualControlWidget::setGcodePreview(const QString& t){
     ui->GCodePreview->setPlainText(t);
 }
-void ManualControlWidget::startPrintJob(QString filePath){
+void ManualControlWidget::startPrintJob(const QString& filePath){
    QMessageBox msg;
    try {    std::string path = filePath.toStdString();
             printerObject->openFile(path,printLogStatus);
@@ -598,7 +598,7 @@ void ManualControlWidget::setLayersCount(int l){
     ui->sl_layersLast->setMaximum(l);
 }
 
-void ManualControlWidget::setFilCount(QString filePath){
+void ManualControlWidget::setFilCount(const QString& filePath){
     double totalSize;
     long timeNeed;
     try{

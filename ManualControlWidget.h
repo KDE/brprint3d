@@ -47,7 +47,7 @@ public:
     explicit ManualControlWidget(QWidget *parent = 0);
     ~ManualControlWidget();
     void init();
-    void setGcodePreview(QString t);
+    void setGcodePreview(const QString& t);
     void setBedStatus(bool b);
     void setExtruderStatus(bool b);
     void getPrinterObject(Repetier *printer_object);
@@ -55,7 +55,7 @@ public:
     void constructPrinterObject(PrinterSettings pSettings);
     void destructPrinterObject();
     void hideExtruders(int e);
-    void startPrintJob(QString filePath);
+    void startPrintJob(const QString& filePath);
 
 private:
     Ui::ManualControlWidget *ui;
@@ -95,7 +95,7 @@ public slots:
     void stopPrintJob();
     void stopOnEmergency();
     void setLayersCount(int l);
-    void setFilCount(QString path);
+    void setFilCount(const QString& path);
 };
 
 #endif // MANUALCONTROLWIDGET_H
