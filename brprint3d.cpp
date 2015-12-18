@@ -76,14 +76,12 @@ void BrPrint3D::setEnabled(bool b)
 
 void BrPrint3D::openFile()
 {   BigButton *btn = qobject_cast<BigButton*>(sender());
-    QString typeGcode("*.gcode");
-    QString typeAll("*.gcode *.stl *.STL");
-    if(btn==ui->bt_import){
-        filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), typeGcode);
+    QString types(QStringLiteral("*.gcode"));
+    if(btn == ui->bt_import){
+        types += QStringLiteral("*.stl *.STL");
     }
-    if(btn==ui->bt_open){
-        filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), typeAll);
-    }
+
+    filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), types);
 
     if (!filePath.isEmpty() && QFileInfo(filePath).completeSuffix() == "gcode") {
         QFile gcode(filePath);
