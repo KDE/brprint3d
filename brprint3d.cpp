@@ -89,7 +89,6 @@ void BrPrint3D::openFile()
             QTextStream in(&gcode);
             QString text = in.readAll();
             ui->vtkView->renderGcode(text);
-            gcode.close();
             emit callFilCount(filePath);
             ui->_ManualControl->setGcodePreview(text);
             if (ui->bt_connect->isChecked())
