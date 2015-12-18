@@ -77,8 +77,6 @@ private:
 signals:
     void s_playStatus(bool b);
     void s_pauseStatus(bool b);
-    void callFilCount(QString filePath);
-
 };
 
 #endif // BRPRINT3D_H

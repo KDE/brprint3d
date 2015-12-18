@@ -50,7 +50,6 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(ui->_ManualControl,&ManualControlWidget::checkConnectButton,this,&BrPrint3D::changeIcon);
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::updateCube,ui->vtkView,&vtkWidget::updateCube);
     connect(ui->vtkView,&vtkWidget::layersCount,ui->_ManualControl,&ManualControlWidget::setLayersCount);
-    connect(this,&BrPrint3D::callFilCount,ui->_ManualControl,&ManualControlWidget::setFilCount);
     connect(ui->vtkView,&vtkWidget::layersCount,ui->_ManualControl,&ManualControlWidget::setLayersCount);
 }
 
@@ -89,11 +88,10 @@ void BrPrint3D::openFile()
             QTextStream in(&gcode);
             QString text = in.readAll();
             ui->vtkView->renderGcode(text);
-            emit callFilCount(filePath);
             ui->_ManualControl->setGcodePreview(text);
             if (ui->bt_connect->isChecked())
                 ui->bt_play->setEnabled(true);
-
+            ui->_ManualControl->setFilCount(filePath);
         }
     } else if(filePathSuffix == "STL" || filePathSuffix == "stl"){
         ui->vtkView->renderSTL(filePath);
