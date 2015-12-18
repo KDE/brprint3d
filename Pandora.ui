@@ -55,81 +55,163 @@
    <enum>Qt::ToolButtonTextUnderIcon</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="3" column="2">
-     <spacer name="verticalSpacer_4">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="4">
-     <layout class="QHBoxLayout" name="ly_ConteinerRight"/>
-    </item>
-    <item row="0" column="0">
-     <layout class="QHBoxLayout" name="ly_ConteinerLeft">
-      <property name="leftMargin">
-       <number>5</number>
-      </property>
-      <property name="topMargin">
-       <number>5</number>
-      </property>
-      <property name="rightMargin">
-       <number>5</number>
-      </property>
-      <property name="bottomMargin">
-       <number>5</number>
-      </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="BigButton" name="bt_import">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="BigButton" name="bt_open">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="BigButton" name="bt_connect">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="resources.qrc">:/Icons/Icons/brlogo.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>false</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="BigButton" name="bt_play">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="BigButton" name="bt_pause">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="BigButton" name="bt_stop">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="BigButton" name="bt_stopOnEmergency">
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="bt_hide">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="bt_hide">
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Settings - Show</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QSplitter" name="splitter">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="maximumSize">
        <size>
-        <width>150</width>
-        <height>30</height>
+        <width>16777215</width>
+        <height>16777215</height>
        </size>
       </property>
-      <property name="text">
-       <string>Settings - Show</string>
-      </property>
-      <property name="checkable">
-       <bool>true</bool>
-      </property>
-      <property name="checked">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <spacer name="verticalSpacer_3">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="2" column="0" colspan="5">
-     <widget class="QSplitter" name="splitter">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
       <widget class="PrinterSettingsWidget" name="_PrinterSettings" native="true">
        <property name="minimumSize">
         <size>
-         <width>390</width>
-         <height>550</height>
+         <width>0</width>
+         <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -139,14 +221,12 @@
         </size>
        </property>
       </widget>
-      <widget class="QWidget" name="horizontalLayoutWidget">
-       <layout class="QHBoxLayout" name="_vtkConteiner"/>
-      </widget>
+      <widget class="vtkWidget" name="vtkView" native="true"/>
       <widget class="ManualControlWidget" name="_ManualControl" native="true">
        <property name="minimumSize">
         <size>
-         <width>440</width>
-         <height>570</height>
+         <width>0</width>
+         <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -157,48 +237,6 @@
        </property>
       </widget>
      </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string/>
-      </property>
-      <property name="pixmap">
-       <pixmap resource="resources.qrc">:/Icons/Icons/brlogo.png</pixmap>
-      </property>
-      <property name="scaledContents">
-       <bool>false</bool>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="3">
-     <spacer name="horizontalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
     </item>
    </layout>
   </widget>
@@ -208,19 +246,19 @@
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArquivo">
     <property name="title">
-     <string>File</string>
+     <string>F&amp;ile</string>
     </property>
     <addaction name="separator"/>
     <addaction name="actionFechar"/>
    </widget>
    <widget class="QMenu" name="menuLinguagem">
     <property name="title">
-     <string>Language</string>
+     <string>&amp;Language</string>
     </property>
     <addaction name="actionEnglish"/>
     <addaction name="actionPortuguese"/>
@@ -228,7 +266,7 @@
    </widget>
    <widget class="QMenu" name="menuSobre">
     <property name="title">
-     <string>About</string>
+     <string>Abo&amp;ut</string>
     </property>
     <addaction name="actionAviso_Legal"/>
     <addaction name="actionDocumenta_o"/>
@@ -253,22 +291,22 @@
   </action>
   <action name="actionEnglish">
    <property name="text">
-    <string>English - EUA</string>
+    <string>&amp;English - EUA</string>
    </property>
   </action>
   <action name="actionPortuguese">
    <property name="text">
-    <string>Portuguese - Brazil</string>
+    <string>&amp;Portuguese - Brazil</string>
    </property>
   </action>
   <action name="actionAviso_Legal">
    <property name="text">
-    <string>Legal Warning</string>
+    <string>&amp;Legal Warning</string>
    </property>
   </action>
   <action name="actionFechar">
    <property name="text">
-    <string>Exit</string>
+    <string>&amp;Exit</string>
    </property>
   </action>
   <action name="actionImportG">
@@ -288,12 +326,12 @@
   </action>
   <action name="actionDocumenta_o">
    <property name="text">
-    <string>Documentation</string>
+    <string>&amp;Documentation</string>
    </property>
   </action>
   <action name="actionAjuda">
    <property name="text">
-    <string>Help</string>
+    <string>&amp;Help</string>
    </property>
   </action>
   <action name="actionPlay">
@@ -397,7 +435,7 @@
   </action>
   <action name="actionSobre_o_BrPrint3D">
    <property name="text">
-    <string>About Br-Print3D</string>
+    <string>&amp;About Br-Print3D</string>
    </property>
   </action>
  </widget>
@@ -412,6 +450,17 @@
    <class>ManualControlWidget</class>
    <extends>QWidget</extends>
    <header>ManualControlWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BigButton</class>
+   <extends>QToolButton</extends>
+   <header>BigButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>vtkWidget</class>
+   <extends>QWidget</extends>
+   <header>vtkWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

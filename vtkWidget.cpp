@@ -53,7 +53,7 @@
 #define DEFAULTY 200
 #define DEFAULTZ 200
 
-vtkWidget::vtkWidget() :
+vtkWidget::vtkWidget(QWidget *parent) : QVTKWidget(parent),
     renderer(vtkSmartPointer<vtkRenderer>::New()),
     mapperStl(vtkSmartPointer<vtkPolyDataMapper>::New()),
     mapperGcode(vtkSmartPointer<vtkPolyDataMapper>::New()),

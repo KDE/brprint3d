@@ -48,8 +48,6 @@
 #include <QInputDialog>
 #include <QStandardPaths>
 
-
-
 namespace Ui
 {
 class BrPrint3D;
@@ -66,22 +64,10 @@ public:
     
 private:
     Ui::BrPrint3D *ui;
-    vtkWidget *vtkView=nullptr;
     PrinterSettings psettings;
     QString filePath;
 
-    BigButton *bt_import;
-    BigButton *bt_open;
-    BigButton *bt_connect;
-    BigButton *bt_play;
-    BigButton *bt_pause;
-    BigButton *bt_stop;
-    BigButton *bt_stopOnEmergency;
-    
     void setEnabled(bool b);
-
-
-private slots:
     void openFile();
     void connectPrinter(bool checked);
     void startPrintJob(bool checked);

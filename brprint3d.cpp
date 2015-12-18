@@ -25,52 +25,33 @@
 #include "ui_Pandora.h"
 
 BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
-    ui(new Ui::BrPrint3D),
-    bt_import(new BigButton(this)),
-    bt_open(new BigButton(this)),
-    bt_connect(new BigButton(this)),
-    bt_play(new BigButton(this)),
-    bt_pause(new BigButton(this)),
-    bt_stop(new BigButton(this)),
-    bt_stopOnEmergency(new BigButton(this)),
-    vtkView(new vtkWidget())
+    ui(new Ui::BrPrint3D)
 {
     ui->setupUi(this);
 
-    ui->ly_ConteinerLeft->addWidget(bt_import);
-    ui->ly_ConteinerLeft->addWidget(bt_open);
-    ui->ly_ConteinerLeft->addWidget(bt_connect);
-
-    ui->ly_ConteinerRight->addWidget(bt_play);
-    ui->ly_ConteinerRight->addWidget(bt_pause);
-    ui->ly_ConteinerRight->addWidget(bt_stop);
-    ui->ly_ConteinerRight->addWidget(bt_stopOnEmergency);
-
-    ui->_vtkConteiner->addWidget(vtkView);
-
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::s_extrudersInUse,ui->_ManualControl,&ManualControlWidget::setExtrudersInUse);
-    connect(bt_import,&BigButton::clicked,this,&BrPrint3D::openFile);
-    connect(bt_open,&BigButton::clicked,this,&BrPrint3D::openFile);
-    connect(bt_connect,&BigButton::clicked,this,&BrPrint3D::connectPrinter);
-    connect(bt_connect,&BigButton::clicked,this,&BrPrint3D::changeIcon);
+    connect(ui->bt_import,&BigButton::clicked,this,&BrPrint3D::openFile);
+    connect(ui->bt_open,&BigButton::clicked,this,&BrPrint3D::openFile);
+    connect(ui->bt_connect,&BigButton::clicked,this,&BrPrint3D::connectPrinter);
+    connect(ui->bt_connect,&BigButton::clicked,this,&BrPrint3D::changeIcon);
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::s_printLogStatus,ui->_ManualControl,&ManualControlWidget::setPrintLogStatus);
-    connect(bt_play,&BigButton::clicked,this,&BrPrint3D::startPrintJob);
-    connect(bt_play,&BigButton::clicked,this,&BrPrint3D::changeIcon);
-    connect(bt_play,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::setPlayStatus);
+    connect(ui->bt_play,&BigButton::clicked,this,&BrPrint3D::startPrintJob);
+    connect(ui->bt_play,&BigButton::clicked,this,&BrPrint3D::changeIcon);
+    connect(ui->bt_play,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::setPlayStatus);
     connect(ui->_ManualControl,&ManualControlWidget::disableCbExtruderQnt,ui->_PrinterSettings,&PrinterSettingsWidget::disableExtrudersQntCb);
-    connect(bt_pause,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::pausePrintJob);
-    connect(bt_pause,&BigButton::clicked,this,&BrPrint3D::changeIcon);
-    connect(bt_stop,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopPrintJob);
-    connect(bt_stop,&BigButton::clicked,this,&BrPrint3D::stopPrintJob);
-    connect(bt_stop,&BigButton::clicked,this,&BrPrint3D::changeIcon);
-    connect(bt_stopOnEmergency,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopOnEmergency);
+    connect(ui->bt_pause,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::pausePrintJob);
+    connect(ui->bt_pause,&BigButton::clicked,this,&BrPrint3D::changeIcon);
+    connect(ui->bt_stop,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopPrintJob);
+    connect(ui->bt_stop,&BigButton::clicked,this,&BrPrint3D::stopPrintJob);
+    connect(ui->bt_stop,&BigButton::clicked,this,&BrPrint3D::changeIcon);
+    connect(ui->bt_stopOnEmergency,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopOnEmergency);
     connect(ui->bt_hide,&QPushButton::clicked,this,&BrPrint3D::hidePrinterSettings);
-    connect(ui->_ManualControl,&ManualControlWidget::checkConnectButton,bt_connect,&BigButton::setChecked);
+    connect(ui->_ManualControl,&ManualControlWidget::checkConnectButton,ui->bt_connect,&BigButton::setChecked);
     connect(ui->_ManualControl,&ManualControlWidget::checkConnectButton,this,&BrPrint3D::changeIcon);
-    connect(ui->_PrinterSettings,&PrinterSettingsWidget::updateCube,vtkView,&vtkWidget::updateCube);
-    connect(vtkView,&vtkWidget::layersCount,ui->_ManualControl,&ManualControlWidget::setLayersCount);
+    connect(ui->_PrinterSettings,&PrinterSettingsWidget::updateCube,ui->vtkView,&vtkWidget::updateCube);
+    connect(ui->vtkView,&vtkWidget::layersCount,ui->_ManualControl,&ManualControlWidget::setLayersCount);
     connect(this,&BrPrint3D::callFilCount,ui->_ManualControl,&ManualControlWidget::setFilCount);
-    connect(vtkView,&vtkWidget::layersCount,ui->_ManualControl,&ManualControlWidget::setLayersCount);
+    connect(ui->vtkView,&vtkWidget::layersCount,ui->_ManualControl,&ManualControlWidget::setLayersCount);
 }
 
 BrPrint3D::~BrPrint3D()
@@ -87,20 +68,20 @@ void BrPrint3D::init()
 
 void BrPrint3D::setEnabled(bool b)
 {
-    bt_play->setEnabled(b);
-    bt_pause->setEnabled(b);
-    bt_stop->setEnabled(b);
-    bt_stopOnEmergency->setEnabled(b);
+    ui->bt_play->setEnabled(b);
+    ui->bt_pause->setEnabled(b);
+    ui->bt_stop->setEnabled(b);
+    ui->bt_stopOnEmergency->setEnabled(b);
 }
 
 void BrPrint3D::openFile()
 {   BigButton *btn = qobject_cast<BigButton*>(sender());
     QString typeGcode("*.gcode");
     QString typeAll("*.gcode *.stl *.STL");
-    if(btn==bt_import){
+    if(btn==ui->bt_import){
         filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), typeGcode);
     }
-    if(btn==bt_open){
+    if(btn==ui->bt_open){
         filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), typeAll);
     }
         if (!filePath.isEmpty() && QFileInfo(filePath).completeSuffix() == "gcode") {
@@ -108,18 +89,18 @@ void BrPrint3D::openFile()
             if (gcode.open(QFile::ReadOnly | QFile::Text)) {
                 QTextStream in(&gcode);
                 QString text = in.readAll();
-                vtkView->renderGcode(text);
+                ui->vtkView->renderGcode(text);
                 gcode.close();
                 emit callFilCount(filePath);
                 ui->_ManualControl->setGcodePreview(text);
-                if (bt_connect->isChecked())
-                    bt_play->setEnabled(true);
+                if (ui->bt_connect->isChecked())
+                    ui->bt_play->setEnabled(true);
 
             }
         }
 
     else if(QFileInfo(filePath).completeSuffix()=="STL" ||QFileInfo(filePath).completeSuffix()=="stl"){
-        vtkView->renderSTL(filePath);
+        ui->vtkView->renderSTL(filePath);
     }
 }
 
@@ -128,9 +109,9 @@ void BrPrint3D::connectPrinter(bool checked)
     if (checked){
         psettings = ui->_PrinterSettings->getCurrentSettings();
         ui->_ManualControl->constructPrinterObject(psettings);
-        bt_play->setEnabled(false);
-        bt_pause->setEnabled(false);
-        bt_stop->setEnabled(false);
+        ui->bt_play->setEnabled(false);
+        ui->bt_pause->setEnabled(false);
+        ui->bt_stop->setEnabled(false);
     } else {
         ui->_ManualControl->destructPrinterObject();
     }
@@ -140,18 +121,18 @@ void BrPrint3D::startPrintJob(bool checked)
 {
     if (checked) {
         ui->_ManualControl->startPrintJob(filePath);
-        bt_play->setEnabled(false);
-        bt_pause->setEnabled(true);
-        bt_stop->setEnabled(true);
+        ui->bt_play->setEnabled(false);
+        ui->bt_pause->setEnabled(true);
+        ui->bt_stop->setEnabled(true);
     }
 }
 void BrPrint3D::stopPrintJob()
 {
-    bt_play->setEnabled(true);
-    bt_play->setChecked(false);
-    bt_play->setIcon(QIcon(":/Icons/Icons/play.png"));
-    bt_pause->setEnabled(false);
-    bt_stop->setEnabled(false);
+    ui->bt_play->setEnabled(true);
+    ui->bt_play->setChecked(false);
+    ui->bt_play->setIcon(QIcon(":/Icons/Icons/play.png"));
+    ui->bt_pause->setEnabled(false);
+    ui->bt_stop->setEnabled(false);
 }
 
 void BrPrint3D::hidePrinterSettings()
@@ -166,28 +147,28 @@ void BrPrint3D::hidePrinterSettings()
 
 void BrPrint3D::changeIcon(bool checked)
 {   BigButton *btn = qobject_cast<BigButton*>(sender());
-    if( btn == bt_play ) {
+    if( btn == ui->bt_play ) {
         if (checked){
             // use btn_play->setEnabled();
             QIcon icon(":/Icons/Icons/playOnClick.png");
             QPixmap pix(":/Icons/Icons/playOnClick.png");
             icon.addPixmap(pix,QIcon::Disabled,QIcon::Off);
-            bt_play->setIcon(icon);
+            ui->bt_play->setIcon(icon);
         } else {
-            bt_play->setIcon(QIcon(":/Icons/Icons/play.png"));
-            bt_play->setChecked(false);
+            ui->bt_play->setIcon(QIcon(":/Icons/Icons/play.png"));
+            ui->bt_play->setChecked(false);
         }
-    } else if (btn == bt_pause) {
+    } else if (btn == ui->bt_pause) {
         if (checked) {
-            bt_pause->setIcon(QIcon(":/Icons/Icons/pauseOnClick.png"));
+            ui->bt_pause->setIcon(QIcon(":/Icons/Icons/pauseOnClick.png"));
         } else {
-            bt_pause->setIcon(QIcon(":/Icons/Icons/pause.png"));
+            ui->bt_pause->setIcon(QIcon(":/Icons/Icons/pause.png"));
         }
-    } else if (btn == bt_connect) {
+    } else if (btn == ui->bt_connect) {
         if (checked){
-            bt_connect->setIcon(QIcon(":/Icons/Icons/connectOnClick.png"));
+            ui->bt_connect->setIcon(QIcon(":/Icons/Icons/connectOnClick.png"));
         } else {
-            bt_connect->setIcon(QIcon(":/Icons/Icons/connect.png"));
+            ui->bt_connect->setIcon(QIcon(":/Icons/Icons/connect.png"));
         }
     }
 }

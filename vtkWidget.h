@@ -42,7 +42,7 @@ class vtkWidget : public QVTKWidget
 {
     Q_OBJECT
 public:
-vtkWidget();
+explicit vtkWidget(QWidget *parent = 0);
 ~vtkWidget();
     void renderSTL(const QString& path);
     void renderGcode(const QString& text);
