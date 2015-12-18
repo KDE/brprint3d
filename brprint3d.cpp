@@ -25,18 +25,18 @@
 #include "ui_Pandora.h"
 
 BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
-    ui(new Ui::BrPrint3D), 
-    bt_import(new BigButton(this,tr("Import GCode"),":/Icons/Icons/import.png", false)),
-    bt_open(new BigButton(this,tr("Open File"),":/Icons/Icons/openFile.png", false)),
-    bt_connect(new BigButton(this,tr("Connect"),":/Icons/Icons/connect.png", true)),
-    bt_play(new BigButton(this,tr("Play"),":/Icons/Icons/play.png", true)),
-    bt_pause(new BigButton(this,tr("Pause"),":/Icons/Icons/pause.png", true)),
-    bt_stop(new BigButton(this,tr("Stop"),":/Icons/Icons/stop.png", false)),
-    bt_stopOnEmergency(new BigButton(this,tr("Emergency Stop"),":/Icons/Icons/emergency.png", false)),
+    ui(new Ui::BrPrint3D),
+    bt_import(new BigButton(this)),
+    bt_open(new BigButton(this)),
+    bt_connect(new BigButton(this)),
+    bt_play(new BigButton(this)),
+    bt_pause(new BigButton(this)),
+    bt_stop(new BigButton(this)),
+    bt_stopOnEmergency(new BigButton(this)),
     vtkView(new vtkWidget())
 {
     ui->setupUi(this);
-    
+
     ui->ly_ConteinerLeft->addWidget(bt_import);
     ui->ly_ConteinerLeft->addWidget(bt_open);
     ui->ly_ConteinerLeft->addWidget(bt_connect);
@@ -70,9 +70,7 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::updateCube,vtkView,&vtkWidget::updateCube);
     connect(vtkView,&vtkWidget::layersCount,ui->_ManualControl,&ManualControlWidget::setLayersCount);
     connect(this,&BrPrint3D::callFilCount,ui->_ManualControl,&ManualControlWidget::setFilCount);
-
     connect(vtkView,&vtkWidget::layersCount,ui->_ManualControl,&ManualControlWidget::setLayersCount);
-
 }
 
 BrPrint3D::~BrPrint3D()

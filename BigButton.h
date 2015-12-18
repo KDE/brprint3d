@@ -23,29 +23,14 @@
 #ifndef BIGBUTTON_H
 #define BIGBUTTON_H
 
-#include <QWidget>
-#include <QtGui/QIcon>
+#include <QToolButton>
 
-namespace Ui {
-class BigButton;
-}
-
-class BigButton : public QWidget
+class BigButton : public QToolButton
 {
     Q_OBJECT
 
 public:
-    explicit BigButton(QWidget *parent, const QString& name, const QString& pix, bool isCheckable = false);
-    ~BigButton();
-
-    bool isChecked();
-    void setIcon(const QIcon& icon);
-    void setChecked(bool b);
-
-private:
-    Ui::BigButton *ui;
-signals:
-    void clicked(bool checked);
+    explicit BigButton(QWidget *parent = 0);
 };
 
 #endif // BIGBUTTON_H

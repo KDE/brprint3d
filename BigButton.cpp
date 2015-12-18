@@ -21,37 +21,8 @@
 
  ======================================================================*/
 #include "BigButton.h"
-#include "ui_BigButton.h"
 
-BigButton::BigButton(QWidget *parent, const QString& name,const QString& iconPath,  bool isCheckable) :
-    QWidget(parent),
-    ui(new Ui::BigButton)
+BigButton::BigButton(QWidget *parent) : QToolButton(parent)
 {   
-    ui->setupUi(this);
-    ui->label->setText(name);
-    ui->pushButton->setCheckable(isCheckable);
-    ui->pushButton->setIcon(QIcon(iconPath));
-    //The value bellow is the best size that the icon could have on the button
-    ui->pushButton->setIconSize(QSize(50,50));
-    connect(ui->pushButton, &QPushButton::clicked, this, &BigButton::clicked);
-}
-
-BigButton::~BigButton()
-{
-    delete ui;
-}
-
-bool BigButton::isChecked()
-{
-    return ui->pushButton->isChecked();
-}
-
-void BigButton::setIcon(const QIcon& icon)
-{
-    ui->pushButton->setIcon(icon);
-}
-
-void BigButton::setChecked(bool b)
-{
-    ui->pushButton->setChecked(b);
+    setIconSize(QSize(50,50));
 }
