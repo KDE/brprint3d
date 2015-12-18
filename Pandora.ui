@@ -61,21 +61,33 @@
       <item>
        <widget class="BigButton" name="bt_import">
         <property name="text">
-         <string>...</string>
+         <string>Import</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/Icons/Icons/import.png</normaloff>:/Icons/Icons/import.png</iconset>
         </property>
        </widget>
       </item>
       <item>
        <widget class="BigButton" name="bt_open">
         <property name="text">
-         <string>...</string>
+         <string>Open</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/Icons/Icons/openFile.png</normaloff>:/Icons/Icons/openFile.png</iconset>
         </property>
        </widget>
       </item>
       <item>
        <widget class="BigButton" name="bt_connect">
         <property name="text">
-         <string>...</string>
+         <string>Connect</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/Icons/Icons/connect.png</normaloff>:/Icons/Icons/connect.png</iconset>
         </property>
        </widget>
       </item>
@@ -124,28 +136,44 @@
       <item>
        <widget class="BigButton" name="bt_play">
         <property name="text">
-         <string>...</string>
+         <string>Play</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/Icons/Icons/play.png</normaloff>:/Icons/Icons/play.png</iconset>
         </property>
        </widget>
       </item>
       <item>
        <widget class="BigButton" name="bt_pause">
         <property name="text">
-         <string>...</string>
+         <string>Pause</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/Icons/Icons/pause.png</normaloff>:/Icons/Icons/pause.png</iconset>
         </property>
        </widget>
       </item>
       <item>
        <widget class="BigButton" name="bt_stop">
         <property name="text">
-         <string>...</string>
+         <string>Stop</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/Icons/Icons/stop.png</normaloff>:/Icons/Icons/stop.png</iconset>
         </property>
        </widget>
       </item>
       <item>
        <widget class="BigButton" name="bt_stopOnEmergency">
         <property name="text">
-         <string>...</string>
+         <string>Emergency Stop</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/Icons/Icons/emergency.png</normaloff>:/Icons/Icons/emergency.png</iconset>
         </property>
        </widget>
       </item>
