@@ -84,7 +84,9 @@ void BrPrint3D::openFile()
     QString filePathSuffix = QFileInfo(filePath).completeSuffix().toLower();
     if (!filePath.isEmpty() && filePathSuffix == QLatin1String("gcode")) {
         QFile gcode(filePath);
-        if (gcode.open(QFile::ReadOnly | QFile::Text)) {
+        if (!gcode.open(QFile::ReadOnly | QFile::Text)) {
+            return;
+        }
             QTextStream in(&gcode);
             QString text = in.readAll();
             ui->vtkView->renderGcode(text);
@@ -92,7 +94,6 @@ void BrPrint3D::openFile()
             if (ui->bt_connect->isChecked())
                 ui->bt_play->setEnabled(true);
             ui->_ManualControl->setFilCount(filePath);
-        }
     } else if(filePathSuffix == QLatin1String("stl")) {
         ui->vtkView->renderSTL(filePath);
     }
