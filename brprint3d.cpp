@@ -87,13 +87,13 @@ void BrPrint3D::openFile()
         if (!gcode.open(QFile::ReadOnly | QFile::Text)) {
             return;
         }
-            QTextStream in(&gcode);
-            QString text = in.readAll();
-            ui->vtkView->renderGcode(text);
-            ui->_ManualControl->setGcodePreview(text);
-            if (ui->bt_connect->isChecked())
-                ui->bt_play->setEnabled(true);
-            ui->_ManualControl->setFilCount(filePath);
+        QTextStream in(&gcode);
+        QString text = in.readAll();
+        ui->vtkView->renderGcode(text);
+        if (ui->bt_connect->isChecked())
+            ui->bt_play->setEnabled(true);
+        ui->_ManualControl->setFilCount(filePath);
+        ui->_ManualControl->setGcodePreview(text);
     } else if(filePathSuffix == QLatin1String("stl")) {
         ui->vtkView->renderSTL(filePath);
     }
