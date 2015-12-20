@@ -37,6 +37,7 @@
 #include <vtkActor.h>
 #include <vtkRenderer.h>
 #include <vtkCubeSource.h>
+#include <QDebug>
 
 class vtkWidget : public QVTKWidget
 {
@@ -60,10 +61,12 @@ private:
     vtkSmartPointer<vtkRenderer> renderer;
     vtkSmartPointer<vtkPolyDataMapper> mapperStl;
     vtkSmartPointer<vtkPolyDataMapper> mapperGcode;
+    vtkSmartPointer<vtkPolyDataMapper> mapperGcodeCar;
     vtkSmartPointer<vtkPolyDataMapper> mapperCube;
     vtkSmartPointer<vtkPolyDataMapper> mapperFloor;
     vtkSmartPointer<vtkActor> actorStl;
     vtkSmartPointer<vtkActor> actorGcode;
+    vtkSmartPointer<vtkActor> actorGcodeCar;
     vtkSmartPointer<vtkActor> actorCube;
     vtkSmartPointer<vtkActor> actorFloor;
     vtkSmartPointer <vtkCubeSource> cube;

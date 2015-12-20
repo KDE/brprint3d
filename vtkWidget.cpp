@@ -57,10 +57,12 @@ vtkWidget::vtkWidget(QWidget *parent) : QVTKWidget(parent),
     renderer(vtkSmartPointer<vtkRenderer>::New()),
     mapperStl(vtkSmartPointer<vtkPolyDataMapper>::New()),
     mapperGcode(vtkSmartPointer<vtkPolyDataMapper>::New()),
+    mapperGcodeCar(vtkSmartPointer<vtkPolyDataMapper>::New()),
     mapperCube(vtkSmartPointer<vtkPolyDataMapper>::New()),
     mapperFloor(vtkSmartPointer<vtkPolyDataMapper>::New()),
     actorStl(vtkSmartPointer<vtkActor>::New()),
     actorGcode(vtkSmartPointer<vtkActor>::New()),
+    actorGcodeCar(vtkSmartPointer<vtkActor>::New()),
     actorCube(vtkSmartPointer<vtkActor>::New()),
     actorFloor(vtkSmartPointer<vtkActor>::New()),
     cube(vtkSmartPointer<vtkCubeSource>::New()),
@@ -107,53 +109,99 @@ void vtkWidget::renderSTL(const QString& pathStl)
 void vtkWidget::renderGcode(const QString& text)
 {
     int nrLayers = 0;
-    auto points = vtkSmartPointer<vtkPoints>::New();
+    auto printPoints = vtkSmartPointer<vtkPoints>::New();
+    auto carPoints = vtkSmartPointer<vtkPoints>::New();
     double x = 0, y = 0, z = 0;
-    int count = 0;
+    int printCount = 0, carCount = 0;
     QStringList list = text.split('\n', QString::SkipEmptyParts);
 
     cleanup();
     for(const auto string : list) {
         if (string.startsWith(';'))
             continue;
-
         QStringList aux = string.split(' ');
-        for (int j = 1, end = aux.size(); j != end; j++) {
-            if (aux.at(j).startsWith('X') && aux.at(j+1).startsWith('Y')) {
-                x = aux.at(j).section('X',1).toDouble();
-                y = aux.at(j+1).section('Y',1).toDouble();
-                points->InsertPoint(count,x,y,z);
-                count++;
-            } else if(aux[j].startsWith('Z')) {
-                z = aux.at(j).section('Z',1).toDouble();
-                nrLayers++;
-                points->InsertPoint(count,x,y,z);
-                count++;
+        int end = aux.size();
+        if(end >= 4 && end  <=5){
+            for (int j = 0;j < end;j++)
+            {	//Read X and Y values
+
+                if(aux.at(j+1).startsWith('X') && aux.at(j+2).startsWith('Y')){
+                     x = aux.at(j+1).section('X',1).toDouble();
+                     y = aux.at(j+2).section('Y',1).toDouble();
+                }
+                //Read Z value
+                if (aux.at(end-1).startsWith('Z')){
+                    z = aux.at(end-1).section('Z',1).toDouble();
+                    nrLayers++;
+                }
+                //If is a car move point add to carPoints
+                if(aux.at(0).startsWith("G0") && x!=0 && y!=0 && z!=0){
+                    carPoints->InsertPoint(carCount,x,y,z);
+                    carCount++;
+                    x=y=0;
+
+                   break;
+                }
+                //If is a print point add to printPoints
+                else if(aux.at(0).startsWith("G1") && x!=0 && y!=0 && z!=0)
+                {
+                    printPoints->InsertPoint(printCount,x,y,z);
+                    printCount++;
+                    x=y=0;
+                    break;
+                }
             }
         }
-    }
 
-    emit layersCount(nrLayers);
+    }//End the read of gcode
+
+    emit layersCount(nrLayers-1);
+    //Set variables to printPoints
     auto polyLine = vtkSmartPointer<vtkPolyLine>::New();
-    polyLine->GetPointIds()->SetNumberOfIds(count);
-    for(unsigned int i = 0; i < count; i++)
+    polyLine->GetPointIds()->SetNumberOfIds(printCount);
+    for(unsigned int i = 0; i < printCount; i++)
         polyLine->GetPointIds()->SetId(i,i);
 
     auto cells = vtkSmartPointer<vtkCellArray>::New();
     auto polyData = vtkSmartPointer<vtkPolyData>::New();
 
     cells->InsertNextCell(polyLine);
-    polyData->SetPoints(points);
+    polyData->SetPoints(printPoints);
     polyData->SetLines(cells);
 
-    // Setup actor and mapper
+    //Set variables to carPoints
+    auto carPolyLine = vtkSmartPointer<vtkPolyLine>::New();
+    carPolyLine->GetPointIds()->SetNumberOfIds(carCount);
+    for(unsigned int i = 0; i < carCount; i++)
+        carPolyLine->GetPointIds()->SetId(i,i);
+
+    auto carCells = vtkSmartPointer<vtkCellArray>::New();
+    auto carPolyData = vtkSmartPointer<vtkPolyData>::New();
+
+    carCells->InsertNextCell(carPolyLine);
+    carPolyData->SetPoints(carPoints);
+    carPolyData->SetLines(carCells);
+
+
+    // Setup actor and mapper to printGCode
     mapperGcode->SetInputData(polyData);
     actorGcode->SetMapper(mapperGcode);
-    actorGcode->GetProperty()->SetLineWidth(2);
-    actorGcode->GetProperty()->SetColor(0,0.5,1); // TODO: Do not use colors as constants. 
+    actorGcode->GetProperty()->SetLineWidth(4);
+    actorGcode->GetProperty()->SetColor(0,0.5,1);
+    actorGcode->GetProperty()->SetOpacity(0.4);
+    //Setup actor and mapper to carGcode
+    mapperGcodeCar->SetInputData(carPolyData);
+    actorGcodeCar->SetMapper(mapperGcodeCar);
+    actorGcodeCar->GetProperty()->SetLineWidth(3);
+    actorGcodeCar->GetProperty()->SetColor(0,1,0);
+
+    //Setup scene
+    renderer->AddActor(actorGcodeCar);
     renderer->AddActor(actorGcode);
+
     renderer->ResetCamera();
     GetRenderWindow()->Render();
+
 }
 
 
