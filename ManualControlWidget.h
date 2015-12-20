@@ -74,6 +74,7 @@ signals:
     void enablePlayButton(bool b);
     void disableCbExtruderQnt(bool b);
     void disablePositionButtons(bool b);
+    void showCarTravels(bool b);
 
 private slots:
     void updateTemp();

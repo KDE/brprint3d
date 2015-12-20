@@ -209,10 +209,11 @@ void vtkWidget::cleanup()
 {
     if(actorStl !=0 ) {
         renderer->RemoveActor(actorStl);
-    }
-
-    if(actorGcode !=0 ) {
+    }else if(actorGcode !=0 ) {
         renderer->RemoveActor(actorGcode);
+    }
+    else if(actorGcodeCar !=0){
+        renderer->RemoveActor(actorGcodeCar);
     }
 }
 
@@ -258,6 +259,16 @@ void vtkWidget::updateCube(const QString& v, QChar axis)
         case 'Z' : areaZ = v.toDouble(); break;
     }
     drawCube();
+}
+
+void vtkWidget::showCarTravels(bool b)
+{
+    if(b){
+        renderer->AddActor(actorGcodeCar);
+    }
+    else{
+        renderer->RemoveActor(actorGcodeCar);
+    }
 }
 
 void vtkWidget::drawFloor()

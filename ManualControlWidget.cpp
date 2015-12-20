@@ -45,6 +45,7 @@ ManualControlWidget::ManualControlWidget(QWidget *parent) :
     connect(timer,&QTimer::timeout,this,&ManualControlWidget::updateTemp);
     connect(timer,&QTimer::timeout,ui->extruderControlWidget,&ExtruderControlWidget::updatePos);
     connect(timer,&QTimer::timeout,this,&ManualControlWidget::isPrintJobRunning);
+    connect(ui->ck_carTravels,&QCheckBox::clicked,this,&ManualControlWidget::showCarTravels);
 
 }
 

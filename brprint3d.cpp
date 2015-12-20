@@ -51,6 +51,7 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::updateCube,ui->vtkView,&vtkWidget::updateCube);
     connect(ui->vtkView,&vtkWidget::layersCount,ui->_ManualControl,&ManualControlWidget::setLayersCount);
     connect(ui->vtkView,&vtkWidget::layersCount,ui->_ManualControl,&ManualControlWidget::setLayersCount);
+    connect(ui->_ManualControl,&ManualControlWidget::showCarTravels,ui->vtkView,&vtkWidget::showCarTravels);
 }
 
 BrPrint3D::~BrPrint3D()
