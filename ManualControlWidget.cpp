@@ -78,12 +78,12 @@ void ManualControlWidget::init()
 }
 void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
 {
-    QMessageBox msg;
     int maxX, maxY, maxZ, transmissionRate, bufferSize;
     std::string connectionPort;
     bool resetOnconnect,isCommaDecimalMark;
     if(pSettings.areaX.isEmpty() || pSettings.areaY.isEmpty() || pSettings.areaZ.isEmpty())
     {
+        QMessageBox msg;
         msg.setText(tr("Make sure you have all the necessary settings for connection!"));
         msg.setIcon(QMessageBox::Warning);
         msg.exec();
@@ -105,6 +105,7 @@ void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
         bufferSize = pSettings.cacheSize.toInt();
         resetOnconnect = pSettings.resetOnConnect;
     try{
+        QMessageBox msg;
         printerObject = new Repetier(transmissionRate,connectionPort,bufferSize,maxX,maxY,maxZ,resetOnconnect,isCommaDecimalMark);
         extruderQnt = printerObject->getNoOfExtruders();
         ui->extruderControlWidget->getPrinterObject(printerObject);
@@ -117,6 +118,7 @@ void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
 
     }
     catch(std::string exc){
+        QMessageBox msg;
         QString e =QString::fromUtf8(exc.c_str());
         msg.setText(e);
         msg.setIcon(QMessageBox::Warning);
