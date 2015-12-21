@@ -104,30 +104,30 @@ void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
         connectionPort = pSettings.connectionPort.toStdString();
         bufferSize = pSettings.cacheSize.toInt();
         resetOnconnect = pSettings.resetOnConnect;
-    try{
-        QMessageBox msg;
-        printerObject = new Repetier(transmissionRate,connectionPort,bufferSize,maxX,maxY,maxZ,resetOnconnect,isCommaDecimalMark);
-        extruderQnt = printerObject->getNoOfExtruders();
-        ui->extruderControlWidget->getPrinterObject(printerObject);
-        timer->start(1000);
-        ui->ManualControlTab->setEnabled(true);
-        emit enablePlayButton(true);
-        msg.setText(tr("Successful Connection"));
-        msg.setIcon(QMessageBox::Information);
-        msg.exec();
+        try{
+            QMessageBox msg;
+            printerObject = new Repetier(transmissionRate,connectionPort,bufferSize,maxX,maxY,maxZ,resetOnconnect,isCommaDecimalMark);
+            extruderQnt = printerObject->getNoOfExtruders();
+            ui->extruderControlWidget->getPrinterObject(printerObject);
+            timer->start(1000);
+            ui->ManualControlTab->setEnabled(true);
+            emit enablePlayButton(true);
+            msg.setText(tr("Successful Connection"));
+            msg.setIcon(QMessageBox::Information);
+            msg.exec();
 
-    }
-    catch(std::string exc){
-        QMessageBox msg;
-        QString e =QString::fromUtf8(exc.c_str());
-        msg.setText(e);
-        msg.setIcon(QMessageBox::Warning);
-        msg.exec();
-        ui->ManualControlTab->setEnabled(false);
-        emit checkConnectButton(false);
+        }
+        catch(std::string exc){
+            QMessageBox msg;
+            QString e =QString::fromUtf8(exc.c_str());
+            msg.setText(e);
+            msg.setIcon(QMessageBox::Warning);
+            msg.exec();
+            ui->ManualControlTab->setEnabled(false);
+            emit checkConnectButton(false);
 
-    }
-    setInitialMarks();
+        }
+        setInitialMarks();
     }
 
 }
