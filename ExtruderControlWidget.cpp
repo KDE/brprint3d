@@ -92,8 +92,7 @@ void ExtruderControlWidget::getPrinterObject(Repetier *pObject)
 
 void ExtruderControlWidget::setHome(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    if(!btn)
-        return;
+    Q_ASSERT(btn);
 
     if(btn == ui->bt_homeX) {
          printerObject->homeAxis('X');
