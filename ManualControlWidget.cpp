@@ -179,35 +179,16 @@ void ManualControlWidget::startExtruders(bool checked)
     }
 
 }
+
 void ManualControlWidget::disableExtrudersButtons(bool checked)
-{   QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    if(btn==ui->bt_extruder1)
-    {
-        ui->bt_extruder2->setEnabled(!checked);
-        ui->bt_extruder3->setEnabled(!checked);
-        ui->bt_extruder4->setEnabled(!checked);
-    }
-    else if(btn==ui->bt_extruder2)
-    {
-        ui->bt_extruder1->setEnabled(!checked);
-        ui->bt_extruder3->setEnabled(!checked);
-        ui->bt_extruder4->setEnabled(!checked);
-    }
-    else if(btn==ui->bt_extruder3)
-    {
-        ui->bt_extruder2->setEnabled(!checked);
-        ui->bt_extruder1->setEnabled(!checked);
-        ui->bt_extruder4->setEnabled(!checked);
-
-    }
-    else if(btn==ui->bt_extruder4)
-    {
-        ui->bt_extruder2->setEnabled(!checked);
-        ui->bt_extruder3->setEnabled(!checked);
-        ui->bt_extruder1->setEnabled(!checked);
-    }
-
+{
+    QPushButton *btn = qobject_cast<QPushButton*>(sender());
+    ui->bt_extruder1->setEnabled(btn == ui->bt_extruder1);
+    ui->bt_extruder2->setEnabled(btn == ui->bt_extruder2);
+    ui->bt_extruder3->setEnabled(btn == ui->bt_extruder3);
+    ui->bt_extruder4->setEnabled(btn == ui->bt_extruder4);
 }
+
 void ManualControlWidget::setNewBedTemp(){
     if(playStatus && ui->bt_Bed->isChecked())
         printerObject->setBedTemp(ui->ds_bedTemp->value());
