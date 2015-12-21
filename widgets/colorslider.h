@@ -24,6 +24,8 @@
 #include <QGraphicsView>
 #include <QGradient>
 
+class QGraphicsSimpleTextItem;
+
 /* Base class for a ColorSlider, you can set the min, max and color gradient
  * and retrieve them */
 class ColorSlider : public QGraphicsView {
@@ -56,4 +58,8 @@ private:
     int m_max;
     int m_currentValue;
     QGradient m_gradient;
+
+    QGraphicsSimpleTextItem *_minText;
+    QGraphicsSimpleTextItem *_maxText;
+    QGraphicsSimpleTextItem *_currText;
 };
