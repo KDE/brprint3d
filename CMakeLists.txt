@@ -9,9 +9,10 @@ if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUXX)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
 endif()
 
-find_package(VTK 6.0 REQUIRED)
+find_package(VTK 6.0 REQUIRED vtkChartsCore vtkGUISupportQt vtkViewsContext2D vtkIOGeometry NO_MODULE)
 find_package(OpenGL REQUIRED)
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Test LinguistTools OpenGL SerialPort)
+
 include(${VTK_USE_FILE})
 include_directories(.
 	${CMAKE_CURRENT_BINARY_DIR}
@@ -69,6 +70,6 @@ add_custom_target(resources ALL DEPENDS ${Resources})
 
 add_executable(BRPrint main.cpp ${Resources})
 
-target_link_libraries(BRPrint Qt5::Core Qt5::Widgets Qt5::OpenGL Qt5::SerialPort ${OPENGL_LIBRARIES} ${VTK_LIBRARIES} BRPrintDialogs BRPRintInterface)
+target_link_libraries(BRPrint Qt5::Core Qt5::Widgets Qt5::OpenGL Qt5::SerialPort ${OPENGL_LIBRARIES} ${VTK_LIBRARIES} BRPrintDialogs BRPRintInterface -lpthread)
 
 enable_testing()
