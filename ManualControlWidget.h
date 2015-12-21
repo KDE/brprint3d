@@ -35,6 +35,7 @@
 #include <QMessageBox>
 #include <stdio.h>
 #include <QtCore/QTimer>
+
 namespace Ui {
 class ManualControlWidget;
 }

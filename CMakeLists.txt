@@ -45,7 +45,6 @@ set(BRPrintInterface_SRCS
 	brprint3d.cpp
 	vtkWidget.cpp
         PrinterSettingsWidget.cpp
-        PrinterSettings.cpp
         ManualControlWidget.cpp
         ExtruderControlWidget.cpp
         BigButton.cpp
