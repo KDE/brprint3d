@@ -149,8 +149,9 @@ void ManualControlWidget::destructPrinterObject()
     ui->ManualControlTab->setDisabled(true);
 }
 
-void ManualControlWidget::startBed(bool checked){
-    if(checked) {
+void ManualControlWidget::startBed(bool checked)
+{
+    if (checked) {
         printerObject->setBedTemp(ui->ds_bedTemp->value());
     } else {
         ui->bt_Bed->setStyleSheet("");
@@ -158,34 +159,21 @@ void ManualControlWidget::startBed(bool checked){
     }
 }
 
-void ManualControlWidget::startExtruders(bool checked){
-    if(checked)
-    {
+void ManualControlWidget::startExtruders(bool checked)
+{
+    if (checked) {
         for(int i=1;i<=extrudersInUse;i++)
             printerObject->setExtrTemp(i-1,ui->ds_extruderTemp->value());
 
-    }
-    else
-    {
+    } else {
         ui->bt_extruder0->setStyleSheet("");
-        for(int i=1;i<=extrudersInUse;i++)
-        {    printerObject->setExtrTemp(i-1,0);
-            switch (i)
-            {
-            case 1:
-                ui->bt_extruder1->setStyleSheet("");
-            break;
-            case 2:
-                ui->bt_extruder2->setStyleSheet("");
-            break;
-            case 3:
-                ui->bt_extruder3->setStyleSheet("");
-            break;
-            case 4:
-                ui->bt_extruder4->setStyleSheet("");
-            break;
-            default:
-                break;
+        for(int i = 1; i <= extrudersInUse; i++) { 
+            printerObject->setExtrTemp(i-1,0);
+            switch (i) {
+            case 1: ui->bt_extruder1->setStyleSheet(""); break;
+            case 2: ui->bt_extruder2->setStyleSheet(""); break;
+            case 3: ui->bt_extruder3->setStyleSheet(""); break;
+            case 4: ui->bt_extruder4->setStyleSheet(""); break;
             }
         }
     }
