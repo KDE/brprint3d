@@ -103,12 +103,7 @@ void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
         transmissionRate = pSettings.transmissionRate.toInt();
         connectionPort = pSettings.connectionPort.toStdString();
         bufferSize = pSettings.cacheSize.toInt();
-        if(pSettings.resetOnConnect==0)
-            resetOnconnect = false;
-        else
-            resetOnconnect = true;
-
-
+        resetOnconnect = pSettings.resetOnConnect;
     try{
         printerObject = new Repetier(transmissionRate,connectionPort,bufferSize,maxX,maxY,maxZ,resetOnconnect,isCommaDecimalMark);
         extruderQnt = printerObject->getNoOfExtruders();
