@@ -112,6 +112,9 @@ void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
             timer->start(1000);
             ui->ManualControlTab->setEnabled(true);
             emit enablePlayButton(true);
+
+            //TODO: Please try to inform the user using another method, a popup on the user face is terrible.
+            //Try to use the KDE Library "InformationWidget"
             msg.setText(tr("Successful Connection"));
             msg.setIcon(QMessageBox::Information);
             msg.exec();
@@ -145,17 +148,16 @@ void ManualControlWidget::destructPrinterObject()
     printerObject->~Repetier();
     ui->ManualControlTab->setDisabled(true);
 }
+
 void ManualControlWidget::startBed(bool checked){
-    if(checked==true)
-    {       float tmp = ui->ds_bedTemp->value();
-             printerObject->setBedTemp(tmp);
-    }
-    else
-    {   ui->bt_Bed->setStyleSheet("");
+    if(checked) {
+        printerObject->setBedTemp(ui->ds_bedTemp->value());
+    } else {
+        ui->bt_Bed->setStyleSheet("");
         printerObject->setBedTemp(0);
     }
-
 }
+
 void ManualControlWidget::startExtruders(bool checked){
     if(checked)
     {
