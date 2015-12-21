@@ -10,6 +10,7 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
 , _currText(new QGraphicsSimpleTextItem())
 {
     setScene(new QGraphicsScene());
+    setupViewFlags();
 
     /* create a somewhat retangular shape for the scene */
     setSceneRect(0,0,100,25);
@@ -83,4 +84,15 @@ int ColorSlider::currentValue() const
 QGradient ColorSlider::gradient() const
 {
     return m_gradient;
+}
+
+void ColorSlider::setupViewFlags()
+{
+        setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
+        setOptimizationFlags(QGraphicsView::DontSavePainterState);
+        setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+        setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
+        setMouseTracking(true);
 }

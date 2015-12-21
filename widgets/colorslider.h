@@ -54,6 +54,8 @@ signals:
     void gradientChanged(QGradient gradient);
 
 private:
+    void setupViewFlags();
+
     int m_min;
     int m_max;
     int m_currentValue;
