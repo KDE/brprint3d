@@ -23,30 +23,11 @@
 
 #ifndef BRPRINT3D_H
 #define BRPRINT3D_H
+
 #include <QMainWindow>
-#include "Dialogs/loading.h"
-#include "Dialogs/documentation.h"
-#include "Dialogs/aboutbrprint.h"
-#include "Dialogs/help.h"
-#include "Dialogs/legalwarning.h"
-#include "KI/Repetier.h"
-#include "vtkWidget.h"
+#include <QString>
+
 #include "PrinterSettings.h"
-#include "BigButton.h"
-#include <stdlib.h>
-#include <iostream>
-#include <fstream>
-#include <QTranslator>
-#include <QFileDialog>
-#include <QMessageBox>
-#include <QTextStream>
-#include <QDebug>
-#include <QVariant>
-#include <QSettings>
-#include <QObject>
-#include <QList>
-#include <QInputDialog>
-#include <QStandardPaths>
 
 namespace Ui
 {
