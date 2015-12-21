@@ -47,6 +47,9 @@ public:
     int max() const;
     int currentValue() const;
 
+protected:
+    virtual void resizeEvent(QResizeEvent* event);
+
 signals:
     void currentValueChanged(int currValue);
     void minValueChanged(int minValue);

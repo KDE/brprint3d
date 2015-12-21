@@ -3,6 +3,8 @@
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
 #include <QGradient>
+#include <QResizeEvent>
+#include <QDebug>
 
 ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
 , _minText(new QGraphicsSimpleTextItem())
@@ -95,4 +97,19 @@ void ColorSlider::setupViewFlags()
         setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
         setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
         setMouseTracking(true);
+}
+
+void ColorSlider::resizeEvent(QResizeEvent* event)
+{
+    QGraphicsView::resizeEvent(event);
+    setSceneRect(0, 0, event->size().width(), event->size().height());
+
+    QFontMetrics fm(font());
+    const int height = fm.height();
+    _minText->setX(0);
+    _minText->setY((sceneRect().height() / 2) - (height / 2));
+
+    const int width = fm.width(_maxText->text());
+    _maxText->setX(sceneRect().width() - width);
+    _maxText->setY((sceneRect().height() / 2) - (height / 2));
 }
