@@ -39,6 +39,13 @@ void ColorSlider::setMax(int max)
     if (m_max == max)
         return;
     m_max = max;
+
+    QFontMetrics fm(font());
+    _maxText->setText(QString::number(m_max));
+    const int height = fm.height();
+    const int width = fm.width(_maxText->text());
+    _maxText->setX(sceneRect().width() - width);
+    _maxText->setY((sceneRect().height() / 2) - (height / 2));
     emit maxValueChanged(max);
 }
 
