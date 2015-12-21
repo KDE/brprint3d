@@ -60,7 +60,7 @@ void ManualControlWidget::init()
     ui->GCodePreview->setPlainText(tr("No Open File."));
 
     //If slic3er exists in Ini file, load path, else locate
-    pathslicer=QVariant ( settings.value("slic3r")).toString();
+    pathslicer = settings.value("slic3r").toString();
     if(pathslicer.isEmpty())
         locateSlicer();
     else
@@ -69,7 +69,7 @@ void ManualControlWidget::init()
     }
 
     //If cura exists in Ini file, load path, else locate
-    pathcura=QVariant (settings.value("cura")).toString();
+    pathcura = settings.value("cura").toString();
     if(pathcura.isEmpty())
         locateCura();
     else
