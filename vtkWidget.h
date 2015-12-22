@@ -31,7 +31,7 @@
 #ifndef VTKWIDGET_H
 #define VTKWIDGET_H
 
-#include <QVTKWidget.h>
+#include <QVTKWidget2.h>
 #include <vtkSmartPointer.h>
 #include <vtkPolyDataMapper.h>
 #include <vtkActor.h>
@@ -39,12 +39,12 @@
 #include <vtkCubeSource.h>
 #include <QDebug>
 
-class vtkWidget : public QVTKWidget
+class vtkWidget : public QVTKWidget2
 {
     Q_OBJECT
 public:
-explicit vtkWidget(QWidget *parent = 0);
-~vtkWidget();
+    explicit vtkWidget(QWidget *parent = 0);
+    ~vtkWidget();
     void renderSTL(const QString& path);
     void renderGcode(const QString& text);
 public slots:
@@ -72,7 +72,6 @@ private:
     vtkSmartPointer<vtkActor> actorCube;
     vtkSmartPointer<vtkActor> actorFloor;
     vtkSmartPointer <vtkCubeSource> cube;
-
 };
 
 #endif // VTKWIDGET_H
