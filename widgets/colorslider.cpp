@@ -11,10 +11,12 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
 , _maxText(new QGraphicsSimpleTextItem())
 , _currText(new QGraphicsSimpleTextItem())
 , _handler(new QGraphicsPolygonItem())
+, _slider(new QGraphicsRectItem)
 {
     setScene(new QGraphicsScene());
     setupViewFlags();
     setupHandler();
+    setupSlider();
 
     /* create a somewhat retangular shape for the scene */
     setSceneRect(0,0,100,25);
@@ -22,6 +24,7 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
     scene()->addItem(_maxText);
     scene()->addItem(_currText);
     scene()->addItem(_handler);
+    scene()->addItem(_slider);
 }
 
 void ColorSlider::setMin(int min)
@@ -63,11 +66,11 @@ void ColorSlider::setCurrentValue(int curr)
     emit currentValueChanged(curr);
 }
 
-void ColorSlider::setGradient(const QGradient& gradient)
+void ColorSlider::setGradient(const QLinearGradient& gradient)
 {
     if (m_gradient == gradient)
         return;
-    m_gradient = gradient;
+
     emit gradientChanged(gradient);
 }
 
@@ -115,6 +118,29 @@ void ColorSlider::setupHandler()
 
 }
 
+void ColorSlider::setupSlider()
+{   QRectF r(0,0,200,10);
+    _slider->setRect(r);
+
+    setupGradient(1);
+
+    QBrush b(m_gradient);
+    _slider->setBrush(b);
+}
+
+void ColorSlider::setupGradient(int type)
+{   //1 for temperature slider
+    if(type==1){
+       QGradientStops stops;
+       stops.append(qMakePair(0,Qt::blue));
+       stops.append(qMakePair(0.5,Qt::yellow));
+       stops.append(qMakePair(1,Qt::red));
+       m_gradient.setStops(stops);
+      }else if(type==2){//2 for other slider
+
+    }
+}
+
 void ColorSlider::resizeEvent(QResizeEvent* event)
 {
     QGraphicsView::resizeEvent(event);
@@ -131,4 +157,6 @@ void ColorSlider::resizeEvent(QResizeEvent* event)
 
     _handler->setX(50);
     _handler->setY((sceneRect().height() / 2) - (_handler->boundingRect().height()/2)-10);
+
+    _slider->setY((sceneRect().height() / 2) - (_slider->boundingRect().height()/2));
 }

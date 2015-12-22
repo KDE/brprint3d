@@ -33,14 +33,14 @@ class ColorSlider : public QGraphicsView {
     Q_PROPERTY(int min READ min WRITE setMin NOTIFY minValueChanged);
     Q_PROPERTY(int max READ max WRITE setMax NOTIFY maxValueChanged);
     Q_PROPERTY(int currentValue READ currentValue WRITE setCurrentValue NOTIFY currentValueChanged);
-    Q_PROPERTY(QGradient gradient READ gradient WRITE setGradient NOTIFY gradientChanged);
+    //Q_PROPERTY(QLinearGradient gradient READ gradient WRITE setGradient NOTIFY gradientChanged);
     
 public:
     ColorSlider(QWidget *parent = 0);
     void setMin(int min);
     void setMax(int max);
     void setCurrentValue(int curr);
-    void setGradient(const QGradient& gradient);
+    void setGradient(const QLinearGradient &gradient);
 
     QGradient gradient() const;
     int min() const;
@@ -59,14 +59,17 @@ signals:
 private:
     void setupViewFlags();
     void setupHandler();
+    void setupSlider();
+    void setupGradient(int type);
 
     int m_min;
     int m_max;
     int m_currentValue;
-    QGradient m_gradient;
+    QLinearGradient m_gradient;
 
     QGraphicsSimpleTextItem *_minText;
     QGraphicsSimpleTextItem *_maxText;
     QGraphicsSimpleTextItem *_currText;
     QGraphicsPolygonItem *_handler;
+    QGraphicsRectItem *_slider;
 };
