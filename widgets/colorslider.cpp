@@ -10,15 +10,18 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
 , _minText(new QGraphicsSimpleTextItem())
 , _maxText(new QGraphicsSimpleTextItem())
 , _currText(new QGraphicsSimpleTextItem())
+, _handler(new QGraphicsPolygonItem())
 {
     setScene(new QGraphicsScene());
     setupViewFlags();
+    setupHandler();
 
     /* create a somewhat retangular shape for the scene */
     setSceneRect(0,0,100,25);
     scene()->addItem(_minText);
     scene()->addItem(_maxText);
     scene()->addItem(_currText);
+    scene()->addItem(_handler);
 }
 
 void ColorSlider::setMin(int min)
@@ -99,6 +102,19 @@ void ColorSlider::setupViewFlags()
         setMouseTracking(true);
 }
 
+void ColorSlider::setupHandler()
+{   QPolygonF p;
+    p.append(QPointF(-5,0));
+    p.append(QPointF(0,-10));
+    p.append(QPointF(5,0));
+    p.append(QPointF(-5,0));
+    _handler->setPolygon(p);
+    QBrush brush(Qt::black);
+    _handler->setBrush(brush);
+    _handler->setRotation(180);
+
+}
+
 void ColorSlider::resizeEvent(QResizeEvent* event)
 {
     QGraphicsView::resizeEvent(event);
@@ -112,4 +128,7 @@ void ColorSlider::resizeEvent(QResizeEvent* event)
     const int width = fm.width(_maxText->text());
     _maxText->setX(sceneRect().width() - width);
     _maxText->setY((sceneRect().height() / 2) - (height / 2));
+
+    _handler->setX(50);
+    _handler->setY((sceneRect().height() / 2) - (_handler->boundingRect().height()/2)-10);
 }

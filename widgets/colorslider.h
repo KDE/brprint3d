@@ -58,6 +58,7 @@ signals:
 
 private:
     void setupViewFlags();
+    void setupHandler();
 
     int m_min;
     int m_max;
@@ -67,4 +68,5 @@ private:
     QGraphicsSimpleTextItem *_minText;
     QGraphicsSimpleTextItem *_maxText;
     QGraphicsSimpleTextItem *_currText;
+    QGraphicsPolygonItem *_handler;
 };
