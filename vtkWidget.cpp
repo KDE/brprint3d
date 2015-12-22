@@ -103,7 +103,6 @@ void vtkWidget::renderSTL(const QString& pathStl)
     actorStl->SetUserTransform(scaleSTL);
     renderer->AddActor(actorStl);
     renderer->ResetCamera();
-    GetRenderWindow()->Render();
 }
 
 void vtkWidget::renderGcode(const QString& text)
@@ -200,8 +199,6 @@ void vtkWidget::renderGcode(const QString& text)
     renderer->AddActor(actorGcode);
 
     renderer->ResetCamera();
-    GetRenderWindow()->Render();
-
 }
 
 
@@ -247,7 +244,6 @@ void vtkWidget::drawCube()
     renderer->AddActor(axes);
     renderer->AddActor(actorCube);
     renderer->ResetCamera();
-    GetRenderWindow()->Render();
     drawFloor();
 }
 
@@ -311,5 +307,4 @@ void vtkWidget::drawFloor()
     transform->Scale(areaX,areaY,areaZ);
     actorFloor->SetUserTransform(transform);
     renderer->AddActor(actorFloor);
-    GetRenderWindow()->Render();
 }
