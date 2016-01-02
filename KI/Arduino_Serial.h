@@ -39,9 +39,10 @@
 class ASerial
 {
 private:
-    std::string serialport;
-    int fd, baudrate, error;
-    struct termios toptions;
+    int _fd;
+    int _baudrate;
+    struct termios _toptions;
+    std::string _serialport;
 public:
     ASerial(std::string serialport, int baudrate) throw (std::string);
     ~ASerial();

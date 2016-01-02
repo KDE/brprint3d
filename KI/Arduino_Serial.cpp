@@ -26,23 +26,17 @@
 
 ASerial::ASerial(std::string serialport, int baudrate) throw (std::string)
 {
-    std::string exc;
-    this->error = 0;
-    this->serialport = serialport;
-    this->baudrate = baudrate;
-    this->fd = open(this->serialport.c_str(), O_RDWR | O_NONBLOCK);
-    if (this->fd == -1) {
-        this->error = 1;
-        exc = "ASerial: Could not open serialport: " + serialport + ".";
-        throw exc;
+    _serialport = serialport;
+    _baudrate = baudrate;
+    _fd = open(this->_serialport.c_str(), O_RDWR | O_NONBLOCK);
+    if (this->_fd == -1){
+        throw std::string("ASerial: Could not open serialport: " + _serialport + '.');
     }
-    if (tcgetattr(fd, &this->toptions) < 0) {
-        this->error = 2;
-        exc = "ASerial: Could not get term attributes.";
-        throw exc;
+    if (tcgetattr(_fd, &_toptions) < 0){
+        throw std::string("ASerial: Could not get term attributes.");
     }
-    speed_t brate = this->baudrate; // let you override switch below if needed
-    switch (baudrate) {
+    speed_t brate = this->_baudrate; // let you override switch below if needed
+    switch (_baudrate){
     case 4800:
         brate = B4800;
         break;
@@ -77,62 +71,56 @@ ASerial::ASerial(std::string serialport, int baudrate) throw (std::string)
         break;
 #endif
     }
-    cfsetispeed(&this->toptions, brate);
-    cfsetospeed(&this->toptions, brate);
+    cfsetispeed(&_toptions, brate);
+    cfsetospeed(&_toptions, brate);
     // 8N1
-    toptions.c_cflag &= ~PARENB;
-    toptions.c_cflag &= ~CSTOPB;
-    toptions.c_cflag &= ~CSIZE;
-    toptions.c_cflag |= CS8;
+    _toptions.c_cflag &= ~PARENB;
+    _toptions.c_cflag &= ~CSTOPB;
+    _toptions.c_cflag &= ~CSIZE;
+    _toptions.c_cflag |= CS8;
     // no flow control
-    toptions.c_cflag &= ~CRTSCTS;
-    toptions.c_cflag |= CREAD | CLOCAL;  // turn on READ & ignore ctrl lines
-    toptions.c_iflag &= ~(IXON | IXOFF | IXANY); // turn off s/w flow ctrl
+    _toptions.c_cflag &= ~CRTSCTS;
+    _toptions.c_cflag |= CREAD | CLOCAL;  // turn on READ & ignore ctrl lines
+    _toptions.c_iflag &= ~(IXON | IXOFF | IXANY); // turn off s/w flow ctrl
 
-    toptions.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG); // make raw
-    toptions.c_oflag &= ~OPOST; // make raw
-    toptions.c_cc[VMIN]  = 0;
-    toptions.c_cc[VTIME] = 0;
-    tcsetattr(fd, TCSANOW, &this->toptions);
-    if (tcsetattr(fd, TCSAFLUSH, &this->toptions) < 0) {
-        this->error = 3;
-        exc = "ASerial: Couldn't set term attributes.";
-        throw exc;
+    _toptions.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG); // make raw
+    _toptions.c_oflag &= ~OPOST; // make raw
+    _toptions.c_cc[VMIN]  = 0;
+    _toptions.c_cc[VTIME] = 0;
+    tcsetattr(_fd, TCSANOW, &_toptions);
+    if (tcsetattr(_fd, TCSAFLUSH, &_toptions) < 0) {
+        throw std::string("ASerial: Couldn't set term attributes.");
     }
 }
+
 ASerial::~ASerial()
 {
-    close(this->fd);
+    close(_fd);
 }
 
 std::string ASerial::getSerialPort()
 {
-    return this->serialport;
+    return _serialport;
 }
 
 int ASerial::getBaudrate()
 {
-    return this->baudrate;
-}
-
-int ASerial::getError()
-{
-    return this->error;
+    return _baudrate;
 }
 
 int ASerial::closePort()
 {
-    return close(this->fd);
+    return close(_fd);
 }
 
 int ASerial::resetSerialPort()
 {
-    close(this->fd);
-    this->fd = open(this->serialport.c_str(), O_RDWR | O_NONBLOCK);
-    if (this->fd == -1)
+    close(_fd);
+    _fd = open(_serialport.c_str(), O_RDWR | O_NONBLOCK);
+    if (_fd == -1)
         return -1;
-    tcsetattr(fd, TCSANOW, &this->toptions);
-    if (tcsetattr(fd, TCSAFLUSH, &this->toptions) < 0) {
+    tcsetattr(_fd, TCSANOW, &_toptions);
+    if (tcsetattr(_fd, TCSAFLUSH, &_toptions) < 0) {
         return -3;
     }
     return 0;
@@ -141,7 +129,7 @@ int ASerial::resetSerialPort()
 int ASerial::writeStr(const char *str)
 {
     int len = (int)strlen(str);
-    int n = (int)write(fd, str, len);
+    int n = (int)write(_fd, str, len);
     if (n != len) {
         return -1;
     }
@@ -150,7 +138,7 @@ int ASerial::writeStr(const char *str)
 
 int ASerial::writeByte(uint8_t byte)
 {
-    int n = (int)write(fd, &byte, 1);
+    int n = (int)write(_fd, &byte, 1);
     if (n != 1)
         return -1;
     return 0;
@@ -159,18 +147,27 @@ int ASerial::writeByte(uint8_t byte)
 int ASerial::readUntil(char *buf, char until, int buf_max)
 {
     char b[2];  // read expects an array, so we give it a 2-byte array
-    b[1] = '\0';
     int i = 0;
-    do {
-        int n = (int)read(fd, b, 1);  // read a char at a time
-        if (n == -1)
+    int n;
+    b[1] = '\0';
+    do{
+        n = (int)read(_fd, b, 1);  // read a char at a time
+        /*if (n == -1)
             return -1;    // couldn't read
         if (n == 0) {
             continue;
         }
-        buf[i] = b[0];
+        buf[i] = b[0];*/
+        switch (n){
+        case 0:
+            continue;
+        case -1:
+            return -1;
+        default:
+            buf[i] = b[0];
+        }
         i++;
-    } while (b[0] != until && i < buf_max);
+    }while (b[0] != until && i < buf_max);
 
     buf[i] = 0;  // null terminate the string*/
     return 0;
@@ -179,26 +176,20 @@ int ASerial::readUntil(char *buf, char until, int buf_max)
 int ASerial::readNBytes(char *buf, int buf_max)
 {
     char b[2];
-    int i, n;
+    int i;
+    int n;
     b[1] = '\0';
     for (i = 0; i < buf_max; i++) {
-        n = (int)read(fd, b, 1);
+        n = (int)read(_fd, b, 1);
         switch (n) {
         case 0:
             continue;
-            break;
         case -1:
             return -1;
         default:
             buf[i] = b[0];
             break;
         }
-        /*if(n == 0){
-            continue;
-        }else if(n == -1){
-            return n;
-        }
-        buf[i] = b[0];*/
     }
     buf[i] = '\0';
     return 0;
@@ -207,5 +198,5 @@ int ASerial::readNBytes(char *buf, int buf_max)
 int ASerial::flush()
 {
     usleep(1); //required to make flush work, for some reason
-    return tcflush(fd, TCIOFLUSH);
+    return tcflush(_fd, TCIOFLUSH);
 }
