@@ -29,12 +29,7 @@ void prepareStringToSend(char *str, const int size)
     for (i = 0; i < size; i++) {
         if (str[i] == '\0') {
             str[i] = '\n';
-<<<<<<< HEAD
             str[i + 1] = '\0';
-=======
-            str[i + 1] = '\r';
-            str[i + 2] = '\0';
->>>>>>> 51e8dce1efef8ac06a034c31a3f2dea23bf768be
             break;
         }
     }
