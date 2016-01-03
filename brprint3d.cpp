@@ -30,7 +30,6 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     ui->setupUi(this);
 
     connect(ui->_PrinterSettings,&PrinterSettingsWidget::s_extrudersInUse,ui->_ManualControl,&ManualControlWidget::setExtrudersInUse);
-    connect(ui->bt_import,&BigButton::clicked,this,&BrPrint3D::openFile);
     connect(ui->bt_open,&BigButton::clicked,this,&BrPrint3D::openFile);
     connect(ui->bt_connect,&BigButton::clicked,this,&BrPrint3D::connectPrinter);
     connect(ui->bt_connect,&BigButton::clicked,this,&BrPrint3D::changeIcon);
@@ -75,12 +74,7 @@ void BrPrint3D::setEnabled(bool b)
 }
 
 void BrPrint3D::openFile()
-{   BigButton *btn = qobject_cast<BigButton*>(sender());
-    QString types(QStringLiteral("*.gcode"));
-    if(btn == ui->bt_import){
-        types += QStringLiteral("*.stl *.STL");
-    }
-
+{   QString types(QStringLiteral("*.gcode"));
     filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), types);
     QString filePathSuffix = QFileInfo(filePath).completeSuffix().toLower();
     if (!filePath.isEmpty() && filePathSuffix == QLatin1String("gcode")) {
@@ -95,8 +89,6 @@ void BrPrint3D::openFile()
             ui->bt_play->setEnabled(true);
         ui->_ManualControl->setFilCount(filePath);
         ui->_ManualControl->setGcodePreview(text);
-    } else if(filePathSuffix == QLatin1String("stl")) {
-        ui->vtkView->renderSTL(filePath);
     }
 }
 
@@ -168,9 +160,3 @@ void BrPrint3D::changeIcon(bool checked)
         }
     }
 }
-
-/*void BrPrint3D::resetPlayButton(){
-    bt_play->setChecked(false);
-    bt_play->setIcon(QIcon(":/Icons/Icons/play.png"));
-
-}*/
