@@ -26,4 +26,5 @@ BigButton::BigButton(QWidget *parent) : QToolButton(parent)
 {   
     setIconSize(QSize(50,50));
     setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    setMinimumWidth(70);
 }
