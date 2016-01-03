@@ -251,12 +251,12 @@ void vtkWidget::drawCube()
     drawFloor();
 }
 
-void vtkWidget::updateCube(const QString& v, QChar axis)
+void vtkWidget::updateCube(const int v, QChar axis)
 {
     switch(axis.toLatin1()) {
-        case 'X' : areaX = v.toDouble(); break;
-        case 'Y' : areaY = v.toDouble(); break;
-        case 'Z' : areaZ = v.toDouble(); break;
+        case 'X' : areaX = v; break;
+        case 'Y' : areaY = v; break;
+        case 'Z' : areaZ = v; break;
     }
     drawCube();
 }

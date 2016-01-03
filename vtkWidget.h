@@ -48,7 +48,7 @@ explicit vtkWidget(QWidget *parent = 0);
     void renderSTL(const QString& path);
     void renderGcode(const QString& text);
 public slots:
-    void updateCube(const QString& v, QChar axis);
+    void updateCube(int v, QChar axis);
     void showCarTravels(bool b);
 
 signals:
