@@ -269,12 +269,12 @@
     <attribute name="title">
      <string>Printer Specs</string>
     </attribute>
-    <widget class="QWidget" name="layoutWidget_3">
+    <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>17</y>
-       <width>321</width>
+       <x>11</x>
+       <y>15</y>
+       <width>315</width>
        <height>275</height>
       </rect>
      </property>
@@ -286,8 +286,14 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1" colspan="2">
-       <widget class="QLineEdit" name="tb_RateMoviment">
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="tb_RateMoviment">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>80</width>
@@ -303,8 +309,14 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1" colspan="2">
-       <widget class="QLineEdit" name="tb_FeedZ">
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="tb_FeedZ">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>80</width>
@@ -321,20 +333,16 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLineEdit" name="tb_ExtruderSpeed_mm">
-        <property name="maximumSize">
+       <widget class="QSpinBox" name="tb_ExtruderSpeed_mm">
+        <property name="minimumSize">
          <size>
-          <width>40</width>
+          <width>80</width>
           <height>25</height>
          </size>
         </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="QLineEdit" name="tb_ExtruderSpeed_sec">
         <property name="maximumSize">
          <size>
-          <width>40</width>
+          <width>80</width>
           <height>25</height>
          </size>
         </property>
@@ -347,8 +355,14 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="1" colspan="2">
-       <widget class="QLineEdit" name="tb_SpeedRetraction">
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="tb_SpeedRetraction">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>80</width>
@@ -364,8 +378,14 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="1" colspan="2">
-       <widget class="QLineEdit" name="tb_ExtruderTemperature">
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="tb_ExtruderTemperature">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>80</width>
@@ -381,8 +401,14 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="1" colspan="2">
-       <widget class="QLineEdit" name="tb_BedTemperature">
+      <item row="5" column="1">
+       <widget class="QSpinBox" name="tb_BedTemperature">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>80</width>
@@ -398,8 +424,14 @@
         </property>
        </widget>
       </item>
-      <item row="6" column="1" colspan="2">
-       <widget class="QLineEdit" name="tb_AreaPrintX">
+      <item row="6" column="1">
+       <widget class="QSpinBox" name="tb_AreaPrintX">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>80</width>
@@ -415,8 +447,14 @@
         </property>
        </widget>
       </item>
-      <item row="7" column="1" colspan="2">
-       <widget class="QLineEdit" name="tb_AreaPrintY">
+      <item row="7" column="1">
+       <widget class="QSpinBox" name="tb_AreaPrintY">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>80</width>
@@ -432,8 +470,14 @@
         </property>
        </widget>
       </item>
-      <item row="8" column="1" colspan="2">
-       <widget class="QLineEdit" name="tb_AreaPrintZ">
+      <item row="8" column="1">
+       <widget class="QSpinBox" name="tb_AreaPrintZ">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>25</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>80</width>
@@ -459,6 +503,28 @@
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
+      <item row="7" column="0" colspan="2">
+       <widget class="QLabel" name="lb_obs">
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">text-align: center;</string>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Check with the manufacturer&lt;br/&gt; or the specifications of your&lt;br/&gt;printer to set Max temperatures on bed &lt;br/&gt;and (s) extruder(s). &lt;br/&gt;As for security, if any error&lt;br/&gt; occurs systemic or printer,&lt;br/&gt;these variables &lt;br/&gt;serve for emergency shutdown.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="lb_vol_sec">
+        <property name="text">
+         <string>Volume Max per Second(mm³/s):</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="0">
        <widget class="QLabel" name="lb_extruder_number">
         <property name="text">
@@ -481,23 +547,6 @@
         </item>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="lb_extrudertmp">
-        <property name="text">
-         <string>Extruder Max Temperature(ºC):</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="tb_ExtruderMaxTemp">
-        <property name="maximumSize">
-         <size>
-          <width>80</width>
-          <height>25</height>
-         </size>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="0">
        <widget class="QLabel" name="lb_tabletmp">
         <property name="text">
@@ -505,45 +554,10 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="tb_BedMaxTemp">
-        <property name="maximumSize">
-         <size>
-          <width>80</width>
-          <height>25</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="lb_vol_sec">
+      <item row="1" column="0">
+       <widget class="QLabel" name="lb_extrudertmp">
         <property name="text">
-         <string>Volume Max per Second(mm³/s):</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="tb_ExtruderMaxVol">
-        <property name="maximumSize">
-         <size>
-          <width>80</width>
-          <height>25</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0" colspan="2">
-       <widget class="QLabel" name="lb_obs">
-        <property name="font">
-         <font>
-          <pointsize>11</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">text-align: center;</string>
-        </property>
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Check with the manufacturer&lt;br/&gt; or the specifications of your&lt;br/&gt;printer to set Max temperatures on bed &lt;br/&gt;and (s) extruder(s). &lt;br/&gt;As for security, if any error&lt;br/&gt; occurs systemic or printer,&lt;br/&gt;these variables &lt;br/&gt;serve for emergency shutdown.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>Extruder Max Temperature(ºC):</string>
         </property>
        </widget>
       </item>
@@ -559,6 +573,15 @@
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="tb_BedMaxTemp"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="tb_ExtruderMaxTemp"/>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="tb_ExtruderMaxVol"/>
       </item>
      </layout>
     </widget>
