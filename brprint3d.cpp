@@ -51,6 +51,9 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(ui->vtkView,&vtkWidget::layersCount,ui->_ManualControl,&ManualControlWidget::setLayersCount);
     connect(ui->vtkView,&vtkWidget::layersCount,ui->_ManualControl,&ManualControlWidget::setLayersCount);
     connect(ui->_ManualControl,&ManualControlWidget::showCarTravels,ui->vtkView,&vtkWidget::showCarTravels);
+    connect(ui->actionAbout,&QAction::triggered,this,&BrPrint3D::showDialogs);
+    connect(ui->actionLegalWarning,&QAction::triggered,this,&BrPrint3D::showDialogs);
+    connect(ui->actionHelp,&QAction::triggered,this,&BrPrint3D::showDialogs);
 }
 
 BrPrint3D::~BrPrint3D()
@@ -158,5 +161,20 @@ void BrPrint3D::changeIcon(bool checked)
         } else {
             ui->bt_connect->setIcon(QIcon(":/Icons/Icons/connect.png"));
         }
+    }
+}
+
+void BrPrint3D::showDialogs(bool b)
+{
+    QAction *act = qobject_cast<QAction*>(sender());
+    if(act == ui->actionAbout && !b){
+        aboutBrPrint w;
+        w.show();
+    }else if(act == ui->actionLegalWarning && !b){
+        LegalWarning w;
+        w.show();
+    }else if(act == ui->actionHelp && !b){
+        Help w;
+        w.show();
     }
 }

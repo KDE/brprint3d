@@ -26,7 +26,9 @@
 
 #include <QMainWindow>
 #include <QString>
-
+#include "Dialogs/aboutbrprint.h"
+#include "Dialogs/legalwarning.h"
+#include "Dialogs/help.h"
 #include "PrinterSettings.h"
 
 namespace Ui
@@ -55,6 +57,7 @@ private:
     void stopPrintJob();
     void hidePrinterSettings();
     void changeIcon(bool checked);
+    void showDialogs(bool b);
 signals:
     void s_playStatus(bool b);
     void s_pauseStatus(bool b);
