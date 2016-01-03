@@ -75,68 +75,6 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="Slicer">
-        <attribute name="title">
-         <string>Slicer</string>
-        </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_5">
-           <item>
-            <widget class="QLabel" name="lb_slicer">
-             <property name="text">
-              <string>Slicer:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="cb_slicer"/>
-           </item>
-           <item>
-            <widget class="QPushButton" name="bt_addSlicer">
-             <property name="text">
-              <string>Add 
- Slicer</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <item>
-            <widget class="QPushButton" name="bt_startSlicer">
-             <property name="text">
-              <string>Start 
- Slicer</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="bt_killSlicer">
-             <property name="text">
-              <string>Stop 
- Slicer</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <spacer name="verticalSpacer">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </widget>
        <widget class="QWidget" name="Preview">
         <attribute name="title">
          <string>Statics of Print</string>
@@ -1237,11 +1175,6 @@ QSlider::handle:horizontal {
       </item>
      </layout>
     </widget>
-   </widget>
-   <widget class="QWidget" name="ToolBoxTab">
-    <attribute name="title">
-     <string>Toolbox</string>
-    </attribute>
    </widget>
   </widget>
  </widget>
