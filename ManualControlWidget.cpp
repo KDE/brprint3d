@@ -56,7 +56,6 @@ ManualControlWidget::~ManualControlWidget()
 
 void ManualControlWidget::init()
 {   ui->ManualControlTab->setDisabled(true);
-    ui->Slicer->setDisabled(true);
     ui->GCodePreview->setPlainText(tr("No Open File."));
 }
 void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
@@ -64,7 +63,7 @@ void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
     int maxX, maxY, maxZ, transmissionRate, bufferSize;
     std::string connectionPort;
     bool resetOnconnect,isCommaDecimalMark;
-    if(pSettings.areaX.isEmpty() || pSettings.areaY.isEmpty() || pSettings.areaZ.isEmpty())
+    if(pSettings.areaX==0 || pSettings.areaY==0 || pSettings.areaZ==0)
     {
         QMessageBox msg;
         msg.setText(tr("Make sure you have all the necessary settings for connection!"));
@@ -80,12 +79,12 @@ void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
             isCommaDecimalMark = false;
         else
             isCommaDecimalMark = true;
-        maxX = pSettings.areaX.toInt();
-        maxY = pSettings.areaY.toInt();
-        maxZ = pSettings.areaZ.toInt();
-        transmissionRate = pSettings.transmissionRate.toInt();
+        maxX = pSettings.areaX;
+        maxY = pSettings.areaY;
+        maxZ = pSettings.areaZ;
+        transmissionRate = pSettings.transmissionRate;
         connectionPort = pSettings.connectionPort.toStdString();
-        bufferSize = pSettings.cacheSize.toInt();
+        bufferSize = pSettings.cacheSize;
         resetOnconnect = pSettings.resetOnConnect;
         try{
             QMessageBox msg;
