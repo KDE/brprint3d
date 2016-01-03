@@ -297,10 +297,10 @@
     <property name="title">
      <string>Abo&amp;ut</string>
     </property>
-    <addaction name="actionAviso_Legal"/>
-    <addaction name="actionDocumenta_o"/>
-    <addaction name="actionAjuda"/>
-    <addaction name="actionSobre_o_BrPrint3D"/>
+    <addaction name="actionLegalWarning"/>
+    <addaction name="actionDocumentation"/>
+    <addaction name="actionHelp"/>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuArquivo"/>
    <addaction name="menuLinguagem"/>
@@ -328,7 +328,7 @@
     <string>&amp;Portuguese - Brazil</string>
    </property>
   </action>
-  <action name="actionAviso_Legal">
+  <action name="actionLegalWarning">
    <property name="text">
     <string>&amp;Legal Warning</string>
    </property>
@@ -353,12 +353,12 @@
     <string>Tema</string>
    </property>
   </action>
-  <action name="actionDocumenta_o">
+  <action name="actionDocumentation">
    <property name="text">
     <string>&amp;Documentation</string>
    </property>
   </action>
-  <action name="actionAjuda">
+  <action name="actionHelp">
    <property name="text">
     <string>&amp;Help</string>
    </property>
@@ -462,7 +462,7 @@
     <string>Clique aqui para abrir um arquivo.</string>
    </property>
   </action>
-  <action name="actionSobre_o_BrPrint3D">
+  <action name="actionAbout">
    <property name="text">
     <string>&amp;About Br-Print3D</string>
    </property>
