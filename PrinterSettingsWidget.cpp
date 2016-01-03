@@ -29,10 +29,9 @@ PrinterSettingsWidget::PrinterSettingsWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->ck_PrintLog,&QCheckBox::toggled,this,&PrinterSettingsWidget::printLogStatusChanged);
-    connect(ui->tb_AreaPrintX,&QLineEdit::textEdited,this,&PrinterSettingsWidget::sendValue);
-    connect(ui->tb_AreaPrintY,&QLineEdit::textEdited,this,&PrinterSettingsWidget::sendValue);
-    connect(ui->tb_AreaPrintZ,&QLineEdit::textEdited,this,&PrinterSettingsWidget::sendValue);
-
+    connect(ui->tb_AreaPrintX,&QSpinBox::editingFinished,this,&PrinterSettingsWidget::sendValue);
+    connect(ui->tb_AreaPrintY,&QSpinBox::editingFinished,this,&PrinterSettingsWidget::sendValue);
+    connect(ui->tb_AreaPrintZ,&QSpinBox::editingFinished,this,&PrinterSettingsWidget::sendValue);
     connect(&timer,&QTimer::timeout,this,&PrinterSettingsWidget::locateArduino);
     connect(ui->bt_SaveSettings,&QPushButton::clicked,this,&PrinterSettingsWidget::saveSettings);
 }
@@ -44,7 +43,6 @@ PrinterSettingsWidget::~PrinterSettingsWidget()
 
 void PrinterSettingsWidget::init()
 {   timer.start(2000);
-
     //Load the previous configs if them exists
     QStringList groups;
     settings.beginGroup("Printer_Configs");
@@ -61,32 +59,29 @@ void PrinterSettingsWidget::setSettings(PrinterSettings p){
 
     //Connection Tab
     ui->cb_ConnectionType->setCurrentText(p.connectionType);
-    ui->cb_TransmitionRate->setCurrentText(p.transmissionRate);
+    ui->cb_TransmitionRate->setCurrentText(QString::number(p.transmissionRate));
     ui->cb_Firmware->setCurrentText(p.firmwareType);
-    ui->cb_CacheSize->setCurrentText(p.cacheSize);
+    ui->cb_CacheSize->setCurrentText(QString::number(p.cacheSize));
 
     //Resets
     ui->ck_ResetOnConnect->setChecked(p.resetOnConnect);
     ui->ck_PrintLog->setChecked(p.printLog);
 
     //Printer Tab
-    ui->tb_RateMoviment->setText(p.rateMoviment);
-    ui->tb_FeedZ->setText(p.feedZ);
-    ui->tb_ExtruderSpeed_mm->setText(p.extruderSpeedMM);
-    ui->tb_ExtruderSpeed_sec->setText(p.extruderSpeedS);
-    ui->tb_ExtruderMaxVol->setText(p.extruderMAXVol);
-    ui->tb_SpeedRetraction->setText(p.extruderRetraction);
-    ui->tb_BedTemperature->setText(p.bedTemperature);
-    ui->tb_ExtruderTemperature->setText(p.extruderTemperature);
-    ui->tb_AreaPrintX->setText(p.areaX);
-    ui->tb_AreaPrintY->setText(p.areaY);
-    ui->tb_AreaPrintZ->setText(p.areaZ);
+    ui->tb_RateMoviment->setValue(p.rateMoviment);
+    ui->tb_FeedZ->setValue(p.feedZ);
+    ui->tb_ExtruderSpeed_mm->setValue(p.extruderSpeed);
+    ui->tb_ExtruderMaxVol->setValue(p.extruderMAXVol);
+    ui->tb_SpeedRetraction->setValue(p.extruderRetraction);
+    ui->tb_BedTemperature->setValue(p.bedTemperature);
+    ui->tb_ExtruderTemperature->setValue(p.extruderTemperature);
+    ui->tb_AreaPrintX->setValue(p.areaX);
+    ui->tb_AreaPrintY->setValue(p.areaY);
+    ui->tb_AreaPrintZ->setValue(p.areaZ);
 
     //Extruder Tab
-    ui->cb_ExtruderQnt->setCurrentText(p.extruderQnt);
-    ui->tb_ExtruderMaxTemp->setText(p.extruderMAXTemp);
-    ui->tb_BedMaxTemp->setText(p.bedMAXTemp);
-
+    ui->tb_ExtruderMaxTemp->setValue(p.extruderMAXTemp);
+    ui->tb_BedMaxTemp->setValue(p.bedMAXTemp);
 }
 
 
@@ -107,8 +102,7 @@ void PrinterSettingsWidget::saveSettings(){
         //Impressora
         settings.setValue("RateMoviment",p.rateMoviment);
         settings.setValue("FeedZ",p.feedZ);
-        settings.setValue("ExtruderSpeedMM",p.extruderSpeedMM);
-        settings.setValue("ExtruderSpeedSec",p.extruderSpeedS);
+        settings.setValue("ExtruderSpeed",p.extruderSpeed);
         settings.setValue("ExtruderRetraction",p.extruderRetraction);
         settings.setValue("BedTemperature",p.bedTemperature);
         settings.setValue("ExtruderTemperature",p.extruderTemperature);
@@ -116,7 +110,6 @@ void PrinterSettingsWidget::saveSettings(){
         settings.setValue("AreaY",p.areaY);
         settings.setValue("AreaZ",p.areaZ);
         //Extrusor
-        settings.setValue("ExtruderQnt",p.extrudersInUse);
         settings.setValue("ExtruderMaxTemp",p.extruderMAXTemp);
         settings.setValue("BedMaxTemp",p.bedMAXTemp);
         settings.setValue("VolumeMax",p.extruderMAXVol);
@@ -138,29 +131,27 @@ PrinterSettings PrinterSettingsWidget::loadSettings(QString q){
        PrinterSettings p;
        //Connection
        p.connectionType = settings.value("ConnectionType","USB").toString();
-       p.transmissionRate = settings.value("TransmissionRate","115200").toString();
+       p.transmissionRate = settings.value("TransmissionRate","115200").toInt();
        p.firmwareType = settings.value("Firmware","Repetier").toString();
-       p.cacheSize = settings.value("CacheSize","127").toString();
+       p.cacheSize = settings.value("CacheSize","127").toInt();
        p.resetOnConnect = settings.value("ResetOnConnect",2).toInt();
        p.printLog = settings.value("PrinterLog",0).toInt();
 
        //Printer
-       p.rateMoviment = settings.value("RateMoviment",0).toString();
-       p.feedZ = settings.value("FeedZ",0).toString();
-       p.extruderSpeedMM = settings.value("ExtruderSpeedMM",0).toString();
-       p.extruderSpeedS = settings.value("ExtruderSpeedSec",0).toString();
-       p.extruderRetraction = settings.value("ExtruderRetraction",0).toString();
-       p.extruderTemperature = settings.value("ExtruderTemperature",210).toString();
-       p.bedTemperature = settings.value("BedTemperature",110).toString();
-       p.areaX = settings.value("AreaX",0).toString();
-       p.areaY = settings.value("AreaY",0).toString();
-       p.areaZ = settings.value("AreaZ",0).toString();
+       p.rateMoviment = settings.value("RateMoviment",0).toInt();
+       p.feedZ = settings.value("FeedZ",0).toInt();
+       p.extruderSpeed = settings.value("ExtruderSpeed",0).toInt();
+       p.extruderRetraction = settings.value("ExtruderRetraction",0).toInt();
+       p.extruderTemperature = settings.value("ExtruderTemperature",210).toInt();
+       p.bedTemperature = settings.value("BedTemperature",110).toInt();
+       p.areaX = settings.value("AreaX",200).toInt();
+       p.areaY = settings.value("AreaY",200).toInt();
+       p.areaZ = settings.value("AreaZ",200).toInt();
 
        //Extruder
-       p.extruderQnt = settings.value("ExtruderQnt",1).toString();
-       p.extruderMAXTemp = settings.value("ExtruderMaxTemp",230).toString();
-       p.bedMAXTemp = settings.value("BedMaxTemp",120).toString();
-       p.extruderMAXVol = settings.value("VolumeMax",0).toString();
+       p.extruderMAXTemp = settings.value("ExtruderMaxTemp",230).toInt();
+       p.bedMAXTemp = settings.value("BedMaxTemp",120).toInt();
+       p.extruderMAXVol = settings.value("VolumeMax",0).toInt();
        settings.endGroup();
        settings.endGroup();
        return p;
@@ -170,27 +161,25 @@ PrinterSettings PrinterSettingsWidget::loadSettings(QString q){
 PrinterSettings PrinterSettingsWidget::getCurrentSettings()
 {
     PrinterSettings p;
-    p.connectionType = ui->cb_ConnectionType->currentText();
     p.connectionPort = ui->cb_ConnectionPort->currentText();
-    p.transmissionRate = ui->cb_TransmitionRate->currentText();
+    p.connectionType = ui->cb_ConnectionType->currentText();
+    p.transmissionRate = ui->cb_TransmitionRate->currentText().toInt();
     p.firmwareType = ui->cb_Firmware->currentText();
-    p.cacheSize = ui->cb_CacheSize->currentText();
+    p.cacheSize = ui->cb_CacheSize->currentText().toInt();
     p.resetOnConnect = ui->ck_ResetOnConnect->isChecked();
     p.printLog = ui->ck_PrintLog->isChecked();
-    p.rateMoviment = ui->tb_RateMoviment->text();
-    p.feedZ = ui->tb_FeedZ->text();
-    p.extruderSpeedMM = ui->tb_ExtruderSpeed_mm->text();
-    p.extruderSpeedS = ui->tb_ExtruderSpeed_sec->text();
-    p.extruderRetraction = ui->tb_SpeedRetraction->text();
-    p.extruderTemperature = ui->tb_ExtruderTemperature->text();
-    p.bedTemperature = ui->tb_BedTemperature->text();
-    p.areaX = ui->tb_AreaPrintX->text();
-    p.areaY = ui->tb_AreaPrintY->text();
-    p.areaZ = ui->tb_AreaPrintZ->text();
-    p.extrudersInUse = ui->cb_ExtruderQnt->currentText().toInt();
-    p.extruderMAXTemp = ui->tb_ExtruderMaxTemp->text();
-    p.extruderMAXVol = ui->tb_ExtruderMaxVol->text();
-    p.bedMAXTemp = ui->tb_BedMaxTemp->text();
+    p.rateMoviment = ui->tb_RateMoviment->value();
+    p.feedZ = ui->tb_FeedZ->value();
+    p.extruderSpeed = ui->tb_ExtruderSpeed_mm->value();
+    p.extruderRetraction = ui->tb_SpeedRetraction->value();
+    p.extruderTemperature = ui->tb_ExtruderTemperature->value();
+    p.bedTemperature = ui->tb_BedTemperature->value();
+    p.areaX = ui->tb_AreaPrintX->value();
+    p.areaY = ui->tb_AreaPrintY->value();
+    p.areaZ = ui->tb_AreaPrintZ->value();
+    p.extruderMAXTemp = ui->tb_ExtruderMaxTemp->value();
+    p.extruderMAXVol = ui->tb_ExtruderMaxVol->value();
+    p.bedMAXTemp = ui->tb_BedMaxTemp->value();
     return p;
 
 
@@ -232,13 +221,13 @@ void PrinterSettingsWidget::on_cb_ExtruderQnt_currentTextChanged(const QString &
 void PrinterSettingsWidget::printLogStatusChanged(){
     emit s_printLogStatus(ui->ck_PrintLog->isChecked());
 }
-void PrinterSettingsWidget::sendValue(QString v){
-    QLineEdit *btn = qobject_cast<QLineEdit*>(sender());
+void PrinterSettingsWidget::sendValue(){
+    QSpinBox *btn = qobject_cast<QSpinBox*>(sender());
     if(btn==ui->tb_AreaPrintX)
-        emit updateCube(v,'X');
+        emit updateCube(ui->tb_AreaPrintX->value(),'X');
     if(btn==ui->tb_AreaPrintY)
-        emit updateCube(v,'Y');
+        emit updateCube(ui->tb_AreaPrintY->value(),'Y');
     if(btn==ui->tb_AreaPrintZ)
-        emit updateCube(v,'Z');
+        emit updateCube(ui->tb_AreaPrintZ->value(),'Z');
 
 }
