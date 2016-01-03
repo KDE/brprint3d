@@ -59,17 +59,6 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="BigButton" name="bt_import">
-        <property name="text">
-         <string>Import</string>
-        </property>
-        <property name="icon">
-         <iconset resource="resources.qrc">
-          <normaloff>:/Icons/Icons/import.png</normaloff>:/Icons/Icons/import.png</iconset>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="BigButton" name="bt_open">
         <property name="text">
          <string>Open</string>
@@ -286,7 +275,7 @@
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArquivo">
