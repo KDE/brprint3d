@@ -63,8 +63,6 @@ private:
     Repetier *printerObject=nullptr;
     int extrudersInUse=1;
     QString pathslicer,pathcura;
-    void locateSlicer();
-    void locateCura();
     QSettings settings;
     bool garbage,playStatus=false,printLogStatus,pauseStatus=false;
     int extruderQnt;
