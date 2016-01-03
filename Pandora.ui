@@ -278,14 +278,14 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuArquivo">
+   <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>F&amp;ile</string>
+     <string>File</string>
     </property>
     <addaction name="separator"/>
-    <addaction name="actionFechar"/>
+    <addaction name="actionClose"/>
    </widget>
-   <widget class="QMenu" name="menuLinguagem">
+   <widget class="QMenu" name="menuLanguage">
     <property name="title">
      <string>&amp;Language</string>
     </property>
@@ -293,31 +293,19 @@
     <addaction name="actionPortuguese"/>
     <addaction name="separator"/>
    </widget>
-   <widget class="QMenu" name="menuSobre">
+   <widget class="QMenu" name="menuAbout">
     <property name="title">
-     <string>Abo&amp;ut</string>
+     <string>About</string>
     </property>
     <addaction name="actionLegalWarning"/>
     <addaction name="actionDocumentation"/>
     <addaction name="actionHelp"/>
     <addaction name="actionAbout"/>
    </widget>
-   <addaction name="menuArquivo"/>
-   <addaction name="menuLinguagem"/>
-   <addaction name="menuSobre"/>
+   <addaction name="menuFile"/>
+   <addaction name="menuLanguage"/>
+   <addaction name="menuAbout"/>
   </widget>
-  <action name="actionEmergency">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/Icons/Icons/bt-emergency.png</normaloff>:/Icons/Icons/bt-emergency.png</iconset>
-   </property>
-   <property name="text">
-    <string>Parada de Emergência</string>
-   </property>
-   <property name="toolTip">
-    <string>Clique aqui para interromper a impressão em caso de emergência.</string>
-   </property>
-  </action>
   <action name="actionEnglish">
    <property name="text">
     <string>&amp;English - EUA</string>
@@ -333,24 +321,9 @@
     <string>&amp;Legal Warning</string>
    </property>
   </action>
-  <action name="actionFechar">
+  <action name="actionClose">
    <property name="text">
     <string>&amp;Exit</string>
-   </property>
-  </action>
-  <action name="actionImportG">
-   <property name="text">
-    <string>Importar GCode</string>
-   </property>
-  </action>
-  <action name="actionCores_Visualiza_o">
-   <property name="text">
-    <string>Cores Visualização</string>
-   </property>
-  </action>
-  <action name="actionTema">
-   <property name="text">
-    <string>Tema</string>
    </property>
   </action>
   <action name="actionDocumentation">
@@ -361,105 +334,6 @@
   <action name="actionHelp">
    <property name="text">
     <string>&amp;Help</string>
-   </property>
-  </action>
-  <action name="actionPlay">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>:/Icons/Icons/bt-play</normaloff>
-     <disabledoff>:/Icons/Icons/bt-play-onclick</disabledoff>
-     <disabledon>:/Icons/Icons/bt-play-onclick</disabledon>:/Icons/Icons/bt-play</iconset>
-   </property>
-   <property name="text">
-    <string>Executar</string>
-   </property>
-   <property name="toolTip">
-    <string>Clique aqui para iniciar a impressão.</string>
-   </property>
-  </action>
-  <action name="actionImport">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/Icons/Icons/bt-import</normaloff>:/Icons/Icons/bt-import</iconset>
-   </property>
-   <property name="text">
-    <string>Importar</string>
-   </property>
-   <property name="toolTip">
-    <string>Clique aqui para importar um GCode</string>
-   </property>
-  </action>
-  <action name="actionStop">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>:/Icons/Icons/bt-stop</normaloff>
-     <activeoff>:/new/Images/bt-stop</activeoff>
-     <activeon>:/Icons/Icons/bt-stop-onclick</activeon>:/Icons/Icons/bt-stop</iconset>
-   </property>
-   <property name="text">
-    <string>Parar</string>
-   </property>
-   <property name="toolTip">
-    <string>Clique aqui para cancelar a impressão.</string>
-   </property>
-  </action>
-  <action name="actionConnect">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>:/Icons/Icons/bt-connect</normaloff>
-     <activeon>:/Icons/Icons/bt-connect-onclick</activeon>:/Icons/Icons/bt-connect</iconset>
-   </property>
-   <property name="text">
-    <string>Conectar</string>
-   </property>
-   <property name="toolTip">
-    <string>Clique aqui para conectar a impressora.</string>
-   </property>
-  </action>
-  <action name="actionPause">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>:/Icons/Icons/bt-pause</normaloff>
-     <activeon>:/Icons/Icons/bt-pause-onclick</activeon>:/Icons/Icons/bt-pause</iconset>
-   </property>
-   <property name="text">
-    <string>Pausar</string>
-   </property>
-   <property name="toolTip">
-    <string>Clique aqui para pausar a impressão.</string>
-   </property>
-  </action>
-  <action name="actionOpen">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/Icons/Icons/bt-file</normaloff>:/Icons/Icons/bt-file</iconset>
-   </property>
-   <property name="text">
-    <string>Abrir</string>
-   </property>
-   <property name="toolTip">
-    <string>Clique aqui para abrir um arquivo.</string>
    </property>
   </action>
   <action name="actionAbout">
