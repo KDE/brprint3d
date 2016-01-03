@@ -23,31 +23,27 @@
 #ifndef PRINTERSETTINGS_H
 #define PRINTERSETTINGS_H
 #include <QString>
-
 struct PrinterSettings
 {
-    QString extruderTemperature;
-    QString bedTemperature;
-    QString extruderMAXTemp;
-    QString bedMAXTemp;
-    QString areaX="2";
-    QString areaY="2";
-    QString areaZ="2";
-    QString rateMoviment;
-    QString extruderSpeedMM;
-    QString extruderSpeedS;
-    QString extruderRetraction;
-    QString extruderQnt;
-    QString connectionType;
-    QString transmissionRate;
-    QString firmwareType;
-    QString cacheSize;
+    int extruderTemperature;
+    int bedTemperature;
+    int extruderMAXTemp;
+    int bedMAXTemp;
+    int areaX;
+    int areaY;
+    int areaZ;
+    int rateMoviment;
+    int extruderSpeed;
+    int extruderRetraction;
     QString connectionPort;
+    QString connectionType;
+    int transmissionRate;
+    QString firmwareType;
+    int cacheSize;
     int resetOnConnect = 0;
     int printLog = 0;
-    int extrudersInUse = 1;
-    QString feedZ;
-    QString extruderMAXVol;
+    int feedZ;
+    int extruderMAXVol;
 };
 
 #endif // PrinterSettings_H
