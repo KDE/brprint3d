@@ -67,12 +67,8 @@ Repetier::Repetier(int baudrate, std::string serialport, int buffersize, double 
     unsigned int min;
     char send[buffersize];
     char serialAns[buffersize * 2];
-    for (int i = 0; i < buffersize * 2; i++){
-        serialAns[i] = '\0';
-    }
-    for (int i = 0; i < buffersize; i++){
-        send[i] = '\0';
-    }
+    serialAns[0] = '\0';
+    send[0] = '\0';
     format[0] = '\0';
     vet = NULL;
     pos = 0;
