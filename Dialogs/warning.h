@@ -38,9 +38,13 @@ class warning : public QDialog
 public:
     explicit warning(QWidget *parent = 0);
     ~warning();
+    void handleEvent();
 
 private:
     Ui::warning *ui;
+signals:
+    void switchoff();
+
 
 };
 

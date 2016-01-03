@@ -29,9 +29,19 @@ warning::warning(QWidget *parent) :
     ui(new Ui::warning)
 {
     ui->setupUi(this);
+    connect(ui->bt_ok,&QPushButton::clicked,this,&warning::handleEvent);
+    connect(ui->bt_off,&QPushButton::clicked,this,&warning::handleEvent);
 }
 
 warning::~warning()
 {
     delete ui;
+}
+
+void warning::handleEvent(){
+    QPushButton *btn = qobject_cast<QPushButton*>(sender());
+    if(btn == ui->bt_off){
+        emit switchoff();
+    }
+    close();
 }
