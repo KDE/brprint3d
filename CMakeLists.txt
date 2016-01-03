@@ -18,7 +18,7 @@ include_directories(.
 	${CMAKE_CURRENT_BINARY_DIR}
 	${CMAKE_BINARY_DIR}
 	KI
-	Windows
+        Dialogs
 )
 
 # compile the KI library for 3D printer communication
@@ -34,8 +34,7 @@ set(Dialogs_SRCS
 	Dialogs/aboutbrprint.cpp
 	Dialogs/documentation.cpp
 	Dialogs/help.cpp
-	Dialogs/legalwarning.cpp
-	Dialogs/loading.cpp
+        Dialogs/legalwarning.cpp
 	Dialogs/warning.cpp
 )
 add_library(BRPrintDialogs STATIC ${Dialogs_SRCS})
