@@ -29,7 +29,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="images.qrc">:/Icons/Icons/bt-warningskull</pixmap>
+    <pixmap resource="../resources.qrc">:/Icons/Icons/warningSkull.png</pixmap>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -47,29 +47,25 @@
     </font>
    </property>
    <property name="text">
-    <string>ATENÇÃO!!!</string>
+    <string>Atention!</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>180</x>
      <y>80</y>
-     <width>241</width>
+     <width>286</width>
      <height>131</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>13</pointsize>
+     <pointsize>11</pointsize>
     </font>
    </property>
    <property name="text">
-    <string>Atenção sua impressora
- está há muito tempo inativa,
- porém está com extrusores 
- e mesa ainda ligados.
-Por favor verifique!</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Your 3D printer is idle&lt;br/&gt;for more than x minutes &lt;br/&gt;with bed and extruders still on. &lt;br/&gt;Please verify!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="textFormat">
     <enum>Qt::AutoText</enum>
@@ -78,7 +74,7 @@ Por favor verifique!</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="bt_ok">
    <property name="geometry">
     <rect>
      <x>380</x>
@@ -91,8 +87,22 @@ Por favor verifique!</string>
     <string>Ok</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="bt_off">
+   <property name="geometry">
+    <rect>
+     <x>235</x>
+     <y>240</y>
+     <width>108</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Switch OFF</string>
+   </property>
+  </widget>
  </widget>
  <resources>
+  <include location="../resources.qrc"/>
   <include location="images.qrc"/>
  </resources>
  <connections/>
