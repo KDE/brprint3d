@@ -169,12 +169,12 @@ void BrPrint3D::showDialogs(bool b)
     QAction *act = qobject_cast<QAction*>(sender());
     if(act == ui->actionAbout && !b){
         aboutBrPrint w;
-        w.show();
+        w.exec();
     }else if(act == ui->actionLegalWarning && !b){
         LegalWarning w;
-        w.show();
+        w.exec();
     }else if(act == ui->actionHelp && !b){
         Help w;
-        w.show();
+        w.exec();
     }
 }
