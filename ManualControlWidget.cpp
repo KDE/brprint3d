@@ -41,10 +41,9 @@ ManualControlWidget::ManualControlWidget(QWidget *parent) :
     connect(ui->sl_printSpeed,&QSlider::valueChanged, this, &ManualControlWidget::sliderValueChanged);
     connect(ui->sl_filamentFlow,&QSlider::valueChanged,this,&ManualControlWidget::sliderValueChanged);
     connect(ui->sl_coolerFan,&QSlider::valueChanged,this,&ManualControlWidget::sliderValueChanged);
-    timer = new QTimer();
-    connect(timer,&QTimer::timeout,this,&ManualControlWidget::updateTemp);
-    connect(timer,&QTimer::timeout,ui->extruderControlWidget,&ExtruderControlWidget::updatePos);
-    connect(timer,&QTimer::timeout,this,&ManualControlWidget::isPrintJobRunning);
+    connect(&timer,&QTimer::timeout,this,&ManualControlWidget::updateTemp);
+    connect(&timer,&QTimer::timeout,ui->extruderControlWidget,&ExtruderControlWidget::updatePos);
+    connect(&timer,&QTimer::timeout,this,&ManualControlWidget::isPrintJobRunning);
     connect(ui->ck_carTravels,&QCheckBox::clicked,this,&ManualControlWidget::showCarTravels);
 
 }
@@ -91,7 +90,7 @@ void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
             printerObject = new Repetier(transmissionRate,connectionPort,bufferSize,maxX,maxY,maxZ,resetOnconnect,isCommaDecimalMark);
             extruderQnt = printerObject->getNoOfExtruders();
             ui->extruderControlWidget->getPrinterObject(printerObject);
-            timer->start(1000);
+            timer.start(1000);
             ui->ManualControlTab->setEnabled(true);
             emit enablePlayButton(true);
 
@@ -117,7 +116,7 @@ void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
 
 }
 void ManualControlWidget::destructPrinterObject()
-{   timer->stop();
+{   timer.stop();
     if(ui->bt_Bed->isChecked()){
         printerObject->setBedTemp(0);
         ui->bt_Bed->setChecked(false);
@@ -366,7 +365,7 @@ void ManualControlWidget::isPrintJobRunning()
         msg.exec();
         emit disableCbExtruderQnt(false);
         emit disableExtrudersButtons(false);
-        disconnect(timer,&QTimer::timeout,this,&ManualControlWidget::isPrintJobRunning);
+        disconnect(&timer,&QTimer::timeout,this,&ManualControlWidget::isPrintJobRunning);
     }
 }
 void ManualControlWidget::pausePrintJob(bool b){

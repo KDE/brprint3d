@@ -66,7 +66,7 @@ private:
     QSettings settings;
     bool garbage,playStatus=false,printLogStatus,pauseStatus=false;
     int extruderQnt;
-    QTimer *timer=nullptr;
+    QTimer timer;
 
 signals:
     void checkConnectButton(bool b);
