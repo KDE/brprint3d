@@ -24,14 +24,14 @@
 #ifndef LEGALWARNING_H
 #define LEGALWARNING_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui
 {
 class LegalWarning;
 }
 
-class LegalWarning : public QWidget
+class LegalWarning : public QDialog
 {
     Q_OBJECT
 

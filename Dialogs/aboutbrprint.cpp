@@ -27,7 +27,7 @@
 #include "QCloseEvent"
 
 aboutBrPrint::aboutBrPrint(QWidget *parent) :
-    QWidget(parent),
+    QDialog(parent),
     ui(new Ui::aboutBrPrint)
 {
     ui->setupUi(this);

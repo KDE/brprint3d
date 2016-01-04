@@ -25,7 +25,7 @@
 #include "ui_legalwarning.h"
 
 LegalWarning::LegalWarning(QWidget *parent) :
-    QWidget(parent),
+    QDialog(parent),
     ui(new Ui::LegalWarning)
 {
     ui->setupUi(this);

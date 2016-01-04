@@ -25,7 +25,7 @@
 #include "ui_documentation.h"
 
 Documentation::Documentation(QWidget *parent) :
-    QWidget(parent),
+    QDialog(parent),
     ui(new Ui::Documentation)
 {
     ui->setupUi(this);

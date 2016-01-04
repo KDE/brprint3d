@@ -24,14 +24,14 @@
 #ifndef ABOUTBRPRINT_H
 #define ABOUTBRPRINT_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui
 {
 class aboutBrPrint;
 }
 
-class aboutBrPrint : public QWidget
+class aboutBrPrint : public QDialog
 {
     Q_OBJECT
 

@@ -24,14 +24,14 @@
 #ifndef DOCUMENTATION_H
 #define DOCUMENTATION_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui
 {
 class Documentation;
 }
 
-class Documentation : public QWidget
+class Documentation : public QDialog
 {
     Q_OBJECT
 
