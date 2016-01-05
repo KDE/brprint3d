@@ -17,10 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Aviso Legal</string>
-  </property>
-  <property name="locale">
-   <locale language="Portuguese" country="Brazil"/>
+   <string>Legal Warning</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -50,7 +47,7 @@
   </widget>
  </widget>
  <resources>
-  <include location="images.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -11,10 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ATENÇÃO</string>
-  </property>
-  <property name="locale">
-   <locale language="Portuguese" country="Brazil"/>
+   <string>ATENTION</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -103,7 +100,7 @@
  </widget>
  <resources>
   <include location="../resources.qrc"/>
-  <include location="images.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -11,10 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Ajuda</string>
-  </property>
-  <property name="locale">
-   <locale language="Portuguese" country="Brazil"/>
+   <string>Help</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
