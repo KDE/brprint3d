@@ -65,6 +65,9 @@ void BrPrint3D::init()
     ui->_PrinterSettings->hide();
     ui->_PrinterSettings->init();
     ui->_ManualControl->init();
+    QList<int> sizeList;
+    sizeList << 360 << 400 <<440;
+    ui->splitter->setSizes(sizeList);
     setEnabled(false);
 }
 
@@ -130,7 +133,9 @@ void BrPrint3D::hidePrinterSettings()
 {
     if(ui->bt_hide->isChecked()) {
         ui->_PrinterSettings->show();
+        ui->_PrinterSettings->setFixedWidth(360);
         ui->bt_hide->setText(tr("Settings - Hide"));
+        ui->splitter->adjustSize();
     } else {    ui->_PrinterSettings->hide();
         ui->bt_hide->setText(tr("Settings - Show"));
     }
