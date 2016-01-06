@@ -21,7 +21,7 @@
 
  ======================================================================*/
 
-#include "brprint3d.h"
+#include "MainWindow.h"
 #include <QApplication>
 #include <QTranslator>
 #include <QSettings>

@@ -21,8 +21,8 @@
 
  ======================================================================*/
 
-#include "brprint3d.h"
-#include "ui_Pandora.h"
+#include "MainWindow.h"
+#include "ui_MainWindow.h"
 
 BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::BrPrint3D)
