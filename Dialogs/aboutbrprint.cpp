@@ -23,8 +23,6 @@
 
 #include "aboutbrprint.h"
 #include "ui_aboutbrprint.h"
-#include "brprint3d.h"
-#include "QCloseEvent"
 
 aboutBrPrint::aboutBrPrint(QWidget *parent) :
     QDialog(parent),
