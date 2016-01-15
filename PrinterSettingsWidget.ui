@@ -43,7 +43,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="Connection_Config">
     <attribute name="title">
@@ -269,7 +269,7 @@
     <attribute name="title">
      <string>Printer Specs</string>
     </attribute>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>11</x>
@@ -300,6 +300,9 @@
           <height>25</height>
          </size>
         </property>
+        <property name="maximum">
+         <number>200</number>
+        </property>
        </widget>
       </item>
       <item row="1" column="0">
@@ -322,6 +325,9 @@
           <width>80</width>
           <height>25</height>
          </size>
+        </property>
+        <property name="maximum">
+         <number>200</number>
         </property>
        </widget>
       </item>
@@ -346,6 +352,9 @@
           <height>25</height>
          </size>
         </property>
+        <property name="maximum">
+         <number>200</number>
+        </property>
        </widget>
       </item>
       <item row="3" column="0">
@@ -368,6 +377,9 @@
           <width>80</width>
           <height>25</height>
          </size>
+        </property>
+        <property name="maximum">
+         <number>200</number>
         </property>
        </widget>
       </item>
@@ -392,6 +404,9 @@
           <height>25</height>
          </size>
         </property>
+        <property name="maximum">
+         <number>250</number>
+        </property>
        </widget>
       </item>
       <item row="5" column="0">
@@ -414,6 +429,9 @@
           <width>80</width>
           <height>25</height>
          </size>
+        </property>
+        <property name="maximum">
+         <number>130</number>
         </property>
        </widget>
       </item>
@@ -438,6 +456,9 @@
           <height>25</height>
          </size>
         </property>
+        <property name="maximum">
+         <number>100000</number>
+        </property>
        </widget>
       </item>
       <item row="7" column="0">
@@ -461,6 +482,9 @@
           <height>25</height>
          </size>
         </property>
+        <property name="maximum">
+         <number>100000</number>
+        </property>
        </widget>
       </item>
       <item row="8" column="0">
@@ -483,6 +507,9 @@
           <width>80</width>
           <height>25</height>
          </size>
+        </property>
+        <property name="maximum">
+         <number>100000</number>
         </property>
        </widget>
       </item>
@@ -575,13 +602,25 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QSpinBox" name="tb_BedMaxTemp"/>
+       <widget class="QSpinBox" name="tb_BedMaxTemp">
+        <property name="maximum">
+         <number>130</number>
+        </property>
+       </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QSpinBox" name="tb_ExtruderMaxTemp"/>
+       <widget class="QSpinBox" name="tb_ExtruderMaxTemp">
+        <property name="maximum">
+         <number>250</number>
+        </property>
+       </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QSpinBox" name="tb_ExtruderMaxVol"/>
+       <widget class="QSpinBox" name="tb_ExtruderMaxVol">
+        <property name="maximum">
+         <number>300</number>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -676,8 +715,6 @@
   </widget>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
-  <include location="resources.qrc"/>
   <include location="resources.qrc"/>
  </resources>
  <connections/>

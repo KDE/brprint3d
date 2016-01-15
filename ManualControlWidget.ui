@@ -877,7 +877,7 @@ QSlider::handle:horizontal {
             </rect>
            </property>
            <property name="maximum">
-            <number>115</number>
+            <number>130</number>
            </property>
           </widget>
          </widget>
@@ -1187,8 +1187,6 @@ QSlider::handle:horizontal {
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="resources.qrc"/>
-  <include location="resources.qrc"/>
   <include location="resources.qrc"/>
  </resources>
  <connections/>
