@@ -185,6 +185,11 @@ PrinterSettings PrinterSettingsWidget::getCurrentSettings()
 
 }
 
+int PrinterSettingsWidget::getPortStatus()
+{
+       return ui->cb_ConnectionPort->count();
+}
+
 void PrinterSettingsWidget::disableExtrudersQntCb(bool d)
 {
     ui->cb_ExtruderQnt->setDisabled(d);

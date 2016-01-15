@@ -99,14 +99,14 @@ void BrPrint3D::openFile()
 }
 
 void BrPrint3D::connectPrinter(bool checked)
-{
-    if (checked){
+{   int portStatus =ui->_PrinterSettings->getPortStatus();
+    if (checked && portStatus!=0){
         psettings = ui->_PrinterSettings->getCurrentSettings();
         ui->_ManualControl->constructPrinterObject(psettings);
         ui->bt_play->setEnabled(false);
         ui->bt_pause->setEnabled(false);
         ui->bt_stop->setEnabled(false);
-    } else {
+    } else if(!checked && portStatus!=0) {
         ui->_ManualControl->destructPrinterObject();
     }
 }

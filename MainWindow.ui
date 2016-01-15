@@ -78,6 +78,9 @@
          <iconset resource="resources.qrc">
           <normaloff>:/Icons/Icons/connect.png</normaloff>:/Icons/Icons/connect.png</iconset>
         </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
@@ -137,6 +140,9 @@
          <iconset resource="resources.qrc">
           <normaloff>:/Icons/Icons/play.png</normaloff>:/Icons/Icons/play.png</iconset>
         </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
@@ -147,6 +153,9 @@
         <property name="icon">
          <iconset resource="resources.qrc">
           <normaloff>:/Icons/Icons/pause.png</normaloff>:/Icons/Icons/pause.png</iconset>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
         </property>
        </widget>
       </item>

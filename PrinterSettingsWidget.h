@@ -48,6 +48,7 @@ public:
     ~PrinterSettingsWidget();
     void init();
     PrinterSettings getCurrentSettings();
+    int getPortStatus();
 
 
 
