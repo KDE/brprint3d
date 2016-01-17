@@ -107,53 +107,56 @@ void vtkWidget::renderSTL(const QString& pathStl)
 }
 
 void vtkWidget::renderGcode(const QString& text)
-{
-    int nrLayers = 0;
+{   //Regular Expression to 3DPrints
+    //This expression is to find lines of gcode like this:  G0 X98.362 Y96.798 Z25.100
+    QRegularExpression _cartesianaZ("G(?<command>\\d+) X(?<axisX>\\d+\\.\\d+) Y(?<axisY>\\d+\\.\\d+) Z(?<axisZ>\\d+.\\d+)");
+    //This expression is to find lines of gcode like this:  G1 X-51.916 Y6.390 E0.7226
+    //Works for cartesian and delta printers
+    QRegularExpression _cartesianaE("G(?<command>\\d+) X(?<axisX>\\d+\\.\\d+) Y(?<axisY>\\d+\\.\\d+) E(\\d+.\\d+)");
+    //This expression is to find lines of gcode like this:  G1 Z1.100 F12000
+    //Only works for delta printers
+    QRegularExpression _deltaZ("G(?<command>\\d+) Z(?<axisZ>\\d+\\.\\d+) F(\\d+\\.\\d+)");
+
+    QRegularExpressionMatch _match;
+    int nrLayers = 0,printCount = 0;
+    double x = 0, y = 0, z = 0, command = 0;
     auto printPoints = vtkSmartPointer<vtkPoints>::New();
-    auto carPoints = vtkSmartPointer<vtkPoints>::New();
-    double x = 0, y = 0, z = 0;
-    int printCount = 0, carCount = 0;
+
     QStringList list = text.split('\n', QString::SkipEmptyParts);
 
     cleanup();
     for(const auto string : list) {
         if (string.startsWith(';'))
             continue;
-        QStringList aux = string.split(' ');
-        int end = aux.size();
-        if(end >= 4 && end  <=5){
-            for (int j = 0;j < end;j++)
-            {	//Read X and Y values
 
-                if(aux.at(j+1).startsWith('X') && aux.at(j+2).startsWith('Y')){
-                     x = aux.at(j+1).section('X',1).toDouble();
-                     y = aux.at(j+2).section('Y',1).toDouble();
-                }
-                //Read Z value
-                if (aux.at(end-1).startsWith('Z')){
-                    z = aux.at(end-1).section('Z',1).toDouble();
-                    nrLayers++;
-                }
-                //If is a car move point add to carPoints
-                if(aux.at(0).startsWith("G0") && x!=0 && y!=0 && z!=0){
-                    carPoints->InsertPoint(carCount,x,y,z);
-                    carCount++;
-                    x=y=0;
+        _match = _cartesianaE.match(string);
+        if(_match.hasMatch()){
 
-                   break;
-                }
-                //If is a print point add to printPoints
-                else if(aux.at(0).startsWith("G1") && x!=0 && y!=0 && z!=0)
-                {
-                    printPoints->InsertPoint(printCount,x,y,z);
-                    printCount++;
-                    x=y=0;
-                    break;
-                }
+            command = _match.captured("command").toInt();
+            x = _match.captured("axisX").toDouble();
+            y = _match.captured("axisY").toDouble();
+
+        }else{
+            _match = _cartesianaZ.match(string);
+            if(_match.hasMatch()){
+                command = _match.captured("command").toInt();
+                x = _match.captured("axisX").toDouble();
+                y = _match.captured("axisY").toDouble();
+                z = _match.captured("axisZ").toDouble();
+
+            }else{
+                 _match = _deltaZ.match(string);
+                 if(_match.hasMatch()){
+                    z = _match.captured("axisZ").toDouble();
+                 }
             }
         }
+        if(x!=0 || y!=0 || z!=0){
+            printPoints->InsertPoint(printCount,x,y,z);
+            printCount++;
+        }
 
-    }//End the read of gcode
+        }//End For
 
     emit layersCount(nrLayers-1);
     //Set variables to printPoints
@@ -169,19 +172,6 @@ void vtkWidget::renderGcode(const QString& text)
     polyData->SetPoints(printPoints);
     polyData->SetLines(cells);
 
-    //Set variables to carPoints
-    auto carPolyLine = vtkSmartPointer<vtkPolyLine>::New();
-    carPolyLine->GetPointIds()->SetNumberOfIds(carCount);
-    for(unsigned int i = 0; i < carCount; i++)
-        carPolyLine->GetPointIds()->SetId(i,i);
-
-    auto carCells = vtkSmartPointer<vtkCellArray>::New();
-    auto carPolyData = vtkSmartPointer<vtkPolyData>::New();
-
-    carCells->InsertNextCell(carPolyLine);
-    carPolyData->SetPoints(carPoints);
-    carPolyData->SetLines(carCells);
-
 
     // Setup actor and mapper to printGCode
     mapperGcode->SetInputData(polyData);
@@ -189,14 +179,8 @@ void vtkWidget::renderGcode(const QString& text)
     actorGcode->GetProperty()->SetLineWidth(4);
     actorGcode->GetProperty()->SetColor(0,0.5,1);
     actorGcode->GetProperty()->SetOpacity(0.4);
-    //Setup actor and mapper to carGcode
-    mapperGcodeCar->SetInputData(carPolyData);
-    actorGcodeCar->SetMapper(mapperGcodeCar);
-    actorGcodeCar->GetProperty()->SetLineWidth(3);
-    actorGcodeCar->GetProperty()->SetColor(0,1,0);
 
     //Setup scene
-    renderer->AddActor(actorGcodeCar);
     renderer->AddActor(actorGcode);
 
     renderer->ResetCamera();

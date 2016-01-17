@@ -37,7 +37,8 @@
 #include <vtkActor.h>
 #include <vtkRenderer.h>
 #include <vtkCubeSource.h>
-#include <QDebug>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 class vtkWidget : public QVTKWidget
 {
