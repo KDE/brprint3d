@@ -65,6 +65,9 @@ set(BRPrintInterface_SRCS
         ExtruderControlWidget.cpp
         BigButton.cpp
         FilCount.cpp
+	widgets/colorslider.cpp
+	widgets/valueitem.cpp
+	widgets/pixmapitem.cpp
 	${BRPRintInterface_UI_SRCS}
 )
 

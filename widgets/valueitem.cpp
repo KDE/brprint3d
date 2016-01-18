@@ -5,7 +5,7 @@ valueItem::valueItem()
 {
     setTextInteractionFlags(Qt::TextEditable);
     setFlag(QGraphicsItem::ItemIsFocusable);
-    setPlainText("0  ");
+    //setPlainText("0  ");
 }
 
 void valueItem::keyPressEvent(QKeyEvent *event)
