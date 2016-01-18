@@ -60,6 +60,7 @@ private:
     void cleanup();
     void drawFloor();
     double areaX, areaY, areaZ;
+    bool isDelta;
     //Vtk Variables
     vtkSmartPointer<vtkRenderer> renderer;
     vtkSmartPointer<vtkPolyDataMapper> mapperStl;

@@ -109,13 +109,13 @@ void vtkWidget::renderSTL(const QString& pathStl)
 void vtkWidget::renderGcode(const QString& text)
 {   //Regular Expression to 3DPrints
     //This expression is to find lines of gcode like this:  G0 X98.362 Y96.798 Z25.100
-    QRegularExpression _cartesianaZ("G(?<command>\\d+) X(?<axisX>\\d+\\.\\d+) Y(?<axisY>\\d+\\.\\d+) Z(?<axisZ>\\d+.\\d+)");
+    QRegularExpression _cartesianaZ("G(?<command>\\d+) X(?<axisX>-?\\d+\\.\\d+) Y(?<axisY>-?\\d+\\.\\d+) Z(?<axisZ>\\d+.\\d+)");
     //This expression is to find lines of gcode like this:  G1 X-51.916 Y6.390 E0.7226
     //Works for cartesian and delta printers
-    QRegularExpression _cartesianaE("G(?<command>\\d+) X(?<axisX>\\d+\\.\\d+) Y(?<axisY>\\d+\\.\\d+) E(\\d+.\\d+)");
+    QRegularExpression _cartesianaE("G(?<command>\\d+) X(?<axisX>-?\\d+\\.\\d+) Y(?<axisY>-?\\d+\\.\\d+) (E(\\d+.\\d+))|(F(\\d+)) ");
     //This expression is to find lines of gcode like this:  G1 Z1.100 F12000
     //Only works for delta printers
-    QRegularExpression _deltaZ("G(?<command>\\d+) Z(?<axisZ>\\d+\\.\\d+) F(\\d+\\.\\d+)");
+    QRegularExpression _deltaZ("G(?<command>\\d+) Z(?<axisZ>\\d+\\.\\d+) F(\\d+)");
 
     QRegularExpressionMatch _match;
     int nrLayers = 0,printCount = 0;
@@ -148,12 +148,19 @@ void vtkWidget::renderGcode(const QString& text)
                  _match = _deltaZ.match(string);
                  if(_match.hasMatch()){
                     z = _match.captured("axisZ").toDouble();
+                    nrLayers++;
+                    isDelta = true;
                  }
             }
         }
         if(x!=0 || y!=0 || z!=0){
-            printPoints->InsertPoint(printCount,x,y,z);
-            printCount++;
+            if (isDelta){
+                printPoints->InsertPoint(printCount,x + (areaX / 2) ,y + (areaY / 2) ,z);
+                printCount++;
+            }else{
+                printPoints->InsertPoint(printCount,x,y,z);
+                printCount++;
+            }
         }
 
         }//End For
@@ -172,7 +179,6 @@ void vtkWidget::renderGcode(const QString& text)
     polyData->SetPoints(printPoints);
     polyData->SetLines(cells);
 
-
     // Setup actor and mapper to printGCode
     mapperGcode->SetInputData(polyData);
     actorGcode->SetMapper(mapperGcode);
@@ -182,7 +188,6 @@ void vtkWidget::renderGcode(const QString& text)
 
     //Setup scene
     renderer->AddActor(actorGcode);
-
     renderer->ResetCamera();
     GetRenderWindow()->Render();
 
