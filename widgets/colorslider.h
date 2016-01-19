@@ -44,9 +44,9 @@ public:
     void setCurrentValue(int curr);
     void setGradient(const QGradientStops &gradient);
     void setPixmap(QPixmap pixmap,bool isButton);
-    /*void mouseMoveEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);*/
+    void mouseReleaseEvent(QMouseEvent *event);
 
     QGradientStops gradient() const;
     int min() const;

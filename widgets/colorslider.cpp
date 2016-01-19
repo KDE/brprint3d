@@ -91,7 +91,7 @@ void ColorSlider::setPixmap(QPixmap pixmap, bool isButton)
     _pixmap->setIsButton(isButton);
 }
 
-/*void ColorSlider::mouseMoveEvent(QMouseEvent *event)
+void ColorSlider::mouseMoveEvent(QMouseEvent *event)
 {   QPointF mapScene = mapToScene(event->pos());
     QPointF mapItem = _slider->mapFromScene(mapScene);
     int currPos = mapItem.x();
@@ -119,7 +119,7 @@ void ColorSlider::mouseReleaseEvent(QMouseEvent *event)
         handlerMove = false;
     }
 }
-*/
+
 int ColorSlider::min() const
 {
     return m_min;
