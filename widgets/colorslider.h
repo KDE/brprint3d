@@ -67,6 +67,7 @@ private:
     void setupHandler();
     void setupSlider();
     void setupInput();
+    void setValue(int value);
     bool handlerMove;
     int m_min;
     int m_max;

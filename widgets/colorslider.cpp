@@ -31,6 +31,7 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
     scene()->addItem(_handler);
     scene()->addItem(_background);
     scene()->addItem(_input);
+    connect(_input,&valueItem::_value,this,&ColorSlider::setValue);
 }
 
 void ColorSlider::setMin(int min)
@@ -171,6 +172,20 @@ void ColorSlider::setupInput()
 {
     _input->setX(sceneRect().width() - _input->boundingRect().width());
     _input->setY((sceneRect().height() / 2) - (_input->boundingRect().height() / 2));
+}
+
+void ColorSlider::setValue(int value)
+{
+    int _max = max(), _min = min();
+    int delta = _max - _min;
+    float _percent = ((value - _min) / delta)*100;
+    float _currX = _percent * (_slider->pos().x() + _slider->boundingRect().width());
+
+    /*QPointF mapScene = mapToScene(currValue,0);
+    QPointF mapItem = _slider->mapFromScene(mapScene);
+    int currX = mapItem.x();*/
+    _handler->setX(_currX);
+    _currText->setText(QString::number(_currX));
 }
 
 void ColorSlider::resizeEvent(QResizeEvent* event)
