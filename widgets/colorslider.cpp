@@ -109,20 +109,22 @@ void ColorSlider::mouseMoveEvent(QMouseEvent *event)
 {
 	if (!_handlerMovementEnabled)
 		return;
-	QPointF mapScene = mapToScene(event->pos());
-    QPointF mapItem = _slider->mapFromScene(mapScene);
-    int currPos = mapItem.x();
-    int _max = _slider->pos().x()+_slider->boundingRect().width(), _min = _slider->pos().x();
-    int delta = _max - _min;
+
     if(handlerMove && (event->buttons() & Qt::LeftButton)){
-        if( (currPos < (_slider->pos().x() + _slider->boundingRect().width())) && currPos > (_slider->pos().x())){
-            _handler->setX(currPos);
-            int currValue = ((float)(currPos - _min)/delta)*100;
-            _currText->setText(QString::number(currValue)) ;
+		QPointF event_scene_pos = mapToScene(event->pos());
+		QPointF event_item_pos = _slider->mapFromScene(mapToScene(event->pos()));
+
+		int currPos = event_scene_pos.x();
+		int width = _slider->boundingRect().width();
+
+		if(_slider->contains(QPointF(event_item_pos.x(), 1))){
+			_handler->setX(event_scene_pos.x());
+
+			//_currText->setText(QString::number(currValue)) ;
 			_currText->setX(_handler->pos().x() - _currText->boundingRect().width() / 2);
-            setCurrentValue(currPos);
-        }
-    }
+			setCurrentValue(currPos);
+		}
+	}
 }
 
 void ColorSlider::mousePressEvent(QMouseEvent *event)
