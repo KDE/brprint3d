@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     colorSlider.setMin(10);
     colorSlider.setMax(100);
     colorSlider.setGradient(gradient);
-    colorSlider.setPixmap(QPixmap(":/Icons/Icons/bed.png"));
+    colorSlider.setPixmap(QPixmap(":/Icons/Icons/bed.png"),true);
     colorSlider.show();
     return app.exec();
 }
