@@ -176,16 +176,13 @@ void ColorSlider::setupInput()
 
 void ColorSlider::setValue(int value)
 {
-    int _max = max(), _min = min();
-    int delta = _max - _min;
-    float _percent = ((value - _min) / delta)*100;
-    float _currX = _percent * (_slider->pos().x() + _slider->boundingRect().width());
+	int delta = max() - min();
+	double percent = (((value - min()) * 100) / delta) / 100.0; // get the percentage in fraction mode( 50% = 0.5, 100% = 1.0)
+	double currX = _slider->boundingRect().width() * percent + _slider->pos().x();
 
-    /*QPointF mapScene = mapToScene(currValue,0);
-    QPointF mapItem = _slider->mapFromScene(mapScene);
-    int currX = mapItem.x();*/
-    _handler->setX(_currX);
-    _currText->setText(QString::number(_currX));
+	_handler->setX(currX);
+	_currText->setText(QString::number(value));
+	_currText->setX(_handler->pos().x() - _currText->boundingRect().width() / 2);
 }
 
 void ColorSlider::resizeEvent(QResizeEvent* event)
