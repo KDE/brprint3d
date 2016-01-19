@@ -51,10 +51,10 @@ public:
     int currentValue() const;
 
 protected:
-    virtual void resizeEvent(QResizeEvent* event);
-    void mouseMoveEvent(QMouseEvent *event);
-    void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);
+    void resizeEvent(QResizeEvent* event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 signals:
     void currentValueChanged(int currValue);
