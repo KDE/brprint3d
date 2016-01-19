@@ -112,17 +112,17 @@ void ColorSlider::mouseMoveEvent(QMouseEvent *event)
 
     if(handlerMove && (event->buttons() & Qt::LeftButton)){
 		QPointF event_scene_pos = mapToScene(event->pos());
-		QPointF event_item_pos = _slider->mapFromScene(mapToScene(event->pos()));
+		QPointF event_item_pos = _slider->mapFromScene(event_scene_pos);
 
-		int currPos = event_scene_pos.x();
 		int width = _slider->boundingRect().width();
 
 		if(_slider->contains(QPointF(event_item_pos.x(), 1))){
 			_handler->setX(event_scene_pos.x());
-
-			//_currText->setText(QString::number(currValue)) ;
+			double valuePercent = (100 * event_item_pos.x() / _slider->boundingRect().width()) / 100;
+			int value = valuePercent * (max() - min()) + min();
+			_currText->setText(QString::number(value)) ;
 			_currText->setX(_handler->pos().x() - _currText->boundingRect().width() / 2);
-			setCurrentValue(currPos);
+			setCurrentValue(value);
 		}
 	}
 }
