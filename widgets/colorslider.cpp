@@ -15,6 +15,7 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
 , _pixmap(new pixmapItem())
 , _input(new valueItem())
 , _background(new QGraphicsRectItem())
+, _handlerMovementEnabled(true)
 {
     setScene(new QGraphicsScene());
     setupViewFlags();
@@ -32,6 +33,19 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
     scene()->addItem(_background);
     scene()->addItem(_input);
     connect(_input,&valueItem::_value,this,&ColorSlider::setValue);
+}
+
+bool ColorSlider::handlerMovementEnabled() const
+{
+	return _handlerMovementEnabled;
+}
+
+void ColorSlider::setHandlerMovementEnabled(bool enabled)
+{
+	if (_handlerMovementEnabled == enabled)
+		return;
+	_handlerMovementEnabled = enabled;
+	emit handlerMovementEnabledChanged(enabled);
 }
 
 void ColorSlider::setMin(int min)
@@ -92,7 +106,10 @@ void ColorSlider::setPixmap(QPixmap pixmap, bool isButton)
 }
 
 void ColorSlider::mouseMoveEvent(QMouseEvent *event)
-{   QPointF mapScene = mapToScene(event->pos());
+{
+	if (!_handlerMovementEnabled)
+		return;
+	QPointF mapScene = mapToScene(event->pos());
     QPointF mapItem = _slider->mapFromScene(mapScene);
     int currPos = mapItem.x();
     int _max = _slider->pos().x()+_slider->boundingRect().width(), _min = _slider->pos().x();
@@ -110,11 +127,15 @@ void ColorSlider::mouseMoveEvent(QMouseEvent *event)
 
 void ColorSlider::mousePressEvent(QMouseEvent *event)
 {
-    handlerMove = true;
+	if (_handlerMovementEnabled)
+		handlerMove = true;
 }
 
 void ColorSlider::mouseReleaseEvent(QMouseEvent *event)
 {
+	if (!_handlerMovementEnabled)
+		return;
+
     if(event->button() == Qt::LeftButton && handlerMove){
         handlerMove = false;
     }

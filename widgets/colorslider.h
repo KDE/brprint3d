@@ -35,6 +35,7 @@ class ColorSlider : public QGraphicsView {
     Q_PROPERTY(int min READ min WRITE setMin NOTIFY minValueChanged);
     Q_PROPERTY(int max READ max WRITE setMax NOTIFY maxValueChanged);
     Q_PROPERTY(int currentValue READ currentValue WRITE setCurrentValue NOTIFY currentValueChanged);
+	Q_PROPERTY(int handlerMovementEnabled READ handlerMovementEnabled WRITE setHandlerMovementEnabled NOTIFY handlerMovementEnabledChanged);
     Q_PROPERTY(QGradientStops gradient READ gradient WRITE setGradient NOTIFY gradientChanged);
 
 public:
@@ -44,11 +45,13 @@ public:
     void setCurrentValue(int curr);
     void setGradient(const QGradientStops &gradient);
     void setPixmap(QPixmap pixmap,bool isButton);
+	void setHandlerMovementEnabled(bool enabled);
 
     QGradientStops gradient() const;
     int min() const;
     int max() const;
     int currentValue() const;
+	bool handlerMovementEnabled() const;
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
@@ -61,6 +64,7 @@ signals:
     void minValueChanged(int minValue);
     void maxValueChanged(int maxValue);
     void gradientChanged(QGradientStops gradient);
+	void handlerMovementEnabledChanged(bool enabled);
 
 private:
     void setupViewFlags();
@@ -82,4 +86,5 @@ private:
     pixmapItem *_pixmap;
     valueItem *_input;
     QGraphicsRectItem *_background;
+	bool _handlerMovementEnabled;
 };
