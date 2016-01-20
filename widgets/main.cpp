@@ -27,16 +27,16 @@ int main(int argc, char *argv[])
 
 	ColorSlider *colorSlider2 = new ColorSlider();
 
-    gradient << qMakePair(1,QColor(Qt::blue))
-             << qMakePair(0.5,QColor(Qt::green))
-             << qMakePair(0.25,QColor(Qt::yellow))
-             << qMakePair(0,QColor(Qt::red));
+    gradient << qMakePair(0,QColor(Qt::blue))
+             << qMakePair(0.25,QColor(Qt::green))
+             << qMakePair(0.5,QColor(Qt::yellow))
+             << qMakePair(1,QColor(Qt::red));
 
 	QLabel *l2 = new QLabel("Mouse not enabled");
     colorSlider2->setMin(10);
     colorSlider2->setMax(100);
     colorSlider2->setGradient(gradient);
-    colorSlider2->setPixmap(QPixmap(":/Icons/Icons/bed.png"),true);
+    colorSlider2->setPixmap(QPixmap(":/Icons/Icons/bed.png"),false);
 	colorSlider2->setHandlerMovementEnabled(false);
 
 	layout->addWidget(l1);
