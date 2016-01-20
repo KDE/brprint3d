@@ -103,6 +103,7 @@ void ColorSlider::setGradient(const QGradientStops& gradient)
 void ColorSlider::setPixmap(QPixmap pixmap, bool b)
 {
     _button->setIcon(QIcon(pixmap));
+    _button->setCheckable(true);
     if(!b){
         _button->setEnabled(false);
     }
@@ -234,7 +235,7 @@ void ColorSlider::resizeEvent(QResizeEvent* event)
     _minText->setX(_proxy->pos().x() + _proxy->boundingRect().width());
     _minText->setY(_proxy->pos().y() + _proxy->boundingRect().height());
     _slider->setRect(0, 0,
-    /* width  */	sceneRect().width() -  _proxy->boundingRect().width() - _input->boundingRect().width() - spacing,
+    /* width  */	sceneRect().width() -  _proxy->boundingRect().width() - _input->boundingRect().width() - (spacing*3),
     /* height */	_proxy->boundingRect().height() / 2);
 
     _slider->setX(_proxy->pos().x() + _proxy->boundingRect().width() + spacing);
@@ -249,7 +250,7 @@ void ColorSlider::resizeEvent(QResizeEvent* event)
     _currText->setX(_handler->pos().x() - _currText->boundingRect().width() / 2);
     _currText->setY(_handler->pos().y() - _handler->boundingRect().height() - spacing);
 
-    _input->setX(sceneRect().width() - _input->boundingRect().width() + spacing);
+    _input->setX(sceneRect().width() - _input->boundingRect().width() - (spacing/2));
     _input->setY((sceneRect().height() / 2) - (_input->boundingRect().height() / 2) - spacing);
 
     _background->setRect(_input->boundingRect());
