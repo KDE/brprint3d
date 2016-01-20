@@ -4,7 +4,8 @@
 #include <QGraphicsTextItem>
 #include <QGradient>
 #include <QResizeEvent>
-#include <QDebug>
+#include <QPushButton>
+#include <QGraphicsProxyWidget>
 
 ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
 , _minText(new QGraphicsSimpleTextItem())
@@ -12,7 +13,7 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
 , _currText(new QGraphicsSimpleTextItem())
 , _handler(new QGraphicsPolygonItem())
 , _slider(new QGraphicsRectItem())
-, _pixmap(new pixmapItem())
+, _pixmap(new QGraphicsPixmapItem())
 , _input(new valueItem())
 , _background(new QGraphicsRectItem())
 , _handlerMovementEnabled(true)
@@ -24,7 +25,7 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
     setupInput();
     /* create a somewhat retangular shape for the scene */
     setSceneRect(0,0,100,25);
-    scene()->addItem(_pixmap);
+
     scene()->addItem(_minText);
     scene()->addItem(_slider);
     scene()->addItem(_maxText);
@@ -99,10 +100,19 @@ void ColorSlider::setGradient(const QGradientStops& gradient)
     emit gradientChanged(gradient);
 }
 
-void ColorSlider::setPixmap(QPixmap pixmap, bool isButton)
-{
-    _pixmap->setPixmap(pixmap);
-    _pixmap->setIsButton(isButton);
+void ColorSlider::setPixmap(QPixmap pixmap, bool b)
+{   _isButton = b;
+    if(_isButton){
+        _button = new QPushButton();
+        _button->setIcon(QIcon(pixmap));
+        _proxy = scene()->addWidget(_button);
+
+    }else{
+        _pixmap = new QGraphicsPixmapItem();
+        _pixmap->setPixmap(pixmap);
+        scene()->addItem(_pixmap);
+    }
+
 }
 
 void ColorSlider::mouseMoveEvent(QMouseEvent *event)
@@ -224,20 +234,34 @@ void ColorSlider::resizeEvent(QResizeEvent* event)
 
 	QGraphicsView::resizeEvent(event);
     setSceneRect(0, 0, event->size().width(), event->size().height());
+    if(_isButton){
+        _proxy->setX(0);
+        _proxy->setY((sceneRect().height() / 2) - (_proxy->boundingRect().height() / 2));
 
-    _pixmap->setX(0);
-    _pixmap->setY((sceneRect().height() / 2) - (_pixmap->boundingRect().height() / 2));
+        _minText->setX(_proxy->pos().x() + _proxy->boundingRect().width());
+        _minText->setY(_proxy->pos().y() + _proxy->boundingRect().height());
+        QSize size = _button->iconSize();
+        _slider->setRect(0, 0,
+        /* width  */	sceneRect().width() -  _proxy->boundingRect().width() - _input->boundingRect().width() - spacing,
+        /* height */	size.height());
 
-    _minText->setX(_pixmap->pos().x() + _pixmap->boundingRect().width());
-    _minText->setY(_pixmap->pos().y() + _pixmap->boundingRect().height() + 2);
+        _slider->setX(_proxy->pos().x() + _proxy->boundingRect().width() + spacing);
+        _slider->setY(_proxy->pos().y() + spacing); //Need discover how to set this really on the center
 
-	_slider->setRect(0, 0,
-    /* width  */	sceneRect().width() -  _pixmap->boundingRect().width() - _input->boundingRect().width() - spacing,
-	/* height */	_pixmap->boundingRect().height());
+    }else{
+        _pixmap->setX(0);
+        _pixmap->setY((sceneRect().height() / 2) - (_pixmap->boundingRect().height() / 2));
 
-    _slider->setX(_pixmap->pos().x() + _pixmap->boundingRect().width() + spacing);
-    _slider->setY(_pixmap->pos().y());
+        _minText->setX(_pixmap->pos().x() + _pixmap->boundingRect().width());
+        _minText->setY(_pixmap->pos().y() + _pixmap->boundingRect().height());
 
+        _slider->setRect(0, 0,
+        /* width  */	sceneRect().width() -  _pixmap->boundingRect().width() - _input->boundingRect().width() - spacing,
+        /* height */	_pixmap->boundingRect().height());
+
+        _slider->setX(_pixmap->pos().x() + _pixmap->boundingRect().width() + spacing);
+        _slider->setY(_pixmap->pos().y());
+    }
     _maxText->setX(_slider->pos().x() + _slider->boundingRect().width() - _maxText->boundingRect().width());
     _maxText->setY(_minText->pos().y());
 

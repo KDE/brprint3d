@@ -24,7 +24,6 @@
 #include <QGraphicsView>
 #include <QGradient>
 #include "valueitem.h"
-#include "pixmapitem.h"
 
 class QGraphicsSimpleTextItem;
 
@@ -44,7 +43,7 @@ public:
     void setMax(int max);
     void setCurrentValue(int curr);
     void setGradient(const QGradientStops &gradient);
-    void setPixmap(QPixmap pixmap,bool isButton);
+    void setPixmap(QPixmap pixmap,bool b);
 	void setHandlerMovementEnabled(bool enabled);
 
     QGradientStops gradient() const;
@@ -83,8 +82,10 @@ private:
     QGraphicsSimpleTextItem *_currText;
     QGraphicsPolygonItem *_handler;
     QGraphicsRectItem *_slider;
-    pixmapItem *_pixmap;
+    QGraphicsPixmapItem *_pixmap;
     valueItem *_input;
     QGraphicsRectItem *_background;
-	bool _handlerMovementEnabled;
+    QGraphicsProxyWidget *_proxy;
+    QPushButton *_button;
+    bool _handlerMovementEnabled, _isButton;
 };
