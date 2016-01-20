@@ -4,7 +4,6 @@
 #include <QGraphicsTextItem>
 #include <QGradient>
 #include <QResizeEvent>
-#include <QPushButton>
 #include <QGraphicsProxyWidget>
 
 ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
@@ -17,6 +16,7 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
 , _input(new valueItem())
 , _background(new QGraphicsRectItem())
 , _handlerMovementEnabled(true)
+, _button(new QToolButton())
 {
     setScene(new QGraphicsScene());
     setupViewFlags();
@@ -25,7 +25,7 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
     setupInput();
     /* create a somewhat retangular shape for the scene */
     setSceneRect(0,0,100,25);
-
+    _proxy = scene()->addWidget(_button);
     scene()->addItem(_minText);
     scene()->addItem(_slider);
     scene()->addItem(_maxText);
@@ -101,18 +101,11 @@ void ColorSlider::setGradient(const QGradientStops& gradient)
 }
 
 void ColorSlider::setPixmap(QPixmap pixmap, bool b)
-{   _isButton = b;
-    if(_isButton){
-        _button = new QPushButton();
-        _button->setIcon(QIcon(pixmap));
-        _proxy = scene()->addWidget(_button);
-
-    }else{
-        _pixmap = new QGraphicsPixmapItem();
-        _pixmap->setPixmap(pixmap);
-        scene()->addItem(_pixmap);
+{
+    _button->setIcon(QIcon(pixmap));
+    if(!b){
+        _button->setEnabled(false);
     }
-
 }
 
 void ColorSlider::mouseMoveEvent(QMouseEvent *event)
@@ -234,34 +227,19 @@ void ColorSlider::resizeEvent(QResizeEvent* event)
 
 	QGraphicsView::resizeEvent(event);
     setSceneRect(0, 0, event->size().width(), event->size().height());
-    if(_isButton){
-        _proxy->setX(0);
-        _proxy->setY((sceneRect().height() / 2) - (_proxy->boundingRect().height() / 2));
 
-        _minText->setX(_proxy->pos().x() + _proxy->boundingRect().width());
-        _minText->setY(_proxy->pos().y() + _proxy->boundingRect().height());
-        QSize size = _button->iconSize();
-        _slider->setRect(0, 0,
-        /* width  */	sceneRect().width() -  _proxy->boundingRect().width() - _input->boundingRect().width() - spacing,
-        /* height */	size.height());
+    _proxy->setX(0);
+    _proxy->setY((sceneRect().height() / 2) - (_proxy->boundingRect().height() / 2) - spacing);
 
-        _slider->setX(_proxy->pos().x() + _proxy->boundingRect().width() + spacing);
-        _slider->setY(_proxy->pos().y() + spacing); //Need discover how to set this really on the center
+    _minText->setX(_proxy->pos().x() + _proxy->boundingRect().width());
+    _minText->setY(_proxy->pos().y() + _proxy->boundingRect().height());
+    _slider->setRect(0, 0,
+    /* width  */	sceneRect().width() -  _proxy->boundingRect().width() - _input->boundingRect().width() - spacing,
+    /* height */	_proxy->boundingRect().height() / 2);
 
-    }else{
-        _pixmap->setX(0);
-        _pixmap->setY((sceneRect().height() / 2) - (_pixmap->boundingRect().height() / 2));
+    _slider->setX(_proxy->pos().x() + _proxy->boundingRect().width() + spacing);
+    _slider->setY((sceneRect().height() / 2) - (_proxy->boundingRect().height() / 2) + spacing);
 
-        _minText->setX(_pixmap->pos().x() + _pixmap->boundingRect().width());
-        _minText->setY(_pixmap->pos().y() + _pixmap->boundingRect().height());
-
-        _slider->setRect(0, 0,
-        /* width  */	sceneRect().width() -  _pixmap->boundingRect().width() - _input->boundingRect().width() - spacing,
-        /* height */	_pixmap->boundingRect().height());
-
-        _slider->setX(_pixmap->pos().x() + _pixmap->boundingRect().width() + spacing);
-        _slider->setY(_pixmap->pos().y());
-    }
     _maxText->setX(_slider->pos().x() + _slider->boundingRect().width() - _maxText->boundingRect().width());
     _maxText->setY(_minText->pos().y());
 
@@ -269,10 +247,10 @@ void ColorSlider::resizeEvent(QResizeEvent* event)
     _handler->setY(_slider->pos().y() - _handler->boundingRect().height());
 
     _currText->setX(_handler->pos().x() - _currText->boundingRect().width() / 2);
-    _currText->setY(_handler->pos().y() - _handler->boundingRect().height() - (spacing *2));
+    _currText->setY(_handler->pos().y() - _handler->boundingRect().height() - spacing);
 
-    _input->setX(sceneRect().width() - _input->boundingRect().width());
-    _input->setY((sceneRect().height() / 2) - (_input->boundingRect().height() / 2));
+    _input->setX(sceneRect().width() - _input->boundingRect().width() + spacing);
+    _input->setY((sceneRect().height() / 2) - (_input->boundingRect().height() / 2) - spacing);
 
     _background->setRect(_input->boundingRect());
     _background->setPen(QPen(Qt::black));

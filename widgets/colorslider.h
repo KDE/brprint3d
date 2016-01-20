@@ -23,6 +23,7 @@
 
 #include <QGraphicsView>
 #include <QGradient>
+#include <QToolButton>
 #include "valueitem.h"
 
 class QGraphicsSimpleTextItem;
@@ -86,6 +87,6 @@ private:
     valueItem *_input;
     QGraphicsRectItem *_background;
     QGraphicsProxyWidget *_proxy;
-    QPushButton *_button;
+    QToolButton *_button;
     bool _handlerMovementEnabled, _isButton;
 };
