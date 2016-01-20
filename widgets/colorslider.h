@@ -24,6 +24,7 @@
 #include <QGraphicsView>
 #include <QGradient>
 #include <QToolButton>
+#include <QSpinBox>
 #include "valueitem.h"
 
 class QGraphicsSimpleTextItem;
@@ -70,8 +71,7 @@ private:
     void setupViewFlags();
     void setupHandler();
     void setupSlider();
-    void setupInput();
-    void setValue(int value);
+    void setValue();
     bool handlerMove;
     int m_min;
     int m_max;
@@ -83,10 +83,9 @@ private:
     QGraphicsSimpleTextItem *_currText;
     QGraphicsPolygonItem *_handler;
     QGraphicsRectItem *_slider;
-    QGraphicsPixmapItem *_pixmap;
-    valueItem *_input;
-    QGraphicsRectItem *_background;
+    QSpinBox *_input;
     QGraphicsProxyWidget *_proxy;
+    QGraphicsProxyWidget *_proxyInput;
     QToolButton *_button;
     bool _handlerMovementEnabled, _isButton;
 };

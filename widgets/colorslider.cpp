@@ -12,9 +12,7 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
 , _currText(new QGraphicsSimpleTextItem())
 , _handler(new QGraphicsPolygonItem())
 , _slider(new QGraphicsRectItem())
-, _pixmap(new QGraphicsPixmapItem())
-, _input(new valueItem())
-, _background(new QGraphicsRectItem())
+, _input(new QSpinBox())
 , _handlerMovementEnabled(true)
 , _button(new QToolButton())
 {
@@ -22,7 +20,6 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
     setupViewFlags();
     setupHandler();
     setupSlider();
-    setupInput();
     /* create a somewhat retangular shape for the scene */
     setSceneRect(0,0,100,25);
     _proxy = scene()->addWidget(_button);
@@ -31,9 +28,8 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
     scene()->addItem(_maxText);
     scene()->addItem(_currText);
     scene()->addItem(_handler);
-    scene()->addItem(_background);
-    scene()->addItem(_input);
-    connect(_input,&valueItem::_value,this,&ColorSlider::setValue);
+    _proxyInput = scene()->addWidget(_input);
+    connect(_input,&QSpinBox::editingFinished,this,&ColorSlider::setValue);
 }
 
 bool ColorSlider::handlerMovementEnabled() const
@@ -54,6 +50,7 @@ void ColorSlider::setMin(int min)
     if (m_min == min)
         return;
     m_min = min;
+    _input->setMinimum(m_min);
 
     /* Try to position the minText on the left/center of the dialog */
     QFontMetrics fm(font());
@@ -70,6 +67,7 @@ void ColorSlider::setMax(int max)
     if (m_max == max)
         return;
     m_max = max;
+    _input->setMaximum(m_max);
 
     QFontMetrics fm(font());
     _maxText->setText(QString::number(m_max));
@@ -195,14 +193,8 @@ void ColorSlider::setupSlider()
     _slider->setPen(QPen(QBrush(Qt::black), 1));
 }
 
-void ColorSlider::setupInput()
-{
-    _input->setX(sceneRect().width() - _input->boundingRect().width());
-    _input->setY((sceneRect().height() / 2) - (_input->boundingRect().height() / 2));
-}
-
-void ColorSlider::setValue(int value)
-{
+void ColorSlider::setValue()
+{   int value = _input->value();
 	int delta = max() - min();
 	double percent = (((value - min()) * 100) / delta) / 100.0; // get the percentage in fraction mode( 50% = 0.5, 100% = 1.0)
 	double currX = _slider->boundingRect().width() * percent + _slider->pos().x();
@@ -235,7 +227,7 @@ void ColorSlider::resizeEvent(QResizeEvent* event)
     _minText->setX(_proxy->pos().x() + _proxy->boundingRect().width());
     _minText->setY(_proxy->pos().y() + _proxy->boundingRect().height());
     _slider->setRect(0, 0,
-    /* width  */	sceneRect().width() -  _proxy->boundingRect().width() - _input->boundingRect().width() - (spacing*3),
+    /* width  */	sceneRect().width() -  _proxy->boundingRect().width() - _proxyInput->boundingRect().width() - (spacing*3),
     /* height */	_proxy->boundingRect().height() / 2);
 
     _slider->setX(_proxy->pos().x() + _proxy->boundingRect().width() + spacing);
@@ -250,13 +242,9 @@ void ColorSlider::resizeEvent(QResizeEvent* event)
     _currText->setX(_handler->pos().x() - _currText->boundingRect().width() / 2);
     _currText->setY(_handler->pos().y() - _handler->boundingRect().height() - spacing);
 
-    _input->setX(sceneRect().width() - _input->boundingRect().width() - (spacing/2));
-    _input->setY((sceneRect().height() / 2) - (_input->boundingRect().height() / 2) - spacing);
+    _proxyInput->setX(sceneRect().width() - _proxyInput->boundingRect().width() - (spacing/2));
+    _proxyInput->setY((sceneRect().height() / 2) - (_proxyInput->boundingRect().height() / 2) - spacing);
 
-    _background->setRect(_input->boundingRect());
-    _background->setPen(QPen(Qt::black));
-    _background->setX(_input->pos().x());
-    _background->setY(_input->pos().y());
     QLinearGradient currGradient(0, 0, _slider->boundingRect().width(), 0);
     currGradient.setStops(m_gradient);
     _slider->setBrush(QBrush(currGradient));
