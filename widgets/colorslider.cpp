@@ -5,6 +5,7 @@
 #include <QGradient>
 #include <QResizeEvent>
 #include <QGraphicsProxyWidget>
+#include <QPalette>
 
 ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
 , _minText(new QGraphicsSimpleTextItem())
@@ -30,6 +31,7 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
     scene()->addItem(_handler);
     _proxyInput = scene()->addWidget(_input);
     connect(_input,&QSpinBox::editingFinished,this,&ColorSlider::setValue);
+    setBackgroundRole(QPalette::Window);
 }
 
 bool ColorSlider::handlerMovementEnabled() const
