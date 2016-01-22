@@ -229,7 +229,7 @@ void ColorSlider::resizeEvent(QResizeEvent* event)
     _minText->setX(_proxy->pos().x() + _proxy->boundingRect().width());
     _minText->setY(_proxy->pos().y() + _proxy->boundingRect().height());
     _slider->setRect(0, 0,
-    /* width  */	sceneRect().width() -  _proxy->boundingRect().width() - _proxyInput->boundingRect().width() - (spacing*3),
+    /* width  */	sceneRect().width() -  _proxy->boundingRect().width() - _proxyInput->boundingRect().width() - (spacing*5),
     /* height */	_proxy->boundingRect().height() / 2);
 
     _slider->setX(_proxy->pos().x() + _proxy->boundingRect().width() + spacing);
@@ -244,7 +244,7 @@ void ColorSlider::resizeEvent(QResizeEvent* event)
     _currText->setX(_handler->pos().x() - _currText->boundingRect().width() / 2);
     _currText->setY(_handler->pos().y() - _handler->boundingRect().height() - spacing);
 
-    _proxyInput->setX(sceneRect().width() - _proxyInput->boundingRect().width() - (spacing/2));
+    _proxyInput->setX(sceneRect().width() - _proxyInput->boundingRect().width() - (spacing*3));
     _proxyInput->setY((sceneRect().height() / 2) - (_proxyInput->boundingRect().height() / 2) - spacing);
 
     QLinearGradient currGradient(0, 0, _slider->boundingRect().width(), 0);
