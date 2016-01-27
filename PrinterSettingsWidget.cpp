@@ -34,6 +34,7 @@ PrinterSettingsWidget::PrinterSettingsWidget(QWidget *parent) :
     connect(ui->tb_AreaPrintZ,&QSpinBox::editingFinished,this,&PrinterSettingsWidget::sendValue);
     connect(&timer,&QTimer::timeout,this,&PrinterSettingsWidget::locateArduino);
     connect(ui->bt_SaveSettings,&QPushButton::clicked,this,&PrinterSettingsWidget::saveSettings);
+    connect(ui->cb_PrinterSettings,&QComboBox::currentTextChanged,this,&PrinterSettingsWidget::printerSettingsEvent);
 }
 
 PrinterSettingsWidget::~PrinterSettingsWidget()
@@ -235,4 +236,10 @@ void PrinterSettingsWidget::sendValue(){
     if(btn==ui->tb_AreaPrintZ)
         emit updateCube(ui->tb_AreaPrintZ->value(),'Z');
 
+}
+
+void PrinterSettingsWidget::printerSettingsEvent(QString s)
+{
+    PrinterSettings p = loadSettings(s);
+    setSettings(p);
 }

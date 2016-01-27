@@ -58,6 +58,7 @@ private slots:
     void printLogStatusChanged();
     void on_cb_ExtruderQnt_currentTextChanged(const QString &arg1);
     void sendValue();
+    void printerSettingsEvent(QString s);
 
 private:
     Ui::PrinterSettingsWidget *ui;
