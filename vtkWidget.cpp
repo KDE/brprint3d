@@ -73,6 +73,7 @@ vtkWidget::vtkWidget(QWidget *parent) : QVTKWidget(parent),
     GetRenderWindow()->AddRenderer(renderer);
     renderer->SetBackground(0.576,0.749,0.874);
     //actor->GetProperty()->SetColor();
+    isDelta = false;
 
     drawCube();
 }
@@ -108,18 +109,13 @@ void vtkWidget::renderSTL(const QString& pathStl)
 
 void vtkWidget::renderGcode(const QString& text)
 {   //Regular Expression to 3DPrints
-    //This expression is to find lines of gcode like this:  G0 X98.362 Y96.798 Z25.100
-    QRegularExpression _cartesianaZ("G(?<command>\\d+) X(?<axisX>-?\\d+\\.\\d+) Y(?<axisY>-?\\d+\\.\\d+) Z(?<axisZ>\\d+.\\d+)");
-    //This expression is to find lines of gcode like this:  G1 X-51.916 Y6.390 E0.7226
-    //Works for cartesian and delta printers
-    QRegularExpression _cartesianaE("G(?<command>\\d+) X(?<axisX>-?\\d+\\.\\d+) Y(?<axisY>-?\\d+\\.\\d+) (E(\\d+.\\d+))|(F(\\d+)) ");
-    //This expression is to find lines of gcode like this:  G1 Z1.100 F12000
-    //Only works for delta printers
-    QRegularExpression _deltaZ("G(?<command>\\d+) Z(?<axisZ>\\d+\\.\\d+) F(\\d+)");
+    QRegularExpression _cartesianaXY("G. .*\\bX(?<axisX>[0-9.-]+) Y(?<axisY>[0-9.-]+)");
+    QRegularExpression _cartesianaXYZ("G. .*\\bX(?<axisX>[0-9.-]+) Y(?<axisY>[0-9.-]+) Z(?<axisZ>[0-9].+)");
+    QRegularExpression _deltaZ("G. .*\\bZ(?<axisZ>[0-9].+)");
 
     QRegularExpressionMatch _match;
     int nrLayers = 0,printCount = 0;
-    double x = 0, y = 0, z = 0, command = 0;
+    double x = 0, y = 0, z = 0;
     auto printPoints = vtkSmartPointer<vtkPoints>::New();
 
     QStringList list = text.split('\n', QString::SkipEmptyParts);
@@ -128,42 +124,38 @@ void vtkWidget::renderGcode(const QString& text)
     for(const auto string : list) {
         if (string.startsWith(';'))
             continue;
-
-        _match = _cartesianaE.match(string);
+        _match = _cartesianaXY.match(string);
         if(_match.hasMatch()){
-
-            command = _match.captured("command").toInt();
             x = _match.captured("axisX").toDouble();
             y = _match.captured("axisY").toDouble();
 
         }else{
-            _match = _cartesianaZ.match(string);
+            _match = _cartesianaXYZ.match(string);
             if(_match.hasMatch()){
-                command = _match.captured("command").toInt();
                 x = _match.captured("axisX").toDouble();
                 y = _match.captured("axisY").toDouble();
                 z = _match.captured("axisZ").toDouble();
-
+                nrLayers++;
             }else{
-                 _match = _deltaZ.match(string);
-                 if(_match.hasMatch()){
+                _match = _deltaZ.match(string);
+                if(_match.hasMatch()){
                     z = _match.captured("axisZ").toDouble();
-                    nrLayers++;
                     isDelta = true;
-                 }
+                    nrLayers++;
+                }
             }
         }
         if(x!=0 || y!=0 || z!=0){
-            if (isDelta){
-                printPoints->InsertPoint(printCount,x + (areaX / 2) ,y + (areaY / 2) ,z);
-                printCount++;
-            }else{
-                printPoints->InsertPoint(printCount,x,y,z);
-                printCount++;
-            }
+                  if (isDelta){
+                      printPoints->InsertPoint(printCount,x + (areaX / 2) ,y + (areaY / 2) ,z);
+                      printCount++;
+                  }else{
+                      printPoints->InsertPoint(printCount,x,y,z);
+                      printCount++;
+                  }
+                  x=y=0;
         }
-
-        }//End For
+    }//End For
 
     emit layersCount(nrLayers-1);
     //Set variables to printPoints
