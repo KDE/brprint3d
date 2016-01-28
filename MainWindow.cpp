@@ -54,6 +54,7 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(ui->actionAbout,&QAction::triggered,this,&BrPrint3D::showDialogs);
     connect(ui->actionLegalWarning,&QAction::triggered,this,&BrPrint3D::showDialogs);
     connect(ui->actionHelp,&QAction::triggered,this,&BrPrint3D::showDialogs);
+    connect(ui->_ManualControl,&ManualControlWidget::showCarTravels, ui->vtkView,&vtkWidget::showCarTravels);
 }
 
 BrPrint3D::~BrPrint3D()
@@ -80,10 +81,10 @@ void BrPrint3D::setEnabled(bool b)
 }
 
 void BrPrint3D::openFile()
-{   QString types(QStringLiteral("*.gcode"));
+{   QString types(QStringLiteral("*.gcode *.gco"));
     filePath = QFileDialog::getOpenFileName(this, "Open File", QDir::homePath(), types);
     QString filePathSuffix = QFileInfo(filePath).completeSuffix().toLower();
-    if (!filePath.isEmpty() && filePathSuffix == QLatin1String("gcode")) {
+    if (!filePath.isEmpty() && (filePathSuffix == QLatin1String("gcode") || filePathSuffix == QLatin1String("gco"))) {
         QFile gcode(filePath);
         if (!gcode.open(QFile::ReadOnly | QFile::Text)) {
             return;
