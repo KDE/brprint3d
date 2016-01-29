@@ -83,6 +83,7 @@ void PrinterSettingsWidget::setSettings(PrinterSettings p){
     //Extruder Tab
     ui->tb_ExtruderMaxTemp->setValue(p.extruderMAXTemp);
     ui->tb_BedMaxTemp->setValue(p.bedMAXTemp);
+    emit updateBed(p.areaX,p.areaY,p.areaZ);
 }
 
 

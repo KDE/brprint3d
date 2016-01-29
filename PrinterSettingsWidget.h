@@ -77,6 +77,7 @@ signals:
    void s_extrudersInUse(int n);
    void s_printLogStatus(bool b);
    void updateCube(int v, QChar axis);
+   void updateBed(int _x, int _y, int _z);
 
 public slots:
    void disableExtrudersQntCb(bool d);
