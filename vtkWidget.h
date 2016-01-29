@@ -51,6 +51,7 @@ explicit vtkWidget(QWidget *parent = 0);
 public slots:
     void updateCube(int v, QChar axis);
     void showCarTravels(bool b);
+    void updateBed(int x, int y, int z);
 
 signals:
     void layersCount(int l);

@@ -48,6 +48,7 @@
 #include <vtkQuad.h>
 #include <vtkInteractorStyleTrackballCamera.h>
 #include <vtkSTLReader.h>
+#include <vtkCamera.h>
 
 #define DEFAULTX 200
 #define DEFAULTY 200
@@ -111,7 +112,7 @@ void vtkWidget::renderGcode(const QString& text)
 {   //Regular Expression to 3DPrints
     QRegularExpression _cartesianaXY("G(?<command>.) .*\\bX(?<axisX>[0-9.-]+) Y(?<axisY>[0-9.-]+) ");
     QRegularExpression _cartesianaXYZ("G(?<command>.) .*\\bX(?<axisX>[0-9.-]+) Y(?<axisY>[0-9.-]+) Z(?<axisZ>[0-9].+)");
-    QRegularExpression _catchE("[E]");
+    QRegularExpression _catchE("[E]|[F]");
     QRegularExpression _deltaZ("G(?<command>.) Z(?<axisZ>[0-9].+) ");
 
     QRegularExpressionMatch _match;
@@ -290,6 +291,14 @@ void vtkWidget::showCarTravels(bool b)
     }
 }
 
+void vtkWidget::updateBed(int x, int y, int z)
+{
+    areaX = x;
+    areaY = y;
+    areaZ = z;
+    drawCube();
+}
+
 void vtkWidget::drawFloor()
 {
     double p0[3] = {0.0, 0.0, 0.0};
@@ -330,5 +339,7 @@ void vtkWidget::drawFloor()
     transform->Scale(areaX,areaY,areaZ);
     actorFloor->SetUserTransform(transform);
     renderer->AddActor(actorFloor);
+    renderer->ResetCamera();
+    renderer->GetActiveCamera()->Zoom(7);
     GetRenderWindow()->Render();
 }
