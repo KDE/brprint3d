@@ -55,6 +55,7 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(ui->actionLegalWarning,&QAction::triggered,this,&BrPrint3D::showDialogs);
     connect(ui->actionHelp,&QAction::triggered,this,&BrPrint3D::showDialogs);
     connect(ui->_ManualControl,&ManualControlWidget::showCarTravels, ui->vtkView,&vtkWidget::showCarTravels);
+    connect(ui->_PrinterSettings,&PrinterSettingsWidget::updateBed,ui->vtkView,&vtkWidget::updateBed);
 }
 
 BrPrint3D::~BrPrint3D()
