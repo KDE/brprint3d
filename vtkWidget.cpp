@@ -109,14 +109,16 @@ void vtkWidget::renderSTL(const QString& pathStl)
 
 void vtkWidget::renderGcode(const QString& text)
 {   //Regular Expression to 3DPrints
-    QRegularExpression _cartesianaXY("G. .*\\bX(?<axisX>[0-9.-]+) Y(?<axisY>[0-9.-]+)");
-    QRegularExpression _cartesianaXYZ("G. .*\\bX(?<axisX>[0-9.-]+) Y(?<axisY>[0-9.-]+) Z(?<axisZ>[0-9].+)");
-    QRegularExpression _deltaZ("G. .*\\bZ(?<axisZ>[0-9].+)");
+    QRegularExpression _cartesianaXY("G(?<command>.) .*\\bX(?<axisX>[0-9.-]+) Y(?<axisY>[0-9.-]+) ");
+    QRegularExpression _cartesianaXYZ("G(?<command>.) .*\\bX(?<axisX>[0-9.-]+) Y(?<axisY>[0-9.-]+) Z(?<axisZ>[0-9].+)");
+    QRegularExpression _catchE("[E]");
+    QRegularExpression _deltaZ("G(?<command>.) Z(?<axisZ>[0-9].+) ");
 
     QRegularExpressionMatch _match;
-    int nrLayers = 0,printCount = 0;
+    int nrLayers = 0,printCount = 0, countDelta=0, command, carCount = 0;
     double x = 0, y = 0, z = 0;
     auto printPoints = vtkSmartPointer<vtkPoints>::New();
+    auto carPoints = vtkSmartPointer<vtkPoints>::New();
 
     QStringList list = text.split('\n', QString::SkipEmptyParts);
 
@@ -124,64 +126,100 @@ void vtkWidget::renderGcode(const QString& text)
     for(const auto string : list) {
         if (string.startsWith(';'))
             continue;
-        _match = _cartesianaXY.match(string);
+        _match = _cartesianaXYZ.match(string);
         if(_match.hasMatch()){
             x = _match.captured("axisX").toDouble();
             y = _match.captured("axisY").toDouble();
+            z = _match.captured("axisZ").toDouble();
+            command = _match.captured("command").toInt();
+            nrLayers++;
 
         }else{
-            _match = _cartesianaXYZ.match(string);
+            _match = _cartesianaXY.match(string);
             if(_match.hasMatch()){
                 x = _match.captured("axisX").toDouble();
                 y = _match.captured("axisY").toDouble();
-                z = _match.captured("axisZ").toDouble();
-                nrLayers++;
+                command = _match.captured("command").toInt();
             }else{
                 _match = _deltaZ.match(string);
                 if(_match.hasMatch()){
                     z = _match.captured("axisZ").toDouble();
-                    isDelta = true;
+                    command = _match.captured("command").toInt();
+                    countDelta++;
+                    if(countDelta>2){
+                        isDelta = true;
+                    }
                     nrLayers++;
                 }
             }
         }
-        if(x!=0 || y!=0 || z!=0){
-                  if (isDelta){
-                      printPoints->InsertPoint(printCount,x + (areaX / 2) ,y + (areaY / 2) ,z);
-                      printCount++;
-                  }else{
-                      printPoints->InsertPoint(printCount,x,y,z);
-                      printCount++;
-                  }
-                  x=y=0;
+        _match = _catchE.match(string);
+        if(_match.hasMatch()){
+
+            if(isDelta){
+                printPoints->InsertPoint(printCount,x + (areaX / 2) ,y + (areaY / 2) ,z);
+                printCount++;
+             }else{
+                printPoints->InsertPoint(printCount,x,y,z);
+                printCount++;
+             }
+        }else {
+
+            if(isDelta){
+                carPoints->InsertPoint(carCount,x + (areaX / 2) ,y + (areaY / 2) ,z);
+                carCount++;
+            }else{
+                carPoints->InsertPoint(carCount,x ,y ,z);
+                carCount++;
+            }
         }
     }//End For
-
     emit layersCount(nrLayers-1);
-    //Set variables to printPoints
-    auto polyLine = vtkSmartPointer<vtkPolyLine>::New();
-    polyLine->GetPointIds()->SetNumberOfIds(printCount);
-    for(unsigned int i = 0; i < printCount; i++)
-        polyLine->GetPointIds()->SetId(i,i);
+       //Set variables to printPoints
+       auto polyLine = vtkSmartPointer<vtkPolyLine>::New();
+       polyLine->GetPointIds()->SetNumberOfIds(printCount);
+       for(unsigned int i = 0; i < printCount; i++)
+           polyLine->GetPointIds()->SetId(i,i);
 
-    auto cells = vtkSmartPointer<vtkCellArray>::New();
-    auto polyData = vtkSmartPointer<vtkPolyData>::New();
+       auto cells = vtkSmartPointer<vtkCellArray>::New();
+       auto polyData = vtkSmartPointer<vtkPolyData>::New();
 
-    cells->InsertNextCell(polyLine);
-    polyData->SetPoints(printPoints);
-    polyData->SetLines(cells);
+       cells->InsertNextCell(polyLine);
+       polyData->SetPoints(printPoints);
+       polyData->SetLines(cells);
 
-    // Setup actor and mapper to printGCode
-    mapperGcode->SetInputData(polyData);
-    actorGcode->SetMapper(mapperGcode);
-    actorGcode->GetProperty()->SetLineWidth(4);
-    actorGcode->GetProperty()->SetColor(0,0.5,1);
-    actorGcode->GetProperty()->SetOpacity(0.4);
+       //Set variables to carPoints
+       auto carPolyLine = vtkSmartPointer<vtkPolyLine>::New();
+       carPolyLine->GetPointIds()->SetNumberOfIds(carCount);
+       for(unsigned int i = 0; i < carCount; i++)
+           carPolyLine->GetPointIds()->SetId(i,i);
 
-    //Setup scene
-    renderer->AddActor(actorGcode);
-    renderer->ResetCamera();
-    GetRenderWindow()->Render();
+       auto carCells = vtkSmartPointer<vtkCellArray>::New();
+       auto carPolyData = vtkSmartPointer<vtkPolyData>::New();
+
+       carCells->InsertNextCell(carPolyLine);
+       carPolyData->SetPoints(carPoints);
+       carPolyData->SetLines(carCells);
+
+
+       // Setup actor and mapper to printGCode
+       mapperGcode->SetInputData(polyData);
+       actorGcode->SetMapper(mapperGcode);
+       actorGcode->GetProperty()->SetLineWidth(4);
+       actorGcode->GetProperty()->SetColor(0,0.5,1);
+       actorGcode->GetProperty()->SetOpacity(0.4);
+       //Setup actor and mapper to carGcode
+       mapperGcodeCar->SetInputData(carPolyData);
+       actorGcodeCar->SetMapper(mapperGcodeCar);
+       actorGcodeCar->GetProperty()->SetLineWidth(3);
+       actorGcodeCar->GetProperty()->SetColor(0,1,0);
+
+       //Setup scene
+       renderer->AddActor(actorGcodeCar);
+       renderer->AddActor(actorGcode);
+
+       renderer->ResetCamera();
+       GetRenderWindow()->Render();
 
 }
 
