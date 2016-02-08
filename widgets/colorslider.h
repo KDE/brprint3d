@@ -66,12 +66,14 @@ signals:
     void maxValueChanged(int maxValue);
     void gradientChanged(QGradientStops gradient);
 	void handlerMovementEnabledChanged(bool enabled);
+    void clicked(bool clicked);
 
 private:
     void setupViewFlags();
     void setupHandler();
     void setupSlider();
     void setValue();
+    void setButtonBackground(QColor c);
     bool handlerMove;
     int m_min;
     int m_max;

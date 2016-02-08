@@ -30,8 +30,9 @@ ColorSlider::ColorSlider(QWidget *parent) : QGraphicsView(parent)
     scene()->addItem(_currText);
     scene()->addItem(_handler);
     _proxyInput = scene()->addWidget(_input);
-    connect(_input,&QSpinBox::editingFinished,this,&ColorSlider::setValue);
     setBackgroundRole(QPalette::Window);
+    connect(_input,&QSpinBox::editingFinished,this,&ColorSlider::setValue);
+    connect(_button,&QToolButton::clicked,this,&ColorSlider::clicked);
 }
 
 bool ColorSlider::handlerMovementEnabled() const
@@ -203,7 +204,15 @@ void ColorSlider::setValue()
 
 	_handler->setX(currX);
 	_currText->setText(QString::number(value));
-	_currText->setX(_handler->pos().x() - _currText->boundingRect().width() / 2);
+    _currText->setX(_handler->pos().x() - _currText->boundingRect().width() / 2);
+}
+
+void ColorSlider::setButtonBackground(QColor c)
+{   QPalette p = _button->palette();
+    p.setColor(QPalette::Button,c);
+    _button->setAutoFillBackground(true);
+    _button->setPalette(p);
+    _button->update();
 }
 
 void ColorSlider::resizeEvent(QResizeEvent* event)
