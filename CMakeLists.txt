@@ -66,7 +66,6 @@ set(BRPrintInterface_SRCS
         ExtruderControlWidget.cpp
         BigButton.cpp
         FilCount.cpp
-	widgets/colorslider.cpp
         widgets/extruderitem.cpp
 	${BRPRintInterface_UI_SRCS}
 )
@@ -92,8 +91,5 @@ add_custom_target(resources ALL DEPENDS ${Resources})
 add_executable(BRPrint main.cpp ${Resources} ${Dialog_UI_SRCS})
 
 target_link_libraries(BRPrint Qt5::Core Qt5::Widgets Qt5::OpenGL Qt5::SerialPort ${OPENGL_LIBRARIES} ${VTK_LIBRARIES} BRPrintDialogs BRPRintInterface -lpthread)
-
-add_executable(BRPrintWidgets widgets/main.cpp widgets/colorslider.cpp widgets/extruderitem.cpp ${Resources})
-target_link_libraries(BRPrintWidgets Qt5::Widgets)
 
 enable_testing()
