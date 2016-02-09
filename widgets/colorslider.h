@@ -20,14 +20,13 @@
  along with BRPrint3D. If not, see <http://www.gnu.org/licenses/>.
 
  ======================================================================*/
+#ifndef COLORSLIDER_H
+#define COLORSLIDER_H
 
 #include <QGraphicsView>
 #include <QGradient>
 #include <QToolButton>
 #include <QSpinBox>
-#include "valueitem.h"
-
-class QGraphicsSimpleTextItem;
 
 /* Base class for a ColorSlider, you can set the min, max and color gradient
  * and retrieve them */
@@ -47,6 +46,9 @@ public:
     void setGradient(const QGradientStops &gradient);
     void setPixmap(QPixmap pixmap,bool b);
 	void setHandlerMovementEnabled(bool enabled);
+    int getInsertValue();
+    void setButtonBackground(QColor c);
+    void setChecked(bool b);
 
     QGradientStops gradient() const;
     int min() const;
@@ -67,13 +69,14 @@ signals:
     void gradientChanged(QGradientStops gradient);
 	void handlerMovementEnabledChanged(bool enabled);
     void clicked(bool clicked);
+    void editFinished();
 
 private:
     void setupViewFlags();
     void setupHandler();
     void setupSlider();
     void setValue();
-    void setButtonBackground(QColor c);
+
     bool handlerMove;
     int m_min;
     int m_max;
@@ -91,3 +94,4 @@ private:
     QToolButton *_button;
     bool _handlerMovementEnabled, _isButton;
 };
+#endif // COLORSLIDER_H
