@@ -206,7 +206,7 @@ void ManualControlWidget::insertExtruderItem(int v)
     for(int i=1;i<=v;i++){
         extruderItem *e = new extruderItem();
         e->setExtruderNumber(i);
-        extruderList.append(i,e);
+        extruderList.insert(i,e);
         l->addWidget(e);
     }
     ui->extruderMonitorTab->update();
