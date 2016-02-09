@@ -6,6 +6,8 @@ extruderItem::extruderItem(QWidget *parent) :
     ui(new Ui::extruderItem)
 {
     ui->setupUi(this);
+    connect(ui->sp_temperature,&QSpinBox::editingFinished,this,&extruderItem::editingFinished);
+    connect(ui->bt_startHeat,&QPushButton::clicked,this,&extruderItem::startHeat);
 }
 
 extruderItem::~extruderItem()
@@ -16,4 +18,18 @@ extruderItem::~extruderItem()
 void extruderItem::setExtruderNumber(int i)
 {
     ui->extruderNumber->setText(QString::number(i));
+}
+
+int extruderItem::getExtruderTemp()
+{
+    return ui->sp_temperature->value();
+}
+
+QSpinBox* extruderItem::getSpinPointer()
+{
+    return ui->sp_temperature;
+}
+
+QPushButton* extruderItem::getButtonPointer(){
+    return ui->bt_startHeat;
 }

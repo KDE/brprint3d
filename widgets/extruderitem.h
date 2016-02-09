@@ -2,6 +2,8 @@
 #define EXTRUDERITEM_H
 
 #include <QWidget>
+#include <QSpinBox>
+#include <QPushButton>
 
 namespace Ui {
 class extruderItem;
@@ -15,9 +17,15 @@ public:
     explicit extruderItem(QWidget *parent = 0);
     ~extruderItem();
     void setExtruderNumber(int i);
+    int getExtruderTemp();
+    QSpinBox *getSpinPointer();
+    QPushButton *getButtonPointer();
 
 private:
     Ui::extruderItem *ui;
+signals:
+    void editingFinished();
+    void startHeat();
 };
 
 #endif // EXTRUDERITEM_H
