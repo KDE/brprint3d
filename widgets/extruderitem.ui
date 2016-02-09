@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>441</width>
+    <width>462</width>
     <height>204</height>
    </rect>
   </property>
@@ -34,6 +34,9 @@
      <property name="icon">
       <iconset resource="../resources.qrc">
        <normaloff>:/Icons/Icons/hotend.png</normaloff>:/Icons/Icons/hotend.png</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
