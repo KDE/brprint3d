@@ -35,6 +35,7 @@
 #include <QMessageBox>
 #include <stdio.h>
 #include <QtCore/QTimer>
+#include "widgets/extruderitem.h"
 
 namespace Ui {
 class ManualControlWidget;
@@ -52,11 +53,17 @@ public:
     void setBedStatus(bool b);
     void setExtruderStatus(bool b);
     void getPrinterObject(Repetier *printer_object);
-    void setInitialMarks();
     void constructPrinterObject(PrinterSettings pSettings);
     void destructPrinterObject();
-    void hideExtruders(int e);
     void startPrintJob(const QString& filePath);
+    void setExtrudersInUse(int e);
+    void setPrintLogStatus(bool b);
+    void pausePrintJob(bool b);
+    void setPlayStatus(bool b);
+    void stopPrintJob();
+    void stopOnEmergency();
+    void setLayersCount(int l);
+    void setFilCount(const QString& path);
 
 private:
     Ui::ManualControlWidget *ui;
@@ -67,6 +74,14 @@ private:
     bool garbage,playStatus=false,printLogStatus,pauseStatus=false;
     int extruderQnt;
     QTimer timer;
+    void updateTemp();
+    void startBed(bool checked);
+    void startExtruders(bool checked);
+    void setNewBedTemp();
+    void setNewExtruderTemp();
+    void isPrintJobRunning();
+    void insertExtruderItem(int v);
+    QMap<int,extruderItem*> extruderList;
 
 signals:
     void checkConnectButton(bool b);
@@ -75,27 +90,6 @@ signals:
     void disablePositionButtons(bool b);
     void showCarTravels(bool b);
 
-private slots:
-    void updateTemp();
-    void startBed(bool checked);
-    void startExtruders(bool checked);
-    void disableExtrudersButtons(bool checked);
-    void setNewBedTemp();
-    void setNewExtruderTemp();
-
-    void isPrintJobRunning();
-    void spinEditFinished();
-    void sliderValueChanged(int v);
-
-public slots:
-    void setExtrudersInUse(int e);
-    void setPrintLogStatus(bool b);
-    void pausePrintJob(bool b);
-    void setPlayStatus(bool b);
-    void stopPrintJob();
-    void stopOnEmergency();
-    void setLayersCount(int l);
-    void setFilCount(const QString& path);
 };
 
 #endif // MANUALCONTROLWIDGET_H
