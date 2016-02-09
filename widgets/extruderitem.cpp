@@ -33,3 +33,8 @@ QSpinBox* extruderItem::getSpinPointer()
 QPushButton* extruderItem::getButtonPointer(){
     return ui->bt_startHeat;
 }
+
+void extruderItem::setCurrTemperature(int v)
+{
+    ui->lb_currTemp->setText(QString::number(v)+" ºC");
+}

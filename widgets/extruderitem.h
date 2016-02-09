@@ -20,12 +20,13 @@ public:
     int getExtruderTemp();
     QSpinBox *getSpinPointer();
     QPushButton *getButtonPointer();
+    void setCurrTemperature(int v);
 
 private:
     Ui::extruderItem *ui;
 signals:
     void editingFinished();
-    void startHeat();
+    void startHeat(bool clicked);
 };
 
 #endif // EXTRUDERITEM_H
