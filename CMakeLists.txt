@@ -67,6 +67,7 @@ set(BRPrintInterface_SRCS
         BigButton.cpp
         FilCount.cpp
         widgets/extruderitem.cpp
+        extrudermodel.cpp
 	${BRPRintInterface_UI_SRCS}
 )
 
