@@ -36,6 +36,7 @@
 #include <stdio.h>
 #include <QtCore/QTimer>
 #include "widgets/extruderitem.h"
+#include "extrudermodel.h"
 
 namespace Ui {
 class ManualControlWidget;

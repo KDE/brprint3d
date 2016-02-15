@@ -35,6 +35,8 @@ ManualControlWidget::ManualControlWidget(QWidget *parent) :
     connect(ui->bt_bedHeat,&QPushButton::clicked,this,&ManualControlWidget::startBed);
     connect(ui->sp_extruderTemp,&QSpinBox::editingFinished,this,&ManualControlWidget::setNewExtruderTemp);
     connect(ui->bt_extruderHeat,&QPushButton::clicked,this,&ManualControlWidget::startExtruders);
+    extruderModel *mymodel = new extruderModel();
+    ui->tableView->setModel(mymodel);
 }
 
 ManualControlWidget::~ManualControlWidget()
@@ -45,13 +47,13 @@ ManualControlWidget::~ManualControlWidget()
 void ManualControlWidget::init()
 {   ui->ManualControlTab->setDisabled(true);
     ui->gcodeText->setPlainText(tr("No Open File."));
-    if(extrudersInUse < 2){
+    /*if(extrudersInUse < 2){
         ui->extruderMonitorTab->setHidden(true);//Dont work, why???
         ui->extruderMonitorTab->setDisabled(true);
     }else{
         ui->gb_extruderOne->setDisabled(true);
         insertExtruderItem(extrudersInUse);
-    }
+    }*/
 }
 void ManualControlWidget::constructPrinterObject(PrinterSettings pSettings)
 {
