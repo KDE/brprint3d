@@ -56,7 +56,6 @@ private slots:
 
     void locateArduino();
     void printLogStatusChanged();
-    void on_cb_ExtruderQnt_currentTextChanged(const QString &arg1);
     void sendValue();
     void printerSettingsEvent(QString s);
 
@@ -69,18 +68,14 @@ private:
     QStringList antPortList;
     QSettings settings;
     PrinterSettings pSettings;
-
     void setSettings(PrinterSettings p);
     PrinterSettings loadSettings(QString q);
     void saveSettings();
+
 signals:
-   void s_extrudersInUse(int n);
    void s_printLogStatus(bool b);
    void updateCube(int v, QChar axis);
    void updateBed(int _x, int _y, int _z);
-
-public slots:
-   void disableExtrudersQntCb(bool d);
 };
 
 #endif // PRINTERSETTINGSWIDGET_H

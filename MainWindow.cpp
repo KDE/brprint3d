@@ -29,7 +29,6 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
 {
     ui->setupUi(this);
 
-    connect(ui->_PrinterSettings,&PrinterSettingsWidget::s_extrudersInUse,ui->_ManualControl,&ManualControlWidget::setExtrudersInUse);
     connect(ui->bt_open,&BigButton::clicked,this,&BrPrint3D::openFile);
     connect(ui->bt_connect,&BigButton::clicked,this,&BrPrint3D::connectPrinter);
     connect(ui->bt_connect,&BigButton::clicked,this,&BrPrint3D::changeIcon);
@@ -37,7 +36,6 @@ BrPrint3D::BrPrint3D(QWidget *parent) : QMainWindow(parent),
     connect(ui->bt_play,&BigButton::clicked,this,&BrPrint3D::startPrintJob);
     connect(ui->bt_play,&BigButton::clicked,this,&BrPrint3D::changeIcon);
     connect(ui->bt_play,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::setPlayStatus);
-    connect(ui->_ManualControl,&ManualControlWidget::disableCbExtruderQnt,ui->_PrinterSettings,&PrinterSettingsWidget::disableExtrudersQntCb);
     connect(ui->bt_pause,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::pausePrintJob);
     connect(ui->bt_pause,&BigButton::clicked,this,&BrPrint3D::changeIcon);
     connect(ui->bt_stop,&BigButton::clicked,ui->_ManualControl,&ManualControlWidget::stopPrintJob);

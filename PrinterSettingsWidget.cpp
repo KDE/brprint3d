@@ -192,11 +192,6 @@ int PrinterSettingsWidget::getPortStatus()
        return ui->cb_ConnectionPort->count();
 }
 
-void PrinterSettingsWidget::disableExtrudersQntCb(bool d)
-{
-    ui->cb_ExtruderQnt->setDisabled(d);
-}
-
 void PrinterSettingsWidget::locateArduino()
 {   actPortList.clear();
     QList<QSerialPortInfo> serialPortInfoList = QSerialPortInfo::availablePorts();
@@ -216,13 +211,6 @@ void PrinterSettingsWidget::locateArduino()
 
 
     }
-
-}
-
-void PrinterSettingsWidget::on_cb_ExtruderQnt_currentTextChanged(const QString &arg1)
-{
-    extrudersInUse = arg1.toInt();
-    emit s_extrudersInUse(extrudersInUse);
 
 }
 void PrinterSettingsWidget::printLogStatusChanged(){

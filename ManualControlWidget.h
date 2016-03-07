@@ -81,13 +81,10 @@ private:
     void setNewBedTemp();
     void setNewExtruderTemp();
     void isPrintJobRunning();
-    void insertExtruderItem(int v);
-    QMap<int,extruderItem*> extruderList;
 
 signals:
     void checkConnectButton(bool b);
     void enablePlayButton(bool b);
-    void disableCbExtruderQnt(bool b);
     void disablePositionButtons(bool b);
     void showCarTravels(bool b);
 

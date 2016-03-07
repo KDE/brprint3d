@@ -35,8 +35,6 @@ ManualControlWidget::ManualControlWidget(QWidget *parent) :
     connect(ui->bt_bedHeat,&QPushButton::clicked,this,&ManualControlWidget::startBed);
     connect(ui->sp_extruderTemp,&QSpinBox::editingFinished,this,&ManualControlWidget::setNewExtruderTemp);
     connect(ui->bt_extruderHeat,&QPushButton::clicked,this,&ManualControlWidget::startExtruders);
-    extruderModel *mymodel = new extruderModel();
-    ui->tableView->setModel(mymodel);
 }
 
 ManualControlWidget::~ManualControlWidget()
@@ -133,20 +131,10 @@ void ManualControlWidget::startBed(bool checked)
 }
 
 void ManualControlWidget::startExtruders(bool checked)
-{    QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    if(extrudersInUse == 1 && checked){
+{   if(extrudersInUse == 1 && checked){
             printerObject->setExtrTemp(0,ui->sp_extruderTemp->value());
-    }else if(checked)/*More then one extruder*/{
-        for(int i=1;i<=extrudersInUse;i++){
-            extruderItem *item = extruderList.value(i);
-            if(btn == item->getButtonPointer()){
-                printerObject->setExtrTemp(i-1,item->getExtruderTemp());
-            }
-        }
     }else/*Heat OFF*/{
-        for(int i=0; i<extrudersInUse;i++){
-            printerObject->setExtrTemp(i,0);
-        }
+        printerObject->setExtrTemp(0,0);
     }
 }
 
@@ -156,18 +144,8 @@ void ManualControlWidget::setNewBedTemp(){
 }
 
 void ManualControlWidget::setNewExtruderTemp(){
-    QSpinBox *btn = qobject_cast<QSpinBox*>(sender());
-    if(btn == ui->sp_extruderTemp){
-        if(playStatus && ui->bt_extruderHeat->isChecked()){
-            printerObject->setExtrTemp(0,ui->sp_extruderTemp->value());
-        }
-    }else{
-        for(int i = 0; i < extrudersInUse ;i++){
-            extruderItem *item = extruderList.value(i);
-            if(btn == item->getSpinPointer()){
-                printerObject->setExtrTemp(i,item->getExtruderTemp());
-            }
-        }
+    if(playStatus && ui->bt_extruderHeat->isChecked()){
+        printerObject->setExtrTemp(0,ui->sp_extruderTemp->value());
     }
 }
 
@@ -182,18 +160,6 @@ void ManualControlWidget::updateTemp()
     //Extruders
     double *extCurrTemp = printerObject->getAllExtrudersTemp();
     ui->lb_extruderCurrTemp->setText(QString::number(extCurrTemp[0])+" ºC");
-    if(extrudersInUse > 1){
-        for(int i = 1; i <= extrudersInUse ;i++){
-            extruderItem *item = extruderList.value(i);
-            item->setCurrTemperature(extCurrTemp[i]);
-        }
-    }
-}
-
-void ManualControlWidget::setExtrudersInUse(int e)
-{
-    extrudersInUse = e;
-    insertExtruderItem(e);
 }
 
 void ManualControlWidget::setGcodePreview(const QString& t){
@@ -231,24 +197,8 @@ void ManualControlWidget::isPrintJobRunning()
         msg.setText("Print job finish!");
         msg.setIcon(QMessageBox::Information);
         msg.exec();
-        emit disableCbExtruderQnt(false);
         disconnect(&timer,&QTimer::timeout,this,&ManualControlWidget::isPrintJobRunning);
     }
-}
-
-void ManualControlWidget::insertExtruderItem(int v)
-{   //TODO: Need to control here, to dont include a lot of widgets if dont need
-    QLayout *l = ui->extruderMonitorTab->layout();
-    for(int i=1;i<=v;i++){
-        extruderItem *e = new extruderItem();
-        e->setExtruderNumber(i);
-        extruderList.insert(i,e);
-        l->addWidget(e);
-        //This work?
-        connect(e,&extruderItem::editingFinished,this,&ManualControlWidget::setNewExtruderTemp);
-        connect(e,&extruderItem::startHeat,this,&ManualControlWidget::startExtruders);
-    }
-    ui->extruderMonitorTab->update();
 }
 
 void ManualControlWidget::pausePrintJob(bool b){

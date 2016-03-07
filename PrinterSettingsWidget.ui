@@ -530,7 +530,7 @@
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="7" column="0" colspan="2">
+      <item row="6" column="0" colspan="2">
        <widget class="QLabel" name="lb_obs">
         <property name="font">
          <font>
@@ -545,50 +545,42 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item row="2" column="0">
        <widget class="QLabel" name="lb_vol_sec">
         <property name="text">
          <string>Volume Max per Second(mm³/s):</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="lb_extruder_number">
-        <property name="text">
-         <string>Number of Extruders:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="cb_ExtruderQnt">
-        <property name="maximumSize">
-         <size>
-          <width>80</width>
-          <height>25</height>
-         </size>
-        </property>
-        <item>
-         <property name="text">
-          <string>1</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="2" column="0">
+      <item row="1" column="0">
        <widget class="QLabel" name="lb_tabletmp">
         <property name="text">
          <string>Bed Max Temperature(ºC):</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="tb_BedMaxTemp">
+        <property name="maximum">
+         <number>130</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
        <widget class="QLabel" name="lb_extrudertmp">
         <property name="text">
          <string>Extruder Max Temperature(ºC):</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="0">
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="tb_ExtruderMaxTemp">
+        <property name="maximum">
+         <number>250</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
          <string/>
@@ -602,20 +594,6 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QSpinBox" name="tb_BedMaxTemp">
-        <property name="maximum">
-         <number>130</number>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QSpinBox" name="tb_ExtruderMaxTemp">
-        <property name="maximum">
-         <number>250</number>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
        <widget class="QSpinBox" name="tb_ExtruderMaxVol">
         <property name="maximum">
          <number>300</number>
