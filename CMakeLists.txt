@@ -55,7 +55,6 @@ set(BRPrintInterface_UI
 	ExtruderControlWidget.ui
 	ManualControlWidget.ui
 	MainWindow.ui
-        widgets/extruderitem.ui
 )
 qt5_wrap_ui(BRPrintInterface_UI_SRCS ${BRPrintInterface_UI})
 set(BRPrintInterface_SRCS
@@ -66,8 +65,6 @@ set(BRPrintInterface_SRCS
         ExtruderControlWidget.cpp
         BigButton.cpp
         FilCount.cpp
-        widgets/extruderitem.cpp
-        extrudermodel.cpp
 	${BRPRintInterface_UI_SRCS}
 )
 
