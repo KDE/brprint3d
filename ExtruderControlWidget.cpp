@@ -76,18 +76,18 @@ void ExtruderControlWidget::init()
 //This slot updates on UI the position of the Extruder
 void ExtruderControlWidget::updatePos()
 {
-    ui->tb_axisXPos->setText(QString::number(printerObject->getCurrentXPos()));
-    ui->tb_axisYPos->setText(QString::number(printerObject->getCurrentYPos()));
-    ui->tb_axisZPos->setText(QString::number(printerObject->getCurrentZPos()));
+    ui->tb_axisXPos->setText(QString::number(printerObject->getCurrentPos('X')));
+    ui->tb_axisYPos->setText(QString::number(printerObject->getCurrentPos('Y')));
+    ui->tb_axisZPos->setText(QString::number(printerObject->getCurrentPos('Z')));
 }
 
 // This function seems to have the wrong name: why it's get if it's not returning anything?
 void ExtruderControlWidget::getPrinterObject(Repetier *pObject)
 {
     printerObject = pObject;
-    maxX = pObject->getMaxX();
-    maxY = pObject->getMaxY();
-    maxZ = pObject->getMaxZ();
+    maxX = pObject->getMax('X');
+    maxY = pObject->getMax('Y');
+    maxZ = pObject->getMax('Z');
 }
 
 void ExtruderControlWidget::setHome(){
@@ -106,7 +106,7 @@ void ExtruderControlWidget::setHome(){
 }
 void ExtruderControlWidget::setPosX()
 {
-    double pos = printerObject->getCurrentXPos();
+    double pos = printerObject->getCurrentPos('X');
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
     if(btn == ui->bt_leftX)
         pos -= ui->cb_displacement->currentText().toDouble();
@@ -118,7 +118,7 @@ void ExtruderControlWidget::setPosX()
 
 void ExtruderControlWidget::setPosY()
 {
-    double pos = printerObject->getCurrentYPos();
+    double pos = printerObject->getCurrentPos('Y');
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
 
     if(btn == ui->bt_upY)
@@ -132,7 +132,7 @@ void ExtruderControlWidget::setPosY()
 
 void ExtruderControlWidget::setPosZ()
 {
-    double pos = printerObject->getCurrentZPos();
+    double pos = printerObject->getCurrentPos('Z');
 
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
     if(btn == ui->bt_upZ)

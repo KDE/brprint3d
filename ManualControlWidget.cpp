@@ -158,8 +158,8 @@ void ManualControlWidget::updateTemp()
     double bedCurrTemp = printerObject->getBedTemp();
     ui->lb_bedCurrTemp->setText(QString::number(bedCurrTemp)+" ºC");
     //Extruders
-    double *extCurrTemp = printerObject->getAllExtrudersTemp();
-    ui->lb_extruderCurrTemp->setText(QString::number(extCurrTemp[0])+" ºC");
+    double extCurrTemp = printerObject->getExtruderTemp(0);
+    ui->lb_extruderCurrTemp->setText(QString::number(extCurrTemp)+" ºC");
 }
 
 void ManualControlWidget::setGcodePreview(const QString& t){
@@ -167,10 +167,10 @@ void ManualControlWidget::setGcodePreview(const QString& t){
 }
 
 void ManualControlWidget::startPrintJob(const QString& filePath){
-   QMessageBox msg;
+   QMessageBox msg; 
    try {    std::string path = filePath.toStdString();
-            printerObject->openFile(path,printLogStatus);
-            printerObject->startPrintJob(true);
+            printerObject->openFile(path,false,"");
+            printerObject->startPrintJob();
             msg.setText(tr("Print job started!"));
             msg.exec();
             emit disablePositionButtons(true);
@@ -210,7 +210,7 @@ void ManualControlWidget::pausePrintJob(bool b){
         msg.exec();
        }
     else{
-          printerObject->startPrintJob(false);
+          printerObject->startPrintJob();
        }
     pauseStatus = b;
 }
