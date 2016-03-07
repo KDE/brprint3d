@@ -112,12 +112,12 @@ void vtkWidget::renderGcode(const QString& text)
 {   //Regular Expression to 3DPrints
     QRegularExpression _cartesianaXY("G(?<command>.) .*\\bX(?<axisX>[0-9.-]+) Y(?<axisY>[0-9.-]+) ");
     QRegularExpression _cartesianaXYZ("G(?<command>.) .*\\bX(?<axisX>[0-9.-]+) Y(?<axisY>[0-9.-]+) Z(?<axisZ>[0-9].+)");
-    QRegularExpression _catchE("[E]|[F]");
+    QRegularExpression _catchE("E(?<retract>[0-9].+)");
     QRegularExpression _deltaZ("G(?<command>.) Z(?<axisZ>[0-9].+) ");
 
     QRegularExpressionMatch _match;
     int nrLayers = 0,printCount = 0, countDelta=0, command, carCount = 0;
-    double x = 0, y = 0, z = 0;
+    double x = 0, y = 0, z = 0, lastE = 0, actE = 0;
     auto printPoints = vtkSmartPointer<vtkPoints>::New();
     auto carPoints = vtkSmartPointer<vtkPoints>::New();
 
@@ -156,24 +156,29 @@ void vtkWidget::renderGcode(const QString& text)
         }
         _match = _catchE.match(string);
         if(_match.hasMatch()){
+            actE = _match.captured("retract").toDouble();
+            double difference = actE - lastE;
+            if(difference > 0) /*has Extrusion - print move*/{
+                if(isDelta){
+                    printPoints->InsertPoint(printCount,x + (areaX / 2) ,y + (areaY / 2) ,z);
+                    printCount++;
+                 }else{
+                    printPoints->InsertPoint(printCount,x,y,z);
+                    printCount++;
+                 }
 
-            if(isDelta){
-                printPoints->InsertPoint(printCount,x + (areaX / 2) ,y + (areaY / 2) ,z);
-                printCount++;
-             }else{
-                printPoints->InsertPoint(printCount,x,y,z);
-                printCount++;
-             }
-        }else {
-
-            if(isDelta){
-                carPoints->InsertPoint(carCount,x + (areaX / 2) ,y + (areaY / 2) ,z);
-                carCount++;
-            }else{
-                carPoints->InsertPoint(carCount,x ,y ,z);
-                carCount++;
             }
-        }
+            else/*has retract - car move*/{
+                if(isDelta){
+                    carPoints->InsertPoint(carCount,x + (areaX / 2) ,y + (areaY / 2) ,z);
+                    carCount++;
+                }else{
+                    carPoints->InsertPoint(carCount,x ,y ,z);
+                    carCount++;
+                }
+            }
+            lastE = actE;
+        }//end match E
     }//End For
     emit layersCount(nrLayers-1);
        //Set variables to printPoints
@@ -223,7 +228,6 @@ void vtkWidget::renderGcode(const QString& text)
        GetRenderWindow()->Render();
 
 }
-
 
 void vtkWidget::cleanup()
 {
