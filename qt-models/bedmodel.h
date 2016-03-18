@@ -8,18 +8,18 @@
 //Local Includes
 #include "bedobject.h"
 
-class bedModel : public QAbstractListModel
+class BedModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    bedModel();
+    BedModel(bedObject *b);
 
 private:
     virtual int rowCount(const QModelIndex &parent) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
     virtual bool setData(const QModelIndex &index, const QVariant &value, int role);
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
-    bedObject bed;
+    bedObject *bed;
     void updateBedTemperature();
     QTimer timer;
 };
