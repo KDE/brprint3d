@@ -18,7 +18,7 @@ QVariant BedModel::data(const QModelIndex &index, int role) const
             return QVariant();
         else{
             switch (index.row()){
-            case 0: return bed->getCurrTemp();
+            case 0: return bed->currTemp;
             case 1: return bed->getDesireTemp();
             case 2: return bed->getX();
             case 3: return bed->getY();
@@ -35,7 +35,7 @@ bool BedModel::setData(const QModelIndex &index, const QVariant &value, int role
 {
     if (role == Qt::EditRole) {
             switch(index.row()) {
-                case 0:  bed->setCurrTemp(value.toDouble()); emit dataChanged(index,index);break;
+                case 0:  bed->currTemp = value.toDouble(); emit dataChanged(index,index);break;
                 case 1:  bed->setDesireTemp(value.toDouble()); emit dataChanged(index,index);break;
             }
             return true;
