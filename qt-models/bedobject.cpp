@@ -27,17 +27,7 @@ double bedObject::getDesireTemp()
     return desireTemp;
 }
 
-double bedObject::getCurrTemp()
-{
-    return currTemp;
-}
-
 void bedObject::setDesireTemp(double t)
 {
     desireTemp = t;
-}
-
-void bedObject::setCurrTemp(double t)
-{
-    currTemp = t;
 }
