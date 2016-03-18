@@ -7,4 +7,3 @@ brprint3d::brprint3d()
 brprint3d::~brprint3d()
 {}
 
-#include "brprint3d.moc"
