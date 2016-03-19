@@ -18,6 +18,8 @@ include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 set(qtModels_SRCS
     qt-models/bedmodel.cpp
     qt-models/bedobject.cpp
+    qt-models/extruderobject.cpp
+    qt-models/extrudermodel.cpp
     )
 
 set(brprint3d_SRCS
