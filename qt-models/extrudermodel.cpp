@@ -29,6 +29,7 @@ QVariant ExtruderModel::data(const QModelIndex &index, int role) const
             case 2: return tmp.getExtrusionSpeed();
             case 3: return tmp.getFanSpeed();
             case 4: return tmp.getMovSpeed();
+            case 5: return tmp.getExtrusionQnt();
         }
     }
 }
@@ -42,6 +43,7 @@ bool ExtruderModel::setData(const QModelIndex &index, const QVariant &value, int
             case 2:  tmp.setExtrusionSpeed(value.toInt()); emit dataChanged(index,index);
             case 3:  tmp.setFanSpeed(value.toInt()); emit dataChanged(index,index);
             case 4:  tmp.setMovSpeed(value.toInt()); emit dataChanged(index,index);
+            case 5:  tmp.setExtrusionQnt(value.toDouble()); emit dataChanged(index,index);
          }
     }else if(role == Qt::DisplayRole){
         if(index.column() == 0){
