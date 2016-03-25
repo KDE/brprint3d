@@ -2,10 +2,10 @@
 #define BEDOBJECT_H
 
 
-class bedObject
+class BedObject
 {
 public:
-    bedObject(int x, int y, int z);
+    BedObject(int x, int y, int z);
     double currTemp;
     int getX();
     int getY();

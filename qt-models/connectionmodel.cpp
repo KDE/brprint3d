@@ -1,16 +1,16 @@
 #include "connectionmodel.h"
 
-connectionModel::connectionModel(ConnectObject *c)
+ConnectionModel::ConnectionModel(ConnectObject *c)
 {
     connect = c;
 }
 
-int connectionModel::rowCount(const QModelIndex &parent) const
+int ConnectionModel::rowCount(const QModelIndex &parent) const
 {   Q_UNUSED(parent);
     return 5;
 }
 
-QVariant connectionModel::data(const QModelIndex &index, int role) const
+QVariant ConnectionModel::data(const QModelIndex &index, int role) const
 {
         if(Qt::DisplayRole != role){
                 return QVariant();
@@ -26,7 +26,7 @@ QVariant connectionModel::data(const QModelIndex &index, int role) const
         }
 }
 
-bool connectionModel::setData(const QModelIndex &index, const QVariant &value, int role)
+bool ConnectionModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if(role == Qt::EditRole){
         switch (index.row()) {

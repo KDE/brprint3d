@@ -6,10 +6,10 @@
 //Local Includes
 #include "connectobject.h"
 
-class connectionModel : public QAbstractListClass
+class ConnectionModel : public QAbstractListClass
 {
 public:
-    connectionModel(ConnectObject *c);
+    ConnectionModel(ConnectObject *c);
 
 private:
     //Override Methods

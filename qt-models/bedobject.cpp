@@ -1,33 +1,33 @@
 #include "bedobject.h"
 
-bedObject::bedObject(int x, int y, int z)
+BedObject::bedObject(int x, int y, int z)
 {
     areaX = x;
     areaY = y;
     areaZ = z;
 }
 
-int bedObject::getX()
+int BedObject::getX()
 {
     return areaX;
 }
 
-int bedObject::getY()
+int BedObject::getY()
 {
     return areaY;
 }
 
-int bedObject::getZ()
+int BedObject::getZ()
 {
     return areaZ;
 }
 
-double bedObject::getDesireTemp()
+double BedObject::getDesireTemp()
 {
     return desireTemp;
 }
 
-void bedObject::setDesireTemp(double t)
+void BedObject::setDesireTemp(double t)
 {
     desireTemp = t;
 }
