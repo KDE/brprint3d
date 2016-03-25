@@ -23,13 +23,16 @@ set(qtModels_SRCS
     qt-models/connectobject.cpp
     qt-models/connectionmodel.cpp
     )
+set(controllers_SRCS
+    controllers/printercontroller.cpp
+    )
 
 set(brprint3d_SRCS
     brprint3d.cpp
     main.cpp
     )
 
-add_executable(brprint3d ${brprint3d_SRCS} ${qtModels_SRCS})
+add_executable(brprint3d ${brprint3d_SRCS} ${qtModels_SRCS} ${controllers_SRCS})
 target_link_libraries(brprint3d Qt5::Core Qt5::Widgets)
 
 #install(TARGETS brprint3d RUNTIME DESTINATION bin)
