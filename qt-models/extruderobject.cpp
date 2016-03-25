@@ -29,6 +29,11 @@ void ExtruderObject::setFanSpeed(int s)
     fanSpeed = s;
 }
 
+void ExtruderObject::setExtrusionQnt(double q)
+{
+    extrusionQnt = q;
+}
+
 int ExtruderObject::getMaxTemp()
 {
     return maxTemp;
@@ -47,4 +52,9 @@ int ExtruderObject::getExtrusionSpeed()
 int ExtruderObject::getFanSpeed()
 {
     return fanSpeed;
+}
+
+double ExtruderObject::getExtrusionQnt()
+{
+   return extrusionQnt;
 }
