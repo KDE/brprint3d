@@ -20,6 +20,8 @@ set(qtModels_SRCS
     qt-models/bedobject.cpp
     qt-models/extruderobject.cpp
     qt-models/extrudermodel.cpp
+    qt-models/connectobject.cpp
+    qt-models/connectionmodel.cpp
     )
 
 set(brprint3d_SRCS
