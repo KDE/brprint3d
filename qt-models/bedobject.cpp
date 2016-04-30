@@ -22,7 +22,7 @@
  ======================================================================*/
 #include "bedobject.h"
 
-BedObject::bedObject(int x, int y, int z)
+BedObject::BedObject(int x, int y, int z)
 {
     areaX = x;
     areaY = y;

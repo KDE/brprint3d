@@ -22,7 +22,7 @@
  ======================================================================*/
 #include "bedmodel.h"
 
-BedModel::BedModel(bedObject *b)
+BedModel::BedModel(BedObject *b)
 {   bed = b;
     timer.start(1000);
     connect(&timer, &QTimer::timeout, this, &BedModel::updateBedTemperature);

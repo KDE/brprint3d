@@ -28,8 +28,9 @@
 //Local Includes
 #include "connectobject.h"
 
-class ConnectionModel : public QAbstractListClass
+class ConnectionModel : public QAbstractListModel
 {
+    Q_OBJECT
 public:
     ConnectionModel(ConnectObject *c);
 

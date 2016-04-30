@@ -38,7 +38,7 @@ QVariant ConnectionModel::data(const QModelIndex &index, int role) const
                 return QVariant();
         }
         else{
-            switch (index->row()){
+            switch (index.row()){
             case 0: return connect->getSerialPort();
             case 1: return connect->getTransmissionRate();
             case 2: return connect->getCacheSize();
@@ -61,4 +61,9 @@ bool ConnectionModel::setData(const QModelIndex &index, const QVariant &value, i
         return true;
     }
     return false;
+}
+
+Qt::ItemFlags ConnectionModel::flags(const QModelIndex &index) const
+{
+    return QAbstractListModel::flags(index) | Qt::ItemIsEditable;
 }
