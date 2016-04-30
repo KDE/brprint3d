@@ -1,1 +1,6 @@
-<RCC/>
+<RCC>
+    <qresource prefix="/base">
+        <file>main.qml</file>
+        <file>BedSettings.qml</file>
+    </qresource>
+</RCC>
