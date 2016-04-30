@@ -9,8 +9,8 @@ endif()
 
 find_package(Qt5 REQUIRED COMPONENTS
                 Core
-                Widgets
                 Test
+                Quick
             )
 
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
@@ -31,8 +31,10 @@ set(brprint3d_SRCS
     brprint3d.cpp
     main.cpp
     )
+qt5_add_resources(RESOURCES resources.qrc)
 
-add_executable(brprint3d ${brprint3d_SRCS} ${qtModels_SRCS} ${controllers_SRCS})
-target_link_libraries(brprint3d Qt5::Core Qt5::Widgets)
+add_executable(brprint3d ${brprint3d_SRCS} ${qtModels_SRCS} ${controllers_SRCS} ${RESOURCES})
+qt5_use_modules(brprint3d Quick Core)
+target_link_libraries(brprint3d Qt5::Core Qt5::Quick)
 
 #install(TARGETS brprint3d RUNTIME DESTINATION bin)
