@@ -20,17 +20,24 @@
  along with BrPrint3D. If not, see <http://www.gnu.org/licenses/>.
 
  ======================================================================*/
-#include <QtGui/QApplication>
 
-int main(int argc, char** argv)
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+
+int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
 
     QCoreApplication::setOrganizationName("KDE");
 
     QCoreApplication::setOrganizationDomain("kde.org");
 
     QCoreApplication::setApplicationName("brprint3d");
+
+    QQmlApplicationEngine engine;
+
+    engine.load(QUrl(QStringLiteral("qrc:/base/main.qml")));
 
     return app.exec();
 }
