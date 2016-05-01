@@ -4,5 +4,6 @@
         <file>BedSettings.qml</file>
         <file>MTextInput.qml</file>
         <file>ExtruderSettings.qml</file>
+        <file>ConnectionSettings.qml</file>
     </qresource>
 </RCC>
