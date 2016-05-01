@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>BedSettings.qml</file>
         <file>MTextInput.qml</file>
+        <file>ExtruderSettings.qml</file>
     </qresource>
 </RCC>
