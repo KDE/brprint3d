@@ -5,5 +5,7 @@
         <file>MTextInput.qml</file>
         <file>ExtruderSettings.qml</file>
         <file>ConnectionSettings.qml</file>
+        <file>SettingsButton.qml</file>
+        <file>MToolBar.qml</file>
     </qresource>
 </RCC>
