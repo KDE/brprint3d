@@ -2,5 +2,6 @@
     <qresource prefix="/base">
         <file>main.qml</file>
         <file>BedSettings.qml</file>
+        <file>MTextInput.qml</file>
     </qresource>
 </RCC>
