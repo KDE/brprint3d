@@ -7,5 +7,6 @@
         <file>ConnectionSettings.qml</file>
         <file>SettingsButton.qml</file>
         <file>MToolBar.qml</file>
+        <file>GCodeEditor.qml</file>
     </qresource>
 </RCC>
