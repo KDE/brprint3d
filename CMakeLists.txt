@@ -31,6 +31,7 @@ set(brprint3d_SRCS
     brprint3d.cpp
     main.cpp
     gcodehighlighter.cpp
+    gcodehandler.cpp
     )
 qt5_add_resources(RESOURCES resources.qrc)
 
