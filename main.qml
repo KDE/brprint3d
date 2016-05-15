@@ -1,6 +1,8 @@
-import QtQuick 2.5
-import QtQuick.Window 2.2
+import QtQuick.Layouts 1.0
+import QtQuick.Window 2.1
+import QtQuick 2.6
 import QtQuick.Controls 1.4
+import QtQuick.Dialogs 1.2
 
 ApplicationWindow{
     id: mainWindow
@@ -9,10 +11,14 @@ ApplicationWindow{
     title: "Br-Print3D"
     width: Screen.width
     height: Screen.height
+
     menuBar: MenuBar{
         Menu{
             title: qsTr("File")
-            MenuItem {text: qsTr("Open Gcode")}
+            MenuItem {
+                    text: qsTr("Open Gcode")
+                    action: fileOpenAction
+            }
             MenuItem {text: qsTr("Close")}
         }
 
@@ -34,7 +40,8 @@ ApplicationWindow{
             MenuItem {text: qsTr("Documentation")}
         }
     }
-    toolBar: Loader{ source: Qt.resolvedUrl("qrc:/base/MToolBar.qml") }
+    toolBar: MToolBar{
+    }
 
     Rectangle{
         id: recBackground
@@ -77,8 +84,17 @@ ApplicationWindow{
             SettingsButton{
                 id: gcodeEditor
                 text: qsTr("GCode Editor")
-                onClicked: generalLoader.setSource("")
+                onClicked: generalLoader.setSource("qrc:/base/GCodeEditor.qml")
             }
+        }
+    }
+
+    Action {
+        id: fileOpenAction
+        text: "Open"
+        onTriggered: {
+            fileDialog.selectExisting = true
+            fileDialog.open()
         }
     }
 
@@ -86,6 +102,13 @@ ApplicationWindow{
          id: generalLoader
          anchors.left: recBackground.right
          anchors.top: recBackground.top
+    }
+
+    FileDialog{
+        id: fileDialog
+        title: qsTr("Select a Gcode file:")
+        folder: shortcuts.home
+        nameFilters: [ "GCode Files (*.gcode *.gco)" ]
     }
 }
 
