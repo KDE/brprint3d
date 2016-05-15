@@ -10,35 +10,61 @@ ToolBar{
         anchors.fill: parent
         spacing: 5
 
-        ToolButton{
-            text: qsTr("Open GCode")
-        }
+        ToolButton{ action: openFileAction }
 
-        ToolButton{
-            text: qsTr("Connect")
-        }
+        ToolButton{ action: connectAction  }
 
         Item { Layout.fillWidth: true }
 
         ToolButton{
-            text: qsTr("Start")
+            action: startAction
             Layout.alignment: Qt.AlignRight
         }
 
         ToolButton{
-            text: qsTr("Pause")
+            action: pauseAction
             Layout.alignment: Qt.AlignRight
         }
 
         ToolButton{
-            text: qsTr("Stop")
+            action: stopAction
             Layout.alignment: Qt.AlignRight
         }
 
         ToolButton{
-            text: qsTr("Emergency Stop")
+            action: emergencyStop
             Layout.alignment: Qt.AlignRight
         }
 
+    }
+
+    Action{
+    id: openFileAction
+    text: qsTr("Open GCode")
+    }
+
+    Action{
+    id: connectAction
+    text: qsTr("Connect")
+    }
+
+    Action{
+    id: startAction
+    text: qsTr("Start")
+    }
+
+    Action{
+    id: pauseAction
+    text: qsTr("Pause")
+    }
+
+    Action{
+    id: stopAction
+    text: qsTr("Stop")
+    }
+
+    Action{
+    id: emergencyStop
+    text: qsTr("Emergency Stop")
     }
 }
