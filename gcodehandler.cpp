@@ -2,8 +2,32 @@
 #include <QTextStream>
 #include <QFileInfo>
 
-GCodeHandler::GCodeHandler(QObject *parent) : QObject(parent)
+GCodeHandler::GCodeHandler(QObject *parent) : QObject(parent),
+    m_target(0),
+    m_doc(0)
 {
+
+}
+
+QQuickItem *GCodeHandler::target()
+{
+    return m_target;
+}
+
+void GCodeHandler::setTarget(QQuickItem *target)
+{
+    m_doc = 0;
+    m_target = target;
+    if (!m_target)
+        return;
+
+    QVariant doc = m_target->property("textDocument");
+    if (doc.canConvert<QQuickTextDocument*>()) {
+        QQuickTextDocument *qqdoc = doc.value<QQuickTextDocument*>();
+        if (qqdoc)
+            m_doc = qqdoc->textDocument();
+    }
+    emit targetChanged();
 
 }
 
