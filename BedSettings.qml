@@ -12,7 +12,7 @@ Rectangle{
         Rectangle{
             width: bedSet.width
             height: 20
-            color: "gray"
+            color: "grey"
             Text {
                 color: "black"
                 text: qsTr("Bed Settings")
