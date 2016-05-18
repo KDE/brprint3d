@@ -7,8 +7,6 @@ import QtQuick.Dialogs 1.2
 Rectangle{
 
     Text {
-        anchors.centerIn: parent
-        anchors.top: parent
         text: qsTr("GCode Editor")
         color: "white"
     }
