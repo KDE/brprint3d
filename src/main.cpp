@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    engine.load(QUrl(QStringLiteral("qrc:/base/main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/base/qml-files/main.qml")));
 
     return app.exec();
 }
