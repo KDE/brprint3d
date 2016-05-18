@@ -40,8 +40,7 @@ ApplicationWindow{
             MenuItem {text: qsTr("Documentation")}
         }
     }
-    toolBar: MToolBar{
-    }
+    toolBar: MToolBar{}
 
     Rectangle{
         id: recBackground
@@ -66,25 +65,25 @@ ApplicationWindow{
             SettingsButton{
                 id: connectionSettings
                 text: qsTr("Connection \n Settings")
-                onClicked: generalLoader.setSource("qrc:/base/ConnectionSettings.qml")
+                onClicked: generalLoader.setSource("qrc:/base/qml-files/ConnectionSettings.qml")
             }
 
             SettingsButton{
                 id: bedSettings
                 text: qsTr("Bed \n Settings")
-                onClicked: generalLoader.setSource("qrc:/base/BedSettings.qml")
+                onClicked: generalLoader.setSource("qrc:/base/qml-files/BedSettings.qml")
             }
 
             SettingsButton{
                 id: extruderSettings
                 text: qsTr("Extruder \n Settings")
-                onClicked: generalLoader.setSource("qrc:/base/ExtruderSettings.qml")
+                onClicked: generalLoader.setSource("qrc:/base/qml-files/ExtruderSettings.qml")
             }
 
             SettingsButton{
                 id: gcodeEditor
                 text: qsTr("GCode Editor")
-                onClicked: generalLoader.setSource("qrc:/base/GCodeEditor.qml")
+                onClicked: generalLoader.setSource("qrc:/base/qml-files/GCodeEditor.qml")
             }
         }
     }
