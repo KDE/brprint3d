@@ -34,7 +34,7 @@ set(brprint3d_SRCS
     src/gcodehighlighter.cpp
     src/gcodehandler.cpp
     )
-qt5_add_resources(RESOURCES src/resources.qrc)
+qt5_add_resources(RESOURCES src/resources.qrc icons/icons.qrc)
 
 add_executable(brprint3d ${brprint3d_SRCS} ${qtModels_SRCS} ${controllers_SRCS} ${RESOURCES})
 qt5_use_modules(brprint3d Quick Core)
