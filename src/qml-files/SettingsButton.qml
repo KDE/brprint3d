@@ -4,7 +4,7 @@ import QtQuick.Window 2.2
 
 Rectangle{
     id: root
-    property color buttonColor: "midnightblue"
+    property color buttonColor: "transparent"
     property color onHoverColor: "mediumslateblue"
     property  alias text: label.text
     signal clicked
