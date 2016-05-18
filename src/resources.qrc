@@ -1,16 +1,12 @@
 <RCC>
     <qresource prefix="/base">
         <file>qml-files/main.qml</file>
-    </qresource>
-    <qresource prefix="/widgets">
-        <file>qml-files/MTextInput.qml</file>
-        <file>qml-files/MToolBar.qml</file>
         <file>qml-files/SettingsButton.qml</file>
-    </qresource>
-    <qresource prefix="/tabs">
         <file>qml-files/BedSettings.qml</file>
         <file>qml-files/ConnectionSettings.qml</file>
         <file>qml-files/ExtruderSettings.qml</file>
         <file>qml-files/GCodeEditor.qml</file>
+        <file>qml-files/MTextInput.qml</file>
+        <file>qml-files/MToolBar.qml</file>
     </qresource>
 </RCC>
