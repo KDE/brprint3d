@@ -44,17 +44,18 @@ ApplicationWindow{
 
     Rectangle{
         id: recBackground
-        width: Screen.width /10
+        width: Screen.width /9.5
         height: Screen.height
-        color: "grey"
+        color: "#1a1a1aff"
 
         Column{
             id: settingsColumn
             spacing: 2
 
             Rectangle{
-                width: settingsColumn.width
+                width: recBackground.width
                 height: title.height +2
+                color: "transparent"
                 Text {
                     id: title
                     text: qsTr("Br-Print3D")
@@ -64,25 +65,59 @@ ApplicationWindow{
 
             SettingsButton{
                 id: connectionSettings
-                text: qsTr("Connection \n Settings")
+                Image {
+                    source: "qrc:/images/usb.png"
+                    width: parent.width /2
+                    height: parent.height /1.5
+                    anchors.centerIn: parent
+                }
+                Text{
+                    text: qsTr("Connection Settings")
+                    color: "white"
+                    anchors.bottom: parent.bottom
+                }
                 onClicked: generalLoader.setSource("qrc:/base/qml-files/ConnectionSettings.qml")
             }
 
             SettingsButton{
                 id: bedSettings
-                text: qsTr("Bed \n Settings")
+                Image {
+                    source: "qrc:/images/bed.png"
+                    width: parent.width /2
+                    height: parent.height /1.5
+                    anchors.centerIn: parent
+                }
+                Text{
+                    text: qsTr("Bed Settings")
+                    color: "white"
+                    anchors.bottom: parent.bottom
+                }
                 onClicked: generalLoader.setSource("qrc:/base/qml-files/BedSettings.qml")
             }
 
             SettingsButton{
                 id: extruderSettings
-                text: qsTr("Extruder \n Settings")
+                Image {
+                    source: "qrc:/images/extruder.png"
+                    width: parent.width /2.7
+                    height: parent.height /1.5
+                    anchors.centerIn: parent
+                }
+                Text {
+                    text: qsTr("Extruder Settings")
+                    color: "white"
+                    anchors.bottom: parent.bottom
+                }
                 onClicked: generalLoader.setSource("qrc:/base/qml-files/ExtruderSettings.qml")
             }
 
             SettingsButton{
                 id: gcodeEditor
-                text: qsTr("GCode Editor")
+                Text {
+                    text: qsTr("GCode Settings")
+                    color: "white"
+                    anchors.bottom: parent.bottom
+                }
                 onClicked: generalLoader.setSource("qrc:/base/qml-files/GCodeEditor.qml")
             }
         }
