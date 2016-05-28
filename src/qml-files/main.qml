@@ -9,15 +9,16 @@ ApplicationWindow{
     visible: true
     color: "white"
     title: "Br-Print3D"
-    width: Screen.width
-    height: Screen.height
+
+    //width: Screen.width
+    //height: Screen.height
 
     menuBar: MenuBar{
         Menu{
             title: qsTr("File")
             MenuItem {
-                    text: qsTr("Open Gcode")
-                    action: fileOpenAction
+                text: qsTr("Open Gcode")
+                action: fileOpenAction
             }
             MenuItem {text: qsTr("Close")}
         }
@@ -42,86 +43,159 @@ ApplicationWindow{
     }
     toolBar: MToolBar{}
 
-    Rectangle{
-        id: recBackground
-        width: Screen.width /9.5
+    Row{
+        width: Screen.width
         height: Screen.height
-        color: "#1a1a1aff"
+        spacing: 5
 
-        Column{
-            id: settingsColumn
-            spacing: 2
+        //First Item
+        Rectangle{
+            id: backgroundRec
+            width: Screen.width /9.5
+            height: Screen.height
+            color: "#1a1a1aff"
 
-            Rectangle{
-                width: recBackground.width
-                height: title.height +2
-                color: "transparent"
-                Text {
-                    id: title
-                    text: qsTr("Br-Print3D")
-                    horizontalAlignment: parent.Center
-                }
-             }
+            Column{
+                spacing: 2
 
-            SettingsButton{
-                id: connectionSettings
-                Image {
-                    source: "qrc:/images/usb.png"
-                    width: parent.width /2
-                    height: parent.height /1.5
-                    anchors.centerIn: parent
+                Rectangle{
+                    width: backgroundRec.width
+                    height: title.height +2
+                    color: "transparent"
+                    Text {
+                        id: title
+                        text: qsTr("Br-Print3D")
+                        horizontalAlignment: parent.Center
+                    }
                 }
-                Text{
-                    text: qsTr("Connection Settings")
-                    color: "white"
-                    anchors.bottom: parent.bottom
+
+                SettingsButton{
+                    id: connectionSettings
+                    Image {
+                        source: "qrc:/images/usb.png"
+                        width: parent.width /2
+                        height: parent.height /1.5
+                        anchors.centerIn: parent
+                    }
+                    Text{
+                        text: qsTr("Connection Settings")
+                        color: "white"
+                        anchors.bottom: parent.bottom
+                    }
+                    onClicked: {
+                        connectionSettingsTab.visible = !connectionSettingsTab.visible
+                        bedSettingsTab.visible = false
+                        extruderSettingsTab.visible = false
+                        gcodeEditorTab.visible = false
+
+                    }
                 }
-                onClicked: generalLoader.setSource("qrc:/base/qml-files/ConnectionSettings.qml")
+
+                SettingsButton{
+                    id: bedSettings
+                    Image {
+                        source: "qrc:/images/bed.png"
+                        width: parent.width /2
+                        height: parent.height /1.5
+                        anchors.centerIn: parent
+                    }
+                    Text{
+                        text: qsTr("Bed Settings")
+                        color: "white"
+                        anchors.bottom: parent.bottom
+                    }
+                    onClicked: {
+                        bedSettingsTab.visible = !bedSettingsTab.visible
+                        connectionSettingsTab.visible = false
+                        extruderSettingsTab.visible = false
+                        gcodeEditorTab.visible = false
+                    }
+                }
+
+                SettingsButton{
+                    id: extruderSettings
+                    Image {
+                        source: "qrc:/images/extruder.png"
+                        width: parent.width /2.7
+                        height: parent.height /1.5
+                        anchors.centerIn: parent
+                    }
+                    Text {
+                        text: qsTr("Extruder Settings")
+                        color: "white"
+                        anchors.bottom: parent.bottom
+                    }
+
+                    onClicked: {
+                        extruderSettingsTab.visible = !extruderSettingsTab.visible
+                        connectionSettingsTab.visible = false
+                        bedSettingsTab.visible = false
+                        gcodeEditorTab.visible = false
+                    }
+
+                }
+
+                SettingsButton{
+                    id: gcodeEditor
+                    Text {
+                        text: qsTr("GCode Settings")
+                        color: "white"
+                        anchors.bottom: parent.bottom
+                    }
+                    onClicked: {
+                        gcodeEditorTab.visible = !gcodeEditorTab.visible
+                        connectionSettingsTab.visible = false
+                        bedSettingsTab.visible = false
+                        extruderSettingsTab.visible = false
+                    }
+                }
+            }//End of column
+        }
+
+        //Second Item
+        Row{
+            id: tabs
+            spacing: 5
+            ConnectionSettings{
+                id: connectionSettingsTab
+                visible: false
             }
+            BedSettings{
+                id: bedSettingsTab
+                visible: false
 
-            SettingsButton{
-                id: bedSettings
-                Image {
-                    source: "qrc:/images/bed.png"
-                    width: parent.width /2
-                    height: parent.height /1.5
-                    anchors.centerIn: parent
-                }
-                Text{
-                    text: qsTr("Bed Settings")
-                    color: "white"
-                    anchors.bottom: parent.bottom
-                }
-                onClicked: generalLoader.setSource("qrc:/base/qml-files/BedSettings.qml")
             }
+            ExtruderSettings{
+                id: extruderSettingsTab
+                visible: false
 
-            SettingsButton{
-                id: extruderSettings
-                Image {
-                    source: "qrc:/images/extruder.png"
-                    width: parent.width /2.7
-                    height: parent.height /1.5
-                    anchors.centerIn: parent
-                }
-                Text {
-                    text: qsTr("Extruder Settings")
-                    color: "white"
-                    anchors.bottom: parent.bottom
-                }
-                onClicked: generalLoader.setSource("qrc:/base/qml-files/ExtruderSettings.qml")
             }
+            GCodeEditor{
+                id: gcodeEditorTab
+                visible: false
 
-            SettingsButton{
-                id: gcodeEditor
-                Text {
-                    text: qsTr("GCode Settings")
-                    color: "white"
-                    anchors.bottom: parent.bottom
-                }
-                onClicked: generalLoader.setSource("qrc:/base/qml-files/GCodeEditor.qml")
             }
         }
-    }
+
+        //Third Item
+        Rectangle{
+            id: _3dView
+            color: "yellow"
+            width: parent.width - tabs.width - backgroundRec.width - realTime.width
+            height: Screen.height
+
+            Text{
+                text: qsTr("3D View")
+                anchors.centerIn: parent
+            }
+        }
+
+        //Four Item
+        RealTimeWidget{
+            id: realTime
+        }
+
+    }//End Row
 
     Action {
         id: fileOpenAction
@@ -131,13 +205,6 @@ ApplicationWindow{
             fileDialog.open()
         }
     }
-
-    Loader{
-         id: generalLoader
-         anchors.left: recBackground.right
-         anchors.top: recBackground.top
-    }
-
     FileDialog{
         id: fileDialog
         title: qsTr("Select a Gcode file:")
