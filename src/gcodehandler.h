@@ -13,6 +13,7 @@ class GCodeHandler : public QObject
     Q_PROPERTY (QQuickItem *target READ target WRITE setTarget NOTIFY targetChanged)
     Q_PROPERTY (QString fileName READ fileName WRITE setFileName NOTIFY fileNameChanged)
     Q_PROPERTY (QString fileContent READ fileContent WRITE setFileContent NOTIFY fileContentChanged)
+    Q_PROPERTY (QUrl fileUrl READ fileUrl WRITE setFileUrl NOTIFY fileUrlChanged)
     Q_INVOKABLE void saveFile();
 
 public:
@@ -22,15 +23,16 @@ public:
 
     QString fileName() const;
     QString fileContent() const;
+    QUrl fileUrl() const;
 
-    void setFileContent(QString path);
-    void setFileName(QString n);
-    void setFilePath(QUrl &name);
+    void setFileContent(const QString &content);
+    void setFileName(const QString &n);
+    void setFileUrl(const QUrl &name);
 
 private:
     QString m_fileName;
     QString m_fileContent;
-    QUrl m_filePath;
+    QUrl m_fileUrl;
 
     QTextDocument *m_doc;
     QQuickItem *m_target;
@@ -38,6 +40,7 @@ private:
 signals:
     void fileContentChanged(const QString &content);
     void fileNameChanged(const QString &name);
+    void fileUrlChanged(const QUrl &url);
     void targetChanged();
 };
 
