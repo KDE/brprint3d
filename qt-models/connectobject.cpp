@@ -27,52 +27,53 @@ ConnectObject::ConnectObject()
 
 }
 
-void ConnectObject::setSerialPort(QString s)
+void ConnectObject::setSerialPort(const QString &s)
 {
-    serialPort = s;
+    m_serialPort = s;
 }
 
-void ConnectObject::setTransmissionRate(int r)
+void ConnectObject::setTransmissionRate(const int &r)
 {
-    transmissionRate = r;
+    m_transmissionRate = r;
 }
 
-void ConnectObject::setCacheSize(int s)
+void ConnectObject::setCacheSize(const int &s)
 {
-    cacheSize = s;
+    m_cacheSize = s;
 }
 
-void ConnectObject::setResetOnConnect(bool b)
+void ConnectObject::setResetOnConnect(const bool &b)
 {
-    resetOnConnect = b;
+    m_resetOnConnect = b;
 }
 
-void ConnectObject::setPrintLog(bool b)
+void ConnectObject::setPrintLog(const bool &b)
 {
-    printLog = b;
+    m_printLog = b;
 }
 
-QString ConnectObject::getSerialPort()
+QString ConnectObject::serialPort() const
 {
-    return serialPort;
+    return m_serialPort;
 }
 
-int ConnectObject::getTransmissionRate()
+int ConnectObject::transmissionRate() const
 {
-    return transmissionRate;
+    return m_transmissionRate;
 }
 
-int ConnectObject::getCacheSize()
+int ConnectObject::cacheSize() const
 {
-    return cacheSize;
+    return m_cacheSize;
 }
 
-bool ConnectObject::getResetOnConnect()
+int ConnectObject::resetOnConnect() const
 {
-    return resetOnConnect;
+    return m_resetOnConnect;
 }
 
-bool ConnectObject::getPrintLog()
+int ConnectObject::printLog() const
 {
-    return printLog;
+    return m_printLog;
 }
+
