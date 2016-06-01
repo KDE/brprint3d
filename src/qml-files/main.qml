@@ -13,6 +13,7 @@ ApplicationWindow{
     //width: Screen.width
     //height: Screen.height
 
+
     menuBar: MenuBar{
         Menu{
             title: qsTr("File")
@@ -44,6 +45,7 @@ ApplicationWindow{
     toolBar: MToolBar{}
 
     Row{
+        id: mainRow
         width: Screen.width
         height: Screen.height
         spacing: 5
@@ -173,8 +175,8 @@ ApplicationWindow{
             GCodeEditor{
                 id: gcodeEditorTab
                 visible: false
-
             }
+
         }
 
         //Third Item
@@ -205,11 +207,15 @@ ApplicationWindow{
             fileDialog.open()
         }
     }
+
     FileDialog{
         id: fileDialog
         title: qsTr("Select a Gcode file:")
         folder: shortcuts.home
         nameFilters: [ "GCode Files (*.gcode *.gco)" ]
+        onAccepted: {
+            gcodeHandler.fileUrl = fileDialog.fileUrl
+        }
     }
 }
 
