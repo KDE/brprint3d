@@ -24,32 +24,68 @@
 
 BedObject::BedObject(int x, int y, int z)
 {
-    areaX = x;
-    areaY = y;
-    areaZ = z;
-}
-
-int BedObject::getX()
-{
-    return areaX;
-}
-
-int BedObject::getY()
-{
-    return areaY;
-}
-
-int BedObject::getZ()
-{
-    return areaZ;
+    m_areaX = x;
+    m_areaY = y;
+    m_areaZ = z;
 }
 
 double BedObject::getDesireTemp()
 {
-    return desireTemp;
+    return m_desireTemp;
 }
 
 void BedObject::setDesireTemp(double t)
 {
-    desireTemp = t;
+    m_desireTemp = t;
+}
+
+int BedObject::areaX() const
+{
+    return m_areaX;
+}
+
+int BedObject::areaY() const
+{
+    return m_areaY;
+}
+
+int BedObject::areaZ() const
+{
+    return m_areaZ;
+}
+
+double BedObject::desireTemp() const
+{
+    return m_desireTemp;
+}
+
+double BedObject::currTemp() const
+{
+    return m_currTemp;
+}
+
+void BedObject::setAreaX(const int &x)
+{
+    m_areaX = x;
+}
+
+void BedObject::setAreaY(const int &y)
+{
+    m_areaY = y;
+}
+
+void BedObject::setAreaZ(const int &z)
+{
+    m_areaZ = z;
+}
+
+void BedObject::setdDesireTemp(const double &t)
+{
+    m_desireTemp = t;
+}
+
+//Dont know about this method
+void BedObject::setCurrTemp(const double &t)
+{
+    m_currTemp = t;
 }
