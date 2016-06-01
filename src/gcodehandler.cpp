@@ -36,22 +36,12 @@ void GCodeHandler::setTarget(QQuickItem *target)
 */
 void GCodeHandler::saveFile() //Default pattern .gcode - Needs handle it?
 {
-    QFile gcode(m_filePath.toLocalFile());
+    QFile gcode(m_fileUrl.toLocalFile());
     if(!gcode.open(QFile::WriteOnly | QFile::Text)){
         gcode.write(m_doc->toPlainText().toUtf8());
         gcode.close();
     }
 
-}
-
-void GCodeHandler::setFilePath(QUrl &name)
-{
-    if(m_filePath != name){
-        m_filePath = name;
-        QString path = name.toLocalFile();
-        setFileName(QFileInfo(path).baseName());
-        setFileContent(path);
-    }
 }
 
 QString GCodeHandler::fileName() const
@@ -64,23 +54,39 @@ QString GCodeHandler::fileContent() const
     return m_fileContent;
 }
 
-void GCodeHandler::setFileContent(QString path)
+QUrl GCodeHandler::fileUrl() const
 {
-    if (!path.isEmpty()) { //Remove this test???
+    return m_fileUrl;
+}
+
+void GCodeHandler::setFileUrl(const QUrl &name)
+{
+    if(m_fileUrl != name){
+        m_fileUrl = name;
+        QString path = name.toLocalFile();
         QFile gcode(path);
         if (!gcode.open(QFile::ReadOnly | QFile::Text)) {
             return;
         }
         QTextStream in(&gcode);
-        m_fileContent = in.readAll();
-        emit fileContentChanged(m_fileContent);
+        QString content = in.readAll();
+        setFileName(QFileInfo(path).baseName());
+        setFileContent(content);
     }
 }
 
-void GCodeHandler::setFileName(QString n)
+void GCodeHandler::setFileContent(const QString& content)
+{
+        m_fileContent = content;
+        emit fileContentChanged(m_fileContent);
+}
+
+void GCodeHandler::setFileName(const QString& n)
 {
     if(m_fileName != n){
         m_fileName = n;
         emit fileNameChanged(m_fileName);
     }
 }
+
+
