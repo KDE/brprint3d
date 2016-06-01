@@ -17,12 +17,10 @@ find_package(Qt5 REQUIRED COMPONENTS
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
 set(qtModels_SRCS
-    qt-models/bedmodel.cpp
     qt-models/bedobject.cpp
     qt-models/extruderobject.cpp
     qt-models/extrudermodel.cpp
     qt-models/connectobject.cpp
-    qt-models/connectionmodel.cpp
     )
 set(controllers_SRCS
     controllers/printercontroller.cpp
