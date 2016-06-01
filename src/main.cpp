@@ -31,15 +31,14 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     QCoreApplication::setOrganizationName("KDE");
-
     QCoreApplication::setOrganizationDomain("kde.org");
-
     QCoreApplication::setApplicationName("brprint3d");
 
-    qmlRegisterType<GCodeHandler>("brprint3d", 1, 0, "GcodeHandler");
+    qmlRegisterUncreatableType<GCodeHandler>("brprint3d", 1, 0, "GcodeHandler", " dont use that ");
 
     QQmlApplicationEngine engine;
 
+    engine.rootContext()->setContextProperty("gcodeHandler", new GCodeHandler());
     engine.load(QUrl(QStringLiteral("qrc:/base/qml-files/main.qml")));
 
     return app.exec();
