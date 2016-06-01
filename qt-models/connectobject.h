@@ -29,25 +29,42 @@
 class ConnectObject : QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY(QString serialPort READ serialPort WRITE setSerialPort NOTIFY serialPortChanged)
+    Q_PROPERTY(int transmissionRate READ transmissionRate WRITE setTransmissionRate NOTIFY transmissionRateChanged)
+    Q_PROPERTY(int cacheSize READ cacheSize WRITE setCacheSize NOTIFY cacheSizeChanged)
+    Q_PROPERTY(bool resetOnConnect READ resetOnConnect WRITE setResetOnConnect NOTIFY resetOnConnectChanged)
+    Q_PROPERTY(bool printLog READ printLog WRITE setPrintLog NOTIFY printLogChanged)
+
 public:
     ConnectObject();
-    void setSerialPort(QString s);
-    void setTransmissionRate(int r);
-    void setCacheSize(int s);
-    void setResetOnConnect(bool b);
-    void setPrintLog(bool b);
-    QString getSerialPort();
-    int getTransmissionRate();
-    int getCacheSize();
-    bool getResetOnConnect();
-    bool getPrintLog();
+    void setSerialPort(const QString &s);
+    void setTransmissionRate(const int &r);
+    void setCacheSize(const int &s);
+    void setResetOnConnect(const bool &b);
+    void setPrintLog(const bool &b);
+
+    QString serialPort() const;
+    int transmissionRate() const;
+    int cacheSize() const;
+    int resetOnConnect() const;
+    int printLog() const;
+
 
 private:
-    QString serialPort;
-    int transmissionRate;
-    int cacheSize;
-    bool resetOnConnect;
-    bool printLog;
+    QString m_serialPort;
+    int m_transmissionRate;
+    int m_cacheSize;
+    bool m_resetOnConnect;
+    bool m_printLog;
+
+signals:
+    void serialPortChanged(const QString &s);
+    void transmissionRateChanged(const int &t);
+    void cacheSizeChanged(const int &c);
+    void resetOnConnectChanged(const bool &b);
+    void printLogChanged(const bool &b);
+
 };
 
 #endif // CONNECTOBJECT_H
