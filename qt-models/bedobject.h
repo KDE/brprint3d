@@ -23,9 +23,11 @@
 #ifndef BEDOBJECT_H
 #define BEDOBJECT_H
 
+#include <QObject>
 
-class BedObject
+class BedObject : QObject
 {
+    Q_OBJECT
 public:
     BedObject(int x, int y, int z);
     double currTemp;

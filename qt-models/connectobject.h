@@ -24,9 +24,11 @@
 #define CONNECTOBJECT_H
 //Qt Includes
 #include <QtCore/QString>
+#include <QObject>
 
-class ConnectObject
+class ConnectObject : QObject
 {
+    Q_OBJECT
 public:
     ConnectObject();
     void setSerialPort(QString s);
