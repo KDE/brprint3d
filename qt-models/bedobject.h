@@ -28,20 +28,45 @@
 class BedObject : QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY(int areaX READ areaX WRITE setAreaX NOTIFY areaXChanged)
+    Q_PROPERTY(int areaY READ areaY WRITE setAreaY NOTIFY areaYChanged)
+    Q_PROPERTY(int areaZ READ areaZ WRITE setAreaZ NOTIFY areaZChanged)
+    Q_PROPERTY(double desireTemp READ desireTemp WRITE setDesireTemp NOTIFY desireTempChanged)
+    Q_PROPERTY(double currTemp READ currTemp WRITE setCurrTemp NOTIFY currTempChanged)
+
 public:
     BedObject(int x, int y, int z);
-    double currTemp;
-    int getX();
-    int getY();
-    int getZ();
+    double m_currTemp;
     double getDesireTemp();
     void setDesireTemp(double t);
 
+    int areaX() const;
+    int areaY() const;
+    int areaZ() const;
+    double desireTemp() const; //Desire Temp
+    double currTemp() const;//Current Temp
+
+    void setAreaX(const int &x);
+    void setAreaY(const int &y);
+    void setAreaZ(const int &z);
+    void setdDesireTemp(const double &t);
+    void setCurrTemp(const double &t);
+
 private:
-    double desireTemp;
-    int areaX;
-    int areaY;
-    int areaZ;
+    double m_desireTemp;
+    int m_areaX;
+    int m_areaY;
+    int m_areaZ;
+
+signals:
+    void areaXChanged(const int &x);
+    void areaYChanged(const int &y);
+    void areaZChanged(const int &z);
+    void desireTempChanged(const double &t);
+    void currTempChanged(const double &t);
+
+
 };
 
 #endif // BEDOBJECT_H
