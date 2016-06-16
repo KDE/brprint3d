@@ -10,6 +10,7 @@ Rectangle{
     color: "#31363b"
     width: Screen.width /4
     height: Screen.height
+    property color textColor: "#eff0f1"
     GridLayout{
         id: grid
         columns: 3
@@ -20,14 +21,14 @@ Rectangle{
 
         Text {
             text: qsTr("Extruder:")
-            color: "#eff0f1"
+            color: textColor
         }
         //How to set a extern list? use a radiobutton instead??
         ComboBox{
             id: cbExtrudersQnt
             model: [1]
             style: ComboBoxStyle{
-                textColor: "#eff0f1"
+                textColor: textColor
             }
         }
         Text{
@@ -36,51 +37,50 @@ Rectangle{
 
         Text{
             text: qsTr("Temperature:")
-            color: "#eff0f1"
+            color: textColor
         }
         MTextInput{
 
         }
         Text{
             text: qsTr("ºC")
-            color: "#eff0f1"
+            color: textColor
         }
         Text{
             text: qsTr("Moviment Speed:")
-            color: "#eff0f1"
+            color: textColor
         }
         MTextInput{
 
         }
         Text{
             text: qsTr("mm/s")
-            color: "#eff0f1"
+            color: textColor
         }
         Text{
             text: qsTr("Extrusion Speed(mm/s):")
-            color: "#eff0f1"
+            color: textColor
         }
         MTextInput{
 
         }
         Text{
             text: qsTr("mm/s")
-            color: "#eff0f1"
+            color: textColor
         }
         Text{
             text: qsTr("Fan Speed:")
-            color: "#eff0f1"
+            color: textColor
         }
         TextField{
-            textColor: "#eff0f1"
-            inputMask: "000"
+            textColor: textColor
             activeFocusOnPress: true
-            validator: IntValidator{}
+            validator: IntValidator{bottom: 0; top: 100}
             text: "100"
         }
         Text{
             text: qsTr("%")
-            color: "#eff0f1"
+            color: textColor
         }
 
         Text{
@@ -95,7 +95,7 @@ Rectangle{
             anchors.margins: 5
             Layout.columnSpan: 3
             text: qsTr(" Please, don't forget to add here the maximum \n temperature that your extruder have. This is\n for your safety and of the 3DPrinter.")
-            color: "#eff0f1"
+            color: textColor
             horizontalAlignment: Text.Center
         }
 
@@ -108,7 +108,7 @@ Rectangle{
         }
         Text{
             text: qsTr("ºC")
-            color: "#eff0f1"
+            color: textColor
         }
 
     }
