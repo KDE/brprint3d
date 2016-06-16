@@ -17,20 +17,9 @@ Rectangle{
         anchors.margins: 3
 
         Text {
-            id: text
-            text: qsTr("GCode Editor")
-            color: "white"
-        }
-
-        Text {
             text: qsTr("GCode Header")
             Layout.fillWidth: true
-            Layout.fillHeight: true
-            Rectangle{
-                color: "transparent"
-                anchors.fill: parent
-
-            }
+            color: "#eff0f1"
         }
 
         TextArea{
@@ -49,12 +38,7 @@ Rectangle{
         Text {
             text: qsTr("GCode Footer")
             Layout.fillWidth: true
-            Layout.fillHeight: true
-            Rectangle{
-                color: "transparent"
-                anchors.fill: parent
-
-            }
+            color: "#eff0f1"
         }
 
         TextArea{
