@@ -1,12 +1,14 @@
 import QtQuick 2.0
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
+import QtQuick.Controls 1.4
 
 Rectangle{
     id: bedSet
     color: "#31363b"
     width: parent.width
     property bool heatedBed: true
+    property color textColor: "#eff0f1"
 
         GridLayout{
         columns: 3
@@ -18,50 +20,63 @@ Rectangle{
 
         Text{
             text: qsTr("Area X:")
-            color: "#eff0f1"
+            color: textColor
         }
-        MTextInput{
 
+        TextField{
+            textColor: bedSet.textColor
+            activeFocusOnPress: true
+            validator: IntValidator{bottom:100}
+            text: "200"
         }
         Text {
             text: qsTr("mm")
-            color: "#eff0f1"
+            color: textColor
         }
 
         Text{
             text: qsTr("Area Y:")
-            color: "#eff0f1"
+            color: textColor
         }
-        MTextInput{
-
+        TextField{
+            textColor: bedSet.textColor
+            activeFocusOnPress: true
+            validator: IntValidator{bottom:100}
+            text: "200"
         }
         Text {
             text: qsTr("mm")
-            color: "#eff0f1"
+            color: textColor
         }
 
         Text{
             text: qsTr("Area Z:")
-            color: "#eff0f1"
+            color: textColor
         }
-        MTextInput{
-
+        TextField{
+            textColor: bedSet.textColor
+            activeFocusOnPress: true
+            validator: IntValidator{bottom:100}
+            text: "200"
         }
         Text {
             text: qsTr("mm")
-            color: "#eff0f1"
+            color: textColor
         }
 
         Text{
             text: qsTr("Temperature:")
-            color: "#eff0f1"
+            color: textColor
         }
-        MTextInput{
-
+        TextField{
+            textColor: bedSet.textColor
+            activeFocusOnPress: true
+            validator: IntValidator{bottom: 0; top: 130}
+            text: "110"
         }
         Text {
             text: qsTr("ºC")
-            color: "#eff0f1"
+            color: textColor
         }
     }
 }
