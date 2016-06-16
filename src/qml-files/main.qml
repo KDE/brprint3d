@@ -9,9 +9,15 @@ ApplicationWindow{
     visible: true
     color: "white"
     title: "Br-Print3D"
+    //Define Minimum and Maximum width/height for the app window
+    minimumWidth: 800
+    minimumHeight: 600
+    maximumWidth: 1920
+    maximumHeight: 1080
 
-    //width: Screen.width
-    //height: Screen.height
+    //Define default width/height
+    width: Screen.width
+    height: Screen.height
 
 
     menuBar: MenuBar{
@@ -44,26 +50,25 @@ ApplicationWindow{
     }
     toolBar: MToolBar{}
 
-    Row{
-        id: mainRow
-        width: Screen.width
-        height: Screen.height
-        spacing: 5
-
-        //First Item
+//-------------Settings Bar-------------------------------------------------------
         Rectangle{
             id: backgroundRec
-            width: Screen.width /9.5
-            height: Screen.height
+            width: parent.width /9.5
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
             color: "#1a1a1aff"
 
             Column{
                 spacing: 2
+                anchors.left: parent.left
+                anchors.right: parent.right
 
                 Rectangle{
-                    width: backgroundRec.width
                     height: title.height +2
                     color: "transparent"
+                    anchors.left: parent.left
+                    anchors.right: parent.right
                     Text {
                         id: title
                         text: qsTr("Br-Print3D")
@@ -73,17 +78,8 @@ ApplicationWindow{
 
                 SettingsButton{
                     id: connectionSettings
-                    Image {
-                        source: "qrc:/images/usb.png"
-                        width: parent.width /2
-                        height: parent.height /1.5
-                        anchors.centerIn: parent
-                    }
-                    Text{
-                        text: qsTr("Connection Settings")
-                        color: "white"
-                        anchors.bottom: parent.bottom
-                    }
+                    source: "qrc:/images/usb.png"
+                    text: qsTr("Connection Settings")
                     onClicked: {
                         connectionSettingsTab.visible = !connectionSettingsTab.visible
                         bedSettingsTab.visible = false
@@ -95,17 +91,8 @@ ApplicationWindow{
 
                 SettingsButton{
                     id: bedSettings
-                    Image {
-                        source: "qrc:/images/bed.png"
-                        width: parent.width /2
-                        height: parent.height /1.5
-                        anchors.centerIn: parent
-                    }
-                    Text{
-                        text: qsTr("Bed Settings")
-                        color: "white"
-                        anchors.bottom: parent.bottom
-                    }
+                    source: "qrc:/images/bed.png"
+                    text: qsTr("Bed Settings")
                     onClicked: {
                         bedSettingsTab.visible = !bedSettingsTab.visible
                         connectionSettingsTab.visible = false
@@ -116,18 +103,8 @@ ApplicationWindow{
 
                 SettingsButton{
                     id: extruderSettings
-                    Image {
-                        source: "qrc:/images/extruder.png"
-                        width: parent.width /2.7
-                        height: parent.height /1.5
-                        anchors.centerIn: parent
-                    }
-                    Text {
-                        text: qsTr("Extruder Settings")
-                        color: "white"
-                        anchors.bottom: parent.bottom
-                    }
-
+                    source: "qrc:/images/extruder.png"
+                    text: qsTr("Extruder Settings")
                     onClicked: {
                         extruderSettingsTab.visible = !extruderSettingsTab.visible
                         connectionSettingsTab.visible = false
@@ -139,11 +116,7 @@ ApplicationWindow{
 
                 SettingsButton{
                     id: gcodeEditor
-                    Text {
-                        text: qsTr("GCode Settings")
-                        color: "white"
-                        anchors.bottom: parent.bottom
-                    }
+                    text: qsTr("GCode Settings")
                     onClicked: {
                         gcodeEditorTab.visible = !gcodeEditorTab.visible
                         connectionSettingsTab.visible = false
@@ -154,50 +127,62 @@ ApplicationWindow{
             }//End of column
         }
 
-        //Second Item
-        Row{
+//---------------------Settings (Show/Hide) ---------------
+        Item {
             id: tabs
-            spacing: 5
+            anchors.left: backgroundRec.right
+            anchors.bottom: backgroundRec.bottom
+            anchors.top: backgroundRec.top
+            width: visibleChildren.length !== 0 ? mainWindow.width/4 : 0
             ConnectionSettings{
                 id: connectionSettingsTab
+                anchors.fill: parent
                 visible: false
             }
             BedSettings{
+                anchors.fill: parent
                 id: bedSettingsTab
                 visible: false
 
             }
             ExtruderSettings{
                 id: extruderSettingsTab
+                anchors.fill: parent
                 visible: false
 
             }
             GCodeEditor{
+                anchors.fill: parent
                 id: gcodeEditorTab
                 visible: false
             }
-
         }
 
-        //Third Item
+//----------------3DView----------------------------------
         Rectangle{
             id: _3dView
             color: "yellow"
-            width: parent.width - tabs.width - backgroundRec.width - realTime.width
+            anchors.left: tabs.right
+            anchors.bottom: parent.bottom
+            anchors.top: parent.top
+            anchors.right: realTime.left
+
             height: Screen.height
 
             Text{
-                text: qsTr("3D View")
+                text: qsTr("3D View") + _3dView.width
                 anchors.centerIn: parent
             }
         }
-
-        //Four Item
+//--------------Real Time Widget ------------------------
         RealTimeWidget{
             id: realTime
+            anchors.bottom: parent.bottom
+            anchors.top: parent.top
+            anchors.right: parent.right
         }
 
-    }//End Row
+//----------Others---------------------------------------
 
     Action {
         id: fileOpenAction
