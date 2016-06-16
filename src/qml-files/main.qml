@@ -19,6 +19,8 @@ ApplicationWindow{
     width: Screen.width
     height: Screen.height
 
+    property color textColor: "#eff0f1"
+
 
     menuBar: MenuBar{
         Menu{
@@ -81,142 +83,158 @@ ApplicationWindow{
         }
     }
 
-//-------------Settings Bar-------------------------------------------------------
-        Rectangle{
-            id: backgroundRec
-            width: parent.width /9.5
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
-            color: "#232629"
+    //-------------Settings Bar-------------------------------------------------------
+    Rectangle{
+        id: backgroundRec
+        width: parent.width /9.5
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        color: "#232629"
 
-            Column{
-                spacing: 2
-                anchors.left: parent.left
-                anchors.right: parent.right
+        Column{
+            spacing: 5
+            anchors.fill: parent
 
-                Rectangle{
-                    height: title.height +2
-                    color: "transparent"
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    Text {
-                        id: title
-                        text: qsTr("Br-Print3D")
-                        horizontalAlignment: parent.Center
-                    }
+            Rectangle{
+                color:"#3daee9"
+                width: parent.width
+                height: 30
+                Text {
+                    id: title
+                    text: qsTr("Br-Print3D")
+                    color: textColor
                 }
+            }
 
-                SettingsButton{
-                    id: connectionSettings
-                    source: "qrc:/images/usb.png"
-                    text: qsTr("Connection Settings")
-                    clickControl: connectionSettingsTab.visible ? true : false
-                    onClicked: {
-                        connectionSettingsTab.visible = !connectionSettingsTab.visible
-                        bedSettingsTab.visible = false
-                        extruderSettingsTab.visible = false
-                        gcodeEditorTab.visible = false
-                    }
+            SettingsButton{
+                id: connectionSettings
+                text: qsTr("Connection Settings")
+                clickControl: connectionSettingsTab.visible ? true : false
+                onClicked: {
+                    connectionSettingsTab.visible = !connectionSettingsTab.visible
+                    bedSettingsTab.visible = false
+                    extruderSettingsTab.visible = false
+                    gcodeEditorTab.visible = false
+                    filamentSettingstab.visible = false
                 }
+            }
 
-                SettingsButton{
-                    id: bedSettings
-                    source: "qrc:/images/bed.png"
-                    text: qsTr("Bed Settings")
-                    clickControl:bedSettingsTab.visible ? true : false
-                    onClicked: {
-                        bedSettingsTab.visible = !bedSettingsTab.visible
-                        connectionSettingsTab.visible = false
-                        extruderSettingsTab.visible = false
-                        gcodeEditorTab.visible = false
-                    }
+            SettingsButton{
+                id: gcodeEditor
+                text: qsTr("GCode Settings")
+                clickControl: gcodeEditorTab.visible ? true : false
+                onClicked: {
+                    gcodeEditorTab.visible = !gcodeEditorTab.visible
+                    connectionSettingsTab.visible = false
+                    bedSettingsTab.visible = false
+                    extruderSettingsTab.visible = false
+                    filamentSettingstab.visible = false
                 }
+            }
 
-                SettingsButton{
-                    id: extruderSettings
-                    source: "qrc:/images/extruder.png"
-                    text: qsTr("Extruder Settings")
-                    clickControl:extruderSettingsTab.visible ? true : false
-                    onClicked: {
-                        extruderSettingsTab.visible = !extruderSettingsTab.visible
-                        connectionSettingsTab.visible = false
-                        bedSettingsTab.visible = false
-                        gcodeEditorTab.visible = false
-                    }
+            SettingsButton{
+                id: bedSettings
+                text: qsTr("Bed Settings")
+                clickControl:bedSettingsTab.visible ? true : false
+                onClicked: {
+                    bedSettingsTab.visible = !bedSettingsTab.visible
+                    connectionSettingsTab.visible = false
+                    extruderSettingsTab.visible = false
+                    gcodeEditorTab.visible = false
+                    filamentSettingstab.visible = false
                 }
+            }
 
-                SettingsButton{
-                    id: gcodeEditor
-                    text: qsTr("GCode Settings")
-                    clickControl: gcodeEditorTab.visible ? true : false
-                    onClicked: {
-                        gcodeEditorTab.visible = !gcodeEditorTab.visible
-                        connectionSettingsTab.visible = false
-                        bedSettingsTab.visible = false
-                        extruderSettingsTab.visible = false
-                    }
+            SettingsButton{
+                id: extruderSettings
+                text: qsTr("Extruder Settings")
+                clickControl:extruderSettingsTab.visible ? true : false
+                onClicked: {
+                    extruderSettingsTab.visible = !extruderSettingsTab.visible
+                    connectionSettingsTab.visible = false
+                    bedSettingsTab.visible = false
+                    gcodeEditorTab.visible = false
+                    filamentSettingstab.visible = false
                 }
-            }//End of column
+            }
+            SettingsButton{
+                id: filamenSettings
+                text: qsTr("Filament Settings")
+                clickControl: filamentSettingstab.visible ? true : false
+                onClicked: {
+                    filamentSettingstab.visible = !filamentSettingstab.visible
+                    gcodeEditorTab.visible = false
+                    connectionSettingsTab.visible = false
+                    bedSettingsTab.visible = false
+                    extruderSettingsTab.visible = false
+                }
+            }
+        }//End of column
+    }
+
+    //---------------------Settings (Show/Hide) ---------------
+    Item {
+        id: tabs
+        anchors.left: backgroundRec.right
+        anchors.bottom: backgroundRec.bottom
+        anchors.top: backgroundRec.top
+        width: visibleChildren.length !== 0 ? mainWindow.width/4 : 0
+        clip: true
+        ConnectionSettings{
+            id: connectionSettingsTab
+            anchors.fill: parent
+            visible: false
         }
+        BedSettings{
+            anchors.fill: parent
+            id: bedSettingsTab
+            visible: false
 
-//---------------------Settings (Show/Hide) ---------------
-        Item {
-            id: tabs
-            anchors.left: backgroundRec.right
-            anchors.bottom: backgroundRec.bottom
-            anchors.top: backgroundRec.top
-            width: visibleChildren.length !== 0 ? mainWindow.width/4 : 0
-            clip: true
-            ConnectionSettings{
-                id: connectionSettingsTab
-                anchors.fill: parent
-                visible: false
-            }
-            BedSettings{
-                anchors.fill: parent
-                id: bedSettingsTab
-                visible: false
-
-            }
-            ExtruderSettings{
-                id: extruderSettingsTab
-                anchors.fill: parent
-                visible: false
-
-            }
-            GCodeEditor{
-                anchors.fill: parent
-                id: gcodeEditorTab
-                visible: false
-            }
         }
+        ExtruderSettings{
+            id: extruderSettingsTab
+            anchors.fill: parent
+            visible: false
 
-//----------------3DView----------------------------------
-        Rectangle{
-            id: _3dView
-            color: "#fcfcfc"
-            anchors.left: tabs.right
-            anchors.bottom: parent.bottom
-            anchors.top: parent.top
-            anchors.right: realTime.left
-
-            height: Screen.height
-
-            Text{
-                text: qsTr("3D View")
-                anchors.centerIn: parent
-            }
         }
-//--------------Real Time Widget ------------------------
-        RealTimeWidget{
-            id: realTime
-            anchors.bottom: parent.bottom
-            anchors.top: parent.top
-            anchors.right: parent.right
+        GCodeEditor{
+            anchors.fill: parent
+            id: gcodeEditorTab
+            visible: false
         }
+        FilamentSettings{
+            anchors.fill: parent
+            id: filamentSettingstab
+            visible: false
+        }
+    }
 
-//----------Others---------------------------------------
+    //----------------3DView----------------------------------
+    Rectangle{
+        id: _3dView
+        color: "#fcfcfc"
+        anchors.left: tabs.right
+        anchors.bottom: parent.bottom
+        anchors.top: parent.top
+        anchors.right: realTime.left
+
+        height: Screen.height
+
+        Text{
+            text: qsTr("3D View")
+            anchors.centerIn: parent
+        }
+    }
+    //--------------Real Time Widget ------------------------
+    RealTimeWidget{
+        id: realTime
+        anchors.bottom: parent.bottom
+        anchors.top: parent.top
+        anchors.right: parent.right
+    }
+
+    //----------Others---------------------------------------
 
     Action {
         id: fileOpenAction
