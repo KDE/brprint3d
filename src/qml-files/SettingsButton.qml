@@ -6,15 +6,27 @@ Rectangle{
     id: root
     property color buttonColor: "transparent"
     property color onHoverColor: "mediumslateblue"
+    property color onClickedColor: "red"
     property  alias text: label.text
+    property alias source: icon.source
     signal clicked
 
-    width: Screen.width /10
+    anchors.left: parent.left
+    anchors.right: parent.right
+
     height: Screen.height /8
+
+    Image {
+        id: icon
+        width: parent.width /2
+        height: parent.height /1.5
+        anchors.centerIn: parent
+    }
 
     Text {
         id: label
         horizontalAlignment: parent.Center
+        anchors.bottom: parent.bottom
         color: "white"
     }
 
