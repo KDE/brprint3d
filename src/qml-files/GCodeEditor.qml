@@ -1,46 +1,73 @@
 import QtQuick 2.5
-import QtQuick.Controls 1.2
+import QtQuick.Controls 1.4
 import brprint3d 1.0
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
-import Qt.labs.controls 1.0
+import QtQuick.Layouts 1.3
+import QtQuick.Controls.Styles 1.4
 
 Rectangle{
     id: root
-    width: Screen.width /4
-    height: Screen.height
-    color: "black"
-    Column{
+    width: parent.width
+    color: "#31363b"
+
+    ColumnLayout{
         spacing: 2
+        anchors.fill: parent
+        anchors.margins: 3
 
         Text {
             id: text
             text: qsTr("GCode Editor")
             color: "white"
         }
-        Rectangle{
-            color: "lightgrey"
-            width: root.width
-            height: root.height - text.height
-            Flickable {
-                id: flick
-                clip: true
-                width: Screen.width /4
-                height: Screen.height
-                ScrollBar.vertical: ScrollBar{
-                }
 
-                TextEdit{
-                    id: gcodeArea
-                    width: flick.width
-                    height: flick.height
-                    focus:  true
-                    wrapMode: TextEdit.Wrap
-                    color: "black"
+        Text {
+            text: qsTr("GCode Header")
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Rectangle{
+                color: "transparent"
+                anchors.fill: parent
 
-                    text: gcodeHandler.fileContent
-                }
             }
+        }
+
+        TextArea{
+            id: gcodeHeader
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            focus:  true
+            wrapMode: TextEdit.Wrap
+            style: TextAreaStyle{
+                backgroundColor: "#eff0f1"
+                textColor:"#31363b"
+            }
+            text: gcodeHandler.fileContentHeader
+        }
+
+        Text {
+            text: qsTr("GCode Footer")
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Rectangle{
+                color: "transparent"
+                anchors.fill: parent
+
+            }
+        }
+
+        TextArea{
+            id: gcodeFooter
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            focus:  true
+            wrapMode: TextEdit.Wrap
+            style: TextAreaStyle{
+                backgroundColor: "#eff0f1"
+                textColor:"#31363b"
+            }
+            text: gcodeHandler.fileContentFooter
         }
     }
 }
