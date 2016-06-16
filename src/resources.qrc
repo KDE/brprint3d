@@ -6,7 +6,6 @@
         <file>qml-files/ConnectionSettings.qml</file>
         <file>qml-files/ExtruderSettings.qml</file>
         <file>qml-files/GCodeEditor.qml</file>
-        <file>qml-files/MTextInput.qml</file>
         <file>qml-files/RealTimeWidget.qml</file>
         <file>qml-files/FilamentSettings.qml</file>
     </qresource>
