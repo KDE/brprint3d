@@ -5,10 +5,11 @@ import QtQuick.Window 2.2
 Rectangle{
     id: root
     property color buttonColor: "transparent"
-    property color onHoverColor: "mediumslateblue"
-    property color onClickedColor: "red"
-    property  alias text: label.text
+    property color onHoverColor: "#31363b"
+    property color onClickedColor: "#1cdc9a"
+    property alias text: label.text
     property alias source: icon.source
+    property bool clickControl: false
     signal clicked
 
     anchors.left: parent.left
@@ -39,5 +40,5 @@ Rectangle{
         }
     }
 
-    color: mArea.containsMouse ? onHoverColor :buttonColor
+    color: mArea.containsMouse ? onHoverColor : clickControl ? onClickedColor : buttonColor
 }
