@@ -4,10 +4,11 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 
+
 Rectangle{
 
     id: connectionSet
-    color: "black"
+    color: "#31363b"
     GridLayout{
         columns: 2
         anchors.left: parent.left
@@ -15,20 +16,9 @@ Rectangle{
         anchors.right: parent.right
         anchors.margins: 5
 
-        Rectangle{
-            implicitHeight: 20
-            color: "grey"
-            Layout.columnSpan: 2
-            Layout.fillWidth: true
-            Text {
-                anchors.centerIn: parent
-                color: "black"
-                text: qsTr("Connection Settings")
-            }
-        }
         Text {
             text: qsTr("Serial Port:")
-            color: "grey"
+            color: "#eff0f1"
         }
         //How to set a extern list?
         ComboBox{
@@ -36,13 +26,13 @@ Rectangle{
             Layout.minimumWidth: cbTransmitionRate.width
             model: []
             style: ComboBoxStyle{
-                textColor: "black"
+                textColor: "#eff0f1"
             }
         }
 
         Text {
             text: qsTr("Transmition Rate:")
-            color: "grey"
+            color: "#eff0f1"
         }
         ComboBox{
             id: cbTransmitionRate
@@ -54,31 +44,32 @@ Rectangle{
             Layout.minimumWidth: placeholder.width + 50
             model: [115200,4800,9600,19200,38400,57600]
             style: ComboBoxStyle{
-                textColor: "black"
+                textColor: "#31363b"
             }
         }
 
         Text {
             text: qsTr("Cache Size:")
-            color: "grey"
+            color: "#eff0f1"
         }
 
-        TextInput{
-            text: "127"
-            color: "grey"
-            inputMask: "000;_"
+        TextField{
+            textColor: "#eff0f1"
+            inputMask: "999"
+            activeFocusOnPress: true
             validator: IntValidator{}
+            text: "127"
         }
         Text{
             text: qsTr("Reset on Connect:")
-            color: "grey"
+            color: "#eff0f1"
         }
         CheckBox{
             id: resetOnConnect
         }
         Text{
             text: qsTr("Job Log:")
-            color: "grey"
+            color: "#eff0f1"
         }
         CheckBox{
             id: printLog
