@@ -4,31 +4,54 @@
 #include <QRegularExpression>
 
 GCodeHandler::GCodeHandler(QObject *parent) : QObject(parent),
-    m_target(0),
-    m_doc(0)
+    m_header(nullptr),
+    m_footer(nullptr),
+    m_doc(nullptr)
 {
 
 }
 
-QQuickItem *GCodeHandler::target()
+QQuickItem *GCodeHandler::header()
 {
-    return m_target;
+    return m_header;
 }
 
-void GCodeHandler::setTarget(QQuickItem *target)
+QQuickItem *GCodeHandler::footer()
+{
+    return m_footer;
+}
+
+void GCodeHandler::setHeader(QQuickItem *target)
 {
     m_doc = 0;
-    m_target = target;
-    if (!m_target)
+    m_header = target;
+    if (!m_header)
         return;
 
-    QVariant doc = m_target->property("textDocument");
+    QVariant doc = m_header->property("textDocument");
     if (doc.canConvert<QQuickTextDocument*>()) {
         QQuickTextDocument *qqdoc = doc.value<QQuickTextDocument*>();
         if (qqdoc)
             m_doc = qqdoc->textDocument();
     }
-    emit targetChanged();
+    emit headerChanged();
+
+}
+
+void GCodeHandler::setFooter(QQuickItem *target)
+{
+    m_doc = 0;
+    m_footer = target;
+    if (!m_footer)
+        return;
+
+    QVariant doc = m_footer->property("textDocument");
+    if (doc.canConvert<QQuickTextDocument*>()) {
+        QQuickTextDocument *qqdoc = doc.value<QQuickTextDocument*>();
+        if (qqdoc)
+            m_doc = qqdoc->textDocument();
+    }
+    emit footerChanged();
 
 }
 
@@ -50,9 +73,14 @@ QString GCodeHandler::fileName() const
     return m_fileName;
 }
 
-QString GCodeHandler::fileContent() const
+QString GCodeHandler::fileContentHeader() const
 {
-    return m_fileContent;
+    return m_fileContentHeader;
+}
+
+QString GCodeHandler::fileContentFooter() const
+{
+    return m_fileContentFooter;
 }
 
 QUrl GCodeHandler::fileUrl() const
@@ -76,8 +104,8 @@ void GCodeHandler::setFileUrl(const QUrl &name)
         QString content = in.readAll();
         //TODO: Send this content to 3DView
         QStringList list = content.split('\n', QString::SkipEmptyParts);
-        QString header = "-------------------Header of Gcode----------------------\n";
-        QString footer = "-------------------Footer of Gcode-------------------------\n";
+        QString header;
+        QString footer;
         foreach (const auto line, list) {
             _match = _cacthMov.match(line);
             if(_match.hasMatch()){
@@ -86,18 +114,25 @@ void GCodeHandler::setFileUrl(const QUrl &name)
             header += (line + "\n");
         }
         int last = list.lastIndexOf(_catchEnd);
-        for(int i = last; i!= list.size(); ++i) {
+        for(int i = last; i!= list.size() -1; ++i) {
             footer += (list.at(i) + "\n");
         }
         setFileName(QFileInfo(path).baseName());
-        setFileContent(header + footer);
+        setFileContentHeader(header);
+        setFileContentFooter(footer);
     }
 }
 
-void GCodeHandler::setFileContent(const QString& content)
+void GCodeHandler::setFileContentHeader(const QString& content)
 {
-        m_fileContent = content;
-        emit fileContentChanged(m_fileContent);
+        m_fileContentHeader = content;
+        emit fileContentHeaderChanged(m_fileContentHeader);
+}
+
+void GCodeHandler::setFileContentFooter(const QString& content)
+{
+        m_fileContentFooter = content;
+        emit fileContentFooterChanged(m_fileContentFooter);
 }
 
 void GCodeHandler::setFileName(const QString& n)
