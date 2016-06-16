@@ -7,7 +7,6 @@
         <file>qml-files/ExtruderSettings.qml</file>
         <file>qml-files/GCodeEditor.qml</file>
         <file>qml-files/MTextInput.qml</file>
-        <file>qml-files/MToolBar.qml</file>
         <file>qml-files/RealTimeWidget.qml</file>
     </qresource>
 </RCC>
