@@ -7,7 +7,7 @@ import QtQuick.Dialogs 1.2
 ApplicationWindow{
     id: mainWindow
     visible: true
-    color: "white"
+    color: "#31363b"
     title: "Br-Print3D"
     //Define Minimum and Maximum width/height for the app window
     minimumWidth: 800
@@ -57,7 +57,7 @@ ApplicationWindow{
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.bottom: parent.bottom
-            color: "#1a1a1aff"
+            color: "#232629"
 
             Column{
                 spacing: 2
@@ -80,12 +80,12 @@ ApplicationWindow{
                     id: connectionSettings
                     source: "qrc:/images/usb.png"
                     text: qsTr("Connection Settings")
+                    clickControl: connectionSettingsTab.visible ? true : false
                     onClicked: {
                         connectionSettingsTab.visible = !connectionSettingsTab.visible
                         bedSettingsTab.visible = false
                         extruderSettingsTab.visible = false
                         gcodeEditorTab.visible = false
-
                     }
                 }
 
@@ -93,6 +93,7 @@ ApplicationWindow{
                     id: bedSettings
                     source: "qrc:/images/bed.png"
                     text: qsTr("Bed Settings")
+                    clickControl:bedSettingsTab.visible ? true : false
                     onClicked: {
                         bedSettingsTab.visible = !bedSettingsTab.visible
                         connectionSettingsTab.visible = false
@@ -105,18 +106,19 @@ ApplicationWindow{
                     id: extruderSettings
                     source: "qrc:/images/extruder.png"
                     text: qsTr("Extruder Settings")
+                    clickControl:extruderSettingsTab.visible ? true : false
                     onClicked: {
                         extruderSettingsTab.visible = !extruderSettingsTab.visible
                         connectionSettingsTab.visible = false
                         bedSettingsTab.visible = false
                         gcodeEditorTab.visible = false
                     }
-
                 }
 
                 SettingsButton{
                     id: gcodeEditor
                     text: qsTr("GCode Settings")
+                    clickControl: gcodeEditorTab.visible ? true : false
                     onClicked: {
                         gcodeEditorTab.visible = !gcodeEditorTab.visible
                         connectionSettingsTab.visible = false
@@ -161,7 +163,7 @@ ApplicationWindow{
 //----------------3DView----------------------------------
         Rectangle{
             id: _3dView
-            color: "yellow"
+            color: "#fcfcfc"
             anchors.left: tabs.right
             anchors.bottom: parent.bottom
             anchors.top: parent.top
