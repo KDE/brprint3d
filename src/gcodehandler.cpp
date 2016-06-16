@@ -1,6 +1,7 @@
 #include "gcodehandler.h"
 #include <QTextStream>
 #include <QFileInfo>
+#include <QRegularExpression>
 
 GCodeHandler::GCodeHandler(QObject *parent) : QObject(parent),
     m_target(0),
@@ -61,6 +62,9 @@ QUrl GCodeHandler::fileUrl() const
 
 void GCodeHandler::setFileUrl(const QUrl &name)
 {
+    QRegularExpression _cacthMov("G(?<command>.) .*\\bX(?<axisX>[0-9.-]+) Y(?<axisY>[0-9.-]+) Z(?<axisZ>[0-9].+)");
+    QRegularExpression _catchEnd(";End GCode");
+    QRegularExpressionMatch _match;
     if(m_fileUrl != name){
         m_fileUrl = name;
         QString path = name.toLocalFile();
@@ -70,8 +74,23 @@ void GCodeHandler::setFileUrl(const QUrl &name)
         }
         QTextStream in(&gcode);
         QString content = in.readAll();
+        //TODO: Send this content to 3DView
+        QStringList list = content.split('\n', QString::SkipEmptyParts);
+        QString header = "-------------------Header of Gcode----------------------\n";
+        QString footer = "-------------------Footer of Gcode-------------------------\n";
+        foreach (const auto line, list) {
+            _match = _cacthMov.match(line);
+            if(_match.hasMatch()){
+                break;
+            }
+            header += (line + "\n");
+        }
+        int last = list.lastIndexOf(_catchEnd);
+        for(int i = last; i!= list.size(); ++i) {
+            footer += (list.at(i) + "\n");
+        }
         setFileName(QFileInfo(path).baseName());
-        setFileContent(content);
+        setFileContent(header + footer);
     }
 }
 
