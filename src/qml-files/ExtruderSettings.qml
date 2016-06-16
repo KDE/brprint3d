@@ -10,7 +10,7 @@ Rectangle{
     color: "#31363b"
     width: Screen.width /4
     height: Screen.height
-    property color textColor: "#eff0f1"
+    property color mtextColor: "#eff0f1"
     GridLayout{
         id: grid
         columns: 3
@@ -31,6 +31,7 @@ Rectangle{
                 textColor: textColor
             }
         }
+
         Text{
 
         }
@@ -39,77 +40,100 @@ Rectangle{
             text: qsTr("Temperature:")
             color: textColor
         }
-        MTextInput{
 
+        TextField{
+            textColor: mtextColor
+            activeFocusOnPress: true
+            validator: IntValidator{bottom:160;top:300}
+            placeholderText: qsTr("(160~300)")
         }
+
         Text{
             text: qsTr("ºC")
             color: textColor
         }
+
         Text{
             text: qsTr("Moviment Speed:")
             color: textColor
         }
-        MTextInput{
 
+        TextField{
+            textColor: mtextColor
+            activeFocusOnPress: true
+            validator: IntValidator{bottom:10;top:300}
+            placeholderText: qsTr("(10~300)")
         }
+
         Text{
             text: qsTr("mm/s")
             color: textColor
         }
+
         Text{
-            text: qsTr("Extrusion Speed(mm/s):")
+            text: qsTr("Extrusion Speed:")
             color: textColor
         }
-        MTextInput{
 
+        TextField{
+            textColor: mtextColor
+            activeFocusOnPress: true
+            validator: IntValidator{bottom:10;top:300}
+            placeholderText: qsTr("(10~300)")
         }
+
         Text{
             text: qsTr("mm/s")
             color: textColor
         }
+
         Text{
             text: qsTr("Fan Speed:")
             color: textColor
         }
+
         TextField{
-            textColor: textColor
+            textColor: mtextColor
             activeFocusOnPress: true
             validator: IntValidator{bottom: 0; top: 100}
-            text: "100"
+            placeholderText: qsTr("(0~100)")
         }
+
         Text{
             text: qsTr("%")
             color: textColor
         }
 
-        Text{
+        GroupBox{
             id: warning
-            text: ">>Important<<"
-            color: "#ed1515"
+            title: qsTr(">>Important<<")
             Layout.columnSpan: 3
-        }
+            Layout.alignment: Qt.AlignHCenter
 
-        Text {
-            id: info
-            anchors.margins: 5
-            Layout.columnSpan: 3
-            text: qsTr(" Please, don't forget to add here the maximum \n temperature that your extruder have. This is\n for your safety and of the 3DPrinter.")
-            color: textColor
-            horizontalAlignment: Text.Center
+            Text {
+                id: info
+                anchors.margins: 5
+                Layout.columnSpan: 3
+                text: qsTr(" Please, don't forget to add here the maximum \n temperature that your extruder have. This is\n for your safety and of the 3DPrinter.")
+                color: "#ed1515"
+                horizontalAlignment: Text.Center
+            }
         }
 
         Text{
             text: qsTr("Max Temperature:")
-            color: "#ed1515"
+            color: textColor
         }
-        MTextInput{
+        TextField{
+            textColor: mtextColor
+            activeFocusOnPress: true
+            validator: IntValidator{bottom:160; top:300}
+            placeholderText: qsTr("(160~300)")
+        }
 
-        }
         Text{
             text: qsTr("ºC")
             color: textColor
         }
-
     }
 }
