@@ -1,8 +1,8 @@
-import QtQuick.Layouts 1.0
-import QtQuick.Window 2.1
 import QtQuick 2.6
+import QtQuick.Window 2.1
 import QtQuick.Controls 1.4
 import QtQuick.Dialogs 1.2
+import QtQuick.Layouts 1.3
 
 ApplicationWindow{
     id: mainWindow
@@ -48,7 +48,38 @@ ApplicationWindow{
             MenuItem {text: qsTr("Documentation")}
         }
     }
-    toolBar: MToolBar{}
+    toolBar: ToolBar{
+        RowLayout{
+            spacing: 5
+            anchors.fill: parent
+
+            ToolButton{ action: fileOpenAction }
+
+            ToolButton{ action: connectAction  }
+
+            Item { Layout.fillWidth: true }
+
+            ToolButton{
+                action: startAction
+                Layout.alignment: Qt.AlignRight
+            }
+
+            ToolButton{
+                action: pauseAction
+                Layout.alignment: Qt.AlignRight
+            }
+
+            ToolButton{
+                action: stopAction
+                Layout.alignment: Qt.AlignRight
+            }
+
+            ToolButton{
+                action: emergencyAction
+                Layout.alignment: Qt.AlignRight
+            }
+        }
+    }
 
 //-------------Settings Bar-------------------------------------------------------
         Rectangle{
@@ -136,6 +167,7 @@ ApplicationWindow{
             anchors.bottom: backgroundRec.bottom
             anchors.top: backgroundRec.top
             width: visibleChildren.length !== 0 ? mainWindow.width/4 : 0
+            clip: true
             ConnectionSettings{
                 id: connectionSettingsTab
                 anchors.fill: parent
@@ -172,7 +204,7 @@ ApplicationWindow{
             height: Screen.height
 
             Text{
-                text: qsTr("3D View") + _3dView.width
+                text: qsTr("3D View")
                 anchors.centerIn: parent
             }
         }
@@ -193,6 +225,31 @@ ApplicationWindow{
             fileDialog.selectExisting = true
             fileDialog.open()
         }
+    }
+
+    Action{
+        id: connectAction
+        text: qsTr("Connect")
+    }
+
+    Action{
+        id: startAction
+        text: qsTr("Start")
+    }
+
+    Action{
+        id: pauseAction
+        text: qsTr("Pause")
+    }
+
+    Action{
+        id: stopAction
+        text: qsTr("Stop")
+    }
+
+    Action{
+        id: emergencyAction
+        text: qsTr("Emergency Stop")
     }
 
     FileDialog{
