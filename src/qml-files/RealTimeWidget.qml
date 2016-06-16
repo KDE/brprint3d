@@ -5,8 +5,8 @@ Rectangle{
 
     id: root
     color: "#1a1a1aff"
-    width: Screen.width /9
-    height: Screen.height
+    width: parent.width/9
+    height: parent.height
 
     Column{
         spacing: 10
