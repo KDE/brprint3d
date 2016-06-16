@@ -3,59 +3,65 @@ import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 
 Rectangle{
-
     id: bedSet
-    color: "black"
+    color: "#31363b"
     width: parent.width
+    property bool heatedBed: true
+
         GridLayout{
-        columns: 2
-        anchors.left: parent.left
+        columns: 3
         anchors.top: parent.top
+        anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 5
-
-        Rectangle{
-            implicitHeight: 20
-            color: "grey"
-            Layout.columnSpan: 2
-            Layout.fillWidth: true
-            Text {
-                color: "black"
-                text: qsTr("Bed Settings")
-                anchors.centerIn: parent.Center
-            }
-        }
+        enabled: heatedBed ? true : false
 
         Text{
             text: qsTr("Area X:")
-            color: "grey"
+            color: "#eff0f1"
         }
         MTextInput{
 
+        }
+        Text {
+            text: qsTr("mm")
+            color: "#eff0f1"
         }
 
         Text{
             text: qsTr("Area Y:")
-            color: "grey"
+            color: "#eff0f1"
         }
         MTextInput{
 
+        }
+        Text {
+            text: qsTr("mm")
+            color: "#eff0f1"
         }
 
         Text{
             text: qsTr("Area Z:")
-            color: "grey"
+            color: "#eff0f1"
         }
         MTextInput{
 
+        }
+        Text {
+            text: qsTr("mm")
+            color: "#eff0f1"
         }
 
         Text{
-            text: qsTr("Temperature(ºC):")
-            color: "grey"
+            text: qsTr("Temperature:")
+            color: "#eff0f1"
         }
         MTextInput{
 
+        }
+        Text {
+            text: qsTr("ºC")
+            color: "#eff0f1"
         }
     }
 }
