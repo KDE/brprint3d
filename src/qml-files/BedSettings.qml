@@ -9,14 +9,29 @@ Rectangle{
     width: parent.width
     property bool heatedBed: true
     property color textColor: "#eff0f1"
+    anchors.rightMargin: 3
+
+    Rectangle{
+        id: title
+        color: textColor
+        width: parent.width
+        height: tex.height
+        Text{
+            id: tex
+            text: qsTr("Bed Settings")
+            color: "#31363b"
+        }
+    }
 
         GridLayout{
         columns: 3
-        anchors.top: parent.top
+        anchors.top: title.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 5
         enabled: heatedBed ? true : false
+
+
 
         Text{
             text: qsTr("Area X:")

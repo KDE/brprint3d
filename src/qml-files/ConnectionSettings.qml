@@ -9,16 +9,31 @@ Rectangle{
 
     id: connectionSet
     color: "#31363b"
+    property color mtextColor: "#eff0f1"
+    anchors.rightMargin: 3
+
+    Rectangle{
+        id: title
+        color: mtextColor
+        width: parent.width
+        height: tex.height
+        Text{
+            id: tex
+            text: qsTr("Connection Settings")
+            color: "#31363b"
+        }
+    }
+
     GridLayout{
         columns: 2
+        anchors.top: title.bottom
         anchors.left: parent.left
-        anchors.top: parent.top
         anchors.right: parent.right
         anchors.margins: 5
 
         Text {
             text: qsTr("Serial Port:")
-            color: "#eff0f1"
+            color: mtextColor
         }
         //How to set a extern list?
         ComboBox{
@@ -26,7 +41,7 @@ Rectangle{
             Layout.minimumWidth: cbTransmitionRate.width
             model: []
             style: ComboBoxStyle{
-                textColor: "#eff0f1"
+                textColor: mtextColor
             }
         }
 
@@ -44,13 +59,13 @@ Rectangle{
             Layout.minimumWidth: placeholder.width + 50
             model: [115200,4800,9600,19200,38400,57600]
             style: ComboBoxStyle{
-                textColor: "#31363b"
+                textColor: mtextColor
             }
         }
 
         Text {
             text: qsTr("Cache Size:")
-            color: "#eff0f1"
+            color: mtextColor
         }
 
         TextField{
@@ -62,14 +77,14 @@ Rectangle{
         }
         Text{
             text: qsTr("Reset on Connect:")
-            color: "#eff0f1"
+            color: mtextColor
         }
         CheckBox{
             id: resetOnConnect
         }
         Text{
             text: qsTr("Job Log:")
-            color: "#eff0f1"
+            color: mtextColor
         }
         CheckBox{
             id: printLog

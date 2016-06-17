@@ -10,16 +10,33 @@ Rectangle{
     id: root
     width: parent.width
     color: "#31363b"
+    anchors.rightMargin: 3
+    property color mTextColor:"#eff0f1"
+
+    Rectangle{
+        id: title
+        color: mTextColor
+        width: parent.width
+        height: tex.height
+        Text{
+            id: tex
+            text: qsTr("GCode Editor")
+            color: "#31363b"
+        }
+    }
 
     ColumnLayout{
         spacing: 2
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: title.bottom
+        anchors.bottom: parent.bottom
         anchors.margins: 3
 
         Text {
-            text: qsTr("GCode Header")
+            text: qsTr("Header")
             Layout.fillWidth: true
-            color: "#eff0f1"
+            color: mTextColor
         }
 
         TextArea{
@@ -29,16 +46,16 @@ Rectangle{
             focus:  true
             wrapMode: TextEdit.Wrap
             style: TextAreaStyle{
-                backgroundColor: "#eff0f1"
+                backgroundColor: mTextColor
                 textColor:"#31363b"
             }
             text: gcodeHandler.fileContentHeader
         }
 
         Text {
-            text: qsTr("GCode Footer")
+            text: qsTr("Footer")
             Layout.fillWidth: true
-            color: "#eff0f1"
+            color: mTextColor
         }
 
         TextArea{
@@ -48,7 +65,7 @@ Rectangle{
             focus:  true
             wrapMode: TextEdit.Wrap
             style: TextAreaStyle{
-                backgroundColor: "#eff0f1"
+                backgroundColor: mTextColor
                 textColor:"#31363b"
             }
             text: gcodeHandler.fileContentFooter

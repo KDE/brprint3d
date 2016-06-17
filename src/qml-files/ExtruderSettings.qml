@@ -11,11 +11,25 @@ Rectangle{
     width: Screen.width /4
     height: Screen.height
     property color mtextColor: "#eff0f1"
+    anchors.rightMargin: 3
+
+    Rectangle{
+        id: title
+        color: mtextColor
+        width: parent.width
+        height: tex.height
+        Text{
+            id: tex
+            text: qsTr("Extruder Settings")
+            color: "#31363b"
+        }
+    }
+
     GridLayout{
         id: grid
         columns: 3
         anchors.left: parent.left
-        anchors.top: parent.top
+        anchors.top: title.bottom
         anchors.right: parent.right
         anchors.margins: 5
 

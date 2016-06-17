@@ -9,11 +9,24 @@ Rectangle{
     color: "#31363b"
     width: parent.width
     property color textColor: "#eff0f1"
+    anchors.rightMargin: 3
+
+    Rectangle{
+        id: title
+        color: textColor
+        width: parent.width
+        height: tex.height
+        Text{
+            id: tex
+            text: qsTr("Filament Settings")
+            color: "#31363b"
+        }
+    }
 
         GridLayout{
             columns: 2
             rowSpacing: 5
-            anchors.top: parent.top
+            anchors.top: title.bottom
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.margins: 5
