@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>bed.png</file>
+        <file>extruder.png</file>
+        <file>filament.png</file>
+        <file>usb.png</file>
+    </qresource>
+</RCC>

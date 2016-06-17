@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/base">
+        <file>qml-files/main.qml</file>
+        <file>qml-files/SettingsButton.qml</file>
+        <file>qml-files/BedSettings.qml</file>
+        <file>qml-files/ConnectionSettings.qml</file>
+        <file>qml-files/ExtruderSettings.qml</file>
+        <file>qml-files/GCodeEditor.qml</file>
+        <file>qml-files/RealTimeWidget.qml</file>
+        <file>qml-files/FilamentSettings.qml</file>
+    </qresource>
+</RCC>
