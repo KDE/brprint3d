@@ -2,7 +2,7 @@
 
  BrPrint3D, Open Source 3D Printing Host
 
- Copyright (C) 2015 BRPrint3D Authors
+ Copyright (C) 2016 BRPrint3D Authors
 
  This file is part of the BrPrint3D project
 
