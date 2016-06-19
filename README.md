@@ -34,7 +34,9 @@ KERNEL=="ttyACM[0-9]",MODE="0666"
 
 Compile steps:
 ```sh
-git clone git.kde.org:brprint3d
+sudo apt-get install git cmake g++ # On debian, Ubuntu, etc.
+git clone https://github.com/KDE/brprint3d.git
+cd brprint3d
 mkdir build
 cd build
 cmake ..
